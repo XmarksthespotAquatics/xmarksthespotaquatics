@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>X Marks the Spot — Balloon Mollies & Live Fish · Iloilo</title>
-<meta name="description" content="Backyard-bred balloon mollies and live ornamental fish from Iloilo, Philippines. Local and international shipping available." />
+<title>X Marks the Spot — Balloon Mollies & Live Fish · Bacolod City</title>
+<meta name="description" content="Backyard-bred balloon mollies and live ornamental fish from Bacolod City, Philippines. Local and international shipping available." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -30,10 +30,21 @@
 
   body {
     font-family: 'Poppins', sans-serif;
-    background: var(--bg);
+    background: var(--bg) url('https://i.imgur.com/G0pb9iy.jpg') center center / cover fixed;
     color: var(--text);
     min-height: 100vh;
   }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(240, 244, 248, 0.88);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero, main, footer { position: relative; z-index: 1; }
 
   /* ── HERO ── */
   .hero {
@@ -348,11 +359,11 @@
   </div>
   <div class="hero-inner">
     <div class="hero-logo"><span class="x">✕</span> Marks the Spot</div>
-    <p class="hero-sub">Backyard-bred balloon mollies &amp; live ornamental fish<br>straight from Iloilo City, Philippines</p>
+    <p class="hero-sub">Backyard-bred balloon mollies &amp; live ornamental fish<br>straight from Bacolod City, Philippines</p>
     <div class="hero-badges">
       <span class="badge badge-gold">🐠 Stocks updated regularly</span>
       <span class="badge badge-teal">🌏 Ships local &amp; international</span>
-      <span class="badge badge-white">📍 Iloilo City, PH</span>
+      <span class="badge badge-white">📍 Bacolod City, PH</span>
     </div>
   </div>
 </header>
@@ -428,7 +439,7 @@
   <!-- CONTACT -->
   <div class="section-title" style="margin-bottom:1rem;">Get in touch</div>
   <div class="contact-grid">
-    <a href="https://facebook.com/YOUR_PAGE" target="_blank" class="contact-card">
+    <a href="https://www.facebook.com/eXedmarksthespot" target="_blank" class="contact-card">
       <div class="contact-icon" style="background:#e7f3ff;">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="#1877f2" aria-hidden="true"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.514c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
       </div>
@@ -437,22 +448,22 @@
         <div class="contact-val">X Marks the Spot</div>
       </div>
     </a>
-    <a href="viber://chat?number=+63XXXXXXXXXX" class="contact-card">
+    <a href="https://wa.me/639173397877" target="_blank" class="contact-card">
       <div class="contact-icon" style="background:#f0eaff;">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="#7360f2" aria-hidden="true"><path d="M11.4 0C5.7 0 1 4.5 1 10c0 2.8 1.2 5.4 3.1 7.2V21l3.9-2.1c1 .3 2.2.4 3.4.4 5.7 0 10.3-4.5 10.3-10S17.1 0 11.4 0zm1 13.5l-2.5-2.7-4.8 2.7 5.3-5.7 2.6 2.7 4.7-2.7-5.3 5.7z"/></svg>
       </div>
       <div>
         <div class="contact-lbl">Viber / WhatsApp</div>
-        <div class="contact-val">+63 XXX XXX XXXX</div>
+        <div class="contact-val">+63 917 339 7877</div>
       </div>
     </a>
-    <a href="mailto:your@email.com" class="contact-card">
+    <a href="mailto:Francisco.Desaca@gmail.com" class="contact-card">
       <div class="contact-icon" style="background:#fff4e0;">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e6a817" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
       </div>
       <div>
         <div class="contact-lbl">Email</div>
-        <div class="contact-val">your@email.com</div>
+        <div class="contact-val">Francisco.Desaca@gmail.com</div>
       </div>
     </a>
   </div>
@@ -460,20 +471,20 @@
 </main>
 
 <footer>
-  <strong>✕ Marks the Spot</strong> · Iloilo City, Philippines<br>
+  <strong>✕ Marks the Spot</strong> · Bacolod City, Philippines<br>
   <span style="margin-top:4px; display:block;">Prices in Philippine Peso (₱) · International orders quoted separately · All stocks subject to availability</span>
 </footer>
 
 <script>
 const FISH = [
-  { name:"Balloon Molly", variant:"Golden Zebra Lyretail",        price:80,  count:45, category:"balloon molly", bg:"#FFF8DC", img:"https://i.imgur.com/9wpZj9o.jpg" },
-  { name:"Balloon Molly", variant:"Pikachu Veiltail",             price:80,  count:30, category:"balloon molly", bg:"#FFFDE7", img:"https://i.imgur.com/x6toumv.jpg" },
-  { name:"Balloon Molly", variant:"Pikachu Roundtail",            price:80,  count:20, category:"balloon molly", bg:"#FFF9C4", img:"https://i.imgur.com/scWp5od.jpg" },
-  { name:"Balloon Molly", variant:"Platinum Marble Zebra Pattern",price:120, count:15, category:"balloon molly", bg:"#F5F5F5", img:"https://i.imgur.com/6zjsYGz.jpg" },
-  { name:"Balloon Molly", variant:"Golden Zebra Veiltail",        price:90,  count:25, category:"balloon molly", bg:"#FFF8DC", img:"https://i.imgur.com/eHacp64.jpg" },
+  { name:"Balloon Molly", variant:"Golden Zebra Lyretail",        price:100, count:45, category:"balloon molly", bg:"#FFF8DC", img:"https://i.imgur.com/PYOUgcb.jpg" },
+  { name:"Balloon Molly", variant:"Pikachu Veiltail",             price:100, count:30, category:"balloon molly", bg:"#FFFDE7", img:"https://i.imgur.com/x6toumv.jpg" },
+  { name:"Balloon Molly", variant:"Pikachu Roundtail",            price:100, count:20, category:"balloon molly", bg:"#FFF9C4", img:"https://i.imgur.com/scWp5od.jpg" },
+  { name:"Balloon Molly", variant:"Platinum Marble Zebra Pattern",price:100, count:15, category:"balloon molly", bg:"#F5F5F5", img:"https://i.imgur.com/6zjsYGz.jpg" },
+  { name:"Balloon Molly", variant:"Golden Zebra Veiltail",        price:100, count:25, category:"balloon molly", bg:"#FFF8DC", img:"https://i.imgur.com/eHacp64.jpg" },
   { name:"Balloon Molly", variant:"Black King Balloon Molly",     price:100, count:0,  category:"balloon molly", bg:"#E8EAF6", img:"https://i.imgur.com/TSZartg.jpg" },
-  { name:"Balloon Molly", variant:"Chocolate Lyretail",           price:90,  count:18, category:"balloon molly", bg:"#EFEBE9", img:"https://i.imgur.com/CH8a14o.jpg" },
-  { name:"Balloon Molly", variant:"Golden Blue Tail Lyretail",    price:110, count:12, category:"balloon molly", bg:"#E3F2FD", img:"https://i.imgur.com/jyWVOfJ.jpg" },
+  { name:"Balloon Molly", variant:"Chocolate Lyretail",           price:100, count:18, category:"balloon molly", bg:"#EFEBE9", img:"https://i.imgur.com/CH8a14o.jpg" },
+  { name:"Balloon Molly", variant:"Golden Blue Tail Lyretail",    price:100, count:12, category:"balloon molly", bg:"#E3F2FD", img:"https://i.imgur.com/jyWVOfJ.jpg" },
   { name:"Balloon Molly", variant:"Tanchu Lyretail",              price:100, count:8,  category:"balloon molly", bg:"#FCE4EC", img:"https://i.imgur.com/bhA6Wlf.jpg" },
 ];
 
@@ -492,7 +503,7 @@ function renderFish(cat) {
   }
   grid.innerHTML = list.map(f => {
     const s = stockInfo(f.count);
-    const fbLink = `https://www.facebook.com/YOUR_PAGE?ref=inquiry_${encodeURIComponent(f.variant+' '+f.name)}`;
+    const fbLink = `https://www.facebook.com/eXedmarksthespot`;
     return `
     <div class="fish-card">
       <div class="fish-img" style="background:${f.bg}">
@@ -503,6 +514,7 @@ function renderFish(cat) {
         <div class="fish-variant">${f.variant}</div>
         <div class="fish-meta">
           <span class="fish-price">₱${f.price}</span>
+        <!-- price per fish -->
           <span class="stock-pill ${s.cls}">${s.label}</span>
         </div>
         ${s.btn
