@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>X Marks the Spot — Balloon Mollies & Live Fish · Bacolod</title>
-<meta name="description" content="Backyard-bred balloon mollies and live ornamental fish from Bacolod, Philippines. Local and international shipping available." />
+<title>X Marks the Spot — Balloon Mollies & Live Fish · Iloilo</title>
+<meta name="description" content="Backyard-bred balloon mollies and live ornamental fish from Iloilo, Philippines. Local and international shipping available." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -186,12 +186,20 @@
 
   .fish-img {
     width: 100%;
-    height: 120px;
+    height: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 52px;
     position: relative;
+    overflow: hidden;
+  }
+
+  .fish-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .fish-body { padding: 12px 14px 14px; }
@@ -340,11 +348,11 @@
   </div>
   <div class="hero-inner">
     <div class="hero-logo"><span class="x">✕</span> Marks the Spot</div>
-    <p class="hero-sub">Backyard-bred balloon mollies &amp; live ornamental fish<br>straight from Bacolod City, Philippines</p>
+    <p class="hero-sub">Backyard-bred balloon mollies &amp; live ornamental fish<br>straight from Iloilo City, Philippines</p>
     <div class="hero-badges">
       <span class="badge badge-gold">🐠 Stocks updated regularly</span>
       <span class="badge badge-teal">🌏 Ships local &amp; international</span>
-      <span class="badge badge-white">📍 Bacolod City, PH</span>
+      <span class="badge badge-white">📍 Iloilo City, PH</span>
     </div>
   </div>
 </header>
@@ -374,10 +382,10 @@
   </div>
 
   <div class="filters" id="filters">
-    <button class="filter-btn active" onclick="filterFish('all',this)">All fish</button>
-    <button class="filter-btn" onclick="filterFish('balloon molly',this)">Balloon mollies</button>
-    <button class="filter-btn" onclick="filterFish('guppy',this)">Guppies</button>
-    <button class="filter-btn" onclick="filterFish('other',this)">Others</button>
+    <button class="filter-btn active" onclick="filterFish('all',this)">All strains</button>
+    <button class="filter-btn" onclick="filterFish('lyretail',this)">Lyretails</button>
+    <button class="filter-btn" onclick="filterFish('veiltail',this)">Veiltails</button>
+    <button class="filter-btn" onclick="filterFish('roundtail',this)">Roundtails</button>
   </div>
 
   <div class="fish-grid" id="fishGrid"></div>
@@ -452,23 +460,21 @@
 </main>
 
 <footer>
-  <strong>✕ Marks the Spot</strong> · Bacolod City, Philippines<br>
+  <strong>✕ Marks the Spot</strong> · Iloilo City, Philippines<br>
   <span style="margin-top:4px; display:block;">Prices in Philippine Peso (₱) · International orders quoted separately · All stocks subject to availability</span>
 </footer>
 
 <script>
 const FISH = [
-  { name:"Balloon Molly", variant:"Gold / Yellow",    price:80,  count:45, category:"balloon molly", bg:"#FFF8DC", emoji:"🐡" },
-  { name:"Balloon Molly", variant:"Black",             price:80,  count:30, category:"balloon molly", bg:"#E8EAF6", emoji:"🐟" },
-  { name:"Balloon Molly", variant:"Dalmatian",         price:100, count:20, category:"balloon molly", bg:"#F3E5F5", emoji:"🐠" },
-  { name:"Balloon Molly", variant:"Orange Sunset",     price:90,  count:5,  category:"balloon molly", bg:"#FBE9E7", emoji:"🐡" },
-  { name:"Balloon Molly", variant:"White / Silver",    price:80,  count:0,  category:"balloon molly", bg:"#F5F5F5", emoji:"🐟" },
-  { name:"Balloon Molly", variant:"Blue / Cobalt",     price:120, count:15, category:"balloon molly", bg:"#E3F2FD", emoji:"🐠" },
-  { name:"Guppy",         variant:"Dumbo Ear Red",     price:60,  count:60, category:"guppy",         bg:"#FFEBEE", emoji:"🐠" },
-  { name:"Guppy",         variant:"Moscow Blue",       price:70,  count:35, category:"guppy",         bg:"#E3F2FD", emoji:"🐟" },
-  { name:"Guppy",         variant:"Yellow Cobra",      price:65,  count:0,  category:"guppy",         bg:"#FFFDE7", emoji:"🐡" },
-  { name:"Molly",         variant:"Sailfin Black",     price:120, count:12, category:"other",         bg:"#E8F5E9", emoji:"🐡" },
-  { name:"Platy",         variant:"Sunset / Mickey",   price:50,  count:40, category:"other",         bg:"#FFF3E0", emoji:"🐟" },
+  { name:"Balloon Molly", variant:"Golden Zebra Lyretail",        price:80,  count:45, category:"balloon molly", bg:"#FFF8DC", img:"https://i.imgur.com/9wpZj9o.jpg" },
+  { name:"Balloon Molly", variant:"Pikachu Veiltail",             price:80,  count:30, category:"balloon molly", bg:"#FFFDE7", img:"https://i.imgur.com/x6toumv.jpg" },
+  { name:"Balloon Molly", variant:"Pikachu Roundtail",            price:80,  count:20, category:"balloon molly", bg:"#FFF9C4", img:"https://i.imgur.com/scWp5od.jpg" },
+  { name:"Balloon Molly", variant:"Platinum Marble Zebra Pattern",price:120, count:15, category:"balloon molly", bg:"#F5F5F5", img:"https://i.imgur.com/6zjsYGz.jpg" },
+  { name:"Balloon Molly", variant:"Golden Zebra Veiltail",        price:90,  count:25, category:"balloon molly", bg:"#FFF8DC", img:"https://i.imgur.com/eHacp64.jpg" },
+  { name:"Balloon Molly", variant:"Black King Balloon Molly",     price:100, count:0,  category:"balloon molly", bg:"#E8EAF6", img:"https://i.imgur.com/TSZartg.jpg" },
+  { name:"Balloon Molly", variant:"Chocolate Lyretail",           price:90,  count:18, category:"balloon molly", bg:"#EFEBE9", img:"https://i.imgur.com/CH8a14o.jpg" },
+  { name:"Balloon Molly", variant:"Golden Blue Tail Lyretail",    price:110, count:12, category:"balloon molly", bg:"#E3F2FD", img:"https://i.imgur.com/jyWVOfJ.jpg" },
+  { name:"Balloon Molly", variant:"Tanchu Lyretail",              price:100, count:8,  category:"balloon molly", bg:"#FCE4EC", img:"https://i.imgur.com/bhA6Wlf.jpg" },
 ];
 
 function stockInfo(count) {
@@ -479,7 +485,7 @@ function stockInfo(count) {
 
 function renderFish(cat) {
   const grid = document.getElementById("fishGrid");
-  const list = cat === "all" ? FISH : FISH.filter(f => f.category === cat);
+  const list = cat === "all" ? FISH : FISH.filter(f => f.variant.toLowerCase().includes(cat));
   if (!list.length) {
     grid.innerHTML = '<div class="empty">No fish found in this category.</div>';
     return;
@@ -489,7 +495,9 @@ function renderFish(cat) {
     const fbLink = `https://www.facebook.com/YOUR_PAGE?ref=inquiry_${encodeURIComponent(f.variant+' '+f.name)}`;
     return `
     <div class="fish-card">
-      <div class="fish-img" style="background:${f.bg}">${f.emoji}</div>
+      <div class="fish-img" style="background:${f.bg}">
+        <img src="${f.img}" alt="${f.variant}" loading="lazy" onerror="this.style.display='none';this.parentNode.innerHTML='🐠';" />
+      </div>
       <div class="fish-body">
         <div class="fish-name">${f.name}</div>
         <div class="fish-variant">${f.variant}</div>
