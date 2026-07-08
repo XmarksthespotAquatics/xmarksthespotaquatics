@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>X Marks the Spot — Balloon Mollies & Live Fish · Bacolod City</title>
-<meta name="description" content="Backyard-bred balloon mollies and live ornamental fish from Bacolod City, Philippines. Local and international shipping available." />
+<meta name="description" content="Premium rare balloon mollies and exotic ornamental fish from Bacolod City, Philippines. Local and international shipping available." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -409,10 +409,42 @@
     font-size: 14px;
   }
 
+  /* ── DESKTOP ── */
+  @media (min-width: 860px) {
+    .fish-grid { grid-template-columns: repeat(4, 1fr); }
+    .hero { padding: 5rem 2rem 4rem; }
+    .hero-logo { font-size: 5rem; }
+    .tx-section { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+    .tx-header { grid-column: 1 / -1; margin-bottom: 0; }
+  }
+
+  /* ── TABLET ── */
+  @media (max-width: 860px) and (min-width: 480px) {
+    .fish-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ── MOBILE ── */
   @media (max-width: 480px) {
     .stats-row { grid-template-columns: repeat(3, 1fr); }
-    .stat-num { font-size: 1.4rem; }
-    .hero-logo { font-size: 2.2rem; }
+    .stat-num { font-size: 1.3rem; }
+    .stat-lbl { font-size: 10px; }
+    .hero { padding: 2.5rem 1rem 2rem; }
+    .hero-logo { font-size: 2rem; letter-spacing: -1px; }
+    .hero-sub { font-size: 0.88rem; }
+    .hero-badges { gap: 6px; }
+    .badge { font-size: 11px; padding: 4px 10px; }
+    .fish-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .fish-img { height: 120px; }
+    .fish-variant { font-size: 12px; }
+    .fish-price { font-size: 15px; }
+    .inquire-btn { font-size: 12px; padding: 8px; }
+    .how-section { padding: 1.5rem 1.25rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .tx-item { flex-wrap: nowrap; }
+    .tx-flag { font-size: 16px; }
+    .tx-name { font-size: 12px; }
+    .container { padding: 1.5rem 1rem; }
+    .section-title { font-size: 1rem; }
   }
 </style>
 </head>
@@ -425,9 +457,9 @@
   </div>
   <div class="hero-inner">
     <div class="hero-logo">✕ Marks the Spot</div>
-    <p class="hero-sub">Backyard-bred balloon mollies &amp; live ornamental fish<br>straight from Bacolod City, Philippines</p>
+    <p class="hero-sub">Selectively bred premium &amp; exotic balloon mollies<br>shipped worldwide from Bacolod City, Philippines</p>
     <div class="hero-badges">
-      <span class="badge badge-gold">🐠 Stocks updated regularly</span>
+      <span class="badge badge-gold">🐠 Premium strains available</span>
       <span class="badge badge-water">🌏 Ships local &amp; international</span>
       <span class="badge badge-dim">📍 Bacolod City, PH</span>
     </div>
@@ -520,7 +552,7 @@
       </div>
       <div>
         <div class="contact-lbl">Facebook</div>
-        <div class="contact-val">eXed Marks the Spot</div>
+        <div class="contact-val">Xmarksthespot</div>
       </div>
     </a>
     <a href="https://wa.me/639173397877" target="_blank" class="contact-card">
@@ -552,7 +584,7 @@
 
 <script>
 const FISH = [
-  { name:"Balloon Molly", variant:"Golden Zebra Lyretail",         price:100, category:"lyretail",  bg:"#1a1500", img:"https://i.imgur.com/PYOUgcb.jpg" },
+  { name:"Balloon Molly", variant:"Golden Zebra Lyretail",         price:100, category:"lyretail",  bg:"#1a1500", img:"https://i.imgur.com/9wpZj9o.jpg" },
   { name:"Balloon Molly", variant:"Pikachu Veiltail",              price:100, category:"veiltail",  bg:"#1a1500", img:"https://i.imgur.com/x6toumv.jpg" },
   { name:"Balloon Molly", variant:"Pikachu Roundtail",             price:100, category:"roundtail", bg:"#1a1500", img:"https://i.imgur.com/scWp5od.jpg" },
   { name:"Balloon Molly", variant:"Platinum Marble Zebra Pattern", price:100, category:"special",   bg:"#111820", img:"https://i.imgur.com/6zjsYGz.jpg" },
