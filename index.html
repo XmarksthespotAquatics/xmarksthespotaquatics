@@ -87,9 +87,10 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .fish-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:1rem}
 .fish-card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border);transition:transform .18s,border-color .18s,box-shadow .18s;display:flex;flex-direction:column}
 .fish-card:hover{transform:translateY(-4px);border-color:rgba(245,200,66,.35);box-shadow:0 8px 32px rgba(0,0,0,.5),0 0 20px rgba(245,200,66,.08)}
-.fish-img{width:100%;height:150px;display:flex;align-items:center;justify-content:center;font-size:52px;overflow:hidden;flex-shrink:0}
+.fish-img{width:100%;height:180px;display:flex;align-items:center;justify-content:center;font-size:52px;overflow:hidden;flex-shrink:0;position:relative}
 .fish-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
 .fish-card:hover .fish-img img{transform:scale(1.05)}
+.fish-img::after{content:'';position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,rgba(13,25,35,0.7),transparent);pointer-events:none}
 .fish-body{padding:12px 14px 14px;display:flex;flex-direction:column;flex:1}
 .fish-name{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
 .fish-variant{font-size:13px;font-weight:600;color:var(--text);margin-top:3px;line-height:1.3;flex:1}
@@ -202,7 +203,7 @@ footer strong{color:var(--gold)}
 @media(max-width:480px){
   .stats-row{grid-template-columns:repeat(3,1fr)}
   .stat-num{font-size:1.3rem}
-  .hero{padding:2.5rem 1rem 2rem}
+  .hero{padding:2.5rem 1rem 2rem;padding-top:3.5rem}
   .hero-logo{font-size:2rem;letter-spacing:-1px}
   .hero-sub{font-size:.88rem}
   .fish-grid{grid-template-columns:repeat(2,1fr);gap:10px}
@@ -213,6 +214,17 @@ footer strong{color:var(--gold)}
 </style>
 </head>
 <body>
+<nav id="navbar" style="position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(13,25,35,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(245,200,66,0.15);padding:10px 1.5rem;display:flex;align-items:center;justify-content:space-between;transform:translateY(-100%);transition:transform 0.3s;">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <img src="https://i.imgur.com/J6wIZx9.jpg" alt="X Marks the Spot" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:1.5px solid var(--gold);" onerror="this.style.display='none'"/>
+    <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--gold);font-size:1rem;">✕ Marks the Spot</span>
+  </div>
+  <div style="display:flex;gap:8px;">
+    <a href="#strains" style="font-size:12px;color:var(--muted);text-decoration:none;padding:5px 10px;border-radius:99px;transition:color 0.15s;" onmouseover="this.style.color='#F5C842'" onmouseout="this.style.color='#8a9bb0'">Strains</a>
+    <a href="#request" style="font-size:12px;font-weight:700;color:#1a1200;background:var(--gold);text-decoration:none;padding:5px 14px;border-radius:99px;">Order Now</a>
+  </div>
+</nav>
+
 
 <header class="hero">
   <div class="hero-bg"></div>
@@ -239,7 +251,7 @@ footer strong{color:var(--gold)}
   <!-- ABOUT -->
   <div class="about-section">
     <div class="about-inner">
-      <div class="about-avatar">🐠</div>
+      <div class="about-avatar" style="background:none;border:2px solid var(--gold-dark);overflow:hidden;"><img src="https://i.imgur.com/J6wIZx9.jpg" alt="X Marks the Spot Logo" style="width:100%;height:100%;object-fit:cover;" onerror="this.outerHTML='🐠'"/></div>
       <div>
         <div class="about-name">X Marks the Spot</div>
         <div class="about-title">Premium Balloon Molly Source · Bacolod City, Philippines</div>
@@ -281,7 +293,7 @@ footer strong{color:var(--gold)}
   </div>
 
   <!-- STRAINS -->
-  <div class="section-header" style="margin-top:2rem">
+  <div class="section-header" style="margin-top:2rem" id="strains">
     <div class="section-title">🐠 Available Strains</div>
     <div style="font-size:12px;color:var(--muted)">Updated July 2026</div>
   </div>
@@ -310,7 +322,7 @@ footer strong{color:var(--gold)}
   </div>
 
   <!-- REQUEST FORM -->
-  <div class="request-section">
+  <div class="request-section" id="request">
     <div class="section-title">🎣 Request a Fish</div>
     <div class="request-sub">Tell us what you are looking for and we will personally select the best match for you.</div>
     <div id="requestForm">
@@ -567,7 +579,24 @@ function toggleFaq(el){
 
 renderFish("all");
 renderTx();
-setInterval(rotateTx,45000);
+// Random interval between 5 and 7 hours (in ms)
+function scheduleNextRotation(){
+  const min = 5 * 60 * 60 * 1000;
+  const max = 7 * 60 * 60 * 1000;
+  const interval = Math.floor(Math.random() * (max - min + 1)) + min;
+  setTimeout(function(){ rotateTx(); scheduleNextRotation(); }, interval);
+}
+scheduleNextRotation();
+</script>
+<script>
+window.addEventListener('scroll', function(){
+  const nav = document.getElementById('navbar');
+  if(window.scrollY > 80){
+    nav.style.transform = 'translateY(0)';
+  } else {
+    nav.style.transform = 'translateY(-100%)';
+  }
+});
 </script>
 </body>
 </html>
