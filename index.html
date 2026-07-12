@@ -20,7 +20,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 
 /* HERO */
 .hero{background:#000;padding:3.5rem 1.5rem 3rem;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(245,200,66,0.3)}
-.hero-bg{position:absolute;inset:0;background:url('https://i.imgur.com/G0pb9iy.jpg') center center/cover no-repeat;opacity:.25;z-index:0;filter:grayscale(30%)}
+.hero-bg{position:absolute;inset:0;background:url('https://i.imgur.com/G0pb9iy.jpg') center center/contain no-repeat,#000;opacity:.3;z-index:0;filter:grayscale(20%)}
 .bubbles span{position:absolute;border-radius:50%;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);animation:float 8s ease-in-out infinite}
 .bubbles span:nth-child(1){width:90px;height:90px;top:10%;left:5%;animation-delay:0s}
 .bubbles span:nth-child(2){width:45px;height:45px;top:65%;left:12%;animation-delay:2s}
@@ -236,7 +236,6 @@ footer strong{color:var(--gold)}
     <div class="hero-logo"><span class="x-mark">✕</span> Marks the Spot</div>
     <p class="hero-sub">Selectively bred premium &amp; exotic balloon mollies<br>evaluated and shipped worldwide from Bacolod City, Philippines</p>
     <div class="hero-badges">
-      <span class="badge badge-gold">🏆 Show &amp; Material Grade Available</span>
       <span class="badge badge-water">🌏 Ships Worldwide</span>
       <span class="badge badge-dim">📍 Bacolod City, PH</span>
     </div>
@@ -292,10 +291,11 @@ footer strong{color:var(--gold)}
   <div class="request-section" id="request">
     <div class="section-title">🎣 Request a Fish</div>
     <div class="request-sub">Tell us what you are looking for and we will personally select the best match for you.</div>
+    <div style="font-size:11px;color:#888;margin-bottom:1rem;"><span style="color:#ef4444;font-weight:700;">*</span> Required fields — please fill these in before sending.</div>
     <div id="requestForm">
       <div class="form-grid">
         <div class="form-group">
-          <label>Strain</label>
+          <label>Strain <span style="color:#ef4444">*</span></label>
           <select id="reqStrain">
             <option value="">Select a strain...</option>
             <option>Golden Zebra Lyretail</option>
@@ -311,7 +311,7 @@ footer strong{color:var(--gold)}
           </select>
         </div>
         <div class="form-group">
-          <label>Grade</label>
+          <label>Grade <span style="color:#ef4444">*</span></label>
           <select id="reqGrade">
             <option value="">Select a grade...</option>
             <option>Material Grade (from $80)</option>
@@ -321,15 +321,15 @@ footer strong{color:var(--gold)}
           </select>
         </div>
         <div class="form-group">
-          <label>Quantity</label>
+          <label>Quantity <span style="color:#ef4444">*</span></label>
           <input type="number" id="reqQty" placeholder="How many fish?" min="1" />
         </div>
         <div class="form-group">
-          <label>Your Country</label>
+          <label>Your Country <span style="color:#ef4444">*</span></label>
           <input type="text" id="reqCountry" placeholder="e.g. USA, Singapore..." />
         </div>
         <div class="form-group">
-          <label>Preferred Contact</label>
+          <label>Preferred Contact <span style="color:#ef4444">*</span></label>
           <select id="reqContact">
             <option value="whatsapp">WhatsApp</option>
             <option value="messenger">Facebook Messenger</option>
@@ -338,11 +338,11 @@ footer strong{color:var(--gold)}
           </select>
         </div>
         <div class="form-group">
-          <label>Your Contact / Username</label>
+          <label>Your Contact / Username <span style="color:#ef4444">*</span></label>
           <input type="text" id="reqHandle" placeholder="Number, FB name, or @telegram..." />
         </div>
         <div class="form-group full">
-          <label>Additional Notes</label>
+          <label>Additional Notes <span style="color:#888;font-weight:400;font-size:10px;">(optional)</span></label>
           <input type="text" id="reqNotes" placeholder="Pair preferences, specific requirements, questions..." />
         </div>
       </div>
@@ -516,7 +516,14 @@ function requestStrain(strain){
   var form = document.getElementById('request');
   form.style.transition = 'box-shadow 0.3s';
   form.style.boxShadow = '0 0 0 2px #F5C842';
-  setTimeout(function(){ form.style.boxShadow = ''; }, 1500);
+  setTimeout(function(){
+    form.style.boxShadow = '';
+    // Move cursor to grade dropdown - next required field
+    var gradeEl = document.getElementById('reqGrade');
+    gradeEl.focus();
+    gradeEl.style.borderColor = '#F5C842';
+    setTimeout(function(){ gradeEl.style.borderColor = 'rgba(245,200,66,0.15)'; }, 2000);
+  }, 800);
 }
 
 function renderFish(cat){
