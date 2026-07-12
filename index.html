@@ -267,6 +267,46 @@ footer strong{color:var(--gold)}
     </div>
   </div>
 
+  <!-- WATER PARAMETERS -->
+  <div style="background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:1.5rem 1.75rem;margin-bottom:2rem;box-shadow:var(--shadow)">
+    <div class="section-title" style="margin-bottom:1rem">💧 Water Parameters &amp; Breeding Conditions</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;">
+      <div style="background:var(--card2);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid var(--border)">
+        <div style="font-size:20px;margin-bottom:4px">🌡️</div>
+        <div style="font-size:18px;font-weight:700;color:var(--gold)">26–28°C</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Temperature</div>
+      </div>
+      <div style="background:var(--card2);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid var(--border)">
+        <div style="font-size:20px;margin-bottom:4px">⚗️</div>
+        <div style="font-size:18px;font-weight:700;color:var(--gold)">7.5–8.2</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">pH Level</div>
+      </div>
+      <div style="background:var(--card2);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid var(--border)">
+        <div style="font-size:20px;margin-bottom:4px">💎</div>
+        <div style="font-size:18px;font-weight:700;color:var(--gold)">10–20 dGH</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Hardness (GH)</div>
+      </div>
+      <div style="background:var(--card2);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid var(--border)">
+        <div style="font-size:20px;margin-bottom:4px">🧂</div>
+        <div style="font-size:18px;font-weight:700;color:var(--gold)">0.5–1 tsp/gal</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Salt Tolerance</div>
+      </div>
+      <div style="background:var(--card2);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid var(--border)">
+        <div style="font-size:20px;margin-bottom:4px">🪨</div>
+        <div style="font-size:18px;font-weight:700;color:var(--gold)">Hard Water</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Water Type</div>
+      </div>
+      <div style="background:var(--card2);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid var(--border)">
+        <div style="font-size:20px;margin-bottom:4px">🔄</div>
+        <div style="font-size:18px;font-weight:700;color:var(--gold)">Weekly 30%</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Water Change</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-top:12px;padding:10px;background:rgba(245,200,66,0.05);border-radius:var(--radius-sm);border-left:3px solid var(--gold)">
+      ⚠️ <strong style="color:var(--text)">Acclimatization tip:</strong> Our fish are bred in hard, slightly alkaline water with salt. When acclimating to your tank, do so gradually over 30–45 minutes. Sudden changes in pH or hardness can cause stress. Match parameters as closely as possible for best results.
+    </div>
+  </div>
+
   <!-- GRADES - moved below strains, inserted via JS -->
 
   <!-- STRAINS -->
@@ -398,7 +438,7 @@ footer strong{color:var(--gold)}
   <div class="tx-section">
     <div class="tx-header">
       <div class="section-title">✅ Recent Transactions</div>
-      <div class="tx-live"><div class="tx-dot"></div> Live</div>
+      <div style="font-size:12px;color:var(--muted);">Verified orders</div>
     </div>
     <div class="tx-list" id="txList"></div>
   </div>
@@ -408,7 +448,7 @@ footer strong{color:var(--gold)}
     <div class="section-title">❓ Frequently Asked Questions</div>
     <div class="faq-list">
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How are the fish shipped internationally? <span class="faq-icon">+</span></div><div class="faq-a">Fish are carefully packed in oxygen-filled bags with water conditioner and insulated boxes to maintain temperature. We ship via trusted air cargo services experienced in live fish transport. Shipping typically takes 1–3 days internationally depending on your location.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What if a fish dies during shipping? <span class="faq-icon">+</span></div><div class="faq-a">We guarantee live arrival for all local shipments. For international orders we take every precaution to ensure safe delivery and will work with you on a case-by-case basis. We always send healthy, well-conditioned fish and document their condition before packing.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is your Dead on Arrival (DOA) policy? <span class="faq-icon">+</span></div><div class="faq-a"><strong style="color:var(--gold)">Local orders:</strong> Full live arrival guarantee. Any DOA must be reported with photo evidence within 2 hours of delivery.<br><br><strong style="color:var(--gold)">International orders:</strong> We require a clear, uncut video of the unopened bag(s) recorded within 2 hours of customs release or delivery. Claims submitted after this window or without video evidence cannot be processed. All fish are documented and photographed in healthy condition before packing. We will work with verified DOA claims on replacement or store credit.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I see the actual fish before I pay? <span class="faq-icon">+</span></div><div class="faq-a">Yes! Once we select your fish we send you photos and a short video of the actual fish before you confirm payment. You are buying a strain and trusting our selection — but we always show you what you are getting before it ships.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What payment methods do you accept? <span class="faq-icon">+</span></div><div class="faq-a">We accept GCash, PayPal, bank transfer, and Western Union. For international orders PayPal or bank transfer is recommended. Payment is confirmed after you approve the fish photos and before we begin packing.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is the difference between the grades? <span class="faq-icon">+</span></div><div class="faq-a">Material Grade fish are healthy quality fish great for breeding programs. Show Potential fish are young fish (2.5–3cm) showing strong competition characteristics. Show Grade fish fully meet the balloon molly competition standard in body shape, scales, and coloration and are ready to enter shows at 3cm and above.</div></div>
@@ -496,7 +536,7 @@ const TX=[
   {flag:"🇫🇷",name:"Camille D.",  loc:"Paris, France",          fish:"Golden Zebra Lyretail x2 · Show Grade",     amt:360,  time:"5 days ago"},
 ];
 
-let txIdx=0;
+// Static transactions only - no fake "just now" rotation
 
 function requestStrain(strain){
   // Pre-fill the strain in the request form
@@ -544,7 +584,7 @@ function filterFish(cat,btn){
 }
 
 function renderTx(){
-  document.getElementById("txList").innerHTML=TX.slice(0,4).map(t=>`
+  document.getElementById("txList").innerHTML=TX.slice(0,5).map(t=>`
     <div class="tx-item">
       <div class="tx-flag">${t.flag}</div>
       <div class="tx-info"><div class="tx-name">${t.name} · ${t.loc}</div><div class="tx-fish">${t.fish}</div></div>
@@ -552,28 +592,44 @@ function renderTx(){
     </div>`).join("");
 }
 
-function rotateTx(){
-  txIdx=(txIdx+1)%TX.length;
-  const list=document.getElementById("txList");
-  const t=TX[txIdx];
-  const el=document.createElement("div");
-  el.className="tx-item tx-new";
-  el.innerHTML=`
-    <div class="tx-flag">${t.flag}</div>
-    <div class="tx-info"><div class="tx-name">${t.name} · ${t.loc}</div><div class="tx-fish">${t.fish}</div></div>
-    <div class="tx-right"><div class="tx-amount">$${t.amt}</div><div class="tx-time">Just now</div></div>`;
-  list.insertBefore(el,list.firstChild);
-  if(list.children.length>4)list.removeChild(list.lastChild);
-}
+// Static display only - no rotation
 
 function sendRequest(){
-  const strain=document.getElementById("reqStrain").value||"Not specified";
-  const grade=document.getElementById("reqGrade").value||"Not specified";
-  const qty=document.getElementById("reqQty").value||"Not specified";
-  const country=document.getElementById("reqCountry").value||"Not specified";
+  // Validation
+  const strain=document.getElementById("reqStrain").value;
+  const grade=document.getElementById("reqGrade").value;
+  const qty=document.getElementById("reqQty").value;
+  const country=document.getElementById("reqCountry").value;
   const contact=document.getElementById("reqContact").value||"whatsapp";
-  const handle=document.getElementById("reqHandle").value||"Not provided";
+  const handle=document.getElementById("reqHandle").value;
   const notes=document.getElementById("reqNotes").value||"None";
+
+  // Clear previous errors
+  document.querySelectorAll(".field-error").forEach(e=>e.remove());
+  document.querySelectorAll(".form-group select, .form-group input").forEach(el=>{
+    el.style.borderColor="rgba(245,200,66,0.15)";
+  });
+
+  let valid=true;
+  function showError(id, msg){
+    const el=document.getElementById(id);
+    el.style.borderColor="#ef4444";
+    const err=document.createElement("div");
+    err.className="field-error";
+    err.style.cssText="font-size:11px;color:#ef4444;margin-top:4px;";
+    err.textContent=msg;
+    el.parentNode.appendChild(err);
+    valid=false;
+  }
+
+  if(!strain) showError("reqStrain","Please select a strain");
+  if(!grade) showError("reqGrade","Please select a grade");
+  if(!qty || qty < 1) showError("reqQty","Please enter quantity");
+  if(!country.trim()) showError("reqCountry","Please enter your country");
+  if(!handle.trim()) showError("reqHandle","Please enter your contact details");
+
+  if(!valid) return;
+
   const msg=`Hi! I found X Marks the Spot and I would like to request:\n\n🐠 Strain: ${strain}\n⭐ Grade: ${grade}\n📦 Quantity: ${qty}\n🌏 Country: ${country}\n📞 Reach me via: ${contact} — ${handle}\n📝 Notes: ${notes}\n\nPlease let me know availability and shipping cost. Thank you!`;
   const urls={
     whatsapp:`https://wa.me/639173397877?text=${encodeURIComponent(msg)}`,
@@ -602,14 +658,7 @@ function toggleFaq(el){
 
 renderFish("all");
 renderTx();
-// Random interval between 5 and 7 hours (in ms)
-function scheduleNextRotation(){
-  const min = 5 * 60 * 60 * 1000;
-  const max = 7 * 60 * 60 * 1000;
-  const interval = Math.floor(Math.random() * (max - min + 1)) + min;
-  setTimeout(function(){ rotateTx(); scheduleNextRotation(); }, interval);
-}
-scheduleNextRotation();
+// No auto-rotation - transactions are honest static records
 </script>
 <script>
 window.addEventListener('scroll', function(){
