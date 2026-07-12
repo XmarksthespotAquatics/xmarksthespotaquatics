@@ -132,6 +132,11 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .submit-btn:hover{background:var(--gold-light)}
 .wa-note{font-size:11px;color:var(--muted);text-align:center;margin-top:8px}
 .wa-note strong{color:#25d366}
+.order-status{display:none;margin-top:14px;padding:12px 14px;border-radius:var(--radius-sm);border:1px solid rgba(245,200,66,.25);background:rgba(245,200,66,.08);color:var(--text);font-size:13px;line-height:1.6}
+.order-status.show{display:block}
+.order-status strong{color:var(--gold)}
+.order-summary{display:none;margin-top:12px;padding:12px 14px;border-radius:var(--radius-sm);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:12px;color:var(--muted);white-space:pre-wrap}
+
 
 /* CONFIRM */
 .confirm-box{display:none;text-align:center;padding:2rem 1rem}
@@ -352,13 +357,21 @@ footer strong{color:var(--gold)}
   <!-- REQUEST FORM -->
   <div class="card-wrap" id="request" style="background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.1)">
     <div class="section-title">🎣 Request a Fish</div>
-    <p style="font-size:13px;color:var(--muted);margin:6px 0 1rem">Tell us what you are looking for and we will personally select the best match for you.</p>
-    <div id="requestForm">
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 1rem">Submit your order and we will capture it directly in the site form. We will also send you a confirmation via WhatsApp or Email.</p>
+
+    <form id="requestForm" name="fish-order" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitOrder(event)">
+      <input type="hidden" name="form-name" value="fish-order">
+      <p style="display:none;">
+        <label>Don’t fill this out if you are human: <input name="bot-field"></label>
+      </p>
+      <input type="hidden" name="order-id" id="orderIdField" value="">
+      <input type="hidden" name="order-summary" id="orderSummaryField" value="">
+
       <div class="req-note"><span>*</span> Required fields — please complete before sending.</div>
       <div class="form-grid">
         <div class="form-group">
-          <label>Strain <span style="color:#ef4444">*</span></label>
-          <select id="reqStrain">
+          <label for="reqStrain">Strain <span style="color:#ef4444">*</span></label>
+          <select id="reqStrain" name="strain" required>
             <option value="">Select a strain...</option>
             <option>Golden Zebra Lyretail</option>
             <option>Pikachu Veiltail</option>
@@ -373,8 +386,8 @@ footer strong{color:var(--gold)}
           </select>
         </div>
         <div class="form-group">
-          <label>Grade <span style="color:#ef4444">*</span></label>
-          <select id="reqGrade">
+          <label for="reqGrade">Grade <span style="color:#ef4444">*</span></label>
+          <select id="reqGrade" name="grade" required>
             <option value="">Select a grade...</option>
             <option>Material Grade (from $80)</option>
             <option>Show Potential (from $120)</option>
@@ -383,12 +396,12 @@ footer strong{color:var(--gold)}
           </select>
         </div>
         <div class="form-group">
-          <label>Quantity <span style="color:#ef4444">*</span></label>
-          <input type="number" id="reqQty" placeholder="How many fish?" min="1"/>
+          <label for="reqQty">Quantity <span style="color:#ef4444">*</span></label>
+          <input type="number" id="reqQty" name="quantity" placeholder="How many fish?" min="1" required/>
         </div>
         <div class="form-group">
-          <label>Your Country <span style="color:#ef4444">*</span></label>
-          <input type="text" id="reqCountry" list="countryList" placeholder="Type or select..." autocomplete="off"/>
+          <label for="reqCountry">Your Country <span style="color:#ef4444">*</span></label>
+          <input type="text" id="reqCountry" name="country" list="countryList" placeholder="Type or select..." autocomplete="off" required/>
           <datalist id="countryList">
             <option value="United States"><option value="Canada"><option value="United Kingdom">
             <option value="Australia"><option value="New Zealand"><option value="Singapore">
@@ -406,28 +419,33 @@ footer strong{color:var(--gold)}
           </datalist>
         </div>
         <div class="form-group">
-          <label>Preferred Contact <span style="color:#ef4444">*</span></label>
-          <select id="reqContact">
+          <label for="reqContact">Preferred Contact <span style="color:#ef4444">*</span></label>
+          <select id="reqContact" name="contact_method" required>
             <option value="whatsapp">WhatsApp</option>
             <option value="email">Email</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Your WhatsApp / Email <span style="color:#ef4444">*</span></label>
-          <input type="text" id="reqHandle" placeholder="Your number or email address"/>
+          <label for="reqHandle">Your WhatsApp / Email <span style="color:#ef4444">*</span></label>
+          <input type="text" id="reqHandle" name="contact_handle" placeholder="Your number or email address" required/>
         </div>
         <div class="form-group full">
-          <label>Additional Notes <span style="color:#555;font-weight:400;font-size:10px">(optional)</span></label>
-          <input type="text" id="reqNotes" placeholder="Pair preferences, specific requirements, questions..."/>
+          <label for="reqNotes">Additional Notes <span style="color:#555;font-weight:400;font-size:10px">(optional)</span></label>
+          <input type="text" id="reqNotes" name="notes" placeholder="Pair preferences, specific requirements, questions..."/>
         </div>
       </div>
-      <button class="submit-btn" onclick="sendRequest()">📩 Send Request →</button>
-      <div class="wa-note">💬 <strong>WhatsApp users:</strong> Your order details will be pre-filled — just press <strong>Send</strong> in WhatsApp to complete your request.</div>
-    </div>
+
+      <div class="order-summary" id="orderPreview"></div>
+      <div class="order-status" id="orderStatus"></div>
+
+      <button class="submit-btn" type="submit">📩 Place Order →</button>
+      <div class="wa-note">💬 <strong>WhatsApp users:</strong> After the form is saved, we will also open a message draft for quick follow-up when available.</div>
+    </form>
+
     <div class="confirm-box" id="confirmBox">
       <div class="confirm-icon">✅</div>
-      <div class="confirm-title">Request Sent!</div>
-      <div class="confirm-sub">Thank you! We will review your request and get back to you within 24 hours via your chosen contact method.<br><br>Feel free to browse our FAQ below or message us directly anytime.</div>
+      <div class="confirm-title">Order Captured!</div>
+      <div class="confirm-sub" id="confirmText">Thank you! Your request has been saved and we will review it within 24 hours.</div>
       <button class="submit-btn" style="margin-top:1.5rem;max-width:260px;margin-left:auto;margin-right:auto;display:block" onclick="resetForm()">Send Another Request</button>
     </div>
   </div>
@@ -653,7 +671,42 @@ function requestStrain(strain){
   },800);
 }
 
-function sendRequest(){
+function buildOrderId(){
+  const now = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  return `XMTS-${now.getFullYear()}${pad(now.getMonth()+1)}${pad(now.getDate())}-${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+}
+
+function buildOrderSummary(orderId){
+  const strain=document.getElementById("reqStrain").value.trim();
+  const grade=document.getElementById("reqGrade").value.trim();
+  const qty=document.getElementById("reqQty").value.trim();
+  const country=document.getElementById("reqCountry").value.trim();
+  const contact=document.getElementById("reqContact").value.trim();
+  const handle=document.getElementById("reqHandle").value.trim();
+  const notes=document.getElementById("reqNotes").value.trim() || "None";
+  return [
+    `Order ID: ${orderId}`,
+    `Strain: ${strain}`,
+    `Grade: ${grade}`,
+    `Quantity: ${qty}`,
+    `Country: ${country}`,
+    `Preferred Contact: ${contact}`,
+    `Contact Handle: ${handle}`,
+    `Notes: ${notes}`
+  ].join('\\n');
+}
+
+function showOrderStatus(message, ok=true){
+  const status=document.getElementById("orderStatus");
+  status.classList.add("show");
+  status.style.borderColor = ok ? "rgba(245,200,66,.25)" : "rgba(239,68,68,.35)";
+  status.style.background = ok ? "rgba(245,200,66,.08)" : "rgba(239,68,68,.08)";
+  status.innerHTML = message;
+}
+
+async function submitOrder(e){
+  e.preventDefault();
   const strain=document.getElementById("reqStrain").value;
   const grade=document.getElementById("reqGrade").value;
   const qty=document.getElementById("reqQty").value;
@@ -668,6 +721,7 @@ function sendRequest(){
   let valid=true;
   function showError(id,msg){
     const el=document.getElementById(id);
+    if(!el) return;
     el.style.borderColor="#ef4444";
     const err=document.createElement("div");
     err.className="field-error";
@@ -675,6 +729,7 @@ function sendRequest(){
     el.parentNode.appendChild(err);
     valid=false;
   }
+
   if(!strain) showError("reqStrain","Please select a strain");
   if(!grade) showError("reqGrade","Please select a grade");
   if(!qty||qty<1) showError("reqQty","Please enter quantity");
@@ -682,23 +737,50 @@ function sendRequest(){
   if(!handle.trim()) showError("reqHandle","Please enter your contact details");
   if(!valid) return;
 
-  const msg="Hi! I found X Marks the Spot and I would like to request:\n\n🐠 Strain: "+strain+"\n⭐ Grade: "+grade+"\n📦 Quantity: "+qty+"\n🌏 Country: "+country+"\n📞 Contact me via: "+contact+" — "+handle+"\n📝 Notes: "+notes+"\n\nPlease let me know availability and shipping cost. Thank you!";
-  if(contact==="whatsapp"){
-    window.open("https://wa.me/639173397877?text="+encodeURIComponent(msg),"_blank");
-  } else {
-    window.open("mailto:Francisco.Desaca@gmail.com?subject=Fish Request — "+encodeURIComponent(strain)+"&body="+encodeURIComponent(msg),"_blank");
+  const orderId = buildOrderId();
+  const orderSummary = buildOrderSummary(orderId);
+  document.getElementById("orderIdField").value = orderId;
+  document.getElementById("orderSummaryField").value = orderSummary;
+  document.getElementById("orderPreview").style.display = "block";
+  document.getElementById("orderPreview").textContent = orderSummary;
+
+  const form = document.getElementById("requestForm");
+  const encoded = new URLSearchParams(new FormData(form)).toString();
+
+  try{
+    await fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encoded
+    });
+    document.getElementById("requestForm").style.display="none";
+    document.getElementById("confirmBox").classList.add("show");
+    document.getElementById("confirmText").innerHTML = `Your order was captured successfully.<br><br><strong>Order ID:</strong> ${orderId}<br><br>We will review it within 24 hours via your chosen contact method.`;
+    showOrderStatus(`✅ Order captured successfully. <strong>Order ID:</strong> ${orderId}`, true);
+
+    const msg = `Hi! I just placed an order on X Marks the Spot.
+
+${orderSummary}
+
+Please confirm availability and shipping cost. Thank you!`;
+    if(contact==="whatsapp"){
+      window.open("https://wa.me/639173397877?text="+encodeURIComponent(msg),"_blank");
+    } else if (contact==="email"){
+      window.open("mailto:Francisco.Desaca@gmail.com?subject="+encodeURIComponent(`Fish Order — ${orderId}`)+"&body="+encodeURIComponent(msg),"_blank");
+    }
+  }catch(err){
+    showOrderStatus("⚠️ The form could not be saved to the server from this page. To capture orders, deploy this site on Netlify or connect a form endpoint like Formspree.", false);
   }
-  document.getElementById("requestForm").style.display="none";
-  document.getElementById("confirmBox").classList.add("show");
 }
 
 function resetForm(){
   document.getElementById("requestForm").style.display="block";
   document.getElementById("confirmBox").classList.remove("show");
+  document.getElementById("orderStatus").classList.remove("show");
+  document.getElementById("orderPreview").style.display="none";
   ["reqStrain","reqGrade","reqQty","reqCountry","reqHandle","reqNotes"].forEach(function(id){document.getElementById(id).value=""});
   document.getElementById("reqContact").value="whatsapp";
 }
-
 function renderTx(){
   document.getElementById("txList").innerHTML=TX.map(function(t){return(
     '<div class="tx-item">'+
