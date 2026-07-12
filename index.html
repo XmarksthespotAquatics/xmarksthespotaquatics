@@ -11,17 +11,17 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --gold:#F5C842;--gold-light:#FFE082;--gold-dark:#c9a227;
-  --water:#1a6b8a;--bg:#0f1923;--card:#1a2535;--card2:#1e2d42;
-  --text:#f0e6cc;--muted:#8a9bb0;--border:rgba(245,200,66,0.12);
-  --radius:14px;--radius-sm:8px;--shadow:0 4px 24px rgba(0,0,0,0.4);
+  --gold:#F5C842;--gold-light:#fff;--gold-dark:#c9a227;
+  --water:#444;--bg:#0a0a0a;--card:#141414;--card2:#1c1c1c;
+  --text:#f5f5f5;--muted:#888;--border:rgba(255,255,255,0.08);
+  --radius:14px;--radius-sm:8px;--shadow:0 4px 24px rgba(0,0,0,0.6);
 }
 body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 
 /* HERO */
-.hero{background:linear-gradient(160deg,#0d1f2d 0%,#0a3d2e 50%,#1a2a0a 100%);padding:3.5rem 1.5rem 3rem;text-align:center;position:relative;overflow:hidden;border-bottom:2px solid var(--gold-dark)}
-.hero-bg{position:absolute;inset:0;background:url('https://i.imgur.com/G0pb9iy.jpg') center/cover no-repeat;opacity:.12;z-index:0}
-.bubbles span{position:absolute;border-radius:50%;background:rgba(245,200,66,.04);border:1px solid rgba(245,200,66,.08);animation:float 8s ease-in-out infinite}
+.hero{background:#000;padding:3.5rem 1.5rem 3rem;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(245,200,66,0.3)}
+.hero-bg{position:absolute;inset:0;background:url('https://i.imgur.com/G0pb9iy.jpg') center center/cover no-repeat;opacity:.25;z-index:0;filter:grayscale(30%)}
+.bubbles span{position:absolute;border-radius:50%;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);animation:float 8s ease-in-out infinite}
 .bubbles span:nth-child(1){width:90px;height:90px;top:10%;left:5%;animation-delay:0s}
 .bubbles span:nth-child(2){width:45px;height:45px;top:65%;left:12%;animation-delay:2s}
 .bubbles span:nth-child(3){width:110px;height:110px;top:5%;right:6%;animation-delay:1s}
@@ -30,13 +30,14 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .bubbles span:nth-child(6){width:70px;height:70px;bottom:20%;left:30%;animation-delay:4s}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
 .hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
-.hero-logo{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.6rem,9vw,4.2rem);font-weight:700;color:var(--gold);letter-spacing:-2px;line-height:1;text-shadow:0 0 40px rgba(245,200,66,.3)}
-.hero-sub{color:rgba(240,230,204,.75);font-size:1rem;margin-top:12px;line-height:1.7}
+.hero-logo{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.6rem,9vw,4.2rem);font-weight:700;color:#fff;letter-spacing:-2px;line-height:1;text-shadow:0 2px 40px rgba(0,0,0,0.8)}
+.hero-logo .x-mark{color:var(--gold)}
+.hero-sub{color:rgba(255,255,255,.7);font-size:1rem;margin-top:12px;line-height:1.7;letter-spacing:0.01em}
 .hero-badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px}
 .badge{display:inline-flex;align-items:center;gap:5px;padding:5px 14px;border-radius:99px;font-size:12px;font-weight:500}
 .badge-gold{background:var(--gold);color:#1a1200;font-weight:700}
-.badge-water{background:rgba(26,107,138,.3);color:#5bc8e8;border:1px solid rgba(91,200,232,.25)}
-.badge-dim{background:rgba(255,255,255,.06);color:rgba(240,230,204,.7);border:1px solid rgba(255,255,255,.1)}
+.badge-water{background:rgba(255,255,255,.08);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.15)}
+.badge-dim{background:rgba(255,255,255,.05);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.1)}
 
 /* LAYOUT */
 .container{max-width:900px;margin:0 auto;padding:2rem 1.25rem}
@@ -57,25 +58,26 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .about-title{font-size:12px;color:var(--muted);margin-top:2px}
 .about-bio{font-size:13px;color:var(--text);line-height:1.7;margin-top:10px;opacity:.85}
 .about-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.about-tag{font-size:11px;padding:3px 10px;border-radius:99px;background:rgba(245,200,66,.1);color:var(--gold);border:1px solid rgba(245,200,66,.2)}
+.about-tag{font-size:11px;padding:3px 10px;border-radius:99px;background:rgba(255,255,255,.06);color:#ccc;border:1px solid rgba(255,255,255,.12)}
 
 /* GRADES */
 .grades-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:1rem;margin-bottom:2rem}
 .grade-card{border-radius:var(--radius);padding:1.25rem 1rem;border:1px solid;text-align:center;position:relative;overflow:hidden}
-.grade-card.material{background:rgba(26,37,53,.8);border-color:rgba(138,155,176,.25)}
-.grade-card.potential{background:rgba(26,43,30,.8);border-color:rgba(74,222,128,.25)}
-.grade-card.show{background:rgba(40,30,10,.8);border-color:rgba(245,200,66,.4)}
+.grade-card.material{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1)}
+.grade-card.potential{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)}
+.grade-card.show{background:rgba(245,200,66,.06);border-color:rgba(245,200,66,.3)}
 .grade-icon{font-size:28px;margin-bottom:8px}
-.grade-photo{width:100%;height:110px;object-fit:cover;border-radius:var(--radius-sm);margin-bottom:10px;display:block}
+.grade-photo{width:80px;height:80px;object-fit:cover;border-radius:50%;margin:0 auto 12px;display:block;border:2px solid rgba(255,255,255,.15)}
+.grade-card.show .grade-photo{border-color:var(--gold)}
 .grade-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:var(--text)}
 .grade-price{font-size:20px;font-weight:700;margin-top:6px}
-.grade-card.material .grade-price{color:var(--muted)}
-.grade-card.potential .grade-price{color:#4ade80}
+.grade-card.material .grade-price{color:#fff}
+.grade-card.potential .grade-price{color:#ddd}
 .grade-card.show .grade-price{color:var(--gold)}
 .grade-desc{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5}
 .grade-size{font-size:10px;margin-top:6px;padding:3px 8px;border-radius:99px;display:inline-block}
-.grade-card.material .grade-size{background:rgba(138,155,176,.15);color:var(--muted)}
-.grade-card.potential .grade-size{background:rgba(74,222,128,.12);color:#4ade80}
+.grade-card.material .grade-size{background:rgba(255,255,255,.08);color:#aaa}
+.grade-card.potential .grade-size{background:rgba(255,255,255,.1);color:#ccc}
 .grade-card.show .grade-size{background:rgba(245,200,66,.12);color:var(--gold)}
 
 /* FILTERS */
@@ -98,7 +100,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .fish-meta{display:flex;align-items:center;justify-content:space-between;margin-top:10px;gap:6px}
 .fish-price{font-size:14px;font-weight:700;color:var(--gold);white-space:nowrap}
 .fish-price span{font-size:10px;color:var(--muted);font-weight:400}
-.stock-pill{font-size:10px;font-weight:600;padding:3px 8px;border-radius:99px;background:rgba(26,200,120,.15);color:#4ade80;border:1px solid rgba(74,222,128,.2);white-space:nowrap;flex-shrink:0}
+.stock-pill{font-size:10px;font-weight:600;padding:3px 8px;border-radius:99px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.15);white-space:nowrap;flex-shrink:0}
 .fish-btn{display:block;width:100%;margin-top:10px;padding:9px;background:var(--gold);color:#1a1200;border:none;border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:background .15s;text-align:center;text-decoration:none}
 .fish-btn:hover{background:var(--gold-light)}
 
@@ -113,17 +115,17 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .tl-item:last-child{padding-bottom:0}
 .tl-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;border:2px solid}
 .tl-dot.gold{background:rgba(245,200,66,.15);border-color:var(--gold)}
-.tl-dot.green{background:rgba(74,222,128,.12);border-color:#4ade80}
-.tl-dot.blue{background:rgba(91,200,232,.12);border-color:#5bc8e8}
-.tl-dot.purple{background:rgba(167,139,250,.12);border-color:#a78bfa}
-.tl-dot.done{background:rgba(74,222,128,.2);border-color:#4ade80}
+.tl-dot.green{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)}
+.tl-dot.blue{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)}
+.tl-dot.purple{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)}
+.tl-dot.done{background:rgba(245,200,66,.15);border-color:var(--gold)}
 .tl-info{padding-top:6px}
 .tl-day{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
 .tl-title{font-size:14px;font-weight:600;color:var(--text);margin-top:2px}
 .tl-desc{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5}
 
 /* REQUEST FORM */
-.request-section{background:linear-gradient(135deg,#0d1f2d,#0a2d1e);border-radius:var(--radius);border:1px solid var(--border);padding:2rem 1.75rem;margin-bottom:2rem;box-shadow:var(--shadow)}
+.request-section{background:rgba(255,255,255,.03);border-radius:var(--radius);border:1px solid rgba(255,255,255,.1);padding:2rem 1.75rem;margin-bottom:2rem;box-shadow:var(--shadow)}
 .request-sub{font-size:13px;color:var(--muted);margin:6px 0 1.5rem}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .form-group{display:flex;flex-direction:column;gap:6px}
@@ -146,7 +148,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .tx-section{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:1.5rem 1.75rem;margin-bottom:2rem;box-shadow:var(--shadow)}
 .tx-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
 .tx-live{display:flex;align-items:center;gap:6px;font-size:12px;color:#4ade80}
-.tx-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite}
+.tx-dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
 .tx-list{display:flex;flex-direction:column;gap:10px}
 .tx-item{display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--card2);border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,.04)}
@@ -172,7 +174,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .faq-item.open .faq-icon{transform:rotate(45deg)}
 
 /* HOW TO ORDER */
-.how-section{background:linear-gradient(135deg,#0d1f2d,#0a2d1e);border-radius:var(--radius);border:1px solid var(--border);padding:2rem 1.75rem;margin-bottom:2rem;box-shadow:var(--shadow)}
+.how-section{background:rgba(255,255,255,.03);border-radius:var(--radius);border:1px solid var(--border);padding:2rem 1.75rem;margin-bottom:2rem;box-shadow:var(--shadow)}
 .steps{display:flex;flex-direction:column;gap:14px;margin-top:1.2rem}
 .step{display:flex;gap:14px;align-items:flex-start}
 .step-num{width:30px;height:30px;border-radius:50%;background:var(--gold);color:#1a1200;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -187,7 +189,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .contact-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
 .contact-val{font-size:12px;font-weight:600;color:var(--text);margin-top:2px;word-break:break-word}
 
-footer{background:#080f18;border-top:1px solid var(--border);color:var(--muted);text-align:center;font-size:12px;padding:1.75rem 1rem}
+footer{background:#000;border-top:1px solid rgba(255,255,255,.08);color:var(--muted);text-align:center;font-size:12px;padding:1.75rem 1rem}
 footer strong{color:var(--gold)}
 .empty{grid-column:1/-1;text-align:center;padding:2.5rem;color:var(--muted);font-size:14px}
 
@@ -215,7 +217,7 @@ footer strong{color:var(--gold)}
 </style>
 </head>
 <body>
-<nav id="navbar" style="position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(13,25,35,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(245,200,66,0.15);padding:10px 1.5rem;display:flex;align-items:center;justify-content:space-between;transform:translateY(-100%);transition:transform 0.3s;">
+<nav id="navbar" style="position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(0,0,0,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);padding:10px 1.5rem;display:flex;align-items:center;justify-content:space-between;transform:translateY(-100%);transition:transform 0.3s;">
   <div style="display:flex;align-items:center;gap:10px;">
     <img src="https://i.imgur.com/J6wIZx9.jpg" alt="X Marks the Spot" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:1.5px solid var(--gold);" onerror="this.style.display='none'"/>
     <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--gold);font-size:1rem;">✕ Marks the Spot</span>
@@ -231,7 +233,7 @@ footer strong{color:var(--gold)}
   <div class="hero-bg"></div>
   <div class="bubbles" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
   <div class="hero-inner">
-    <div class="hero-logo">✕ Marks the Spot</div>
+    <div class="hero-logo"><span class="x-mark">✕</span> Marks the Spot</div>
     <p class="hero-sub">Selectively bred premium &amp; exotic balloon mollies<br>evaluated and shipped worldwide from Bacolod City, Philippines</p>
     <div class="hero-badges">
       <span class="badge badge-gold">🏆 Show &amp; Material Grade Available</span>
@@ -264,46 +266,6 @@ footer strong{color:var(--gold)}
           <span class="about-tag">✅ Personally Selected</span>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- WATER PARAMETERS -->
-  <div style="background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:1.5rem 1.75rem;margin-bottom:2rem;box-shadow:var(--shadow)">
-    <div class="section-title" style="margin-bottom:1rem">💧 Water Parameters &amp; Breeding Conditions</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;">
-      <div style="background:var(--card2);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid var(--border)">
-        <div style="font-size:20px;margin-bottom:4px">🌡️</div>
-        <div style="font-size:18px;font-weight:700;color:var(--gold)">26–28°C</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px">Temperature</div>
-      </div>
-      <div style="background:var(--card2);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid var(--border)">
-        <div style="font-size:20px;margin-bottom:4px">⚗️</div>
-        <div style="font-size:18px;font-weight:700;color:var(--gold)">7.5–8.2</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px">pH Level</div>
-      </div>
-      <div style="background:var(--card2);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid var(--border)">
-        <div style="font-size:20px;margin-bottom:4px">💎</div>
-        <div style="font-size:18px;font-weight:700;color:var(--gold)">10–20 dGH</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px">Hardness (GH)</div>
-      </div>
-      <div style="background:var(--card2);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid var(--border)">
-        <div style="font-size:20px;margin-bottom:4px">🧂</div>
-        <div style="font-size:18px;font-weight:700;color:var(--gold)">0.5–1 tsp/gal</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px">Salt Tolerance</div>
-      </div>
-      <div style="background:var(--card2);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid var(--border)">
-        <div style="font-size:20px;margin-bottom:4px">🪨</div>
-        <div style="font-size:18px;font-weight:700;color:var(--gold)">Hard Water</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px">Water Type</div>
-      </div>
-      <div style="background:var(--card2);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid var(--border)">
-        <div style="font-size:20px;margin-bottom:4px">🔄</div>
-        <div style="font-size:18px;font-weight:700;color:var(--gold)">Weekly 30%</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px">Water Change</div>
-      </div>
-    </div>
-    <div style="font-size:12px;color:var(--muted);margin-top:12px;padding:10px;background:rgba(245,200,66,0.05);border-radius:var(--radius-sm);border-left:3px solid var(--gold)">
-      ⚠️ <strong style="color:var(--text)">Acclimatization tip:</strong> Our fish are bred in hard, slightly alkaline water with salt. When acclimating to your tank, do so gradually over 30–45 minutes. Sudden changes in pH or hardness can cause stress. Match parameters as closely as possible for best results.
     </div>
   </div>
 
@@ -448,7 +410,8 @@ footer strong{color:var(--gold)}
     <div class="section-title">❓ Frequently Asked Questions</div>
     <div class="faq-list">
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How are the fish shipped internationally? <span class="faq-icon">+</span></div><div class="faq-a">Fish are carefully packed in oxygen-filled bags with water conditioner and insulated boxes to maintain temperature. We ship via trusted air cargo services experienced in live fish transport. Shipping typically takes 1–3 days internationally depending on your location.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is your Dead on Arrival (DOA) policy? <span class="faq-icon">+</span></div><div class="faq-a"><strong style="color:var(--gold)">Local orders:</strong> Full live arrival guarantee. Any DOA must be reported with photo evidence within 2 hours of delivery.<br><br><strong style="color:var(--gold)">International orders:</strong> We require a clear, uncut video of the unopened bag(s) recorded within 2 hours of customs release or delivery. Claims submitted after this window or without video evidence cannot be processed. All fish are documented and photographed in healthy condition before packing. We will work with verified DOA claims on replacement or store credit.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is your Dead on Arrival (DOA) policy? <span class="faq-icon">+</span></div><div class="faq-a"><strong>Local orders:</strong> Full live arrival guarantee. Any DOA must be reported with clear photo evidence within 2 hours of delivery.<br><br><strong>International orders:</strong> A clear uncut video of the unopened bag must be sent within 2 hours of customs release or delivery. Claims without video evidence or submitted after this window cannot be processed. All fish are photographed in healthy condition before packing. Verified DOA claims will be handled via replacement or store credit.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What water parameters are your fish raised in? <span class="faq-icon">+</span></div><div class="faq-a">Our balloon mollies are raised in hard, slightly alkaline water: Temperature 26–28°C, pH 7.5–8.2, Hardness 10–20 dGH, with light salt (0.5–1 tsp per gallon). When acclimating to your tank, do so gradually over 30–45 minutes. Sudden changes in pH or hardness can cause stress — match parameters as closely as possible for best results.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I see the actual fish before I pay? <span class="faq-icon">+</span></div><div class="faq-a">Yes! Once we select your fish we send you photos and a short video of the actual fish before you confirm payment. You are buying a strain and trusting our selection — but we always show you what you are getting before it ships.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What payment methods do you accept? <span class="faq-icon">+</span></div><div class="faq-a">We accept GCash, PayPal, bank transfer, and Western Union. For international orders PayPal or bank transfer is recommended. Payment is confirmed after you approve the fish photos and before we begin packing.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is the difference between the grades? <span class="faq-icon">+</span></div><div class="faq-a">Material Grade fish are healthy quality fish great for breeding programs. Show Potential fish are young fish (2.5–3cm) showing strong competition characteristics. Show Grade fish fully meet the balloon molly competition standard in body shape, scales, and coloration and are ready to enter shows at 3cm and above.</div></div>
