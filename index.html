@@ -30,9 +30,9 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .nav-cta{font-size:12px;font-weight:700;color:#1a1200;background:var(--gold);text-decoration:none;padding:6px 16px;border-radius:99px;border:none;cursor:pointer}
 
 /* HERO */
-.hero{background:#000;padding:5rem 1.5rem 4rem;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(245,200,66,0.2);min-height:420px;display:flex;align-items:center;justify-content:center}
+.hero{background:#000;padding:5rem 1.5rem 4rem;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(245,200,66,0.2);min-height:560px;display:flex;align-items:center;justify-content:center}
 .hero-bg{position:absolute;inset:0;background:url('https://i.imgur.com/J6wIZx9.jpg') center center/cover no-repeat;opacity:1;z-index:0}
-.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.45) 50%,rgba(0,0,0,0.75) 100%)}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.55) 50%,rgba(0,0,0,0.85) 100%)}
 .bubbles span{position:absolute;border-radius:50%;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);animation:float 8s ease-in-out infinite;z-index:1}
 .bubbles span:nth-child(1){width:90px;height:90px;top:10%;left:5%;animation-delay:0s}
 .bubbles span:nth-child(2){width:45px;height:45px;top:65%;left:12%;animation-delay:2s}
@@ -41,14 +41,31 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .bubbles span:nth-child(5){width:30px;height:30px;top:40%;right:4%;animation-delay:1.5s}
 .bubbles span:nth-child(6){width:70px;height:70px;bottom:20%;left:30%;animation-delay:4s}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-.hero-inner{position:relative;z-index:2;max-width:700px;margin:0 auto}
+.hero-inner{position:relative;z-index:2;max-width:700px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+
+/* Centered & Resized Hero Logo Image */
+.hero-inner img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--gold);
+  margin-bottom: 15px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
 .hero-logo{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.8rem,9vw,4.5rem);font-weight:700;color:#fff;letter-spacing:-2px;line-height:1;text-shadow:0 2px 40px rgba(0,0,0,0.9)}
 .hero-logo .xmark{color:var(--gold)}
 .hero-sub{color:rgba(255,255,255,.75);font-size:1rem;margin-top:14px;line-height:1.7;text-shadow:0 1px 8px rgba(0,0,0,0.8)}
 .hero-badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px}
-.badge{display:inline-flex;align-items:center;gap:5px;padding:6px 16px;border-radius:99px;font-size:12px;font-weight:500}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:6px 16px;border-radius:99px;font-size:12px;font-weight:500;text-decoration:none}
 .badge-water{background:rgba(255,255,255,.1);color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(4px)}
-.badge-dim{background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(4px)}
+.badge-dim{background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(4px);transition: background 0.2s, color 0.2s;}
+.badge-dim:hover{background:rgba(245,200,66,.15);color:#fff;border-color:var(--gold)}
+
+/* Embedded Stats Row */
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;max-width:450px;margin-top:25px}
+.hero-stats .stat{background:rgba(20,20,20,0.6);backdrop-filter:blur(8px);border-radius:var(--radius);padding:1rem 0.75rem;text-align:center;border:1px solid var(--border);box-shadow:var(--shadow)}
 
 /* LAYOUT */
 .container{max-width:900px;margin:0 auto;padding:2rem 1.25rem}
@@ -57,10 +74,8 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .card-wrap{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:1.75rem;margin-bottom:2rem;box-shadow:var(--shadow)}
 
 /* STATS */
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:2rem}
-.stat{background:var(--card);border-radius:var(--radius);padding:1.2rem 1rem;text-align:center;box-shadow:var(--shadow);border:1px solid var(--border)}
-.stat-num{font-size:1.8rem;font-weight:700;color:var(--gold);line-height:1}
-.stat-lbl{font-size:11px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.06em}
+.stat-num{font-size:1.6rem;font-weight:700;color:var(--gold);line-height:1}
+.stat-lbl{font-size:10px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.06em}
 
 /* ABOUT */
 .about-inner{display:flex;gap:1.5rem;align-items:flex-start}
@@ -76,7 +91,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .grades-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:1rem;margin-bottom:2rem}
 .grade-card{border-radius:var(--radius);padding:1.25rem 1rem;border:1px solid;text-align:center}
 .grade-card.material{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1)}
-.grade-card.potential覆{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)}
+.grade-card.potential{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)}
 .grade-card.show{background:rgba(245,200,66,.06);border-color:rgba(245,200,66,.3)}
 .grade-photo{width:80px;height:80px;object-fit:cover;border-radius:50%;margin:0 auto 12px;display:block;border:2px solid rgba(255,255,255,.15)}
 .grade-card.show .grade-photo{border-color:var(--gold)}
@@ -106,7 +121,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .fish-img::after{content:'';position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);pointer-events:none}
 .fish-card:hover .fish-img img{transform:scale(1.05)}
 .fish-body{padding:12px 14px 14px;display:flex;flex-direction:column;flex:1}
-.fish-name{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing Club:.05em}
+.fish-name{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
 .fish-variant{font-size:13px;font-weight:600;color:var(--text);margin-top:3px;line-height:1.3;flex:1}
 .fish-meta{display:flex;align-items:center;justify-content:space-between;margin-top:10px;gap:6px}
 .fish-price{font-size:14px;font-weight:700;color:var(--gold);white-space:nowrap}
@@ -245,7 +260,7 @@ footer strong{color:var(--gold)}
 .field-error{font-size:11px;color:#ef4444;margin-top:4px}
 
 /* RESPONSIVE */
-@media(min-width:860px){.fish-grid{grid-template-columns:repeat(4,1fr)}.hero{padding:7rem 2rem 5rem;min-height:520px}}
+@media(min-width:860px){.fish-grid{grid-template-columns:repeat(4,1fr)}.hero{padding:7rem 2rem 5rem;min-height:560px}}
 @media(max-width:860px) and (min-width:480px){.fish-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:680px){
   .grades-grid{grid-template-columns:1fr}
@@ -257,9 +272,9 @@ footer strong{color:var(--gold)}
   .contact-grid{grid-template-columns:1fr}
 }
 @media(max-width:480px){
-  .stats-row{grid-template-columns:repeat(3,1fr)}
+  .hero-stats{grid-template-columns:repeat(3,1fr)}
   .stat-num{font-size:1.3rem}
-  .hero{padding:4rem 1rem 3rem;min-height:340px}
+  .hero{padding:4rem 1rem 3rem;min-height:480px}
   .hero-logo{font-size:2.2rem;letter-spacing:-1px}
   .fish-grid{grid-template-columns:repeat(2,1fr);gap:10px}
   .fish-img{height:130px}
@@ -299,23 +314,27 @@ footer strong{color:var(--gold)}
   <div class="hero-bg"></div>
   <div class="bubbles" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
   <div class="hero-inner">
+    <!-- Scaled Down and Centered Logo Img -->
+    <img src="https://i.imgur.com/J6wIZx9.jpg" alt="Logo Image" onerror="this.style.display='none'"/>
+    
     <div class="hero-logo"><span class="xmark">✕</span> Marks the Spot</div>
     <p class="hero-sub">Selectively bred premium &amp; exotic balloon mollies<br>evaluated and shipped worldwide from Talisay City, Philippines</p>
     <div class="hero-badges">
       <span class="badge badge-water">🌏 Ships Worldwide</span>
-      <span class="badge badge-dim">📍 Talisay City, PH</span>
+      <!-- Clickable Address Badge Linking to Google Maps -->
+      <a href="https://www.google.com/maps/search/?api=1&query=Menlo+phase+2+village+Talisay+City+Negros+Occidental" target="_blank" class="badge badge-dim">📍 Talisay City, PH</a>
+    </div>
+
+    <!-- Repositioned Stats Grid Embedded within Hero Content Details -->
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">9</div><div class="stat-lbl">Strains</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">Grades</div></div>
+      <div class="stat"><div class="stat-num">500+</div><div class="stat-lbl">Sold</div></div>
     </div>
   </div>
 </header>
 
 <main class="container">
-
-  <!-- STATS -->
-  <div class="stats-row">
-    <div class="stat"><div class="stat-num">9</div><div class="stat-lbl">Strains</div></div>
-    <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">Grades</div></div>
-    <div class="stat"><div class="stat-num">500+</div><div class="stat-lbl">Sold Worldwide</div></div>
-  </div>
 
   <!-- ABOUT -->
   <div class="card-wrap">
