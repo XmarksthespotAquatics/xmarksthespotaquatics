@@ -66,6 +66,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min
 .grade-card.potential{background:rgba(26,43,30,.8);border-color:rgba(74,222,128,.25)}
 .grade-card.show{background:rgba(40,30,10,.8);border-color:rgba(245,200,66,.4)}
 .grade-icon{font-size:28px;margin-bottom:8px}
+.grade-photo{width:100%;height:110px;object-fit:cover;border-radius:var(--radius-sm);margin-bottom:10px;display:block}
 .grade-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:var(--text)}
 .grade-price{font-size:20px;font-weight:700;margin-top:6px}
 .grade-card.material .grade-price{color:var(--muted)}
@@ -266,31 +267,7 @@ footer strong{color:var(--gold)}
     </div>
   </div>
 
-  <!-- GRADES -->
-  <div class="section-title">📊 Grade Guide &amp; Pricing</div>
-  <div class="grades-grid">
-    <div class="grade-card material">
-      <div class="grade-icon">🐟</div>
-      <div class="grade-name">Material Grade</div>
-      <div class="grade-price">from $80</div>
-      <div class="grade-desc">Healthy, quality fish with strong coloration and solid body structure. Ideal for building and developing your breeding program.</div>
-      <div class="grade-size">Any size</div>
-    </div>
-    <div class="grade-card potential">
-      <div class="grade-icon">⭐</div>
-      <div class="grade-name">Show Potential</div>
-      <div class="grade-price">from $120</div>
-      <div class="grade-desc">Young fish showing strong show characteristics with excellent form and coloration. Eligible for junior category competition.</div>
-      <div class="grade-size">2.5cm – 3cm</div>
-    </div>
-    <div class="grade-card show">
-      <div class="grade-icon">🏆</div>
-      <div class="grade-name">Show Grade</div>
-      <div class="grade-price">from $180</div>
-      <div class="grade-desc">Fully meets the balloon molly competition standard. Outstanding body shape, scale quality, and coloration — competition-ready.</div>
-      <div class="grade-size">3cm and above</div>
-    </div>
-  </div>
+  <!-- GRADES - moved below strains, inserted via JS -->
 
   <!-- STRAINS -->
   <div class="section-header" style="margin-top:2rem" id="strains">
@@ -309,18 +286,6 @@ footer strong{color:var(--gold)}
     📸 <strong>Photo Reference Notice:</strong> All photos display the strain's typical characteristics and color patterns for reference only. Each fish is individually hand-picked to match your chosen strain. Exact patterns, coloration and markings will naturally vary per fish — this is the beauty of working with live animals.
   </div>
 
-  <!-- TIMELINE -->
-  <div class="timeline-section">
-    <div class="section-title">📋 What Happens After You Order</div>
-    <div class="timeline">
-      <div class="tl-item"><div class="tl-dot gold">📩</div><div class="tl-info"><div class="tl-day">Day 1</div><div class="tl-title">We receive your request</div><div class="tl-desc">We review your strain, grade, and quantity and confirm availability. You will hear back within 24 hours.</div></div></div>
-      <div class="tl-item"><div class="tl-dot green">🐠</div><div class="tl-info"><div class="tl-day">Day 2 – 3</div><div class="tl-title">Fish are personally selected</div><div class="tl-desc">We hand-pick and evaluate each fish against the balloon molly competition standard — only the best make it through.</div></div></div>
-      <div class="tl-item"><div class="tl-dot blue">💳</div><div class="tl-info"><div class="tl-day">Day 3 – 4</div><div class="tl-title">You approve &amp; payment is confirmed</div><div class="tl-desc">We send you photos of your selected fish, confirm the final price and shipping cost, then process your payment.</div></div></div>
-      <div class="tl-item"><div class="tl-dot purple">📦</div><div class="tl-info"><div class="tl-day">Day 4 – 5</div><div class="tl-title">Fish packed &amp; shipped</div><div class="tl-desc">Your fish are carefully packed with oxygen and shipped. You receive a tracking number and full care instructions.</div></div></div>
-      <div class="tl-item"><div class="tl-dot done">✅</div><div class="tl-info"><div class="tl-day">Day 5 – 10</div><div class="tl-title">Fish arrive at your door</div><div class="tl-desc">Delivery depends on your location. We are available to assist with any questions during transit and after arrival.</div></div></div>
-    </div>
-  </div>
-
   <!-- REQUEST FORM -->
   <div class="request-section" id="request">
     <div class="section-title">🎣 Request a Fish</div>
@@ -334,7 +299,7 @@ footer strong{color:var(--gold)}
             <option>Golden Zebra Lyretail</option>
             <option>Pikachu Veiltail</option>
             <option>Pikachu Roundtail</option>
-            <option>Platinum Marble Zebra Pattern</option>
+            <option>Platinum Marble Zebra Pattern Roundtail</option>
             <option>Golden Zebra Veiltail</option>
             <option>Black King Balloon Molly</option>
             <option>Chocolate Lyretail</option>
@@ -386,6 +351,46 @@ footer strong{color:var(--gold)}
       <div class="confirm-title">Request Sent!</div>
       <div class="confirm-sub">Thank you for your interest! We will review your request and get back to you within 24 hours via your chosen contact method.<br><br>Feel free to browse our FAQ below or message us directly anytime.</div>
       <button class="request-btn" style="margin-top:1.5rem;max-width:260px;margin-left:auto;margin-right:auto;display:block" onclick="resetForm()">Send Another Request</button>
+    </div>
+  </div>
+
+  <!-- TIMELINE - now below request form -->
+  <div class="timeline-section" style="margin-bottom:2rem">
+    <div class="section-title">📋 What Happens After You Order</div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot gold">📩</div><div class="tl-info"><div class="tl-day">Day 1</div><div class="tl-title">We receive your request</div><div class="tl-desc">We review your strain, grade, and quantity and confirm availability. You will hear back within 24 hours.</div></div></div>
+      <div class="tl-item"><div class="tl-dot green">🐠</div><div class="tl-info"><div class="tl-day">Day 2 – 3</div><div class="tl-title">Fish are personally selected</div><div class="tl-desc">We hand-pick and evaluate each fish against the balloon molly competition standard — only the best make it through.</div></div></div>
+      <div class="tl-item"><div class="tl-dot blue">💳</div><div class="tl-info"><div class="tl-day">Day 3 – 4</div><div class="tl-title">You approve &amp; payment is confirmed</div><div class="tl-desc">We send you photos of your selected fish, confirm the final price and shipping cost, then process your payment.</div></div></div>
+      <div class="tl-item"><div class="tl-dot purple">📦</div><div class="tl-info"><div class="tl-day">Day 4 – 5</div><div class="tl-title">Fish packed &amp; shipped</div><div class="tl-desc">Your fish are carefully packed with oxygen and shipped. You receive a tracking number and full care instructions.</div></div></div>
+      <div class="tl-item"><div class="tl-dot done">✅</div><div class="tl-info"><div class="tl-day">Day 5 – 10</div><div class="tl-title">Fish arrive at your door</div><div class="tl-desc">Delivery depends on your location. We are available to assist with any questions during transit and after arrival.</div></div></div>
+    </div>
+  </div>
+
+  <!-- GRADES - now below strains -->
+  <div style="margin-bottom:2rem">
+    <div class="section-title" style="margin-bottom:1rem">📊 Grade Guide &amp; Pricing</div>
+    <div class="grades-grid">
+      <div class="grade-card material">
+        <img src="https://i.imgur.com/scWp5od.jpg" alt="Material Grade" class="grade-photo" onerror="this.style.display='none'"/>
+        <div class="grade-name">Material Grade</div>
+        <div class="grade-price">from $80</div>
+        <div class="grade-desc">Healthy, quality fish with strong coloration and solid body structure. Ideal for building and developing your breeding program.</div>
+        <div class="grade-size">Any size</div>
+      </div>
+      <div class="grade-card potential">
+        <img src="https://i.imgur.com/6zjsYGz.jpg" alt="Show Potential" class="grade-photo" onerror="this.style.display='none'"/>
+        <div class="grade-name">Show Potential</div>
+        <div class="grade-price">from $120</div>
+        <div class="grade-desc">Young fish showing strong show characteristics with excellent form and coloration. Eligible for junior category competition.</div>
+        <div class="grade-size">2.5cm – 3cm</div>
+      </div>
+      <div class="grade-card show">
+        <img src="https://i.imgur.com/PYOUgcb.jpg" alt="Show Grade" class="grade-photo" onerror="this.style.display='none'"/>
+        <div class="grade-name">Show Grade</div>
+        <div class="grade-price">from $180</div>
+        <div class="grade-desc">Fully meets the balloon molly competition standard. Outstanding body shape, scale quality, and coloration — competition-ready.</div>
+        <div class="grade-size">3cm and above</div>
+      </div>
     </div>
   </div>
 
@@ -470,7 +475,7 @@ const FISH=[
   {name:"Balloon Molly",variant:"Golden Zebra Lyretail",        category:"lyretail", bg:"#1a1500",img:"https://i.imgur.com/PYOUgcb.jpg"},
   {name:"Balloon Molly",variant:"Pikachu Veiltail",             category:"veiltail", bg:"#1a1500",img:"https://i.imgur.com/x6toumv.jpg"},
   {name:"Balloon Molly",variant:"Pikachu Roundtail",            category:"roundtail",bg:"#1a1500",img:"https://i.imgur.com/scWp5od.jpg"},
-  {name:"Balloon Molly",variant:"Platinum Marble Zebra Pattern",category:"special",  bg:"#111820",img:"https://i.imgur.com/6zjsYGz.jpg"},
+  {name:"Balloon Molly",variant:"Platinum Marble Zebra Pattern Roundtail",category:"special",  bg:"#111820",img:"https://i.imgur.com/6zjsYGz.jpg"},
   {name:"Balloon Molly",variant:"Golden Zebra Veiltail",        category:"veiltail", bg:"#1a1500",img:"https://i.imgur.com/eHacp64.jpg"},
   {name:"Balloon Molly",variant:"Black King Balloon Molly",     category:"king",     bg:"#0d0d0d",img:"https://i.imgur.com/TSZartg.jpg"},
   {name:"Balloon Molly",variant:"Chocolate Lyretail",           category:"lyretail", bg:"#150e05",img:"https://i.imgur.com/CH8a14o.jpg"},
@@ -493,6 +498,24 @@ const TX=[
 
 let txIdx=0;
 
+function requestStrain(strain){
+  // Pre-fill the strain in the request form
+  var sel = document.getElementById('reqStrain');
+  for(var i=0;i<sel.options.length;i++){
+    if(sel.options[i].text === strain){
+      sel.selectedIndex = i;
+      break;
+    }
+  }
+  // Smooth scroll to request section
+  document.getElementById('request').scrollIntoView({behavior:'smooth',block:'start'});
+  // Highlight the form briefly
+  var form = document.getElementById('request');
+  form.style.transition = 'box-shadow 0.3s';
+  form.style.boxShadow = '0 0 0 2px #F5C842';
+  setTimeout(function(){ form.style.boxShadow = ''; }, 1500);
+}
+
 function renderFish(cat){
   const grid=document.getElementById("fishGrid");
   const list=cat==="all"?FISH:FISH.filter(f=>f.category===cat||f.variant.toLowerCase().includes(cat));
@@ -509,7 +532,7 @@ function renderFish(cat){
           <span class="fish-price">from $80 <span>/ fish</span></span>
           <span class="stock-pill">✓ Available</span>
         </div>
-        <a class="fish-btn" href="https://www.facebook.com/eXedmarksthespot" target="_blank">Request this strain →</a>
+        <button class="fish-btn" onclick="requestStrain('${f.variant.replace(/'/g,"\\'")}')">Request this strain →</button>
       </div>
     </div>`).join("");
 }
