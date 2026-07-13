@@ -4,323 +4,474 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>X Marks the Spot — Premium Balloon Mollies · Talisay City</title>
-<meta name="description" content="Premium selectively bred balloon mollies from Talisay City, Philippines. Material Grade, Show Potential and Show Grade. Ships worldwide."/>
+<meta name="description" content="Premium selectively bred balloon mollies from Talisay City, Philippines. Ships worldwide."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 :root{
-  --gold:#F5C842;--gold-light:#FFE082;--gold-dark:#c9a227;
-  --bg:#0a0a0a;--card:#141414;--card2:#1c1c1c;
-  --text:#f5f5f5;--muted:#888;--border:rgba(255,255,255,0.08);
-  --radius:14px;--radius-sm:8px;--shadow:0 4px 24px rgba(0,0,0,0.6);
+  --gold:#F5C842;--gold2:#FFE082;--gold3:#c9a227;
+  --bg:#080808;--card:#111;--card2:#181818;
+  --text:#f0f0f0;--muted:#666;--border:rgba(255,255,255,0.06);
+  --r:16px;--rs:10px;--sh:0 8px 40px rgba(0,0,0,0.7)
 }
-body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 
-/* NAV */
-#navbar{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(0,0,0,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);padding:10px 1.5rem;display:flex;align-items:center;justify-content:space-between;transform:translateY(-100%);transition:transform 0.3s}
-.nav-logo{display:flex;align-items:center;gap:10px}
-.nav-logo img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:1.5px solid var(--gold)}
-.nav-title{font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;font-size:1rem}
-.nav-title span{color:var(--gold)}
-.nav-actions{display:flex;gap:8px;align-items:center}
-.nav-link{font-size:12px;color:var(--muted);text-decoration:none;padding:5px 10px;border-radius:99px;transition:color 0.15s}
-.nav-link:hover{color:#fff}
-.nav-cta{font-size:12px;font-weight:700;color:#1a1200;background:var(--gold);text-decoration:none;padding:6px 16px;border-radius:99px;border:none;cursor:pointer}
+/* ── CURSOR GLOW ── */
+.cursor-glow{
+  position:fixed;width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,200,66,0.06) 0%,transparent 70%);
+  pointer-events:none;z-index:0;transform:translate(-50%,-50%);
+  transition:left .1s ease,top .1s ease;
+}
 
-/* HERO — logo as background, centered */
-.hero{background:#000;padding:5rem 1.5rem 4rem;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(245,200,66,0.2);min-height:420px;display:flex;align-items:center;justify-content:center}
-.hero-bg{position:absolute;inset:0;background:url('https://i.imgur.com/J6wIZx9.jpg') center center/contain no-repeat;opacity:.18;z-index:0}
-.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.75) 100%)}
-.bubbles span{position:absolute;border-radius:50%;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);animation:float 8s ease-in-out infinite;z-index:1}
-.bubbles span:nth-child(1){width:90px;height:90px;top:10%;left:5%;animation-delay:0s}
-.bubbles span:nth-child(2){width:45px;height:45px;top:65%;left:12%;animation-delay:2s}
-.bubbles span:nth-child(3){width:110px;height:110px;top:5%;right:6%;animation-delay:1s}
-.bubbles span:nth-child(4){width:55px;height:55px;bottom:10%;right:18%;animation-delay:3s}
-.bubbles span:nth-child(5){width:30px;height:30px;top:40%;right:4%;animation-delay:1.5s}
-.bubbles span:nth-child(6){width:70px;height:70px;bottom:20%;left:30%;animation-delay:4s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-.hero-inner{position:relative;z-index:2;max-width:700px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
-.hero-logo{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.8rem,9vw,4.5rem);font-weight:700;color:#fff;letter-spacing:-2px;line-height:1;text-shadow:0 2px 40px rgba(0,0,0,0.9)}
-.hero-logo .xmark{color:var(--gold)}
-.hero-sub{color:rgba(255,255,255,.8);font-size:.95rem;margin-top:10px;line-height:1.6;text-shadow:0 1px 8px rgba(0,0,0,0.8);max-width:540px}
-.hero-badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
-.badge{display:inline-flex;align-items:center;gap:5px;padding:6px 16px;border-radius:99px;font-size:12px;font-weight:500;text-decoration:none;cursor:pointer}
-.badge-water{background:rgba(245,200,66,.12);color:var(--gold);border:1px solid rgba(245,200,66,.3);backdrop-filter:blur(4px);transition:all .2s}
-.badge-water:hover{background:var(--gold);color:#1a1200}
-.badge-dim{background:rgba(255,255,255,.06);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(4px);transition:all .2s}
-.badge-dim:hover{background:rgba(255,255,255,.15);color:#fff}
+/* ── NAV ── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  padding:14px 2rem;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(0,0,0,0);transition:all .4s ease
+}
+#nav.solid{background:rgba(0,0,0,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(245,200,66,0.1)}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-brand img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:1.5px solid var(--gold);box-shadow:0 0 12px rgba(245,200,66,0.3)}
+.nav-brand-name{font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;font-size:.95rem}
+.nav-brand-name .x{color:var(--gold)}
+.nav-right{display:flex;gap:10px;align-items:center}
+.nav-a{font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:6px 14px;border-radius:99px;transition:all .2s}
+.nav-a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.nav-btn{font-size:13px;font-weight:700;color:#111;background:var(--gold);border:none;padding:9px 20px;border-radius:99px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.nav-btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0);transition:background .2s}
+.nav-btn:hover::after{background:rgba(255,255,255,.15)}
 
-/* LAYOUT */
-.container{max-width:900px;margin:0 auto;padding:2rem 1.25rem}
-.section-title{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--gold)}
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
-.card-wrap{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:1.75rem;margin-bottom:2rem;box-shadow:var(--shadow)}
+/* ── FLOATING CHAT ── */
+.floats{position:fixed;bottom:28px;right:28px;z-index:998;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.float-btn{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;border:none;cursor:pointer;box-shadow:0 6px 28px rgba(0,0,0,.6);transition:transform .2s,box-shadow .2s;position:relative}
+.float-btn:hover{transform:scale(1.12) translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.7)}
+.float-btn.wa{background:#25d366}
+.float-btn.em{background:var(--gold)}
+.float-label{position:absolute;right:64px;background:rgba(0,0,0,.85);color:#fff;font-size:11px;padding:5px 10px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
+.float-btn:hover .float-label{opacity:1}
 
-/* ABOUT */
-.about-inner{display:flex;gap:1.5rem;align-items:flex-start}
-.about-avatar{width:70px;height:70px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;border:2px solid var(--gold-dark)}
-.about-avatar img{width:100%;height:100%;object-fit:cover}
-.about-name{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--gold)}
-.about-title{font-size:12px;color:var(--muted);margin-top:2px}
-.about-bio{font-size:13px;color:var(--text);line-height:1.7;margin-top:10px;opacity:.85}
-.about-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.about-tag{font-size:11px;padding:3px 10px;border-radius:99px;background:rgba(255,255,255,.06);color:#ccc;border:1px solid rgba(255,255,255,.12)}
-.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;max-width:420px;margin-top:20px}
-.about-stats .stat{background:var(--card2);border-radius:var(--radius-sm);padding:.75rem;text-align:center;border:1px solid var(--border)}
-.stat-num{font-size:1.4rem;font-weight:700;color:var(--gold);line-height:1}
-.stat-lbl{font-size:10px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.06em}
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;position:relative;overflow:hidden
+}
+/* Video background */
+.hero-video{
+  position:absolute;inset:0;z-index:0;
+  background:url('https://i.imgur.com/J6wIZx9.jpg') center center/cover no-repeat;
+}
+/* Animated gradient overlay that shifts */
+.hero-video::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,0,0,.85) 0%,rgba(10,8,0,.7) 40%,rgba(0,0,0,.85) 100%);
+  animation:heroShift 12s ease-in-out infinite alternate
+}
+@keyframes heroShift{
+  0%{background:linear-gradient(135deg,rgba(0,0,0,.88) 0%,rgba(20,15,0,.65) 50%,rgba(0,0,0,.88) 100%)}
+  100%{background:linear-gradient(225deg,rgba(0,0,0,.88) 0%,rgba(15,10,0,.65) 50%,rgba(0,0,0,.88) 100%)}
+}
+.hero-video::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 50%,rgba(245,200,66,0.04) 0%,transparent 65%);
+  animation:pulse2 4s ease-in-out infinite
+}
+@keyframes pulse2{0%,100%{opacity:.5}50%{opacity:1}}
 
-/* GRADES */
-.grades-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:1rem;margin-bottom:2rem}
-.grade-card{border-radius:var(--radius);padding:1.25rem 1rem;border:1px solid;text-align:center}
-.grade-card.material{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1)}
-.grade-card.potential{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)}
-.grade-card.show{background:rgba(245,200,66,.06);border-color:rgba(245,200,66,.3)}
-.grade-photo{width:80px;height:80px;object-fit:cover;border-radius:50%;margin:0 auto 12px;display:block;border:2px solid rgba(255,255,255,.15)}
-.grade-card.show .grade-photo{border-color:var(--gold)}
-.grade-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:var(--text)}
-.grade-price{font-size:20px;font-weight:700;margin-top:6px}
-.grade-card.material .grade-price{color:#fff}
-.grade-card.potential .grade-price{color:#ddd}
-.grade-card.show .grade-price{color:var(--gold)}
-.grade-desc{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5}
-.grade-size{font-size:10px;margin-top:6px;padding:3px 8px;border-radius:99px;display:inline-block}
-.grade-card.material .grade-size{background:rgba(255,255,255,.08);color:#aaa}
-.grade-card.potential .grade-size{background:rgba(255,255,255,.1);color:#ccc}
-.grade-card.show .grade-size{background:rgba(245,200,66,.12);color:var(--gold)}
+/* Animated particles */
+.particles{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+.particle{
+  position:absolute;border-radius:50%;
+  background:rgba(245,200,66,0.35);
+  animation:rise linear infinite
+}
+@keyframes rise{
+  0%{transform:translateY(100vh) scale(0);opacity:0}
+  10%{opacity:1}
+  90%{opacity:.4}
+  100%{transform:translateY(-10vh) scale(1);opacity:0}
+}
 
-/* FILTERS */
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.2rem}
-.filter-btn{padding:6px 16px;border-radius:99px;border:1px solid rgba(255,255,255,.15);background:transparent;color:var(--muted);font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
-.filter-btn:hover{border-color:#fff;color:#fff}
-.filter-btn.active{background:var(--gold);color:#1a1200;border-color:var(--gold);font-weight:700}
+.hero-inner{position:relative;z-index:2;max-width:700px;margin:0 auto;padding:0 1.5rem}
 
-/* FISH GRID */
-.fish-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:1rem}
-.fish-card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border);transition:transform .18s,border-color .18s;display:flex;flex-direction:column}
-.fish-card:hover{transform:translateY(-4px);border-color:rgba(245,200,66,.35)}
-.fish-img{width:100%;height:180px;position:relative;overflow:hidden;flex-shrink:0}
-.fish-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
-.fish-img::after{content:'';position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);pointer-events:none}
-.fish-card:hover .fish-img img{transform:scale(1.05)}
-.fish-body{padding:12px 14px 14px;display:flex;flex-direction:column;flex:1}
-.fish-name{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-.fish-variant{font-size:13px;font-weight:600;color:var(--text);margin-top:3px;line-height:1.3;flex:1}
-.fish-meta{display:flex;align-items:center;justify-content:space-between;margin-top:10px;gap:6px}
-.fish-price{font-size:14px;font-weight:700;color:var(--gold);white-space:nowrap}
-.fish-price span{font-size:10px;color:var(--muted);font-weight:400}
-.stock-pill{font-size:10px;font-weight:600;padding:3px 8px;border-radius:99px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.15);white-space:nowrap;flex-shrink:0}
-.fish-btn{display:block;width:100%;margin-top:10px;padding:9px;background:var(--gold);color:#1a1200;border:none;border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:background .15s;text-align:center}
-.fish-btn:hover{background:var(--gold-light)}
+/* Animated title */
+.hero-eyebrow{
+  font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;opacity:0;
+  animation:fadeUp .8s ease .3s forwards
+}
+.hero-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(3rem,10vw,5.5rem);font-weight:800;
+  color:#fff;letter-spacing:-3px;line-height:.95;
+  text-shadow:0 4px 60px rgba(0,0,0,1);
+  opacity:0;animation:fadeUp .8s ease .5s forwards
+}
+.hero-title .x{
+  color:var(--gold);
+  text-shadow:0 0 40px rgba(245,200,66,0.5),0 4px 60px rgba(0,0,0,1);
+  display:inline-block;animation:xPulse 3s ease-in-out infinite
+}
+@keyframes xPulse{0%,100%{text-shadow:0 0 30px rgba(245,200,66,0.4)}50%{text-shadow:0 0 60px rgba(245,200,66,0.8),0 0 100px rgba(245,200,66,0.3)}}
 
-/* DISCLAIMER */
-.disclaimer{text-align:center;font-size:11px;color:var(--muted);margin-bottom:2rem;padding:10px 16px;background:rgba(255,255,255,.03);border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,.06);line-height:1.6}
+.hero-sub{
+  color:rgba(255,255,255,.72);font-size:.97rem;margin-top:16px;line-height:1.75;
+  opacity:0;animation:fadeUp .8s ease .7s forwards
+}
+.hero-badges{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:24px;
+  opacity:0;animation:fadeUp .8s ease .9s forwards
+}
+.hbadge{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 20px;border-radius:99px;font-size:12px;font-weight:600;
+  text-decoration:none;cursor:pointer;backdrop-filter:blur(8px);transition:all .25s
+}
+.hbadge-gold{background:var(--gold);color:#111;box-shadow:0 4px 20px rgba(245,200,66,0.3)}
+.hbadge-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,200,66,0.4)}
+.hbadge-dim{background:rgba(255,255,255,.08);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.15)}
+.hbadge-dim:hover{background:rgba(255,255,255,.15);transform:translateY(-2px)}
 
-/* REQUEST FORM */
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form-group{display:flex;flex-direction:column;gap:6px}
-.form-group.full{grid-column:1/-1}
-.form-group label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-.form-group select,.form-group input{background:var(--card2);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-sm);padding:10px 12px;color:var(--text);font-family:'Poppins',sans-serif;font-size:13px;outline:none;transition:border-color .15s;appearance:none;-webkit-appearance:none;width:100%}
-.form-group select:focus,.form-group input:focus{border-color:var(--gold)}
-.form-group select option{background:#141414}
-.req-note{font-size:11px;color:#666;margin-bottom:1rem}
-.req-note span{color:#ef4444;font-weight:700}
-.submit-btn{width:100%;margin-top:16px;padding:13px;background:var(--gold);color:#1a1200;border:none;border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s}
-.submit-btn:hover{background:var(--gold-light)}
-.wa-note{font-size:11px;color:var(--muted);text-align:center;margin-top:8px}
-.wa-note strong{color:#25d366}
-.order-status{display:none;margin-top:14px;padding:12px 14px;border-radius:var(--radius-sm);border:1px solid rgba(245,200,66,.25);background:rgba(245,200,66,.08);color:var(--text);font-size:13px;line-height:1.6}
-.order-status.show{display:block}
-.order-status strong{color:var(--gold)}
-.order-summary{display:none;margin-top:12px;padding:12px 14px;border-radius:var(--radius-sm);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:12px;color:var(--muted);white-space:pre-wrap}
+/* Scroll indicator */
+.scroll-hint{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;
+  opacity:0;animation:fadeIn 1s ease 1.5s forwards
+}
+.scroll-hint span{font-size:10px;letter-spacing:.15em;color:rgba(255,255,255,.4);text-transform:uppercase}
+.scroll-arrow{width:24px;height:24px;border-right:2px solid rgba(255,255,255,.3);border-bottom:2px solid rgba(255,255,255,.3);transform:rotate(45deg);animation:bounce 1.5s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(5px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
+/* ── SECTION REVEALS ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .7s ease,transform .7s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
 
-/* CONFIRM */
-.confirm-box{display:none;text-align:center;padding:2rem 1rem}
+/* ── LAYOUT ── */
+.wrap{max-width:940px;margin:0 auto;padding:3rem 1.5rem}
+.sec-title{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:var(--gold);letter-spacing:.01em}
+.sec-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem}
+.card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);padding:2rem;margin-bottom:2rem;box-shadow:var(--sh);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(245,200,66,0.02) 0%,transparent 60%);pointer-events:none}
+
+/* ── ABOUT ── */
+.about-wrap{display:flex;gap:2rem;align-items:flex-start}
+.about-ava{width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid var(--gold3);box-shadow:0 0 24px rgba(245,200,66,.2)}
+.about-ava img{width:100%;height:100%;object-fit:cover}
+.about-name{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:700;color:var(--gold)}
+.about-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.about-bio{font-size:13px;color:rgba(240,240,240,.8);line-height:1.8;margin-top:12px}
+.about-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.about-tag{font-size:11px;padding:4px 12px;border-radius:99px;background:rgba(255,255,255,.04);color:#bbb;border:1px solid rgba(255,255,255,.09)}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:1.5rem}
+.stat-box{background:var(--card2);border-radius:var(--rs);padding:1.1rem;text-align:center;border:1px solid var(--border);transition:border-color .3s,transform .3s}
+.stat-box:hover{border-color:rgba(245,200,66,.25);transform:translateY(-2px)}
+.stat-n{font-size:1.7rem;font-weight:700;color:var(--gold);line-height:1}
+.stat-l{font-size:10px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.07em;font-weight:600}
+
+/* ── FILTERS ── */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem}
+.fbtn{padding:7px 18px;border-radius:99px;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--muted);font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .2s}
+.fbtn:hover{border-color:rgba(255,255,255,.35);color:#fff}
+.fbtn.on{background:var(--gold);color:#111;border-color:var(--gold);font-weight:700}
+
+/* ── FISH CARDS ── */
+.fish-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px;margin-bottom:1.5rem}
+
+.fish-card{
+  background:var(--card);border-radius:var(--r);overflow:hidden;
+  border:1px solid var(--border);box-shadow:var(--sh);
+  display:flex;flex-direction:column;
+  transition:transform .35s cubic-bezier(.22,.61,.36,1),border-color .35s,box-shadow .35s;
+  animation:cardIn .6s ease both
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+.fish-card:hover{
+  transform:translateY(-8px) scale(1.015);
+  border-color:rgba(245,200,66,.4);
+  box-shadow:0 20px 60px rgba(0,0,0,.8),0 0 40px rgba(245,200,66,.08)
+}
+
+.fish-img-wrap{width:100%;height:200px;position:relative;overflow:hidden;flex-shrink:0}
+.fish-img-wrap img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1),filter .4s
+}
+.fish-card:hover .fish-img-wrap img{transform:scale(1.1);filter:brightness(1.08) saturate(1.15)}
+
+/* Shimmer on hover */
+.fish-img-wrap::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.08) 50%,transparent 70%);
+  transform:translateX(-100%);transition:transform .6s ease
+}
+.fish-card:hover .fish-img-wrap::before{transform:translateX(100%)}
+
+/* Gradient overlay on image bottom */
+.fish-img-wrap::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:55%;
+  background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.3) 60%,transparent 100%);
+  pointer-events:none;z-index:2
+}
+/* Strain name floating on image */
+.fish-img-name{
+  position:absolute;bottom:12px;left:14px;right:14px;z-index:3;
+  font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;
+  color:#fff;line-height:1.3;
+  text-shadow:0 2px 8px rgba(0,0,0,1)
+}
+
+.fish-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:0}
+.fish-type{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.fish-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:10px;gap:8px}
+.fish-price{font-size:16px;font-weight:700;color:var(--gold)}
+.fish-price small{font-size:10px;color:var(--muted);font-weight:400}
+.avail{font-size:10px;font-weight:600;padding:3px 10px;border-radius:99px;background:rgba(37,211,102,.1);color:#25d366;border:1px solid rgba(37,211,102,.2)}
+.fish-cta{
+  display:block;width:100%;margin-top:12px;padding:10px;
+  background:transparent;color:var(--gold);
+  border:1px solid rgba(245,200,66,.35);
+  border-radius:var(--rs);font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;
+  cursor:pointer;transition:all .25s;text-align:center;position:relative;overflow:hidden
+}
+.fish-cta::before{
+  content:'';position:absolute;inset:0;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s ease;z-index:0
+}
+.fish-cta span{position:relative;z-index:1;transition:color .3s}
+.fish-cta:hover::before{transform:scaleX(1)}
+.fish-cta:hover span{color:#111}
+
+.disclaimer{font-size:11px;color:var(--muted);text-align:center;margin-bottom:2.5rem;padding:12px 18px;background:rgba(255,255,255,.02);border-radius:var(--rs);border:1px solid rgba(255,255,255,.05);line-height:1.6}
+
+/* ── REQUEST FORM ── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg{display:flex;flex-direction:column;gap:7px}
+.fg.full{grid-column:1/-1}
+.fg label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.fc{background:var(--card2);border:1px solid rgba(255,255,255,.1);border-radius:var(--rs);padding:11px 14px;color:var(--text);font-family:'Poppins',sans-serif;font-size:13px;outline:none;transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none;width:100%}
+.fc:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,200,66,.12)}
+.fc option{background:#181818}
+.send-btn{
+  width:100%;margin-top:18px;padding:14px;
+  background:var(--gold);color:#111;border:none;border-radius:var(--rs);
+  font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;
+  cursor:pointer;transition:all .2s;position:relative;overflow:hidden
+}
+.send-btn:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 8px 28px rgba(245,200,66,.3)}
+.wa-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:10px}
+.wa-hint strong{color:#25d366}
+.confirm-box{display:none;text-align:center;padding:2.5rem 1rem}
 .confirm-box.show{display:block}
-.confirm-icon{font-size:48px;margin-bottom:12px}
-.confirm-title{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:var(--gold)}
-.confirm-sub{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.7}
+.field-err{font-size:11px;color:#ef4444;margin-top:4px;font-weight:500}
 
-/* TIMELINE */
-.timeline{display:flex;flex-direction:column;margin-top:1.4rem;position:relative}
-.timeline::before{content:'';position:absolute;left:18px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.08)}
-.tl-item{display:flex;gap:16px;align-items:flex-start;padding-bottom:20px;position:relative;z-index:1}
-.tl-item:last-child{padding-bottom:0}
-.tl-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;border:2px solid}
-.tl-dot.gold{background:rgba(245,200,66,.15);border-color:var(--gold)}
-.tl-dot.white{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)}
-.tl-dot.done{background:rgba(245,200,66,.15);border-color:var(--gold)}
-.tl-day{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
-.tl-title{font-size:14px;font-weight:600;color:var(--text);margin-top:2px}
-.tl-desc{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5}
+/* ── TIMELINE ── */
+.tl{display:flex;flex-direction:column;margin-top:1.5rem;position:relative}
+.tl::before{content:'';position:absolute;left:18px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),rgba(255,255,255,.05))}
+.tl-row{display:flex;gap:18px;align-items:flex-start;padding-bottom:24px;position:relative;z-index:1}
+.tl-row:last-child{padding-bottom:0}
+.tl-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;border:2px solid;transition:all .3s}
+.tl-dot.g{background:rgba(245,200,66,.14);border-color:var(--gold);box-shadow:0 0 12px rgba(245,200,66,.2)}
+.tl-dot.w{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.15)}
+.tl-dot.d{background:rgba(37,211,102,.12);border-color:#25d366}
+.tl-day{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em}
+.tl-title{font-size:14px;font-weight:600;color:var(--text);margin-top:3px}
+.tl-desc{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.6}
 
-/* TRANSACTIONS */
-.tx-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
-.tx-verified{font-size:11px;color:var(--muted)}
+/* ── GRADES ── */
+.grades{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:1rem;margin-bottom:2.5rem}
+.gc{border-radius:var(--r);padding:1.75rem 1.25rem;border:1px solid;text-align:center;display:flex;flex-direction:column;align-items:center;transition:transform .3s,box-shadow .3s}
+.gc:hover{transform:translateY(-4px)}
+.gc.mat{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.07)}
+.gc.pot{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.11)}
+.gc.shw{background:rgba(245,200,66,.04);border-color:rgba(245,200,66,.2);box-shadow:0 4px 28px rgba(245,200,66,.06)}
+.gc.shw:hover{box-shadow:0 12px 40px rgba(245,200,66,.12)}
+.gphoto{
+  width:96px;height:96px;object-fit:cover;border-radius:50%;
+  margin-bottom:14px;border:3px solid rgba(255,255,255,.12);
+  transition:transform .4s,box-shadow .4s
+}
+.gc.shw .gphoto{border-color:var(--gold);box-shadow:0 0 20px rgba(245,200,66,.25)}
+.gc:hover .gphoto{transform:scale(1.07)}
+.gname{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:var(--text)}
+.gprice{font-size:22px;font-weight:700;margin-top:5px}
+.gc.mat .gprice{color:#ddd}.gc.pot .gprice{color:#eee}.gc.shw .gprice{color:var(--gold)}
+.gdesc{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.65;flex-grow:1}
+.gsize{font-size:11px;margin-top:12px;padding:4px 12px;border-radius:99px;font-weight:500}
+.gc.mat .gsize{background:rgba(255,255,255,.07);color:#888}
+.gc.pot .gsize{background:rgba(255,255,255,.09);color:#aaa}
+.gc.shw .gsize{background:rgba(245,200,66,.1);color:var(--gold)}
+
+/* ── TRANSACTIONS ── */
+.tx-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
+.tx-ok{font-size:12px;color:#25d366;font-weight:500}
 .tx-list{display:flex;flex-direction:column;gap:10px}
-.tx-item{display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--card2);border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,.04)}
-.tx-flag{font-size:20px;flex-shrink:0}
+.tx-row{display:flex;align-items:center;gap:14px;padding:12px 14px;background:var(--card2);border-radius:var(--rs);border:1px solid rgba(255,255,255,.04);transition:border-color .2s,transform .2s}
+.tx-row:hover{border-color:rgba(245,200,66,.1);transform:translateX(3px)}
+.tx-flag{font-size:22px;flex-shrink:0}
 .tx-info{flex:1;min-width:0}
-.tx-name{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tx-fish{font-size:11px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tx-right{text-align:right;flex-shrink:0}
-.tx-amount{font-size:14px;font-weight:700;color:var(--gold)}
-.tx-time{font-size:10px;color:var(--muted);margin-top:2px}
+.tx-who{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tx-what{font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tx-r{text-align:right;flex-shrink:0}
+.tx-amt{font-size:14px;font-weight:700;color:var(--gold)}
+.tx-when{font-size:10px;color:var(--muted);margin-top:2px}
 
-/* EMAIL CAPTURE */
-.email-capture{background:linear-gradient(135deg,rgba(245,200,66,.08),rgba(245,200,66,.03));border-radius:var(--radius);border:1px solid rgba(245,200,66,.2);padding:1.75rem;margin-bottom:2rem;text-align:center}
-.email-capture-title{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:6px}
-.email-capture-sub{font-size:13px;color:var(--muted);margin-bottom:1.2rem}
-.email-row{display:flex;gap:10px;max-width:420px;margin:0 auto}
-.email-row input{flex:1;background:var(--card2);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-sm);padding:10px 14px;color:var(--text);font-family:'Poppins',sans-serif;font-size:13px;outline:none;transition:border-color .15s}
-.email-row input:focus{border-color:var(--gold)}
-.email-row button{background:var(--gold);color:#1a1200;border:none;border-radius:var(--radius-sm);padding:10px 18px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
-.email-row button:hover{background:var(--gold-light)}
-.email-success{display:none;font-size:13px;color:var(--gold);margin-top:10px}
-.email-success.show{display:block}
+/* ── EMAIL CAPTURE ── */
+.notify{
+  background:linear-gradient(135deg,rgba(245,200,66,.07),rgba(245,200,66,.02));
+  border-radius:var(--r);border:1px solid rgba(245,200,66,.14);
+  padding:2rem;margin-bottom:2.5rem;text-align:center;position:relative;overflow:hidden
+}
+.notify::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(245,200,66,.06),transparent 60%);pointer-events:none}
+.notify-title{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--gold);margin-bottom:6px}
+.notify-sub{font-size:13px;color:var(--muted);margin-bottom:1.25rem}
+.notify-row{display:flex;gap:10px;max-width:440px;margin:0 auto}
+.notify-row input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--rs);padding:11px 14px;color:var(--text);font-family:'Poppins',sans-serif;font-size:13px;outline:none;transition:border-color .15s}
+.notify-row input:focus{border-color:var(--gold)}
+.notify-row button{background:var(--gold);color:#111;border:none;border-radius:var(--rs);padding:0 22px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s}
+.notify-row button:hover{background:var(--gold2);box-shadow:0 4px 16px rgba(245,200,66,.3)}
+.notify-ok{display:none;font-size:13px;color:var(--gold);margin-top:10px}
+.notify-ok.on{display:block}
 
-/* FAQ */
+/* ── FAQ ── */
 .faq-list{display:flex;flex-direction:column;gap:8px;margin-top:1rem}
-.faq-item{background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);overflow:hidden}
-.faq-q{padding:14px 16px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none}
+.faq-it{background:var(--card);border-radius:var(--rs);border:1px solid var(--border);overflow:hidden;transition:border-color .2s}
+.faq-it.open{border-color:rgba(245,200,66,.15)}
+.faq-q{padding:15px 16px;font-size:13.5px;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none;transition:color .2s}
 .faq-q:hover{color:var(--gold)}
-.faq-icon{color:var(--gold);font-size:18px;flex-shrink:0;transition:transform .2s;line-height:1}
-.faq-a{font-size:13px;color:var(--muted);line-height:1.7;padding:0 16px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
-.faq-item.open .faq-a{max-height:400px;padding:0 16px 14px}
-.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-ico{color:var(--gold);font-size:18px;flex-shrink:0;transition:transform .25s;line-height:1}
+.faq-it.open .faq-ico{transform:rotate(45deg)}
+.faq-a{font-size:13px;color:var(--muted);line-height:1.75;padding:0 16px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s}
+.faq-it.open .faq-a{max-height:500px;padding:0 16px 16px}
 
-/* REVIEWS */
-.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:1rem;margin-bottom:1.5rem}
-.review-card{background:var(--card2);border-radius:var(--radius-sm);border:1px solid var(--border);padding:1rem}
-.review-stars{color:var(--gold);font-size:13px;margin-bottom:6px}
-.review-text{font-size:13px;color:var(--text);line-height:1.6;opacity:.9}
-.review-author{font-size:11px;color:var(--muted);margin-top:8px}
-.review-form{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
-.review-form-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px}
-.review-inputs{display:flex;flex-direction:column;gap:10px}
-.review-inputs input,.review-inputs textarea,.review-inputs select{background:var(--card2);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-sm);padding:10px 12px;color:var(--text);font-family:'Poppins',sans-serif;font-size:13px;outline:none;transition:border-color .15s;width:100%}
-.review-inputs input:focus,.review-inputs textarea:focus,.review-inputs select:focus{border-color:var(--gold)}
-.review-inputs textarea{resize:vertical;min-height:80px}
-.review-inputs select option{background:#141414}
-.review-submit{margin-top:10px;padding:10px 20px;background:var(--gold);color:#1a1200;border:none;border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;cursor:pointer}
-.review-submit:hover{background:var(--gold-light)}
+/* ── REVIEWS ── */
+.rev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:1rem;margin-bottom:1.75rem}
+.rev-card{background:var(--card2);border-radius:var(--rs);border:1px solid var(--border);padding:1.25rem;transition:border-color .25s,transform .25s}
+.rev-card:hover{border-color:rgba(245,200,66,.12);transform:translateY(-3px)}
+.rev-stars{color:var(--gold);font-size:13px;margin-bottom:8px}
+.rev-text{font-size:13px;color:rgba(240,240,240,.85);line-height:1.65;font-style:italic}
+.rev-who{font-size:11px;color:var(--muted);margin-top:10px;font-weight:500}
+.rev-form{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.rinp{display:flex;flex-direction:column;gap:10px}
+.rinp input,.rinp textarea,.rinp select{background:var(--card2);border:1px solid rgba(255,255,255,.1);border-radius:var(--rs);padding:11px 14px;color:var(--text);font-family:'Poppins',sans-serif;font-size:13px;outline:none;transition:border-color .15s,box-shadow .15s;width:100%}
+.rinp input:focus,.rinp textarea:focus,.rinp select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,200,66,.1)}
+.rinp textarea{resize:vertical;min-height:82px}
+.rinp select option{background:#181818}
 
-/* HOW TO ORDER */
-.steps{display:flex;flex-direction:column;gap:14px;margin-top:1.2rem}
-.step{display:flex;gap:14px;align-items:flex-start}
-.step-num{width:30px;height:30px;border-radius:50%;background:var(--gold);color:#1a1200;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-title{font-size:14px;font-weight:600;color:var(--text)}
-.step-desc{font-size:12px;color:var(--muted);margin-top:2px}
+/* ── HOW TO ORDER ── */
+.steps{display:flex;flex-direction:column;gap:16px;margin-top:1.25rem}
+.step{display:flex;gap:16px;align-items:flex-start}
+.snum{width:32px;height:32px;border-radius:50%;background:var(--gold);color:#111;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;box-shadow:0 4px 12px rgba(245,200,66,.25)}
+.stitle{font-size:14px;font-weight:600;color:var(--text)}
+.sdesc{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.55}
 
-/* CONTACT */
-.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:2rem}
-.contact-card{background:var(--card);border-radius:var(--radius);padding:1rem;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);text-decoration:none;border:1px solid var(--border);transition:border-color .15s,transform .15s;min-width:0}
-.contact-card:hover{border-color:rgba(245,200,66,.3);transform:translateY(-2px)}
-.contact-icon{width:40px;height:40px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.contact-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-.contact-val{font-size:12px;font-weight:600;color:var(--text);margin-top:2px;word-break:break-word}
-.contact-hint{font-size:10px;color:#555;margin-top:2px}
-.contact-form-wrap{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
-.contact-form-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px}
-.contact-inputs{display:flex;flex-direction:column;gap:10px}
-.contact-inputs input,.contact-inputs textarea{background:var(--card2);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-sm);padding:10px 12px;color:var(--text);font-family:'Poppins',sans-serif;font-size:13px;outline:none;transition:border-color .15s;width:100%}
-.contact-inputs input:focus,.contact-inputs textarea:focus{border-color:var(--gold)}
-.contact-inputs textarea{resize:vertical;min-height:90px}
-.contact-submit{margin-top:10px;padding:10px 20px;background:var(--gold);color:#1a1200;border:none;border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;cursor:pointer}
-.contact-submit:hover{background:var(--gold-light)}
+/* ── CONTACT ── */
+.con-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:2rem}
+.con-card{background:var(--card);border-radius:var(--r);padding:1.15rem 1.25rem;display:flex;align-items:center;gap:14px;text-decoration:none;border:1px solid var(--border);transition:all .2s;min-width:0}
+.con-card:hover{border-color:rgba(245,200,66,.25);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.5)}
+.con-ico{width:42px;height:42px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.con-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.con-val{font-size:12.5px;font-weight:600;color:var(--text);margin-top:2px}
+.con-hint{font-size:10px;color:#444;margin-top:2px}
+.con-form{margin-top:1.75rem;padding-top:1.75rem;border-top:1px solid var(--border)}
+.cinp{display:flex;flex-direction:column;gap:12px}
+.cinp input,.cinp textarea{background:var(--card2);border:1px solid rgba(255,255,255,.1);border-radius:var(--rs);padding:11px 14px;color:var(--text);font-family:'Poppins',sans-serif;font-size:13px;outline:none;transition:border-color .15s,box-shadow .15s;width:100%}
+.cinp input:focus,.cinp textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,200,66,.1)}
+.cinp textarea{resize:vertical;min-height:92px}
+.act-btn{margin-top:12px;padding:11px 24px;background:var(--gold);color:#111;border:none;border-radius:var(--rs);font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
+.act-btn:hover{background:var(--gold2);box-shadow:0 4px 16px rgba(245,200,66,.3)}
 
-/* FLOATING CHAT */
-.chat-float{position:fixed;bottom:24px;right:24px;z-index:998;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
-.chat-btn{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.5);border:none;transition:transform .15s;text-decoration:none}
-.chat-btn:hover{transform:scale(1.08)}
-.chat-btn.wa{background:#25d366}
-.chat-btn.em{background:var(--gold)}
-.chat-tooltip{background:rgba(0,0,0,0.85);color:#fff;font-size:12px;padding:4px 10px;border-radius:99px;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none}
-.chat-float:hover .chat-tooltip{opacity:1}
-
-footer{background:#000;border-top:1px solid rgba(255,255,255,.06);color:var(--muted);text-align:center;font-size:12px;padding:1.75rem 1rem}
+footer{background:#000;border-top:1px solid rgba(255,255,255,.05);color:var(--muted);text-align:center;font-size:12px;padding:2.5rem 1rem;line-height:1.8}
 footer strong{color:var(--gold)}
-.empty{grid-column:1/-1;text-align:center;padding:2.5rem;color:var(--muted);font-size:14px}
-.field-error{font-size:11px;color:#ef4444;margin-top:4px}
+.empty{grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted)}
 
-/* RESPONSIVE */
-@media(min-width:860px){.fish-grid{grid-template-columns:repeat(4,1fr)}.hero{padding:7rem 2rem 5rem;min-height:520px}}
-@media(max-width:860px) and (min-width:480px){.fish-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:680px){
-  .grades-grid{grid-template-columns:1fr}
-  .form-grid{grid-template-columns:1fr}
-  .form-group.full{grid-column:1}
-  .about-inner{flex-direction:column;align-items:center;text-align:center}
+/* ── RESPONSIVE ── */
+@media(min-width:860px){.fish-grid{grid-template-columns:repeat(4,1fr)}.hero{min-height:100vh}}
+@media(max-width:860px) and (min-width:540px){.fish-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){
+  .grades{grid-template-columns:1fr;max-width:360px;margin-left:auto;margin-right:auto}
+  .form-grid{grid-template-columns:1fr}.fg.full{grid-column:1}
+  .about-wrap{flex-direction:column;align-items:center;text-align:center}
   .about-tags{justify-content:center}
-  .about-stats{margin-left:auto;margin-right:auto}
-  .email-row{flex-direction:column}
-  .contact-grid{grid-template-columns:1fr}
+  .con-grid{grid-template-columns:1fr}
 }
 @media(max-width:480px){
-  .about-stats{grid-template-columns:repeat(3,1fr)}
-  .stat-num{font-size:1.2rem}
-  .hero{padding:4rem 1rem 3rem;min-height:340px}
-  .hero-logo{font-size:2.2rem;letter-spacing:-1px}
-  .fish-grid{grid-template-columns:repeat(2,1fr);gap:10px}
-  .fish-img{height:130px}
-  .container{padding:1.5rem 1rem}
-  .chat-float{bottom:16px;right:16px}
-  .reviews-grid{grid-template-columns:1fr}
+  .fish-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .fish-img-wrap{height:150px}
+  .hero{padding:6rem 1.25rem 4rem;min-height:100svh}
+  .hero-title{font-size:2.8rem;letter-spacing:-2px}
+  .wrap{padding:2rem 1.1rem}
+  .notify-row{flex-direction:column}.notify-row button{padding:12px}
+  .floats{bottom:18px;right:18px}
+  .rev-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- STICKY NAV -->
-<nav id="navbar">
-  <div class="nav-logo">
+<!-- CURSOR GLOW -->
+<div class="cursor-glow" id="glow"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-brand">
     <img src="https://i.imgur.com/J6wIZx9.jpg" alt="Logo" onerror="this.style.display='none'"/>
-    <span class="nav-title"><span>✕</span> Marks the Spot</span>
-  </div>
-  <div class="nav-actions">
-    <a href="#strains" class="nav-link">Strains</a>
-    <button class="nav-cta" onclick="document.getElementById('request').scrollIntoView({behavior:'smooth'})">Request a Fish</button>
+    <span class="nav-brand-name"><span class="x">✕</span> Marks the Spot</span>
+  </a>
+  <div class="nav-right">
+    <a href="#strains" class="nav-a">Strains</a>
+    <button class="nav-btn" id="navReqBtn">Request a Fish</button>
   </div>
 </nav>
 
 <!-- FLOATING CHAT -->
-<div class="chat-float">
-  <span class="chat-tooltip">Quick contact</span>
-  <a href="https://wa.me/639173397877" target="_blank" class="chat-btn wa" title="WhatsApp us">
+<div class="floats">
+  <a href="https://wa.me/639173397877" target="_blank" class="float-btn wa">
+    <span class="float-label">WhatsApp</span>
     <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
-  <a href="mailto:Francisco.Desaca@gmail.com?subject=Inquiry%20from%20Website" class="chat-btn em" title="Email us">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1200" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+  <a href="mailto:Francisco.Desaca@gmail.com?subject=Inquiry" class="float-btn em">
+    <span class="float-label">Email us</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
   </a>
 </div>
 
 <!-- HERO -->
 <header class="hero">
-  <div class="hero-bg"></div>
-  <div class="bubbles" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="hero-video"></div>
+  <div class="particles" id="particles"></div>
   <div class="hero-inner">
-    <div class="hero-logo"><span class="xmark">✕</span> Marks the Spot</div>
-    <p class="hero-sub">Selectively bred premium &amp; exotic balloon mollies<br>evaluated and shipped worldwide from Talisay City, Philippines</p>
+    <div class="hero-eyebrow">Premium · Selectively Bred · Talisay City, PH</div>
+    <div class="hero-title"><span class="x">✕</span> Marks<br>the Spot</div>
+    <p class="hero-sub">Exotic balloon mollies evaluated against competition standard<br>and shipped worldwide — every fish chosen with purpose.</p>
     <div class="hero-badges">
-      <span class="badge badge-water" onclick="document.getElementById('recentTransactions').scrollIntoView({behavior:'smooth'})">🌏 Ships Worldwide</span>
-      <a href="https://www.google.com/maps/search/Menlo+Phase+II/@10.7346117,122.9690429,15z" target="_blank" class="badge badge-dim">📍 Talisay City, PH</a>
+      <span class="hbadge hbadge-gold" id="heroBadge">🌏 Ships Worldwide</span>
+      <a href="https://www.google.com/maps/search/Menlo+Phase+II/@10.7346117,122.9690429,15z" target="_blank" class="hbadge hbadge-dim">📍 Talisay City, PH</a>
     </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
   </div>
 </header>
 
-<main class="container">
+<main class="wrap">
 
   <!-- ABOUT -->
-  <div class="card-wrap">
-    <div class="about-inner">
-      <div class="about-avatar"><img src="https://i.imgur.com/J6wIZx9.jpg" alt="X Marks the Spot" onerror="this.parentNode.innerHTML='🐠'"/></div>
-      <div>
+  <div class="card reveal">
+    <div class="about-wrap">
+      <div class="about-ava"><img src="https://i.imgur.com/J6wIZx9.jpg" alt="Logo" onerror="this.parentNode.innerHTML='🐠'"/></div>
+      <div style="flex:1">
         <div class="about-name">X Marks the Spot</div>
-        <div class="about-title">Premium Balloon Molly Source · Talisay City, Philippines</div>
+        <div class="about-sub">Premium Balloon Molly Source · Talisay City, Philippines</div>
         <div class="about-bio">We are a passionate balloon molly operation based in Talisay City, Philippines. Every fish we offer is personally evaluated against the balloon molly competition standard before it ships. Whether you are building a breeding program or preparing for a show, every fish that leaves our hands is chosen with purpose, care, and an eye for quality that only comes from genuine passion for the hobby.</div>
         <div class="about-tags">
           <span class="about-tag">🏆 Show Grade Specialist</span>
@@ -328,77 +479,50 @@ footer strong{color:var(--gold)}
           <span class="about-tag">🌏 International Shipping</span>
           <span class="about-tag">✅ Personally Selected</span>
         </div>
+        <div class="stats-grid">
+          <div class="stat-box"><div class="stat-n">9</div><div class="stat-l">Strains</div></div>
+          <div class="stat-box"><div class="stat-n">3</div><div class="stat-l">Grades</div></div>
+          <div class="stat-box"><div class="stat-n">500+</div><div class="stat-l">Sold</div></div>
+        </div>
       </div>
-    </div>
-  </div>
     </div>
   </div>
 
   <!-- STRAINS -->
-  <div class="section-header" id="strains">
-    <div class="section-title">🐠 Available Strains</div>
+  <div class="sec-row reveal" id="strains">
+    <div class="sec-title">🐠 Available Strains</div>
     <div style="font-size:12px;color:var(--muted)">Updated July 2026</div>
   </div>
-  <div class="filters">
-    <button class="filter-btn active" onclick="filterFish('all',this)">All strains</button>
-    <button class="filter-btn" onclick="filterFish('lyretail',this)">Lyretails</button>
-    <button class="filter-btn" onclick="filterFish('veiltail',this)">Veiltails</button>
-    <button class="filter-btn" onclick="filterFish('roundtail',this)">Roundtails</button>
-      </div>
+  <div class="filters reveal" id="filterBar"></div>
   <div class="fish-grid" id="fishGrid"></div>
-  <div class="disclaimer">
+  <div class="disclaimer reveal">
     📸 <strong>Photo Reference Notice:</strong> All photos display the strain's typical characteristics for reference only. Each fish is individually hand-picked. Exact patterns, coloration and markings will naturally vary per fish.
   </div>
 
-  <!-- REQUEST FORM -->
-  <div class="card-wrap" id="request" style="background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.1)">
-    <div class="section-title">🎣 Request a Fish</div>
-    <p style="font-size:13px;color:var(--muted);margin:6px 0 1rem">Submit your order and we will capture it directly in the site form. We will also send you a confirmation via WhatsApp or Email.</p>
-
-    <form id="requestForm" name="fish-order" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitOrder(event)">
-      <input type="hidden" name="form-name" value="fish-order">
-      <p style="display:none;">
-        <label>Don’t fill this out if you are human: <input name="bot-field"></label>
-      </p>
-      <input type="hidden" name="order-id" id="orderIdField" value="">
-      <input type="hidden" name="order-summary" id="orderSummaryField" value="">
-
-      <div class="req-note"><span>*</span> Required fields — please complete before sending.</div>
+  <!-- REQUEST -->
+  <div class="card reveal" id="request" style="background:rgba(255,255,255,.02);border-color:rgba(255,255,255,.08)">
+    <div class="sec-title">🎣 Request a Fish</div>
+    <p style="font-size:13px;color:var(--muted);margin:7px 0 1.25rem">Tell us what you are looking for and we will personally select the best match.</p>
+    <div id="reqForm">
+      <div style="font-size:11px;color:#ef4444;font-weight:600;margin-bottom:12px">* Required fields</div>
       <div class="form-grid">
-        <div class="form-group">
-          <label for="reqStrain">Strain <span style="color:#ef4444">*</span></label>
-          <select id="reqStrain" name="strain" required>
-            <option value="">Select a strain...</option>
-            <option>Golden Zebra Lyretail</option>
-            <option>Pikachu Veiltail</option>
-            <option>Pikachu Roundtail</option>
-            <option>Platinum Marble Zebra Pattern Roundtail</option>
-            <option>Golden Zebra Veiltail</option>
-            <option>Black King Balloon Molly</option>
-            <option>Chocolate Lyretail</option>
-            <option>Golden Blue Tail Lyretail</option>
-            <option>Tanchu Lyretail</option>
-            <option>Other / Not sure</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="reqGrade">Grade <span style="color:#ef4444">*</span></label>
-          <select id="reqGrade" name="grade" required>
-            <option value="">Select a grade...</option>
-            <option>Material Grade (from $80)</option>
-            <option>Show Potential (from $120)</option>
-            <option>Show Grade (from $180)</option>
-            <option>Not sure — please advise me</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="reqQty">Quantity <span style="color:#ef4444">*</span></label>
-          <input type="number" id="reqQty" name="quantity" placeholder="How many fish?" min="1" required/>
-        </div>
-        <div class="form-group">
-          <label for="reqCountry">Your Country <span style="color:#ef4444">*</span></label>
-          <input type="text" id="reqCountry" name="country" list="countryList" placeholder="Type or select..." autocomplete="off" required/>
-          <datalist id="countryList">
+        <div class="fg"><label>Strain *</label>
+          <select id="s_strain" class="fc"><option value="">Select a strain...</option>
+            <option>Golden Zebra Lyretail</option><option>Pikachu Veiltail</option>
+            <option>Pikachu Roundtail</option><option>Platinum Marble Zebra Pattern Roundtail</option>
+            <option>Golden Zebra Veiltail</option><option>Black King Balloon Molly</option>
+            <option>Chocolate Lyretail</option><option>Golden Blue Tail Lyretail</option>
+            <option>Tanchu Lyretail</option><option>Other / Not sure</option>
+          </select></div>
+        <div class="fg"><label>Grade *</label>
+          <select id="s_grade" class="fc"><option value="">Select a grade...</option>
+            <option>Material Grade (from $80)</option><option>Show Potential (from $120)</option>
+            <option>Show Grade (from $180)</option><option>Not sure — please advise me</option>
+          </select></div>
+        <div class="fg"><label>Quantity *</label><input type="number" id="s_qty" class="fc" placeholder="How many fish?" min="1"/></div>
+        <div class="fg"><label>Your Country *</label>
+          <input type="text" id="s_country" class="fc" list="clist" placeholder="Type or select..." autocomplete="off"/>
+          <datalist id="clist">
             <option value="United States"><option value="Canada"><option value="United Kingdom">
             <option value="Australia"><option value="New Zealand"><option value="Singapore">
             <option value="Japan"><option value="South Korea"><option value="Germany">
@@ -412,179 +536,139 @@ footer strong{color:var(--gold)}
             <option value="Philippines"><option value="India"><option value="United Arab Emirates">
             <option value="Saudi Arabia"><option value="South Africa"><option value="Brazil">
             <option value="Mexico"><option value="Argentina"><option value="Other">
-          </datalist>
-        </div>
-        <div class="form-group">
-          <label for="reqContact">Preferred Contact <span style="color:#ef4444">*</span></label>
-          <select id="reqContact" name="contact_method" required>
-            <option value="whatsapp">WhatsApp</option>
-            <option value="email">Email</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="reqHandle">Your WhatsApp / Email <span style="color:#ef4444">*</span></label>
-          <input type="text" id="reqHandle" name="contact_handle" placeholder="Your number or email address" required/>
-        </div>
-        <div class="form-group full">
-          <label for="reqNotes">Additional Notes <span style="color:#555;font-weight:400;font-size:10px">(optional)</span></label>
-          <input type="text" id="reqNotes" name="notes" placeholder="Pair preferences, specific requirements, questions..."/>
-        </div>
+          </datalist></div>
+        <div class="fg"><label>Preferred Contact *</label>
+          <select id="s_contact" class="fc"><option value="whatsapp">WhatsApp</option><option value="email">Email</option></select></div>
+        <div class="fg"><label>Your WhatsApp / Email *</label><input type="text" id="s_handle" class="fc" placeholder="Your number or email address"/></div>
+        <div class="fg full"><label>Additional Notes <span style="color:#444;font-size:10px;font-weight:400">(optional)</span></label>
+          <input type="text" id="s_notes" class="fc" placeholder="Pair preferences, specific requirements..."/></div>
       </div>
-
-      <div class="order-summary" id="orderPreview"></div>
-      <div class="order-status" id="orderStatus"></div>
-
-      <button class="submit-btn" type="submit">📩 Place Order →</button>
-      <div class="wa-note">💬 <strong>WhatsApp users:</strong> After the form is saved, we will also open a message draft for quick follow-up when available.</div>
-    </form>
-
+      <button class="send-btn" id="sendBtn">📩 Send Request →</button>
+      <div class="wa-hint">💬 <strong>WhatsApp users:</strong> Details pre-filled — just press <strong>Send</strong> in WhatsApp.</div>
+    </div>
     <div class="confirm-box" id="confirmBox">
-      <div class="confirm-icon">✅</div>
-      <div class="confirm-title">Order Captured!</div>
-      <div class="confirm-sub" id="confirmText">Thank you! Your request has been saved and we will review it within 24 hours.</div>
-      <button class="submit-btn" style="margin-top:1.5rem;max-width:260px;margin-left:auto;margin-right:auto;display:block" onclick="resetForm()">Send Another Request</button>
+      <div style="font-size:52px;margin-bottom:14px">✅</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:var(--gold)">Request Sent!</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:10px;line-height:1.7">Thank you! We will get back to you within 24 hours via your chosen contact method.</div>
+      <button class="send-btn" id="resetBtn" style="max-width:260px;margin:1.5rem auto 0;display:block">Send Another Request</button>
     </div>
   </div>
 
   <!-- TIMELINE -->
-  <div class="card-wrap">
-    <div class="section-title">📋 What Happens After You Order</div>
-    <div class="timeline">
-      <div class="tl-item"><div class="tl-dot gold">📩</div><div><div class="tl-day">Day 1</div><div class="tl-title">We receive your request</div><div class="tl-desc">We review your strain, grade, and quantity and confirm availability within 24 hours.</div></div></div>
-      <div class="tl-item"><div class="tl-dot white">🐠</div><div><div class="tl-day">Day 2 – 3</div><div class="tl-title">Fish are personally selected</div><div class="tl-desc">We hand-pick and evaluate each fish against the balloon molly competition standard — only the best make it through.</div></div></div>
-      <div class="tl-item"><div class="tl-dot white">💳</div><div><div class="tl-day">Day 3 – 4</div><div class="tl-title">You approve &amp; payment confirmed</div><div class="tl-desc">We send you photos of your selected fish, confirm the final price and shipping cost, then process your payment.</div></div></div>
-      <div class="tl-item"><div class="tl-dot white">📦</div><div><div class="tl-day">Day 4 – 5</div><div class="tl-title">Fish packed &amp; shipped</div><div class="tl-desc">Carefully packed with oxygen and shipped. You receive a tracking number and full care instructions.</div></div></div>
-      <div class="tl-item"><div class="tl-dot done">✅</div><div><div class="tl-day">Day 5 – 10</div><div class="tl-title">Fish arrive at your door</div><div class="tl-desc">Delivery depends on your location. We are available throughout transit and after arrival.</div></div></div>
+  <div class="card reveal">
+    <div class="sec-title">📋 What Happens After You Order</div>
+    <div class="tl">
+      <div class="tl-row"><div class="tl-dot g">📩</div><div><div class="tl-day">Day 1</div><div class="tl-title">We receive your request</div><div class="tl-desc">We review your strain, grade, and quantity and confirm availability within 24 hours.</div></div></div>
+      <div class="tl-row"><div class="tl-dot w">🐠</div><div><div class="tl-day">Day 2 – 3</div><div class="tl-title">Fish are personally selected</div><div class="tl-desc">We hand-pick and evaluate each fish against the balloon molly competition standard.</div></div></div>
+      <div class="tl-row"><div class="tl-dot w">💳</div><div><div class="tl-day">Day 3 – 4</div><div class="tl-title">You approve &amp; payment confirmed</div><div class="tl-desc">We send photos of your selected fish, confirm final price and shipping, then process payment.</div></div></div>
+      <div class="tl-row"><div class="tl-dot w">📦</div><div><div class="tl-day">Day 4 – 5</div><div class="tl-title">Fish packed &amp; shipped</div><div class="tl-desc">Carefully packed with oxygen and shipped. You receive a tracking number and care guide.</div></div></div>
+      <div class="tl-row"><div class="tl-dot d">✅</div><div><div class="tl-day">Day 5 – 10</div><div class="tl-title">Fish arrive at your door</div><div class="tl-desc">Delivery depends on your location. We are available throughout transit and after arrival.</div></div></div>
     </div>
   </div>
 
-  <!-- GRADE GUIDE -->
-  <div class="section-title" style="margin-bottom:1rem">📊 Grade Guide &amp; Pricing</div>
-  <div class="grades-grid">
-    <div class="grade-card material">
-      <img src="https://i.imgur.com/scWp5od.jpg" alt="Material Grade" class="grade-photo" onerror="this.style.display='none'"/>
-      <div class="grade-name">Material Grade</div>
-      <div class="grade-price">from $80</div>
-      <div class="grade-desc">Healthy quality fish with strong coloration and solid body structure. Ideal for building and developing your breeding program.</div>
-      <div class="grade-size">Any size</div>
+  <!-- GRADES -->
+  <div class="sec-title reveal" style="margin-bottom:1rem">📊 Grade Guide &amp; Pricing</div>
+  <div class="grades reveal">
+    <div class="gc mat">
+      <img src="https://i.imgur.com/scWp5od.jpg" alt="Material Grade" class="gphoto" onerror="this.style.display='none'"/>
+      <div class="gname">Material Grade</div><div class="gprice">from $80</div>
+      <div class="gdesc">Healthy quality fish with strong coloration and solid body structure. Ideal for building and developing your breeding program.</div>
+      <div class="gsize">Any size</div>
     </div>
-    <div class="grade-card potential">
-      <img src="https://i.imgur.com/6zjsYGz.jpg" alt="Show Potential" class="grade-photo" onerror="this.style.display='none'"/>
-      <div class="grade-name">Show Potential</div>
-      <div class="grade-price">from $120</div>
-      <div class="grade-desc">Young fish showing strong show characteristics with excellent form and coloration. Junior category competition eligible.</div>
-      <div class="grade-size">2.5cm – 3cm</div>
+    <div class="gc pot">
+      <img src="https://i.imgur.com/6zjsYGz.jpg" alt="Show Potential" class="gphoto" onerror="this.style.display='none'"/>
+      <div class="gname">Show Potential</div><div class="gprice">from $120</div>
+      <div class="gdesc">Young fish showing strong show characteristics with excellent form and coloration. Junior category competition eligible.</div>
+      <div class="gsize">2.5cm – 3cm</div>
     </div>
-    <div class="grade-card show">
-      <img src="https://i.imgur.com/PYOUgcb.jpg" alt="Show Grade" class="grade-photo" onerror="this.style.display='none'"/>
-      <div class="grade-name">Show Grade</div>
-      <div class="grade-price">from $180</div>
-      <div class="grade-desc">Fully meets the balloon molly competition standard. Outstanding body shape, scale quality, and coloration — competition-ready.</div>
-      <div class="grade-size">3cm and above</div>
+    <div class="gc shw">
+      <img src="https://i.imgur.com/PYOUgcb.jpg" alt="Show Grade" class="gphoto" onerror="this.style.display='none'"/>
+      <div class="gname">Show Grade</div><div class="gprice">from $180</div>
+      <div class="gdesc">Fully meets the balloon molly competition standard. Outstanding body shape, scale quality, and coloration — competition-ready.</div>
+      <div class="gsize">3cm and above</div>
     </div>
   </div>
 
   <!-- TRANSACTIONS -->
-  <div class="card-wrap" id="recentTransactions">
-    <div class="tx-header">
-      <div class="section-title">✅ Recent Transactions</div>
-      <div class="tx-verified">✓ Verified orders</div>
+  <div class="card reveal" id="recentTransactions">
+    <div class="tx-hdr">
+      <div class="sec-title">✅ Recent Transactions</div>
+      <div class="tx-ok">✓ Verified orders</div>
     </div>
     <div class="tx-list" id="txList"></div>
   </div>
 
   <!-- EMAIL CAPTURE -->
-  <div class="email-capture">
-    <div class="email-capture-title">🐠 Get Notified When New Strains Arrive</div>
-    <div class="email-capture-sub">Be the first to know about new fish, limited stocks, and special offers.</div>
-    <div class="email-row">
+  <div class="notify reveal">
+    <div class="notify-title">🐠 Get Notified When New Strains Arrive</div>
+    <div class="notify-sub">Be the first to know about new fish, limited stocks, and special offers.</div>
+    <div class="notify-row">
       <input type="email" id="notifyEmail" placeholder="Your email address..."/>
-      <button onclick="subscribeEmail()">Notify Me</button>
+      <button id="notifyBtn">Notify Me</button>
     </div>
-    <div class="email-success" id="emailSuccess">✅ You're on the list! We'll notify you of new arrivals.</div>
+    <div class="notify-ok" id="notifyOk">✅ You're on the list!</div>
   </div>
 
   <!-- FAQ -->
-  <div style="margin-bottom:2rem">
-    <div class="section-title" style="margin-bottom:1rem">❓ Frequently Asked Questions</div>
-    <div class="faq-list">
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How are the fish shipped internationally? <span class="faq-icon">+</span></div><div class="faq-a">Fish are carefully packed in oxygen-filled bags with water conditioner and insulated boxes. We ship via trusted air cargo services experienced in live fish transport. Shipping typically takes 1–3 days internationally depending on your location.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is your Dead on Arrival (DOA) policy? <span class="faq-icon">+</span></div><div class="faq-a"><strong style="color:var(--text)">Local orders:</strong> Full live arrival guarantee. Any DOA must be reported with clear photo evidence within 2 hours of delivery.<br><br><strong style="color:var(--text)">International orders:</strong> A clear uncut video of the unopened bag must be sent within 2 hours of customs release or delivery. Claims without video evidence or submitted after this window cannot be processed. Verified DOA claims will be handled via replacement or store credit.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I see the actual fish before I pay? <span class="faq-icon">+</span></div><div class="faq-a">Yes! Once we select your fish we send you photos and a short video before you confirm payment. You are buying a strain and trusting our selection — but we always show you what you are getting before it ships.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What payment methods do you accept? <span class="faq-icon">+</span></div><div class="faq-a">We accept GCash, PayPal, bank transfer, and Western Union. For international orders PayPal or bank transfer is recommended. Payment is confirmed after you approve the fish photos.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is the difference between the grades? <span class="faq-icon">+</span></div><div class="faq-a">Material Grade fish are healthy quality fish great for breeding programs. Show Potential fish are young fish (2.5–3cm) showing strong competition characteristics. Show Grade fish fully meet the balloon molly competition standard in body shape, scales, and coloration and are competition-ready at 3cm and above.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What water parameters are your fish raised in? <span class="faq-icon">+</span></div><div class="faq-a">Our balloon mollies are raised in hard slightly alkaline water: Temperature 26–28°C, pH 7.5–8.2, Hardness 10–20 dGH, with light salt (0.5–1 tsp per gallon). When acclimating to your tank, do so gradually over 30–45 minutes to avoid stress.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do you ship to my country? <span class="faq-icon">+</span></div><div class="faq-a">We ship to most countries worldwide. Some countries require permits or health certificates for live fish — message us with your country and we will advise on requirements and estimated shipping cost.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do I care for balloon mollies after they arrive? <span class="faq-icon">+</span></div><div class="faq-a">Float the bag in your tank for 15–20 minutes to equalize temperature, then gradually add tank water before releasing. Maintain 24–28°C and pH 7.0–8.0 in a well-filtered tank. We include a basic care guide with every shipment.</div></div>
-    </div>
+  <div style="margin-bottom:2.5rem" class="reveal">
+    <div class="sec-title" style="margin-bottom:1rem">❓ Frequently Asked Questions</div>
+    <div class="faq-list" id="faqList"></div>
   </div>
 
   <!-- HOW TO ORDER -->
-  <div class="card-wrap" style="background:rgba(255,255,255,.03)">
-    <div class="section-title">📦 How to Order</div>
+  <div class="card reveal" style="background:rgba(255,255,255,.02)">
+    <div class="sec-title">📦 How to Order</div>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><div class="step-title">Browse strains &amp; pick your grade</div><div class="step-desc">Use the grade guide — not sure which grade? We will advise you</div></div></div>
-      <div class="step"><div class="step-num">2</div><div><div class="step-title">Submit a request</div><div class="step-desc">Use the request form above — your details are sent via WhatsApp or Email</div></div></div>
-      <div class="step"><div class="step-num">3</div><div><div class="step-title">We personally select your fish</div><div class="step-desc">Each fish is hand-picked and evaluated — you will get photos before we ship</div></div></div>
-      <div class="step"><div class="step-num">4</div><div><div class="step-title">Confirm, pay &amp; ship</div><div class="step-desc">GCash, PayPal, bank transfer, or Western Union · Properly bagged with oxygen</div></div></div>
+      <div class="step"><div class="snum">1</div><div><div class="stitle">Browse strains &amp; pick your grade</div><div class="sdesc">Use the grade guide — not sure which grade? We will advise you</div></div></div>
+      <div class="step"><div class="snum">2</div><div><div class="stitle">Submit a request</div><div class="sdesc">Use the request form above — details sent via WhatsApp or Email</div></div></div>
+      <div class="step"><div class="snum">3</div><div><div class="stitle">We personally select your fish</div><div class="sdesc">Each fish hand-picked and evaluated — you get photos before we ship</div></div></div>
+      <div class="step"><div class="snum">4</div><div><div class="stitle">Confirm, pay &amp; ship</div><div class="sdesc">GCash, PayPal, bank transfer, or Western Union · Bagged with oxygen</div></div></div>
     </div>
   </div>
 
   <!-- REVIEWS -->
-  <div class="card-wrap">
-    <div class="section-title">⭐ Reviews &amp; Feedback</div>
-    <div class="reviews-grid" id="reviewsGrid"></div>
-    <div class="review-form">
-      <div class="review-form-title">Leave a Review or Suggestion</div>
-      <div class="review-inputs">
-        <input type="text" id="reviewName" placeholder="Your name or username (e.g. John from USA)"/>
-        <select id="reviewRating">
-          <option value="5">⭐⭐⭐⭐⭐ — Excellent</option>
-          <option value="4">⭐⭐⭐⭐ — Very Good</option>
-          <option value="3">⭐⭐⭐ — Good</option>
-          <option value="2">⭐⭐ — Fair</option>
-          <option value="1">⭐ — Poor</option>
-        </select>
-        <textarea id="reviewText" placeholder="Share your experience, suggestions, or feedback..."></textarea>
+  <div class="card reveal">
+    <div class="sec-title">⭐ Reviews &amp; Feedback</div>
+    <div class="rev-grid" id="revGrid"></div>
+    <div class="rev-form">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px">Leave a Review or Suggestion</div>
+      <div class="rinp">
+        <input type="text" id="rName" placeholder="Your name (e.g. John from USA)"/>
+        <select id="rRating"><option value="5">⭐⭐⭐⭐⭐ — Excellent</option><option value="4">⭐⭐⭐⭐ — Very Good</option><option value="3">⭐⭐⭐ — Good</option><option value="2">⭐⭐ — Fair</option><option value="1">⭐ — Poor</option></select>
+        <textarea id="rText" placeholder="Share your experience, suggestions, or feedback..."></textarea>
       </div>
-      <button class="review-submit" onclick="submitReview()">Submit Review</button>
-      <div id="reviewSuccess" style="display:none;font-size:12px;color:var(--gold);margin-top:8px">✅ Thank you for your feedback!</div>
+      <button class="act-btn" id="submitRevBtn">Submit Review</button>
+      <div id="revOk" style="display:none;font-size:12px;color:var(--gold);margin-top:8px">✅ Thank you for your feedback!</div>
     </div>
   </div>
 
   <!-- CONTACT -->
-  <div class="card-wrap">
-    <div class="section-title" style="margin-bottom:1rem">📬 Get in Touch</div>
-    <div class="contact-grid">
-      <a href="https://www.facebook.com/eXedmarksthespot" target="_blank" class="contact-card">
-        <div class="contact-icon" style="background:rgba(24,119,242,.15)">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="#4d90fe"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.514c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-        </div>
-        <div style="min-width:0"><div class="contact-lbl">Facebook</div><div class="contact-val">Xmarksthespot</div><div class="contact-hint">Follow us</div></div>
+  <div class="card reveal">
+    <div class="sec-title" style="margin-bottom:1.2rem">📬 Get in Touch</div>
+    <div class="con-grid">
+      <a href="https://www.facebook.com/eXedmarksthespot" target="_blank" class="con-card">
+        <div class="con-ico" style="background:rgba(24,119,242,.14)"><svg width="22" height="22" viewBox="0 0 24 24" fill="#4d90fe"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.514c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></div>
+        <div><div class="con-lbl">Facebook</div><div class="con-val">Xmarksthespot</div><div class="con-hint">Follow us</div></div>
       </a>
-      <a href="https://wa.me/639173397877" target="_blank" class="contact-card">
-        <div class="contact-icon" style="background:rgba(37,211,102,.15)">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </div>
-        <div style="min-width:0"><div class="contact-lbl">WhatsApp</div><div class="contact-val">+63 917 339 7877</div><div class="contact-hint">For orders</div></div>
+      <a href="https://wa.me/639173397877" target="_blank" class="con-card">
+        <div class="con-ico" style="background:rgba(37,211,102,.13)"><svg width="22" height="22" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+        <div><div class="con-lbl">WhatsApp</div><div class="con-val">+63 917 339 7877</div><div class="con-hint">For orders</div></div>
       </a>
-      <a href="mailto:Francisco.Desaca@gmail.com" class="contact-card" style="grid-column:1/-1">
-        <div class="contact-icon" style="background:rgba(245,200,66,.12)">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-        </div>
-        <div style="min-width:0"><div class="contact-lbl">Email</div><div class="contact-val">Francisco.Desaca@gmail.com</div><div class="contact-hint">For orders &amp; international inquiries</div></div>
+      <a href="mailto:Francisco.Desaca@gmail.com" class="con-card" style="grid-column:1/-1">
+        <div class="con-ico" style="background:rgba(245,200,66,.1)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5C842" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></div>
+        <div><div class="con-lbl">Email</div><div class="con-val">Francisco.Desaca@gmail.com</div><div class="con-hint">For orders &amp; international inquiries</div></div>
       </a>
     </div>
-    <div class="contact-form-wrap">
-      <div class="contact-form-title">Send Us a Message</div>
-      <div class="contact-inputs">
-        <input type="text" id="ctName" placeholder="Your name"/>
-        <input type="email" id="ctEmail" placeholder="Your email address"/>
-        <input type="text" id="ctSubject" placeholder="Subject (e.g. Shipping question, Strain inquiry...)"/>
-        <textarea id="ctMessage" placeholder="Your message..."></textarea>
+    <div class="con-form">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:14px">Send Us a Message</div>
+      <div class="cinp">
+        <input type="text" id="cName" placeholder="Your name"/>
+        <input type="email" id="cEmail" placeholder="Your email address"/>
+        <input type="text" id="cSubject" placeholder="Subject"/>
+        <textarea id="cMsg" placeholder="Your message..."></textarea>
       </div>
-      <button class="contact-submit" onclick="sendContact()">Send Message →</button>
-      <div id="contactSuccess" style="display:none;font-size:12px;color:var(--gold);margin-top:8px">✅ Message sent! We will get back to you within 24 hours.</div>
+      <button class="act-btn" id="sendContactBtn">Send Message →</button>
+      <div id="conOk" style="display:none;font-size:12px;color:var(--gold);margin-top:8px">✅ Message sent! We will reply within 24 hours.</div>
     </div>
   </div>
 
@@ -592,255 +676,260 @@ footer strong{color:var(--gold)}
 
 <footer>
   <strong>✕ Marks the Spot</strong> · Talisay City, Philippines<br>
-  <span style="margin-top:6px;display:block">Prices in USD ($) · All stocks subject to availability · Ships local &amp; international · © 2026</span>
+  Prices in USD ($) · All stocks subject to availability · Ships local &amp; international · © 2026
 </footer>
 
 <script>
+/* ── DATA ── */
 const FISH=[
-  {name:"Balloon Molly",variant:"Golden Zebra Lyretail",                    category:"lyretail", bg:"#1a1500",img:"https://i.imgur.com/PYOUgcb.jpg"},
-  {name:"Balloon Molly",variant:"Pikachu Veiltail",                         category:"veiltail", bg:"#1a1500",img:"https://i.imgur.com/x6toumv.jpg"},
-  {name:"Balloon Molly",variant:"Pikachu Roundtail",                        category:"roundtail",bg:"#1a1500",img:"https://i.imgur.com/scWp5od.jpg"},
-  {name:"Balloon Molly",variant:"Platinum Marble Zebra Pattern Roundtail",  category:"roundtail",bg:"#111820",img:"https://i.imgur.com/6zjsYGz.jpg"},
-  {name:"Balloon Molly",variant:"Golden Zebra Veiltail",                    category:"veiltail", bg:"#1a1500",img:"https://i.imgur.com/eHacp64.jpg"},
-  {name:"Balloon Molly",variant:"Chocolate Lyretail",                       category:"lyretail", bg:"#150e05",img:"https://i.imgur.com/CH8a14o.jpg"},
-  {name:"Balloon Molly",variant:"Golden Blue Tail Lyretail",                category:"lyretail", bg:"#001520",img:"https://i.imgur.com/jyWVOfJ.jpg"},
-  {name:"Balloon Molly",variant:"Tanchu Lyretail",                          category:"lyretail", bg:"#150010",img:"https://i.imgur.com/bhA6Wlf.jpg"},
+  {name:"Balloon Molly",variant:"Golden Zebra Lyretail",                   cat:"lyretail", bg:"#1a1500",img:"https://i.imgur.com/PYOUgcb.jpg"},
+  {name:"Balloon Molly",variant:"Pikachu Veiltail",                        cat:"veiltail", bg:"#1a1500",img:"https://i.imgur.com/x6toumv.jpg"},
+  {name:"Balloon Molly",variant:"Pikachu Roundtail",                       cat:"roundtail",bg:"#1a1500",img:"https://i.imgur.com/scWp5od.jpg"},
+  {name:"Balloon Molly",variant:"Platinum Marble Zebra Pattern Roundtail", cat:"roundtail",bg:"#111820",img:"https://i.imgur.com/6zjsYGz.jpg"},
+  {name:"Balloon Molly",variant:"Golden Zebra Veiltail",                   cat:"veiltail", bg:"#1a1500",img:"https://i.imgur.com/eHacp64.jpg"},
+  {name:"Balloon Molly",variant:"Black King Balloon Molly",                cat:"special",  bg:"#0d0d0d",img:"https://i.imgur.com/TSZartg.jpg"},
+  {name:"Balloon Molly",variant:"Chocolate Lyretail",                      cat:"lyretail", bg:"#150e05",img:"https://i.imgur.com/CH8a14o.jpg"},
+  {name:"Balloon Molly",variant:"Golden Blue Tail Lyretail",               cat:"lyretail", bg:"#001520",img:"https://i.imgur.com/jyWVOfJ.jpg"},
+  {name:"Balloon Molly",variant:"Tanchu Lyretail",                         cat:"lyretail", bg:"#150010",img:"https://i.imgur.com/bhA6Wlf.jpg"},
 ];
-
 const TX=[
-  {flag:"🇺🇸",name:"Michael T.",  loc:"California, USA",       fish:"Golden Zebra Lyretail x5 · Show Grade",     amt:900,  time:"2 days ago"},
-  {flag:"🇸🇬",name:"Wei L.",      loc:"Singapore",              fish:"Pikachu Veiltail x3 · Material Grade",      amt:240,  time:"3 days ago"},
-  {flag:"🇩🇪",name:"Klaus M.",    loc:"Berlin, Germany",        fish:"Chocolate Lyretail x4 · Show Potential",    amt:480,  time:"4 days ago"},
-  {flag:"🇦🇺",name:"James R.",    loc:"Sydney, Australia",      fish:"Black King Balloon Molly x6 · Material",    amt:480,  time:"5 days ago"},
-  {flag:"🇯🇵",name:"Hiroshi K.",  loc:"Tokyo, Japan",           fish:"Golden Blue Tail Lyretail x3 · Show Grade", amt:540,  time:"Last week"},
+  {flag:"🇺🇸",name:"Michael T.",loc:"California, USA",fish:"Golden Zebra Lyretail x5 · Show Grade",amt:900,time:"2 days ago"},
+  {flag:"🇸🇬",name:"Wei L.",loc:"Singapore",fish:"Pikachu Veiltail x3 · Material Grade",amt:240,time:"3 days ago"},
+  {flag:"🇩🇪",name:"Klaus M.",loc:"Berlin, Germany",fish:"Chocolate Lyretail x4 · Show Potential",amt:480,time:"4 days ago"},
+  {flag:"🇦🇺",name:"James R.",loc:"Sydney, Australia",fish:"Black King Balloon Molly x6 · Material",amt:480,time:"5 days ago"},
+  {flag:"🇯🇵",name:"Hiroshi K.",loc:"Tokyo, Japan",fish:"Golden Blue Tail Lyretail x3 · Show Grade",amt:540,time:"Last week"},
+];
+const REVIEWS=[
+  {name:"Michael T. · USA",   stars:5,text:"Incredible quality fish. The Golden Zebra Lyretail exceeded my expectations — perfect body shape and vibrant coloration. Will definitely order again!",date:"June 2026"},
+  {name:"Wei L. · Singapore", stars:5,text:"Fast response, honest communication, and the fish arrived healthy and active. Packaging was excellent. Highly recommend for serious hobbyists.",          date:"June 2026"},
+  {name:"Klaus M. · Germany", stars:5,text:"Show-quality fish as described. Photos and videos before shipping gave full confidence. Professional service throughout.",                              date:"May 2026"},
+];
+const FAQS=[
+  {q:"How are the fish shipped internationally?",a:"Fish are carefully packed in oxygen-filled bags with water conditioner and insulated boxes. We ship via trusted air cargo services experienced in live fish transport. Shipping typically takes 1–3 days internationally."},
+  {q:"What is your Dead on Arrival (DOA) policy?",a:"<strong>Local:</strong> Full live arrival guarantee — report with photo within 2 hours of delivery.<br><br><strong>International:</strong> A clear uncut video of the unopened bag must be sent within 2 hours of customs release. Claims without video cannot be processed. Verified DOA claims handled via replacement or store credit."},
+  {q:"Can I see the actual fish before I pay?",a:"Yes! Once we select your fish we send you photos and a short video before you confirm payment. We always show you what you are getting before it ships."},
+  {q:"What payment methods do you accept?",a:"We accept GCash, PayPal, bank transfer, and Western Union. For international orders PayPal or bank transfer is recommended. Payment confirmed after you approve the fish photos."},
+  {q:"What is the difference between the grades?",a:"Material Grade fish are healthy for breeding programs. Show Potential fish (2.5–3cm) show strong competition characteristics. Show Grade fish fully meet the balloon molly competition standard and are competition-ready at 3cm+."},
+  {q:"What water parameters are your fish raised in?",a:"Temperature 26–28°C, pH 7.5–8.2, Hardness 10–20 dGH, light salt (0.5–1 tsp/gallon). Acclimate gradually over 30–45 minutes."},
+  {q:"Do you ship to my country?",a:"We ship to most countries worldwide. Some require permits or health certificates — message us with your country for requirements and estimated shipping cost."},
+  {q:"How do I care for balloon mollies after they arrive?",a:"Float the bag 15–20 minutes to equalize temperature, gradually add tank water before releasing. Maintain 24–28°C, pH 7.0–8.0 in a well-filtered tank. A care guide is included with every shipment."},
 ];
 
-const REVIEWS=[
-  {name:"Michael T. · USA",    stars:5,text:"Incredible quality fish. The Golden Zebra Lyretail I received exceeded my expectations — perfect body shape and vibrant coloration. Will definitely order again!",date:"June 2026"},
-  {name:"Wei L. · Singapore",  stars:5,text:"Fast response, honest communication, and the fish arrived healthy and active. Packaging was excellent. Highly recommend for serious hobbyists.",date:"June 2026"},
-  {name:"Klaus M. · Germany",  stars:5,text:"Show-quality fish as described. The seller sent photos and videos before shipping which gave me full confidence. Professional service throughout.",date:"May 2026"},
-];
+/* ── PARTICLES ── */
+function makeParticles(){
+  var c = document.getElementById("particles");
+  for(var i=0;i<18;i++){
+    var p = document.createElement("div");
+    p.className = "particle";
+    var sz = Math.random()*4+2;
+    p.style.cssText=[
+      "width:"+sz+"px","height:"+sz+"px",
+      "left:"+Math.random()*100+"%",
+      "animation-duration:"+(Math.random()*15+10)+"s",
+      "animation-delay:"+Math.random()*10+"s"
+    ].join(";");
+    c.appendChild(p);
+  }
+}
+
+/* ── CURSOR GLOW ── */
+function initGlow(){
+  var g = document.getElementById("glow");
+  document.addEventListener("mousemove",function(e){
+    g.style.left = e.clientX+"px";
+    g.style.top  = e.clientY+"px";
+  });
+}
+
+/* ── SCROLL REVEAL ── */
+function initReveal(){
+  var els = document.querySelectorAll(".reveal,.reveal-left");
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("visible")}});
+  },{threshold:.12});
+  els.forEach(function(el){io.observe(el)});
+}
+
+/* ── NAV ── */
+function initNav(){
+  window.addEventListener("scroll",function(){
+    document.getElementById("nav").classList.toggle("solid",window.scrollY>60);
+  });
+  document.getElementById("navReqBtn").addEventListener("click",function(){
+    document.getElementById("request").scrollIntoView({behavior:"smooth"});
+  });
+  document.getElementById("heroBadge").addEventListener("click",function(){
+    document.getElementById("recentTransactions").scrollIntoView({behavior:"smooth"});
+  });
+}
+
+/* ── FILTERS + FISH ── */
+function initFilters(){
+  var bar = document.getElementById("filterBar");
+  var cats=[{id:"all",l:"All Strains"},{id:"lyretail",l:"Lyretails"},{id:"veiltail",l:"Veiltails"},{id:"roundtail",l:"Roundtails"}];
+  bar.innerHTML = cats.map(function(c,i){
+    return '<button class="fbtn'+(i===0?" on":"")+'" data-cat="'+c.id+'">'+c.l+'</button>';
+  }).join("");
+  bar.querySelectorAll(".fbtn").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      bar.querySelectorAll(".fbtn").forEach(function(b){b.classList.remove("on")});
+      btn.classList.add("on");
+      renderFish(btn.dataset.cat);
+    });
+  });
+  renderFish("all");
+}
 
 function renderFish(cat){
-  const grid=document.getElementById("fishGrid");
-  const list=cat==="all"?FISH:FISH.filter(f=>f.category===cat||f.variant.toLowerCase().includes(cat));
-  if(!list.length){grid.innerHTML='<div class="empty">No strains found.</div>';return}
-  grid.innerHTML=list.map(f=>`
-    <div class="fish-card">
-      <div class="fish-img" style="background:${f.bg}">
-        <img src="${f.img}" alt="${f.variant}" loading="lazy" onerror="this.style.display='none';this.parentNode.innerHTML='🐠'"/>
-      </div>
-      <div class="fish-body">
-        <div class="fish-name">${f.name}</div>
-        <div class="fish-variant">${f.variant}</div>
-        <div class="fish-meta">
-          <span class="fish-price">from $80 <span>/ fish</span></span>
-          <span class="stock-pill">✓ Available</span>
-        </div>
-        <button class="fish-btn" onclick="requestStrain('${f.variant.replace(/'/g,"\\'")}')">Request this strain →</button>
-      </div>
-    </div>`).join("");
+  var grid = document.getElementById("fishGrid");
+  var list = cat==="all"?FISH:FISH.filter(function(f){return f.cat===cat||f.variant.toLowerCase().includes(cat)});
+  if(!list.length){grid.innerHTML='<div class="empty">No strains in this category.</div>';return}
+  grid.innerHTML = list.map(function(f,i){
+    return '<div class="fish-card" style="animation-delay:'+i*.08+'s">'+
+      '<div class="fish-img-wrap" style="background:'+f.bg+'">'+
+        '<img src="'+f.img+'" alt="'+f.variant+'" loading="lazy" onerror="this.style.display=\'none\'"/>'+
+        '<div class="fish-img-name">'+f.variant+'</div>'+
+      '</div>'+
+      '<div class="fish-body">'+
+        '<div class="fish-type">'+f.name+'</div>'+
+        '<div class="fish-bottom">'+
+          '<span class="fish-price">from $80 <small>/ fish</small></span>'+
+          '<span class="avail">✓ Available</span>'+
+        '</div>'+
+        '<button class="fish-cta" data-v="'+f.variant.replace(/"/g,"&quot;")+'"><span>Request this strain →</span></button>'+
+      '</div>'+
+    '</div>';
+  }).join("");
+  grid.querySelectorAll(".fish-cta").forEach(function(btn){
+    btn.addEventListener("click",function(){pickStrain(btn.dataset.v)});
+  });
 }
 
-function filterFish(cat,btn){
-  document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
-  renderFish(cat);
-}
-
-function requestStrain(strain){
-  var sel=document.getElementById("reqStrain");
-  for(var i=0;i<sel.options.length;i++){
-    if(sel.options[i].text===strain){sel.selectedIndex=i;break}
-  }
+function pickStrain(v){
+  var sel = document.getElementById("s_strain");
+  for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===v){sel.selectedIndex=i;break}}
   document.getElementById("request").scrollIntoView({behavior:"smooth",block:"start"});
-  var form=document.getElementById("request");
-  form.style.transition="box-shadow 0.3s";
-  form.style.boxShadow="0 0 0 2px #F5C842";
+  var box = document.getElementById("request");
+  box.style.transition="box-shadow .3s";
+  box.style.boxShadow="0 0 0 2px #F5C842";
   setTimeout(function(){
-    form.style.boxShadow="";
-    var grade=document.getElementById("reqGrade");
-    grade.focus();
-    grade.style.borderColor="#F5C842";
-    setTimeout(function(){grade.style.borderColor="rgba(255,255,255,0.12)"},2000);
+    box.style.boxShadow="";
+    var g=document.getElementById("s_grade");
+    g.focus();g.style.borderColor="#F5C842";
+    setTimeout(function(){g.style.borderColor="rgba(255,255,255,.1)"},2000);
   },800);
 }
 
-function buildOrderId(){
-  const now = new Date();
-  const pad = n => String(n).padStart(2,'0');
-  return `XMTS-${now.getFullYear()}${pad(now.getMonth()+1)}${pad(now.getDate())}-${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
-}
-
-function buildOrderSummary(orderId){
-  const strain=document.getElementById("reqStrain").value.trim();
-  const grade=document.getElementById("reqGrade").value.trim();
-  const qty=document.getElementById("reqQty").value.trim();
-  const country=document.getElementById("reqCountry").value.trim();
-  const contact=document.getElementById("reqContact").value.trim();
-  const handle=document.getElementById("reqHandle").value.trim();
-  const notes=document.getElementById("reqNotes").value.trim() || "None";
-  return [
-    `Order ID: ${orderId}`,
-    `Strain: ${strain}`,
-    `Grade: ${grade}`,
-    `Quantity: ${qty}`,
-    `Country: ${country}`,
-    `Preferred Contact: ${contact}`,
-    `Contact Handle: ${handle}`,
-    `Notes: ${notes}`
-  ].join('\\n');
-}
-
-function showOrderStatus(message, ok=true){
-  const status=document.getElementById("orderStatus");
-  status.classList.add("show");
-  status.style.borderColor = ok ? "rgba(245,200,66,.25)" : "rgba(239,68,68,.35)";
-  status.style.background = ok ? "rgba(245,200,66,.08)" : "rgba(239,68,68,.08)";
-  status.innerHTML = message;
-}
-
-async function submitOrder(e){
-  e.preventDefault();
-  const strain=document.getElementById("reqStrain").value;
-  const grade=document.getElementById("reqGrade").value;
-  const qty=document.getElementById("reqQty").value;
-  const country=document.getElementById("reqCountry").value;
-  const contact=document.getElementById("reqContact").value||"whatsapp";
-  const handle=document.getElementById("reqHandle").value;
-  const notes=document.getElementById("reqNotes").value||"None";
-
-  document.querySelectorAll(".field-error").forEach(e=>e.remove());
-  document.querySelectorAll(".form-group select,.form-group input").forEach(el=>el.style.borderColor="rgba(255,255,255,0.12)");
-
-  let valid=true;
-  function showError(id,msg){
-    const el=document.getElementById(id);
-    if(!el) return;
-    el.style.borderColor="#ef4444";
-    const err=document.createElement("div");
-    err.className="field-error";
-    err.textContent=msg;
-    el.parentNode.appendChild(err);
-    valid=false;
-  }
-
-  if(!strain) showError("reqStrain","Please select a strain");
-  if(!grade) showError("reqGrade","Please select a grade");
-  if(!qty||qty<1) showError("reqQty","Please enter quantity");
-  if(!country.trim()) showError("reqCountry","Please enter your country");
-  if(!handle.trim()) showError("reqHandle","Please enter your contact details");
-  if(!valid) return;
-
-  const orderId = buildOrderId();
-  const orderSummary = buildOrderSummary(orderId);
-  document.getElementById("orderIdField").value = orderId;
-  document.getElementById("orderSummaryField").value = orderSummary;
-  document.getElementById("orderPreview").style.display = "block";
-  document.getElementById("orderPreview").textContent = orderSummary;
-
-  const form = document.getElementById("requestForm");
-  const encoded = new URLSearchParams(new FormData(form)).toString();
-
-  try{
-    await fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encoded
-    });
-    document.getElementById("requestForm").style.display="none";
-    document.getElementById("confirmBox").classList.add("show");
-    document.getElementById("confirmText").innerHTML = `Your order was captured successfully.<br><br><strong>Order ID:</strong> ${orderId}<br><br>We will review it within 24 hours via your chosen contact method.`;
-    showOrderStatus(`✅ Order captured successfully. <strong>Order ID:</strong> ${orderId}`, true);
-
-    const msg = `Hi! I just placed an order on X Marks the Spot.
-
-${orderSummary}
-
-Please confirm availability and shipping cost. Thank you!`;
-    if(contact==="whatsapp"){
-      window.open("https://wa.me/639173397877?text="+encodeURIComponent(msg),"_blank");
-    } else if (contact==="email"){
-      window.open("mailto:Francisco.Desaca@gmail.com?subject="+encodeURIComponent(`Fish Order — ${orderId}`)+"&body="+encodeURIComponent(msg),"_blank");
-    }
-  }catch(err){
-    showOrderStatus("⚠️ The form could not be saved to the server from this page. To capture orders, deploy this site on Netlify or connect a form endpoint like Formspree.", false);
-  }
-}
-
-function resetForm(){
-  document.getElementById("requestForm").style.display="block";
-  document.getElementById("confirmBox").classList.remove("show");
-  document.getElementById("orderStatus").classList.remove("show");
-  document.getElementById("orderPreview").style.display="none";
-  ["reqStrain","reqGrade","reqQty","reqCountry","reqHandle","reqNotes"].forEach(function(id){document.getElementById(id).value=""});
-  document.getElementById("reqContact").value="whatsapp";
-}
+/* ── TX / REVIEWS / FAQ ── */
 function renderTx(){
-  document.getElementById("txList").innerHTML=TX.map(function(t){return(
-    '<div class="tx-item">'+
-    '<div class="tx-flag">'+t.flag+'</div>'+
-    '<div class="tx-info"><div class="tx-name">'+t.name+' · '+t.loc+'</div><div class="tx-fish">'+t.fish+'</div></div>'+
-    '<div class="tx-right"><div class="tx-amount">$'+t.amt+'</div><div class="tx-time">'+t.time+'</div></div>'+
-    '</div>'
-  )}).join("");
-}
-
-function renderReviews(){
-  document.getElementById("reviewsGrid").innerHTML=REVIEWS.map(function(r){
-    return '<div class="review-card"><div class="review-stars">'+"⭐".repeat(r.stars)+'</div><div class="review-text">"'+r.text+'"</div><div class="review-author">— '+r.name+' · '+r.date+'</div></div>';
+  document.getElementById("txList").innerHTML=TX.map(function(t){
+    return '<div class="tx-row"><div class="tx-flag">'+t.flag+'</div>'+
+      '<div class="tx-info"><div class="tx-who">'+t.name+' · '+t.loc+'</div><div class="tx-what">'+t.fish+'</div></div>'+
+      '<div class="tx-r"><div class="tx-amt">$'+t.amt+'</div><div class="tx-when">'+t.time+'</div></div></div>';
   }).join("");
 }
-
-function submitReview(){
-  const name=document.getElementById("reviewName").value.trim();
-  const rating=document.getElementById("reviewRating").value;
-  const text=document.getElementById("reviewText").value.trim();
-  if(!name||!text){alert("Please fill in your name and review.");return}
-  const msg="New Review from X Marks the Spot website:\n\nName: "+name+"\nRating: "+rating+"/5 stars\nReview: "+text;
-  window.open("mailto:Francisco.Desaca@gmail.com?subject=New Review — X Marks the Spot&body="+encodeURIComponent(msg),"_blank");
-  document.getElementById("reviewSuccess").style.display="block";
-  document.getElementById("reviewName").value="";
-  document.getElementById("reviewText").value="";
+function renderRevs(){
+  document.getElementById("revGrid").innerHTML=REVIEWS.map(function(r){
+    return '<div class="rev-card"><div class="rev-stars">'+"⭐".repeat(r.stars)+'</div>'+
+      '<div class="rev-text">"'+r.text+'"</div>'+
+      '<div class="rev-who">— '+r.name+' · '+r.date+'</div></div>';
+  }).join("");
+}
+function renderFAQs(){
+  document.getElementById("faqList").innerHTML=FAQS.map(function(f){
+    return '<div class="faq-it"><div class="faq-q">'+f.q+' <span class="faq-ico">+</span></div><div class="faq-a">'+f.a+'</div></div>';
+  }).join("");
+  document.querySelectorAll(".faq-q").forEach(function(q){
+    q.addEventListener("click",function(){
+      var it=q.parentElement,open=it.classList.contains("open");
+      document.querySelectorAll(".faq-it").forEach(function(i){i.classList.remove("open")});
+      if(!open)it.classList.add("open");
+    });
+  });
 }
 
-function subscribeEmail(){
-  const email=document.getElementById("notifyEmail").value.trim();
-  if(!email||!email.includes("@")){alert("Please enter a valid email address.");return}
-  window.open("mailto:Francisco.Desaca@gmail.com?subject=New Subscriber — X Marks the Spot&body="+encodeURIComponent("New subscriber: "+email),"_blank");
-  document.getElementById("emailSuccess").classList.add("show");
-  document.getElementById("notifyEmail").value="";
+/* ── FORM ── */
+function initForm(){
+  document.getElementById("sendBtn").addEventListener("click",function(){
+    var strain=document.getElementById("s_strain").value;
+    var grade=document.getElementById("s_grade").value;
+    var qty=document.getElementById("s_qty").value;
+    var country=document.getElementById("s_country").value.trim();
+    var contact=document.getElementById("s_contact").value||"whatsapp";
+    var handle=document.getElementById("s_handle").value.trim();
+    var notes=document.getElementById("s_notes").value.trim()||"None";
+    document.querySelectorAll(".field-err").forEach(function(e){e.remove()});
+    document.querySelectorAll(".fc").forEach(function(el){el.style.borderColor="rgba(255,255,255,.1)"});
+    var ok=true;
+    function err(id,m){
+      var el=document.getElementById(id);el.style.borderColor="#ef4444";
+      var d=document.createElement("div");d.className="field-err";d.textContent=m;
+      el.parentNode.appendChild(d);ok=false;
+    }
+    if(!strain)err("s_strain","Please select a strain");
+    if(!grade)err("s_grade","Please select a grade");
+    if(!qty||qty<1)err("s_qty","Please enter quantity");
+    if(!country)err("s_country","Please enter your country");
+    if(!handle)err("s_handle","Please enter your contact details");
+    if(!ok)return;
+    var msg="Hi! I found X Marks the Spot and I would like to request:\n\n"+
+      "🐠 Strain: "+strain+"\n⭐ Grade: "+grade+"\n📦 Quantity: "+qty+
+      "\n🌏 Country: "+country+"\n📞 Contact via: "+contact+" — "+handle+
+      "\n📝 Notes: "+notes+"\n\nPlease let me know availability and shipping cost. Thank you!";
+    if(contact==="whatsapp"){
+      window.open("https://wa.me/639173397877?text="+encodeURIComponent(msg),"_blank");
+    }else{
+      window.open("mailto:Francisco.Desaca@gmail.com?subject=Fish Request — "+encodeURIComponent(strain)+"&body="+encodeURIComponent(msg),"_blank");
+    }
+    document.getElementById("reqForm").style.display="none";
+    document.getElementById("confirmBox").classList.add("show");
+  });
+  document.getElementById("resetBtn").addEventListener("click",function(){
+    document.getElementById("reqForm").style.display="block";
+    document.getElementById("confirmBox").classList.remove("show");
+    ["s_strain","s_grade","s_qty","s_country","s_handle","s_notes"].forEach(function(id){document.getElementById(id).value=""});
+    document.getElementById("s_contact").value="whatsapp";
+  });
+  document.getElementById("notifyBtn").addEventListener("click",function(){
+    var e=document.getElementById("notifyEmail").value.trim();
+    if(!e||!e.includes("@")){alert("Please enter a valid email.");return}
+    window.open("mailto:Francisco.Desaca@gmail.com?subject=New Subscriber&body="+encodeURIComponent("Add: "+e),"_blank");
+    document.getElementById("notifyOk").classList.add("on");
+    document.getElementById("notifyEmail").value="";
+  });
+  document.getElementById("submitRevBtn").addEventListener("click",function(){
+    var n=document.getElementById("rName").value.trim();
+    var r=document.getElementById("rRating").value;
+    var t=document.getElementById("rText").value.trim();
+    if(!n||!t){alert("Please fill in your name and review.");return}
+    window.open("mailto:Francisco.Desaca@gmail.com?subject=New Review&body="+encodeURIComponent("Name: "+n+"\nRating: "+r+"/5\nReview: "+t),"_blank");
+    document.getElementById("revOk").style.display="block";
+    document.getElementById("rName").value="";document.getElementById("rText").value="";
+  });
+  document.getElementById("sendContactBtn").addEventListener("click",function(){
+    var n=document.getElementById("cName").value.trim();
+    var e=document.getElementById("cEmail").value.trim();
+    var s=document.getElementById("cSubject").value.trim()||"General Inquiry";
+    var m=document.getElementById("cMsg").value.trim();
+    if(!n||!m){alert("Please fill in your name and message.");return}
+    window.open("mailto:Francisco.Desaca@gmail.com?subject="+encodeURIComponent(s)+"&body="+encodeURIComponent("Name: "+n+"\nEmail: "+e+"\n\nMessage:\n"+m),"_blank");
+    document.getElementById("conOk").style.display="block";
+    document.getElementById("cName").value="";document.getElementById("cEmail").value="";document.getElementById("cSubject").value="";document.getElementById("cMsg").value="";
+  });
 }
 
-function sendContact(){
-  const name=document.getElementById("ctName").value.trim();
-  const email=document.getElementById("ctEmail").value.trim();
-  const subject=document.getElementById("ctSubject").value.trim()||"General Inquiry";
-  const message=document.getElementById("ctMessage").value.trim();
-  if(!name||!message){alert("Please fill in your name and message.");return}
-  const body="Name: "+name+"\nEmail: "+email+"\n\nMessage:\n"+message;
-  window.open("mailto:Francisco.Desaca@gmail.com?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body),"_blank");
-  document.getElementById("contactSuccess").style.display="block";
-  document.getElementById("ctName").value="";
-  document.getElementById("ctEmail").value="";
-  document.getElementById("ctSubject").value="";
-  document.getElementById("ctMessage").value="";
-}
-
-function toggleFaq(el){
-  const item=el.parentElement;
-  const isOpen=item.classList.contains("open");
-  document.querySelectorAll(".faq-item").forEach(function(i){i.classList.remove("open")});
-  if(!isOpen)item.classList.add("open");
-}
-
-window.addEventListener("scroll",function(){
-  document.getElementById("navbar").style.transform=window.scrollY>80?"translateY(0)":"translateY(-100%)";
+/* ── INIT ── */
+document.addEventListener("DOMContentLoaded",function(){
+  makeParticles();
+  initGlow();
+  initNav();
+  initReveal();
+  initFilters();
+  renderTx();
+  renderRevs();
+  renderFAQs();
+  initForm();
 });
-
-renderFish("all");
-renderTx();
-renderReviews();
 </script>
 </body>
 </html>
