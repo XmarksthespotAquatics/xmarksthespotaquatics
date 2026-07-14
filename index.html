@@ -273,6 +273,13 @@ section{padding:100px 0}
   transition:transform .7s cubic-bezier(.23,1,.32,1),filter .5s
 }
 .fish-card:hover .fc-img{transform:scale(1.06);filter:brightness(1.06) saturate(1.1)}
+  /* Target the images inside your strain cards to limit their height */
+.fish-card img, 
+.fc-img {
+    max-height: 350px; /* Adjust this value to your liking */
+    width: 100%;
+    object-fit: cover; /* Keeps the aspect ratio intact without stretching */
+}
 /* Dark overlay */
 .fc-overlay{
   position:absolute;inset:0;
