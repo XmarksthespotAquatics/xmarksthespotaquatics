@@ -74,20 +74,34 @@ body:hover #cursor{opacity:1}
 /* ═══════════════════════════════════════
    FLOATING ACTIONS
 ═══════════════════════════════════════ */
-.fab{position:fixed;bottom:32px;right:32px;z-index:99;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
-.fab-btn{
-  display:flex;align-items:center;gap:10px;
-  text-decoration:none;border:none;cursor:none;
-  border-radius:99px;padding:12px 18px;
-  font-family:'Inter',sans-serif;font-size:12px;font-weight:700;
-  transition:all .3s cubic-bezier(.23,1,.32,1);
-  box-shadow:0 6px 28px rgba(0,0,0,.6)
+.fab {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 99;
+    display: flex;
+    gap: 12px;
 }
-.fab-btn.wa{background:#25d366;color:#fff}
-.fab-btn.wa:hover{background:#20b858;transform:translateY(-3px) scale(1.02);box-shadow:0 12px 36px rgba(37,211,102,.4)}
-.fab-btn.em{background:var(--g2);color:#0a0a0a}
-.fab-btn.em:hover{background:var(--g3);transform:translateY(-3px) scale(1.02);box-shadow:0 12px 36px rgba(245,200,66,.4)}
-
+.fab-btn {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0 !important;
+    text-decoration: none;
+    border: none;
+    cursor: none;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.fab-btn.wa { background: #25d366; color: #fff; }
+.fab-btn.em { background: var(--g2); color: #0a0a0a; }
+.fab-btn:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.6);
+}
 /* ═══════════════════════════════════════
    HERO — FULL VIEWPORT
 ═══════════════════════════════════════ */
