@@ -281,14 +281,21 @@ section{padding:100px 0}
 }
 .fish-card:hover .fc-img{transform:scale(1.06);filter:brightness(1.06) saturate(1.1)}
   /* Target the images inside your strain cards to limit their height */
-.fish-card {
-    border-radius: 12px !important;
-    overflow: hidden !important;
-    max-height: 320px !important;
+/* Unified Grid & Clean Card Fix */
+.fish-grid, .fish-extra-grid {
+    background: transparent !important;
+    gap: 16px !important;
+    padding: 10px 0;
 }
-.fish-card img, 
-.fc-img {
+.fish-card {
+    border-radius: 16px !important;
+    overflow: hidden !important;
     height: 100% !important;
+    aspect-ratio: auto !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.fish-card img, .fc-img {
+    height: 280px !important;
     width: 100% !important;
     object-fit: cover !important;
 }
