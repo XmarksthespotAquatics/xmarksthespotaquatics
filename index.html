@@ -382,7 +382,7 @@
     .rs{display:flex;gap:16px;padding-bottom:28px;position:relative}
     .rs::before{content:'';position:absolute;left:15px;top:36px;bottom:4px;width:1px;background:linear-gradient(to bottom,var(--g2),transparent)}
     .rs:last-child::before{display:none}
-    .rs-dot{width:30px;height:30px;border-radius:50%;background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:var(--g2);font-family:'Space Grotesk',sans-serif}
+    .rs-dot{width:30px;height:30px;border-radius:50%;background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--g2);font-family:'Space Grotesk',sans-serif}
     .rs-title{font-size:13px;font-weight:600;color:#fff;margin-bottom:3px}
     .rs-desc{font-size:12px;color:var(--t2);line-height:1.6}
     .req-form{background:var(--s1);border-radius:20px;border:1px solid var(--bd);padding:32px;position:relative;overflow:hidden}
@@ -1020,7 +1020,13 @@
         <div class="rev-form-wrap">
           <div class="rinp">
             <input type="text" id="rName" placeholder="Your name (e.g. John from USA)"/>
-            <select id="rRating"><option value="5">⭐⭐⭐⭐⭐ Excellent</option><option value="4">⭐⭐⭐⭐ Very Good</option><option value="3">⭐⭐⭐ Good</option><option value="2">⭐⭐ Fair</option><option value="1">⭐ Poor</option></select>
+            <select id="rRating">
+              <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+              <option value="4">⭐⭐⭐⭐ Very Good</option>
+              <option value="3">⭐⭐⭐ Good</option>
+              <option value="2">⭐⭐ Fair</option>
+              <option value="1">⭐ Poor</option>
+            </select>
             <textarea id="rText" placeholder="Share your experience..."></textarea>
           </div>
           <button class="sub-btn" id="submitRevBtn">Submit Review</button>
@@ -1116,7 +1122,7 @@ function initCursor(){
   c.innerHTML='<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="4" y1="4" x2="24" y2="24" stroke="#F5C842" stroke-width="3" stroke-linecap="round"/><line x1="24" y1="4" x2="4" y2="24" stroke="#F5C842" stroke-width="3" stroke-linecap="round"/></svg>';
   var mx=0,my=0;
   document.addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY;c.style.left=mx+"px";c.style.top=my+"px"},{passive:true});
-  document.querySelectorAll("a,button").forEach(function(el){
+  document.querySelectorAll("a,button,select,input,textarea").forEach(function(el){
     el.addEventListener("mouseenter",function(){c.classList.add("hover")});
     el.addEventListener("mouseleave",function(){c.classList.remove("hover")});
   });
@@ -1253,61 +1259,110 @@ function initForm(){
     var contact=document.getElementById("s_contact").value||"whatsapp";
     var handle=document.getElementById("s_handle").value.trim();
     var notes=document.getElementById("s_notes").value.trim()||"None";
+    
     document.querySelectorAll(".req-err").forEach(function(e){e.remove()});
     document.querySelectorAll(".fc2").forEach(function(el){el.style.borderColor="var(--bd)"});
+    
     var ok=true;
-    function err(id,m){var el=document.getElementById(id);el.style.borderColor="#f87171";var d=document.createElement("div");d.className="req-err";d.textContent=m;el.parentNode.appendChild(d);ok=false}
+    function err(id,m){
+      var el=document.getElementById(id);
+      el.style.borderColor="#f87171";
+      var d=document.createElement("div");
+      d.className="req-err";
+      d.textContent=m;
+      el.parentNode.appendChild(d);
+      ok=false;
+    }
+    
     if(!strain)err("s_strain","Please select a strain");
     if(!grade)err("s_grade","Please select a grade");
     if(!qty||qty<1)err("s_qty","Please enter quantity");
     if(!country)err("s_country","Please enter your country");
     if(!handle)err("s_handle","Please enter your contact details");
     if(!ok)return;
+    
     var msg="Hi! I'd like to order from X Marks the Spot:\n\n🐠 Strain: "+strain+"\n⭐ Grade: "+grade+"\n📦 Quantity: "+qty+"\n🌏 Country: "+country+"\n📞 Contact via: "+contact+" — "+handle+"\n📝 Notes: "+notes+"\n\nPlease confirm availability and shipping cost. Thank you!";
-    if(contact==="whatsapp"){window.open("https://wa.me/639173397877?text="+encodeURIComponent(msg),"_blank")}
-    else{window.open("mailto:Francisco.Desaca@gmail.com?subject=Fish Request — "+encodeURIComponent(strain)+"&body="+encodeURIComponent(msg),"_blank")}
+    if(contact==="whatsapp"){
+      window.open("https://wa.me/639173397877?text="+encodeURIComponent(msg),"_blank");
+    } else {
+      window.open("mailto:Francisco.Desaca@gmail.com?subject=Fish Request — "+encodeURIComponent(strain)+"&body="+encodeURIComponent(msg),"_blank");
+    }
+    
     document.getElementById("reqForm").style.display="none";
     document.getElementById("confirmBox").classList.add("on");
   });
+
   document.getElementById("resetBtn").addEventListener("click",function(){
     document.getElementById("reqForm").style.display="block";
     document.getElementById("confirmBox").classList.remove("on");
-    ["s_strain","s_grade","s_qty","s_country","s_handle","s_notes"].forEach(function(id){document.getElementById(id).value=""});
+    ["s_strain","s_grade","s_qty","s_country","s_handle","s_notes"].forEach(function(id){
+      document.getElementById(id).value="";
+    });
     document.getElementById("s_contact").value="whatsapp";
   });
+
   document.getElementById("notifyBtn").addEventListener("click",function(){
     var e=document.getElementById("notifyEmail").value.trim();
-    if(!e||!e.includes("@")){alert("Please enter a valid email address.");return}
+    if(!e||!e.includes("@")){
+      alert("Please enter a valid email address.");
+      return;
+    }
     window.open("mailto:Francisco.Desaca@gmail.com?subject=Newsletter&body="+encodeURIComponent("Add: "+e),"_blank");
     document.getElementById("notifyOk").classList.add("on");
     document.getElementById("notifyEmail").value="";
   });
+
+  // Re-implemented and closed review handler
   document.getElementById("submitRevBtn").addEventListener("click",function(){
     var n=document.getElementById("rName").value.trim();
-    var r=document.getElementById("rRating").value;
+    var rating=document.getElementById("rRating").value;
     var t=document.getElementById("rText").value.trim();
-    if(!n||!t){alert("Please fill out name and review text.");return}
-    var msg="New Review for X Marks the Spot:\nName: "+n+"\nRating: "+r+"/5\nReview: "+t;
-    window.open("mailto:Francisco.Desaca@gmail.com?subject=New Review&body="+encodeURIComponent(msg),"_blank");
-    document.getElementById("revOk").classList.add("on");
+    
+    if(!n || !t){
+      alert("Please fill out your name and review content.");
+      return;
+    }
+    
+    // Process local addition of review
+    REVIEWS.unshift({name: n, stars: parseInt(rating), text: t, date: "Just now"});
+    renderRevs();
+    
+    // Clear form and display confirmation
     document.getElementById("rName").value="";
     document.getElementById("rText").value="";
+    var revOk = document.getElementById("revOk");
+    revOk.classList.add("on");
+    setTimeout(function(){ revOk.classList.remove("on"); }, 4000);
   });
+
+  // Re-implemented and closed message dispatcher
   document.getElementById("sendContactBtn").addEventListener("click",function(){
     var n=document.getElementById("cName").value.trim();
-    var e=document.getElementById("cEmail").value.trim();
-    var s=document.getElementById("cSubject").value.trim();
-    var m=document.getElementById("cMsg").value.trim();
-    if(!n||!e||!s||!m){alert("Please fill out all contact form fields.");return}
-    var body="From: "+n+" ("+e+")\nSubject: "+s+"\n\nMessage:\n"+m;
-    window.open("mailto:Francisco.Desaca@gmail.com?subject=Contact Form — "+encodeURIComponent(s)+"&body="+encodeURIComponent(body),"_blank");
-    document.getElementById("conOk").classList.add("on");
-    ["cName","cEmail","cSubject","cMsg"].forEach(function(id){document.getElementById(id).value=""});
+    var email=document.getElementById("cEmail").value.trim();
+    var sub=document.getElementById("cSubject").value.trim();
+    var msg=document.getElementById("cMsg").value.trim();
+    
+    if(!n || !email || !msg){
+      alert("Name, Email, and Message are required.");
+      return;
+    }
+    
+    var mailBody = "Name: " + n + "\nEmail: " + email + "\n\nMessage:\n" + msg;
+    window.open("mailto:Francisco.Desaca@gmail.com?subject="+encodeURIComponent(sub || "General Inquiry")+"&body="+encodeURIComponent(mailBody),"_blank");
+    
+    document.getElementById("cName").value="";
+    document.getElementById("cEmail").value="";
+    document.getElementById("cSubject").value="";
+    document.getElementById("cMsg").value="";
+    
+    var conOk = document.getElementById("conOk");
+    conOk.classList.add("on");
+    setTimeout(function(){ conOk.classList.remove("on"); }, 4000);
   });
 }
 
-/* INITIALIZATION */
-window.addEventListener("DOMContentLoaded",function(){
+/* INITIALIZER */
+document.addEventListener("DOMContentLoaded",function(){
   initCursor();
   makeParticles();
   initNavAndPopups();
