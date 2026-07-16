@@ -138,7 +138,7 @@
     }
     .hero-media{
       position:absolute;inset:0;z-index:0;
-      background:url('https://i.imgur.com/J6wIZx9.jpg') center center/cover no-repeat;
+      background:url('https://i.imgur.com/eHacp64.jpg') center center/cover no-repeat;
       transform:scale(1.08);
       animation:heroZoom 20s ease-in-out infinite alternate
     }
@@ -263,7 +263,7 @@
     .about-visual{position:relative}
     .about-img-frame{
       width:100%;aspect-ratio:4/5;border-radius:24px;overflow:hidden;
-      background:url('https://i.imgur.com/J6wIZx9.jpg') center/cover;
+      background:url('https://i.imgur.com/6zjsYGz.jpg') center/cover;
       position:relative;box-shadow:0 32px 80px rgba(0,0,0,.8)
     }
     .about-img-frame::after{
@@ -378,7 +378,6 @@
     .gc-pill{font-size:11px;font-weight:600;padding:4px 12px;border-radius:99px;display:inline-block}
     .mat-pill{background:rgba(255,255,255,.06);color:var(--t2)}
     .pot-pill{background:rgba(100,200,120,.1);color:#6dc87a}
-    .shw-pill覆{background:rgba(212,168,67,.12);color:var(--g2)}
     .shw-pill{background:rgba(212,168,67,.12);color:var(--g2)}
 
     /* ═══════════════════════════════════════
@@ -655,7 +654,7 @@
 <!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-brand">
-    <div class="nav-logo"><img src="https://i.imgur.com/J6wIZx9.jpg" alt="X Marks the Spot"/></div>
+    <div class="nav-logo"><img src="https://i.imgur.com/6zjsYGz.jpg" alt="X Marks the Spot"/></div>
     <span class="nav-wordmark"><em>✕</em> Marks the Spot</span>
   </a>
   <div class="nav-links">
@@ -677,7 +676,7 @@
   <div class="fp-header">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
       <div style="width:44px;height:44px;border-radius:50%;overflow:hidden;flex-shrink:0">
-        <img src="https://i.imgur.com/J6wIZx9.jpg" alt="X Marks the Spot" style="width:100%;height:100%;object-fit:cover;display:block"/>
+        <img src="https://i.imgur.com/6zjsYGz.jpg" alt="X Marks the Spot" style="width:100%;height:100%;object-fit:cover;display:block"/>
       </div>
       <div>
         <div class="fp-title">X Marks the Spot</div>
@@ -1087,14 +1086,14 @@
 /* DATA */
 const FISH=[
   {n:"Balloon Molly",v:"Golden Zebra Lyretail",               cat:"lyretail", bg:"#1a1500",img:"https://i.imgur.com/PYOUgcb.jpg"},
-  {n:"Balloon Molly",v:"Pikachu Veiltail",                    cat:"veiltail", bg:"#1a1500",img:"https://i.imgur.com/x6toumv.jpg"},
+  {n:"Balloon Molly",v:"Pikachu Veiltail",                    cat:"veiltail", bg:"#1a1500",img:"https://i.imgur.com/scWp5od.jpg"},
   {n:"Balloon Molly",v:"Pikachu Roundtail",                   cat:"roundtail",bg:"#1a1500",img:"https://i.imgur.com/scWp5od.jpg"},
   {n:"Balloon Molly",v:"Platinum Marble Zebra Roundtail",     cat:"roundtail",bg:"#111820",img:"https://i.imgur.com/6zjsYGz.jpg"},
   {n:"Balloon Molly",v:"Golden Zebra Veiltail",               cat:"veiltail", bg:"#1a1500",img:"https://i.imgur.com/eHacp64.jpg"},
   {n:"Balloon Molly",v:"Black King Balloon Molly",            cat:"special",  bg:"#0d0d0d",img:"https://i.imgur.com/TSZartg.jpg"},
   {n:"Balloon Molly",v:"Chocolate Lyretail",                  cat:"lyretail", bg:"#150e05",img:"https://i.imgur.com/CH8a14o.jpg"},
-  {n:"Balloon Molly",v:"Golden Blue Tail Lyretail",           cat:"lyretail", bg:"#001520",img:"https://i.imgur.com/jyWVOfJ.jpg"},
-  {n:"Balloon Molly",v:"Tanchu Lyretail",                     cat:"lyretail", bg:"#150010",img:"https://i.imgur.com/bhA6Wlf.jpg"},
+  {n:"Balloon Molly",v:"Golden Blue Tail Lyretail",           cat:"lyretail", bg:"#001520",img:"https://i.imgur.com/eHacp64.jpg"},
+  {n:"Balloon Molly",v:"Tanchu Lyretail",                     cat:"lyretail", bg:"#150010",img:"https://i.imgur.com/PYOUgcb.jpg"},
 ];
 const TX=[
   {flag:"🇺🇸",name:"Michael T.",loc:"California, USA",      fish:"Golden Zebra Lyretail ×5 · Show Grade",   amt:900, time:"2 days ago"},
@@ -1319,36 +1318,22 @@ function initForm(){
         document.getElementById("cSubject").value = "";
         document.getElementById("cMsg").value = "";
         document.getElementById("conOk").classList.remove("on");
-      }, 4000);
-    }
-  });
-
-  // Review form submission logic
-  document.getElementById("submitRevBtn").addEventListener("click", function() {
-    var name = document.getElementById("rName").value.trim();
-    var text = document.getElementById("rText").value.trim();
-    if(name && text) {
-      document.getElementById("revOk").classList.add("on");
-      setTimeout(function() {
-        document.getElementById("rName").value = "";
-        document.getElementById("rText").value = "";
-        document.getElementById("revOk").classList.remove("on");
-      }, 4000);
+      }, 2000);
     }
   });
 }
 
-/* INITIALIZE ALL BUILDERS */
-window.addEventListener("DOMContentLoaded", function() {
+/* INITIALIZE ALL SETUP */
+window.addEventListener("DOMContentLoaded",function(){
   initCursor();
   makeParticles();
   initNavAndPopups();
+  initReveal();
   initFilters();
   renderTx();
   renderRevs();
   renderFAQs();
   initForm();
-  initReveal();
 });
 </script>
 </body>
