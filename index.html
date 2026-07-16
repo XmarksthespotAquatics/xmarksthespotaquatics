@@ -1,245 +1,1004 @@
-python3 - << 'EOF'
-with open('/mnt/user-data/outputs/index.html', 'r') as f:
-    c = f.read()
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>X Marks the Spot — Rare Balloon Mollies</title>
+    <style>
+        :root {
+            --bg: #000000;
+            --s1: #0d0d0d;
+            --s2: #141414;
+            --t1: #ffffff;
+            --t2: #a1a1a1;
+            --g1: #D4A843;
+            --g2: #F5C842;
+            --bd: rgba(212,168,67,0.15);
+        }
 
-# ── 1. FIX FISH GRID — Single unified grid (3 cols), drop split and extra grids ──
-old_fish_grid_css = '''.fish-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:3px;
-  border-radius:20px;overflow:hidden;
-  background:var(--bd)
-}
-.fish-card{
-  background:var(--s1);position:relative;overflow:hidden;
-  aspect-ratio:3/4;cursor:none;
-}'''
-new_fish_grid_css = '''.fish-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:3px;
-  border-radius:20px;overflow:hidden;
-  background:var(--bd)
-}
-.fish-card{
-  background:var(--s1);position:relative;overflow:hidden;
-  aspect-ratio:4/5;cursor:none;
-}'''
-c = c.replace(old_fish_grid_css, new_fish_grid_css)
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
 
-old_extra_css = '''.fish-extra-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:3px;
-  margin-top:3px;border-radius:0 0 20px 20px;overflow:hidden;
-  background:var(--bd)
-}
-.fish-extra-grid .fish-card{aspect-ratio:3/4}'''
-new_extra_css = '''.fish-extra-grid{display:none}'''
-c = c.replace(old_extra_css, new_extra_css)
+        body {
+            background-color: var(--bg);
+            color: var(--t1);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 168, 67, 0.1);
+        }
 
-# ── 2. FIX HTML CONTAINERS — Ensure we use a clean single grid with fishGridTop ──
-# If there is a "fishGridExtra" div in the HTML, we clean it up and ensure fishGridTop represents the single grid.
-c = c.replace('<div class="fish-grid" id="fishGridTop"></div>', '<div class="fish-grid" id="fishGridTop"></div>')
-c = c.replace('<div class="fish-extra-grid" id="fishGridExtra"></div>', '')
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--t1);
+        }
 
-# ── 3. FIX JS RENDER — Render all fish into fishGridTop, handle optional extra cleanup ──
-old_render = '''function renderFish(){
-  var list=currentCat==="all"?FISH:FISH.filter(function(f){return f.cat===currentCat});
-  var top=list.slice(0,3),extra=list.slice(3);
-  var tg=document.getElementById("fishGridTop"),eg=document.getElementById("fishGridExtra");
-  tg.innerHTML=top.map(function(f,i){return fishCard(f,i===0)}).join("");
-  eg.innerHTML=extra.map(function(f){return fishCard(f,false)}).join("");
-  document.querySelectorAll(".fc-cta").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      pickStrain(btn.dataset.v);
-    });
-  });
-}'''
-new_render = '''function renderFish(){
-  var list=currentCat==="all"?FISH:FISH.filter(function(f){return f.cat===currentCat});
-  var tg=document.getElementById("fishGridTop");
-  if(tg) {
-    tg.innerHTML=list.map(function(f){return fishCard(f)}).join("");
-  }
-  var eg=document.getElementById("fishGridExtra");
-  if(eg) eg.innerHTML="";
-  document.querySelectorAll(".fc-cta").forEach(function(btn){
-    btn.addEventListener("click",function(){pickStrain(btn.dataset.v)});
-  });
-}'''
-c = c.replace(old_render, new_render)
+        .brand img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--g1);
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(212, 168, 67, 0.3);
+        }
 
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
 
-# ── 4. FIX FISHCARD FUNCTION — Uniform markup, no first-child "big" parameter ──
-old_fishcard_fn = '''function fishCard(f,big){
-  return'<div class="fish-card">'+
-    '<img class="fc-img" src="'+f.img+'" alt="'+f.v+'" loading="lazy" onerror="this.style.background=\''+f.bg+'\'"/>'+
-    '<div class="fc-overlay"></div>'+
-    '<div class="fc-shimmer"></div>'+
-    '<div class="fc-info">'+
-      '<div class="fc-type">'+f.n+'</div>'+
-      '<div class="fc-name">'+f.v+'</div>'+
-      '<div class="fc-bottom">'+
-        '<span class="fc-price">from $80</span>'+
-        '<button class="fc-cta" data-v="'+f.v.replace(/"/g,"&quot;")+'">Request →</button>'+
-      '</div>'+
-    '</div>'+
-  '</div>';
-}'''
-new_fishcard_fn = '''function fishCard(f){
-  return'<div class="fish-card">'+
-    '<img class="fc-img" src="'+f.img+'" alt="'+f.v+'" loading="lazy" onerror="this.style.background=\''+f.bg+'\'"/>'+
-    '<div class="fc-overlay"></div>'+
-    '<div class="fc-shimmer"></div>'+
-    '<div class="fc-info">'+
-      '<div class="fc-type">'+f.n+'</div>'+
-      '<div class="fc-name">'+f.v+'</div>'+
-      '<div class="fc-bottom">'+
-        '<span class="fc-price">from $80</span>'+
-        '<button class="fc-cta" data-v="'+f.v.replace(/"/g,"&quot;")+'">Request →</button>'+
-      '</div>'+
-    '</div>'+
-  '</div>';
-}'''
-c = c.replace(old_fishcard_fn, new_fishcard_fn)
+        .brand-name {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
+        .brand-sub {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--t2);
+        }
 
-# ── 5. CURSOR STYLE ──
-old_cursor_css = '''#cursor{
-  position:fixed;pointer-events:none;z-index:9999;
-  font-size:22px;line-height:1;
-  transform:translate(-50%,-50%) rotate(-30deg);
-  transition:transform .15s cubic-bezier(.23,1,.32,1),font-size .2s;
-  filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));
-  user-select:none
-}
-#cursor.hover{transform:translate(-50%,-50%) rotate(-30deg) scale(1.4)}
-#cursor-ring{display:none}'''
-new_cursor_css = '''#cursor{
-  position:fixed;pointer-events:none;z-index:9999;
-  width:28px;height:28px;
-  transform:translate(-50%,-50%);
-  transition:transform .2s cubic-bezier(.23,1,.32,1);
-  user-select:none;
-}
-#cursor svg{
-  width:100%;height:100%;
-  transition:transform .3s cubic-bezier(.23,1,.32,1),filter .2s
-}
-#cursor.hover svg{transform:rotate(90deg) scale(1.3);filter:drop-shadow(0 0 8px rgba(245,200,66,.8))}
-#cursor-ring{display:none}'''
-c = c.replace(old_cursor_css, new_cursor_css)
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
 
+        .nav-links a {
+            color: var(--t2);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
 
-# ── 6. CURSOR JS — Uses Event Delegation so dynamic re-renders maintain hover states ──
-old_cursor_js = '''/* CURSOR — fish emoji */
-function initCursor(){
-  var c=document.getElementById("cursor");
-  if(!c)return;
-  c.textContent="🐠";
-  document.addEventListener("mousemove",function(e){
-    c.style.left=e.clientX+"px";
-    c.style.top=e.clientY+"px";
-  },{passive:true});
-  document.querySelectorAll("a,button").forEach(function(el){
-    el.addEventListener("mouseenter",function(){c.classList.add("hover")});
-    el.addEventListener("mouseleave",function(){c.classList.remove("hover")});
-  });
-}'''
-new_cursor_js = '''/* CURSOR — animated X */
-function initCursor(){
-  var c=document.getElementById("cursor");
-  if(!c)return;
-  c.innerHTML='<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="4" y1="4" x2="24" y2="24" stroke="#F5C842" stroke-width="3" stroke-linecap="round"/><line x1="24" y1="4" x2="4" y2="24" stroke="#F5C842" stroke-width="3" stroke-linecap="round"/></svg>';
-  document.addEventListener("mousemove",function(e){
-    c.style.left=e.clientX+"px";
-    c.style.top=e.clientY+"px";
-  },{passive:true});
-  
-  // Event delegation to capture dynamic buttons/anchors (like re-rendered filter lists)
-  document.addEventListener("mouseover", function(e){
-    if(e.target.closest("a, button, [role='button']")) {
-      c.classList.add("hover");
-    }
-  }, {passive:true});
-  document.addEventListener("mouseout", function(e){
-    if(e.target.closest("a, button, [role='button']")) {
-      c.classList.remove("hover");
-    }
-  }, {passive:true});
-}'''
-c = c.replace(old_cursor_js, new_cursor_js)
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--g1), var(--g2));
+            transition: width 0.3s ease;
+        }
 
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-# ── 7. FAB BUTTONS AND POPUP HEADERS ──
-old_fab_btn = '''<button class="fish-fab" id="fishFab" title="Contact Us">🐠</button>'''
-new_fab_btn = '''<button class="fish-fab" id="fishFab" title="Contact Us">
-  <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-    <line x1="4" y1="4" x2="24" y2="24" stroke="#111" stroke-width="3" stroke-linecap="round"/>
-    <line x1="24" y1="4" x2="4" y2="24" stroke="#111" stroke-width="3" stroke-linecap="round"/>
-  </svg>
-</button>'''
-c = c.replace(old_fab_btn, new_fab_btn)
+        .nav-links a:hover {
+            color: var(--t1);
+        }
 
-old_fp_header = '''  <div class="fp-header">
-    <span class="fp-fish">🐡</span>
-    <div class="fp-title">Get in Touch</div>
-    <div class="fp-sub">We respond within 24 hours</div>
-    <button class="fp-close" id="fpClose">✕</button>
-  </div>'''
-new_fp_header = '''  <div class="fp-header">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
-      <div style="width:44px;height:44px;border-radius:50%;overflow:hidden;border:1.5px solid rgba(212,168,67,0.4);flex-shrink:0">
-        <img src="https://i.imgur.com/J6wIZx9.jpg" alt="X Marks the Spot" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.parentNode.innerHTML='✕'"/>
-      </div>
-      <div>
-        <div class="fp-title">X Marks the Spot</div>
-        <div class="fp-sub">We respond within 24 hours</div>
-      </div>
-    </div>
-    <button class="fp-close" id="fpClose">
-      <svg viewBox="0 0 16 16" fill="none" width="12" height="12"><line x1="2" y1="2" x2="14" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="2" x2="2" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
-  </div>'''
-c = c.replace(old_fp_header, new_fp_header)
+        .cta-btn {
+            background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 100%);
+            color: #000 !important;
+            padding: 0.6rem 1.4rem !important;
+            border-radius: 50px;
+            font-weight: 700 !important;
+            box-shadow: 0 4px 15px rgba(212, 168, 67, 0.3);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
 
-old_fab_css_btn = '''.fish-fab{
-  position:fixed;bottom:32px;right:32px;z-index:99;
-  width:58px;height:58px;border-radius:50%;
-  background:var(--g2);border:none;cursor:none;
-  display:flex;align-items:center;justify-content:center;
-  font-size:26px;
-  box-shadow:0 6px 28px rgba(245,200,66,.35);
-  transition:transform .3s cubic-bezier(.23,1,.32,1),box-shadow .3s;
-  animation:fabFloat 3s ease-in-out infinite
-}
-@keyframes fabFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.fish-fab:hover{transform:translateY(-4px) scale(1.08)!important;animation:none;box-shadow:0 12px 40px rgba(245,200,66,.5)}'''
-new_fab_css_btn = '''.fish-fab{
-  position:fixed;bottom:32px;right:32px;z-index:99;
-  width:54px;height:54px;border-radius:50%;
-  background:var(--g2);border:none;cursor:none;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 28px rgba(245,200,66,.4);
-  transition:all .3s cubic-bezier(.23,1,.32,1);
-}
-.fish-fab svg{transition:transform .4s cubic-bezier(.23,1,.32,1)}
-.fish-fab:hover{transform:scale(1.1);box-shadow:0 12px 40px rgba(245,200,66,.55)}
-.fish-fab:hover svg{transform:rotate(90deg)}
-.fish-popup.open ~ .fish-fab svg, #fishFab.active svg{transform:rotate(45deg)}'''
-c = c.replace(old_fab_css_btn, new_fab_css_btn)
+        .cta-btn::after {
+            display: none !important;
+        }
 
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 168, 67, 0.5);
+        }
 
-# ── 8. CLEAN RESPONSIVE MEDIA QUERIES ──
-import re
-c = re.sub(r'  \.fish-grid\{grid-template-columns:repeat\(3,1fr\)\}\s*', '  .fish-grid{grid-template-columns:repeat(3,1fr)}\n  ', c)
-c = re.sub(r'  \.fish-extra-grid\{grid-template-columns:repeat\(\d+,1fr\)\}\s*', '', c)
-c = re.sub(r'  \.fish-card:first-child\{.*?\}\s*', '', c)
-c = re.sub(r'  \.fish-card:nth-child\(2\).*?\}\s*', '', c)
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            background: 
+                linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%),
+                url('https://i.imgur.com/TSZartg.jpeg') no-repeat center center/cover;
+            margin-bottom: 2rem;
+        }
 
-with open('/mnt/user-data/outputs/index.html', 'w') as f:
-    f.write(c)
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            animation: fadeIn 1.2s ease-out;
+        }
 
-print("Applied adjustments successfully! Dynamic hover event delegation configured.")
-EOF
+        .hero-badge {
+            background: rgba(212, 168, 67, 0.1);
+            border: 1px solid var(--g1);
+            color: var(--g1);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #ffffff 30%, #a1a1a1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--t2);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 100%);
+            color: #000;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(212, 168, 67, 0.35);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(212, 168, 67, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--t1);
+            border: 2px solid rgba(255,255,255,0.2);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--t1);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* STRAINS SECTION */
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 6rem auto 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-tag {
+            color: var(--g1);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header p {
+            color: var(--t2);
+            font-size: 1.1rem;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 6rem 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* CARD STYLES */
+        .card {
+            background: linear-gradient(145deg, var(--s1) 0%, var(--s2) 100%);
+            border: 1px solid var(--bd);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212, 168, 67, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 40px rgba(212, 168, 67, 0.05);
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card:hover .image-container img {
+            transform: scale(1.08);
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 40%, rgba(13,13,13,0.95) 100%);
+            z-index: 1;
+        }
+
+        .badge-premium {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--g1);
+            color: var(--g2);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            backdrop-filter: blur(5px);
+            z-index: 2;
+        }
+
+        .card-content {
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--t1);
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .rarity-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--g1);
+            font-weight: 700;
+        }
+
+        .origin-tag {
+            font-size: 0.75rem;
+            color: var(--t2);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .description {
+            color: var(--t2);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        /* STATS COMPONENT */
+        .fish-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            padding: 1rem;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: var(--t2);
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .stat-val {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--t1);
+        }
+
+        .action-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .price-wrap {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--t2);
+            letter-spacing: 1px;
+        }
+
+        .price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--t1);
+        }
+
+        .price span {
+            font-size: 0.9rem;
+            color: var(--g1);
+            margin-right: 2px;
+        }
+
+        .card-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--t1);
+            padding: 0.8rem 1.6rem;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .card-btn {
+            background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 100%);
+            border-color: transparent;
+            color: #000;
+            box-shadow: 0 8px 20px rgba(212, 168, 67, 0.25);
+        }
+
+        /* CONTACT SECTION */
+        .contact {
+            background: linear-gradient(to bottom, var(--bg) 0%, var(--s1) 100%);
+            border-top: 1px solid var(--bd);
+            padding: 8rem 2rem;
+            text-align: center;
+        }
+
+        .contact-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(20, 20, 20, 0.5);
+            border: 1px solid var(--bd);
+            padding: 4rem 3rem;
+            border-radius: 32px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            color: var(--t2);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .contact-item {
+            font-size: 1.25rem;
+            color: var(--t1);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--g1);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #000;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer p {
+            color: var(--t2);
+            font-size: 0.9rem;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2.75rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .hero-btns {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="brand">
+                <img src="https://i.imgur.com/J6wIZx9.png" alt="X Marks the Spot Logo">
+                <div class="brand-text">
+                    <span class="brand-name">X Marks the Spot</span>
+                    <span class="brand-sub">Rare Balloon Mollies</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#strains">Our Strains</a></li>
+                <li><a href="#about">Our Standards</a></li>
+                <li><a href="#contact" class="cta-btn">Inquire Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (Uses Black King Balloon Molly as background) -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="hero-badge">Sourced Worldwide</span>
+            <h1>Exclusive Elite Balloon Mollies</h1>
+            <p>We source the finest, healthiest, and most visually stunning show-grade balloon mollies on the market today.</p>
+            <div class="hero-btns">
+                <a href="#strains" class="btn-primary">View Collection</a>
+                <a href="#contact" class="btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STRAINS SECTION -->
+    <section id="strains">
+        <div class="section-header">
+            <span class="section-tag">Elite Genetics</span>
+            <h2>Our Signature Strains</h2>
+            <p>Every specimen is hand-selected, quarantined, and conditioned to thrive in your showcase tank.</p>
+        </div>
+
+        <div class="gallery-container">
+            <div class="grid">
+
+                <!-- Fish Card 1: Golden Zebra Lyretail -->
+                <div class="card">
+                    <span class="badge-premium">Show Quality</span>
+                    <div class="image-container">
+                        <img src="https://i.imgur.com/PYOUgcb.jpeg" alt="Golden Zebra Lyretail Balloon Molly">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h3 class="card-title">Golden Zebra Lyretail</h3>
+                            <div class="card-meta">
+                                <span class="rarity-tag">Ultra Rare</span>
+                                <span class="origin-tag">Import</span>
+                            </div>
+                        </div>
+                        <p class="description">Features a dramatic high-fin and long-flowing lyretail pattern. The striking golden-orange stripes against black markings offer incredible contrast.</p>
+                        <div class="fish-stats">
+                            <div class="stat-box">
+                                <span class="stat-label">Size</span>
+                                <span class="stat-val">2.5" - 3"</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">Temp</span>
+                                <span class="stat-val">76-82°F</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">pH</span>
+                                <span class="stat-val">7.5 - 8.2</span>
+                            </div>
+                        </div>
+                        <div class="action-container">
+                            <div class="price-wrap">
+                                <span class="price-label">Price / Pair</span>
+                                <div class="price"><span>$</span>125</div>
+                            </div>
+                            <a href="#contact" class="card-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fish Card 2: Pikachu Veiltail -->
+                <div class="card">
+                    <span class="badge-premium">High Fin</span>
+                    <div class="image-container">
+                        <img src="https://i.imgur.com/x6toumv.jpeg" alt="Pikachu Veiltail Balloon Molly">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h3 class="card-title">Pikachu Veiltail</h3>
+                            <div class="card-meta">
+                                <span class="rarity-tag">Extremely Rare</span>
+                                <span class="origin-tag">Import</span>
+                            </div>
+                        </div>
+                        <p class="description">Vibrant, true-yellow bodies that resemble the iconic electric aesthetic. Finished with delicate, feathery veil tail fins that glide gracefully.</p>
+                        <div class="fish-stats">
+                            <div class="stat-box">
+                                <span class="stat-label">Size</span>
+                                <span class="stat-val">2.2" - 2.8"</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">Temp</span>
+                                <span class="stat-val">76-82°F</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">pH</span>
+                                <span class="stat-val">7.5 - 8.2</span>
+                            </div>
+                        </div>
+                        <div class="action-container">
+                            <div class="price-wrap">
+                                <span class="price-label">Price / Pair</span>
+                                <div class="price"><span>$</span>110</div>
+                            </div>
+                            <a href="#contact" class="card-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fish Card 3: Pikachu Roundtail -->
+                <div class="card">
+                    <span class="badge-premium">Show Quality</span>
+                    <div class="image-container">
+                        <img src="https://i.imgur.com/scWp5od.jpeg" alt="Pikachu Roundtail Balloon Molly">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h3 class="card-title">Pikachu Roundtail</h3>
+                            <div class="card-meta">
+                                <span class="rarity-tag">Limited Stock</span>
+                                <span class="origin-tag">Import</span>
+                            </div>
+                        </div>
+                        <p class="description">A variant of the Pikachu line showing off a tight, rounded, coin-like tail. Perfect body proportions make this balloon shape especially cute and active.</p>
+                        <div class="fish-stats">
+                            <div class="stat-box">
+                                <span class="stat-label">Size</span>
+                                <span class="stat-val">2.0" - 2.6"</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">Temp</span>
+                                <span class="stat-val">76-82°F</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">pH</span>
+                                <span class="stat-val">7.5 - 8.2</span>
+                            </div>
+                        </div>
+                        <div class="action-container">
+                            <div class="price-wrap">
+                                <span class="price-label">Price / Pair</span>
+                                <div class="price"><span>$</span>95</div>
+                            </div>
+                            <a href="#contact" class="card-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fish Card 4: Platinum Marble Zebra Pattern -->
+                <div class="card">
+                    <span class="badge-premium">Ultra Grade</span>
+                    <div class="image-container">
+                        <img src="https://i.imgur.com/6zjsYGz.jpeg" alt="Platinum Marble Zebra Pattern Balloon Molly">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h3 class="card-title">Platinum Marble Zebra Pattern</h3>
+                            <div class="card-meta">
+                                <span class="rarity-tag">Exclusive</span>
+                                <span class="origin-tag">Import</span>
+                            </div>
+                        </div>
+                        <p class="description">Stunning icy-white platinum body featuring beautiful black "zebra-marbling" throughout the flank. Highly reflective under LED lighting.</p>
+                        <div class="fish-stats">
+                            <div class="stat-box">
+                                <span class="stat-label">Size</span>
+                                <span class="stat-val">2.5" - 3.2"</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">Temp</span>
+                                <span class="stat-val">76-82°F</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">pH</span>
+                                <span class="stat-val">7.5 - 8.2</span>
+                            </div>
+                        </div>
+                        <div class="action-container">
+                            <div class="price-wrap">
+                                <span class="price-label">Price / Pair</span>
+                                <div class="price"><span>$</span>140</div>
+                            </div>
+                            <a href="#contact" class="card-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fish Card 5: Golden Zebra Veiltail -->
+                <div class="card">
+                    <span class="badge-premium">Select Grade</span>
+                    <div class="image-container">
+                        <img src="https://i.imgur.com/eHacp64.jpeg" alt="Golden Zebra Veiltail Balloon Molly">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h3 class="card-title">Golden Zebra Veiltail</h3>
+                            <div class="card-meta">
+                                <span class="rarity-tag">Highly Coveted</span>
+                                <span class="origin-tag">Import</span>
+                            </div>
+                        </div>
+                        <p class="description">An exquisite combination of golden zebra patterns paired with a wide, flowing veil tail. Moves like silk through the water column.</p>
+                        <div class="fish-stats">
+                            <div class="stat-box">
+                                <span class="stat-label">Size</span>
+                                <span class="stat-val">2.4" - 3.0"</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">Temp</span>
+                                <span class="stat-val">76-82°F</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">pH</span>
+                                <span class="stat-val">7.5 - 8.2</span>
+                            </div>
+                        </div>
+                        <div class="action-container">
+                            <div class="price-wrap">
+                                <span class="price-label">Price / Pair</span>
+                                <div class="price"><span>$</span>120</div>
+                            </div>
+                            <a href="#contact" class="card-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fish Card 6: Black King Balloon Molly -->
+                <div class="card">
+                    <span class="badge-premium">Show Quality</span>
+                    <div class="image-container">
+                        <img src="https://i.imgur.com/TSZartg.jpeg" alt="Black King Balloon Molly">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h3 class="card-title">Black King Balloon Molly</h3>
+                            <div class="card-meta">
+                                <span class="rarity-tag">Classic Elite</span>
+                                <span class="origin-tag">Import</span>
+                            </div>
+                        </div>
+                        <p class="description">Dense, velvet-black coloration with zero light penetration. True king-sized round bodies with a commanding presence in planted aquariums.</p>
+                        <div class="fish-stats">
+                            <div class="stat-box">
+                                <span class="stat-label">Size</span>
+                                <span class="stat-val">2.8" - 3.5"</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">Temp</span>
+                                <span class="stat-val">76-82°F</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">pH</span>
+                                <span class="stat-val">7.5 - 8.2</span>
+                            </div>
+                        </div>
+                        <div class="action-container">
+                            <div class="price-wrap">
+                                <span class="price-label">Price / Pair</span>
+                                <div class="price"><span>$</span>85</div>
+                            </div>
+                            <a href="#contact" class="card-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fish Card 7: Chocolate Lyretail -->
+                <div class="card">
+                    <span class="badge-premium">Rare Pattern</span>
+                    <div class="image-container">
+                        <img src="https://i.imgur.com/CH8a14o.jpeg" alt="Chocolate Lyretail Balloon Molly">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h3 class="card-title">Chocolate Lyretail</h3>
+                            <div class="card-meta">
+                                <span class="rarity-tag">Rare Import</span>
+                                <span class="origin-tag">Import</span>
+                            </div>
+                        </div>
+                        <p class="description">Rich, deep cocoa-toned scales fade into amber edges. Highlighted by an exceptionally sharp lyretail setup and elegant fin posture.</p>
+                        <div class="fish-stats">
+                            <div class="stat-box">
+                                <span class="stat-label">Size</span>
+                                <span class="stat-val">2.3" - 2.9"</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">Temp</span>
+                                <span class="stat-val">76-82°F</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">pH</span>
+                                <span class="stat-val">7.5 - 8.2</span>
+                            </div>
+                        </div>
+                        <div class="action-container">
+                            <div class="price-wrap">
+                                <span class="price-label">Price / Pair</span>
+                                <div class="price"><span>$</span>115</div>
+                            </div>
+                            <a href="#contact" class="card-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fish Card 8: Golden Blue Tail Lyretail -->
+                <div class="card">
+                    <span class="badge-premium">Vibrant Color</span>
+                    <div class="image-container">
+                        <img src="https://i.imgur.com/jyWVOfJ.jpeg" alt="Golden Blue Tail Lyretail Balloon Molly">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h3 class="card-title">Golden Blue Tail Lyretail</h3>
+                            <div class="card-meta">
+                                <span class="rarity-tag">Limited</span>
+                                <span class="origin-tag">Import</span>
+                            </div>
+                        </div>
+                        <p class="description">A majestic mutation showing off a shimmering golden face and front half, transitioning into a reflective pearlescent blue hue in the tail.</p>
+                        <div class="fish-stats">
+                            <div class="stat-box">
+                                <span class="stat-label">Size</span>
+                                <span class="stat-val">2.5" - 3.1"</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">Temp</span>
+                                <span class="stat-val">76-82°F</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">pH</span>
+                                <span class="stat-val">7.5 - 8.2</span>
+                            </div>
+                        </div>
+                        <div class="action-container">
+                            <div class="price-wrap">
+                                <span class="price-label">Price / Pair</span>
+                                <div class="price"><span>$</span>130</div>
+                            </div>
+                            <a href="#contact" class="card-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fish Card 9: Tanchu Lyretail -->
+                <div class="card">
+                    <span class="badge-premium">High Contrast</span>
+                    <div class="image-container">
+                        <img src="https://i.imgur.com/bhA6Wlf.jpeg" alt="Tanchu Lyretail Balloon Molly">
+                        <div class="overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h3 class="card-title">Tanchu Lyretail</h3>
+                            <div class="card-meta">
+                                <span class="rarity-tag">Very Rare</span>
+                                <span class="origin-tag">Import</span>
+                            </div>
+                        </div>
+                        <p class="description">Bred to resemble the traditional Japanese 'Tancho' Koi, showing a solid snow-white body topped with a striking crimson red cap on the head.</p>
+                        <div class="fish-stats">
+                            <div class="stat-box">
+                                <span class="stat-label">Size</span>
+                                <span class="stat-val">2.2" - 2.8"</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">Temp</span>
+                                <span class="stat-val">76-82°F</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">pH</span>
+                                <span class="stat-val">7.5 - 8.2</span>
+                            </div>
+                        </div>
+                        <div class="action-container">
+                            <div class="price-wrap">
+                                <span class="price-label">Price / Pair</span>
+                                <div class="price"><span>$</span>150</div>
+                            </div>
+                            <a href="#contact" class="card-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+        <div class="contact-card">
+            <h2>Add to Your Aquarium</h2>
+            <p>Ready to acquire show-grade genetics? Drop us an inquiry directly and we will match you with curated stock.</p>
+            <div class="contact-info">
+                <a href="mailto:info@xmarksthespotaquatics.com" class="contact-item">info@xmarksthespotaquatics.com</a>
+                <a href="tel:+1234567890" class="contact-item">+1 (234) 567-890</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 X Marks the Spot Aquatics. All Rights Reserved. Specialty Live Imports.</p>
+    </footer>
+
+</body>
+</html>
