@@ -1283,23 +1283,31 @@ function initForm(){
     document.getElementById("notifyEmail").value="";
   });
   document.getElementById("submitRevBtn").addEventListener("click",function(){
-    var n=document.getElementById("rName").value.trim(),r=document.getElementById("rRating").value,t=document.getElementById("rText").value.trim();
-    if(!n||!t){alert("Please fill in your name and review.");return}
-    window.open("mailto:Francisco.Desaca@gmail.com?subject=Review&body="+encodeURIComponent("Name: "+n+"\nRating: "+r+"/5\nReview: "+t),"_blank");
+    var n=document.getElementById("rName").value.trim();
+    var r=document.getElementById("rRating").value;
+    var t=document.getElementById("rText").value.trim();
+    if(!n||!t){alert("Please fill out name and review text.");return}
+    var msg="New Review for X Marks the Spot:\nName: "+n+"\nRating: "+r+"/5\nReview: "+t;
+    window.open("mailto:Francisco.Desaca@gmail.com?subject=New Review&body="+encodeURIComponent(msg),"_blank");
     document.getElementById("revOk").classList.add("on");
-    document.getElementById("rName").value="";document.getElementById("rText").value="";
+    document.getElementById("rName").value="";
+    document.getElementById("rText").value="";
   });
   document.getElementById("sendContactBtn").addEventListener("click",function(){
-    var n=document.getElementById("cName").value.trim(),e=document.getElementById("cEmail").value.trim(),s=document.getElementById("cSubject").value.trim()||"General Inquiry",m=document.getElementById("cMsg").value.trim();
-    if(!n||!m){alert("Please fill in your name and message.");return}
-    window.open("mailto:Francisco.Desaca@gmail.com?subject="+encodeURIComponent(s)+"&body="+encodeURIComponent("Name: "+n+"\nEmail: "+e+"\n\n"+m),"_blank");
+    var n=document.getElementById("cName").value.trim();
+    var e=document.getElementById("cEmail").value.trim();
+    var s=document.getElementById("cSubject").value.trim();
+    var m=document.getElementById("cMsg").value.trim();
+    if(!n||!e||!s||!m){alert("Please fill out all contact form fields.");return}
+    var body="From: "+n+" ("+e+")\nSubject: "+s+"\n\nMessage:\n"+m;
+    window.open("mailto:Francisco.Desaca@gmail.com?subject=Contact Form — "+encodeURIComponent(s)+"&body="+encodeURIComponent(body),"_blank");
     document.getElementById("conOk").classList.add("on");
-    document.getElementById("cName").value="";document.getElementById("cEmail").value="";document.getElementById("cSubject").value="";document.getElementById("cMsg").value="";
+    ["cName","cEmail","cSubject","cMsg"].forEach(function(id){document.getElementById(id).value=""});
   });
 }
 
-/* INITIALIZATION ON LOAD */
-window.addEventListener("DOMContentLoaded", function() {
+/* INITIALIZATION */
+window.addEventListener("DOMContentLoaded",function(){
   initCursor();
   makeParticles();
   initNavAndPopups();
