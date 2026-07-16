@@ -288,6 +288,7 @@
       border-radius: 30px;
       font-weight: 600;
       transition: all 0.2s;
+      cursor: none;
     }
     .filter-btn.active, .filter-btn:hover {
       background: var(--g2);
@@ -377,6 +378,7 @@
       font-size: 13px;
       font-weight: 600;
       transition: all 0.2s;
+      cursor: none;
     }
     .fish-card:hover .fc-cta {
       background: var(--g2);
@@ -1028,7 +1030,7 @@
       <button class="filter-btn" onclick="filterCat('round')">Roundtails</button>
     </div>
 
-    <!-- Unified Single Grid Container (No splitting anymore) -->
+    <!-- Unified Single Grid Container -->
     <div class="fish-grid" id="fishGridTop"></div>
 
     <p class="disclaimer-text">
@@ -1375,9 +1377,18 @@
   <!-- DYNAMIC FLOATING DOCK ACTION DIALOG -->
   <div class="fish-popup" id="fishPopup">
     <div class="fp-header">
-      <div class="fp-title">🐡 Get in Touch</div>
-      <div class="fp-sub">We respond within 24 hours</div>
-      <button class="fp-close" onclick="toggleFishPopup()">✕</button>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
+        <div style="width:44px;height:44px;border-radius:50%;overflow:hidden;border:1.5px solid rgba(212,168,67,0.4);flex-shrink:0">
+          <img src="https://i.imgur.com/J6wIZx9.jpg" alt="X Marks the Spot" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.parentNode.innerHTML='✕'"/>
+        </div>
+        <div>
+          <div class="fp-title">X Marks the Spot</div>
+          <div class="fp-sub">We respond within 24 hours</div>
+        </div>
+      </div>
+      <button class="fp-close" id="fpClose" onclick="toggleFishPopup()">
+        <svg viewBox="0 0 16 16" fill="none" width="12" height="12"><line x1="2" y1="2" x2="14" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="2" x2="2" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
     </div>
     <div class="fp-body">
       <a href="https://wa.me/639173397877" target="_blank" class="social-btn">
@@ -1386,7 +1397,7 @@
       <a href="https://facebook.com/Xmarksthespot" target="_blank" class="social-btn">
         <span>🌐</span> FACEBOOK Xmarksthespot
       </a>
-      <a href="mailto:Francisco.Desaca@gmail.com" class="social-btn">
+      <a href="url?id=5" class="social-btn">
         <span>✉️</span> EMAIL Francisco.Desaca@gmail.com
       </a>
       <div class="fp-notice">
@@ -1396,139 +1407,161 @@
   </div>
 
   <button class="fish-fab" id="fishFab" onclick="toggleFishPopup()">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 4V20M4 12H20" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+      <line x1="4" y1="4" x2="24" y2="24" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+      <line x1="24" y1="4" x2="4" y2="24" stroke="#111" stroke-width="3" stroke-linecap="round"/>
     </svg>
   </button>
 
   <script>
-    // FISH COLLECTION DATA
-    const fishData = [
-      { id: 1, name: "Golden Zebra Lyretail", cat: "lyre", img: "https://i.imgur.com/Wb04fJ6.jpg", price: "from $80" },
-      { id: 2, name: "Pikachu Veiltail", cat: "veil", img: "https://i.imgur.com/uR1jWqG.jpg", price: "from $80" },
-      { id: 3, name: "Pikachu Roundtail", cat: "round", img: "https://i.imgur.com/U8DbyGz.jpg", price: "from $80" },
-      { id: 4, name: "Platinum Marble Zebra Roundtail", cat: "round", img: "https://i.imgur.com/R38IexX.jpg", price: "from $80" },
-      { id: 5, name: "Golden Zebra Veiltail", cat: "veil", img: "https://i.imgur.com/39A8n8J.jpg", price: "from $80" },
-      { id: 6, name: "Black King Balloon Molly", cat: "round", img: "https://i.imgur.com/oU0O7v1.jpg", price: "from $80" },
-      { id: 7, name: "Chocolate Lyretail", cat: "lyre", img: "https://i.imgur.com/0zJb7B0.jpg", price: "from $80" },
-      { id: 8, name: "Golden Blue Tail Lyretail", cat: "lyre", img: "https://i.imgur.com/mOa7lW2.jpg", price: "from $80" },
-      { id: 9, name: "Tanchu Lyretail", cat: "lyre", img: "https://i.imgur.com/f25n9U8.jpg", price: "from $80" }
+    // FISH COLLECTION DATA — Structuring keys to map correctly with render functions
+    const FISH = [
+      { n: "Balloon Molly", v: "Golden Zebra Lyretail", cat: "lyre", img: "https://i.imgur.com/Wb04fJ6.jpg", bg: "#1a1a1a" },
+      { n: "Balloon Molly", v: "Pikachu Veiltail", cat: "veil", img: "https://i.imgur.com/uR1jWqG.jpg", bg: "#1a1a1a" },
+      { n: "Balloon Molly", v: "Pikachu Roundtail", cat: "round", img: "https://i.imgur.com/U8DbyGz.jpg", bg: "#1a1a1a" },
+      { n: "Balloon Molly", v: "Platinum Marble Zebra Roundtail", cat: "round", img: "https://i.imgur.com/R38IexX.jpg", bg: "#1a1a1a" },
+      { n: "Balloon Molly", v: "Golden Zebra Veiltail", cat: "veil", img: "https://i.imgur.com/39A8n8J.jpg", bg: "#1a1a1a" },
+      { n: "Balloon Molly", v: "Black King Balloon Molly", cat: "round", img: "https://i.imgur.com/oU0O7v1.jpg", bg: "#1a1a1a" },
+      { n: "Balloon Molly", v: "Chocolate Lyretail", cat: "lyre", img: "https://i.imgur.com/0zJb7B0.jpg", bg: "#1a1a1a" },
+      { n: "Balloon Molly", v: "Golden Blue Tail Lyretail", cat: "lyre", img: "https://i.imgur.com/mOa7lW2.jpg", bg: "#1a1a1a" },
+      { n: "Balloon Molly", v: "Tanchu Lyretail", cat: "lyre", img: "https://i.imgur.com/f25n9U8.jpg", bg: "#1a1a1a" }
     ];
 
-    // INITIALIZE GRID
-    function renderGrid(data) {
-      const container = document.getElementById('fishGridTop');
-      container.innerHTML = '';
-      data.forEach(fish => {
-        const card = document.createElement('div');
-        card.className = `fish-card`;
-        card.setAttribute('data-category', fish.cat);
-        card.innerHTML = `
-          <img class="fc-img" src="${fish.img}" alt="${fish.name}" onerror="this.src='https://placehold.co/400x500/141414/ffffff?text=${encodeURIComponent(fish.name)}'"/>
-          <div class="fc-overlay"></div>
-          <div class="fc-shimmer"></div>
-          <div class="fc-info">
-            <div class="fc-type">Balloon Molly</div>
-            <div class="fc-name">${fish.name}</div>
-            <div class="fc-bottom">
-              <div class="fc-price">${fish.price}</div>
-              <button class="fc-cta" onclick="requestStrain('${fish.name}')">Request →</button>
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
+    var currentCat = "all";
+
+    // GENERATE UNIFORM FISH CARD HTML
+    function fishCard(f) {
+      return '<div class="fish-card">' +
+        '<img class="fc-img" src="' + f.img + '" alt="' + f.v + '" loading="lazy" onerror="this.style.background=\'' + f.bg + '\'"/>' +
+        '<div class="fc-overlay"></div>' +
+        '<div class="fc-shimmer"></div>' +
+        '<div class="fc-info">' +
+          '<div class="fc-type">' + f.n + '</div>' +
+          '<div class="fc-name">' + f.v + '</div>' +
+          '<div class="fc-bottom">' +
+            '<span class="fc-price">from $80</span>' +
+            '<button class="fc-cta" data-v="' + f.v.replace(/"/g, "&quot;") + '">Request →</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    // RENDER FISH CARDS INSIDE UNIFIED CONTAINER
+    function renderFish() {
+      var list = currentCat === "all" ? FISH : FISH.filter(function(f) { return f.cat === currentCat; });
+      var tg = document.getElementById("fishGridTop");
+      if (tg) {
+        tg.innerHTML = list.map(function(f) { return fishCard(f); }).join("");
+      }
+      
+      // Bind events to dynamically rendered CTAs
+      document.querySelectorAll(".fc-cta").forEach(function(btn) {
+        btn.addEventListener("click", function() {
+          pickStrain(btn.dataset.v);
+        });
       });
     }
 
     // FILTER FUNCTIONALITY
     function filterCat(cat) {
-      const btns = document.querySelectorAll('.filter-bar button');
-      btns.forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-
-      if (cat === 'all') {
-        renderGrid(fishData);
-      } else {
-        const filtered = fishData.filter(f => f.cat === cat);
-        renderGrid(filtered);
+      currentCat = cat;
+      var btns = document.querySelectorAll('.filter-bar button');
+      btns.forEach(function(btn) { btn.classList.remove('active'); });
+      if (event && event.target) {
+        event.target.classList.add('active');
       }
+      renderFish();
     }
 
     // AUTO POPULATE FORM & SCROLL
-    function requestStrain(strainName) {
-      const select = document.getElementById('formStrain');
-      select.value = strainName;
-      document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+    function pickStrain(strainName) {
+      var select = document.getElementById('formStrain');
+      if (select) {
+        select.value = strainName;
+      }
+      var orderSection = document.getElementById('order');
+      if (orderSection) {
+        orderSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
 
-    // SUBMIT TO WHATSAPP OR EMAIL
+    // SUBMIT ORDER TO WHATSAPP OR EMAIL
     function handleOrderSubmit(e) {
       e.preventDefault();
-      const strain = document.getElementById('formStrain').value;
-      const grade = document.getElementById('formGrade').value;
-      const qty = document.getElementById('formQty').value;
-      const country = document.getElementById('formCountry').value;
-      const contactType = document.getElementById('formContactType').value;
-      const contactVal = document.getElementById('formContactVal').value;
-      const notes = document.getElementById('formNotes').value;
+      var strain = document.getElementById('formStrain').value;
+      var grade = document.getElementById('formGrade').value;
+      var qty = document.getElementById('formQty').value;
+      var country = document.getElementById('formCountry').value;
+      var contactType = document.getElementById('formContactType').value;
+      var contactVal = document.getElementById('formContactVal').value;
+      var notes = document.getElementById('formNotes').value;
 
-      const messageText = `Hello! I would like to order:
-- Strain: ${strain}
-- Grade: ${grade}
-- Quantity: ${qty}
-- Destination Country: ${country}
-- Contact Preference: ${contactType} (${contactVal})
-- Additional Notes: ${notes || 'None'}`;
+      var messageText = "Hello! I would like to order:\n" +
+        "- Strain: " + strain + "\n" +
+        "- Grade: " + grade + "\n" +
+        "- Quantity: " + qty + "\n" +
+        "- Destination Country: " + country + "\n" +
+        "- Contact Preference: " + contactType + " (" + contactVal + ")\n" +
+        "- Additional Notes: " + (notes || 'None');
 
       if (contactType === 'WhatsApp') {
-        const cleanPhone = "639173397877";
-        const url = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(messageText)}`;
+        var cleanPhone = "639173397877";
+        var url = "https://api.whatsapp.com/send?phone=" + cleanPhone + "&text=" + encodeURIComponent(messageText);
         window.open(url, '_blank');
       } else {
-        const mailtoUrl = `mailto:Francisco.Desaca@gmail.com?subject=New Molly Order Request&body=${encodeURIComponent(messageText)}`;
+        var mailtoUrl = "mailto:Francisco.Desaca@gmail.com?subject=" + encodeURIComponent("New Molly Order Request") + "&body=" + encodeURIComponent(messageText);
         window.open(mailtoUrl, '_blank');
       }
     }
 
     // TOGGLE FAQ ACCORDIONS
     function toggleFaq(elem) {
-      const active = elem.classList.contains('active');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-      if(!active) elem.classList.add('active');
-    }
-
-    // TOGGLE FISH FAB POPUP
-    function toggleFishPopup() {
-      const popup = document.getElementById('fishPopup');
-      const fab = document.getElementById('fishFab');
-      popup.classList.toggle('open');
-      fab.classList.toggle('active');
-    }
-
-    // CUSTOM GOLDEN '✕' CURSOR SCRIPT
-    const cursor = document.getElementById('cursor');
-    const svgCursor = `
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M18 6L6 18M6 6L18 18" stroke="#D4A843" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    `;
-    cursor.innerHTML = svgCursor;
-
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = `${e.clientX}px`;
-      cursor.style.top = `${e.clientY}px`;
-    });
-
-    document.addEventListener('mouseover', (e) => {
-      if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button') || e.target.classList.contains('faq-q')) {
-        cursor.classList.add('hover');
-      } else {
-        cursor.classList.remove('hover');
+      var active = elem.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('active'); });
+      if (!active) {
+        elem.classList.add('active');
       }
-    });
+    }
+
+    // TOGGLE FAB POPUP
+    function toggleFishPopup() {
+      var popup = document.getElementById('fishPopup');
+      var fab = document.getElementById('fishFab');
+      if (popup && fab) {
+        popup.classList.toggle('open');
+        fab.classList.toggle('active');
+      }
+    }
+
+    // CUSTOM GOLDEN "✕" CURSOR
+    function initCursor() {
+      var c = document.getElementById("cursor");
+      if (!c) return;
+      c.innerHTML = '<svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="4" y1="4" x2="24" y2="24" stroke="#F5C842" stroke-width="3" stroke-linecap="round"/><line x1="24" y1="4" x2="4" y2="24" stroke="#F5C842" stroke-width="3" stroke-linecap="round"/></svg>';
+      
+      document.addEventListener("mousemove", function(e) {
+        c.style.left = e.clientX + "px";
+        c.style.top = e.clientY + "px";
+      }, { passive: true });
+      
+      // Robust event delegation for dynamic and static hover targets
+      document.addEventListener("mouseover", function(e) {
+        if (e.target.closest("a, button, [role='button'], .faq-q, .filter-btn")) {
+          c.classList.add("hover");
+        }
+      }, { passive: true });
+      document.addEventListener("mouseout", function(e) {
+        if (e.target.closest("a, button, [role='button'], .faq-q, .filter-btn")) {
+          c.classList.remove("hover");
+        }
+      }, { passive: true });
+    }
 
     // RENDER FIRST TIME
-    renderGrid(fishData);
+    window.addEventListener('DOMContentLoaded', function() {
+      initCursor();
+      renderFish();
+    });
   </script>
 </body>
 </html>
