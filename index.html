@@ -1,1004 +1,1312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>X Marks the Spot — Rare Balloon Mollies</title>
-    <style>
-        :root {
-            --bg: #000000;
-            --s1: #0d0d0d;
-            --s2: #141414;
-            --t1: #ffffff;
-            --t2: #a1a1a1;
-            --g1: #D4A843;
-            --g2: #F5C842;
-            --bd: rgba(212,168,67,0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--t1);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* NAVIGATION */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(212, 168, 67, 0.1);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--t1);
-        }
-
-        .brand img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid var(--g1);
-            object-fit: cover;
-            box-shadow: 0 0 15px rgba(212, 168, 67, 0.3);
-        }
-
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .brand-name {
-            font-size: 1.25rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .brand-sub {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--t2);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--t2);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--g1), var(--g2));
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: var(--t1);
-        }
-
-        .cta-btn {
-            background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 100%);
-            color: #000 !important;
-            padding: 0.6rem 1.4rem !important;
-            border-radius: 50px;
-            font-weight: 700 !important;
-            box-shadow: 0 4px 15px rgba(212, 168, 67, 0.3);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-        }
-
-        .cta-btn::after {
-            display: none !important;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 168, 67, 0.5);
-        }
-
-        /* HERO SECTION */
-        .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 2rem;
-            background: 
-                linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%),
-                url('https://i.imgur.com/TSZartg.jpeg') no-repeat center center/cover;
-            margin-bottom: 2rem;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            z-index: 2;
-            animation: fadeIn 1.2s ease-out;
-        }
-
-        .hero-badge {
-            background: rgba(212, 168, 67, 0.1);
-            border: 1px solid var(--g1);
-            color: var(--g1);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, #ffffff 30%, #a1a1a1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--t2);
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 100%);
-            color: #000;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            box-shadow: 0 10px 25px rgba(212, 168, 67, 0.35);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(212, 168, 67, 0.5);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--t1);
-            border: 2px solid rgba(255,255,255,0.2);
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--t1);
-            background: rgba(255,255,255,0.05);
-        }
-
-        /* STRAINS SECTION */
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 6rem auto 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .section-tag {
-            color: var(--g1);
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: block;
-            margin-bottom: 1rem;
-        }
-
-        .section-header h2 {
-            font-size: 2.75rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            letter-spacing: -0.5px;
-        }
-
-        .section-header p {
-            color: var(--t2);
-            font-size: 1.1rem;
-        }
-
-        .gallery-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem 6rem 2rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 2.5rem;
-        }
-
-        /* CARD STYLES */
-        .card {
-            background: linear-gradient(145deg, var(--s1) 0%, var(--s2) 100%);
-            border: 1px solid var(--bd);
-            border-radius: 24px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(212, 168, 67, 0.4);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 40px rgba(212, 168, 67, 0.05);
-        }
-
-        .image-container {
-            position: relative;
-            width: 100%;
-            height: 280px;
-            overflow: hidden;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .card:hover .image-container img {
-            transform: scale(1.08);
-        }
-
-        .overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent 40%, rgba(13,13,13,0.95) 100%);
-            z-index: 1;
-        }
-
-        .badge-premium {
-            position: absolute;
-            top: 1.25rem;
-            right: 1.25rem;
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--g1);
-            color: var(--g2);
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            backdrop-filter: blur(5px);
-            z-index: 2;
-        }
-
-        .card-content {
-            padding: 2rem;
-            position: relative;
-            z-index: 2;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card-header {
-            margin-bottom: 1.5rem;
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--t1);
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-meta {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .rarity-tag {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--g1);
-            font-weight: 700;
-        }
-
-        .origin-tag {
-            font-size: 0.75rem;
-            color: var(--t2);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .description {
-            color: var(--t2);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        /* STATS COMPONENT */
-        .fish-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            padding: 1rem;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 16px;
-            margin-bottom: 1.5rem;
-        }
-
-        .stat-box {
-            text-align: center;
-            padding: 0.25rem;
-        }
-
-        .stat-label {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            color: var(--t2);
-            letter-spacing: 1px;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .stat-val {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--t1);
-        }
-
-        .action-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: auto;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .price-wrap {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .price-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            color: var(--t2);
-            letter-spacing: 1px;
-        }
-
-        .price {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--t1);
-        }
-
-        .price span {
-            font-size: 0.9rem;
-            color: var(--g1);
-            margin-right: 2px;
-        }
-
-        .card-btn {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--t1);
-            padding: 0.8rem 1.6rem;
-            border-radius: 16px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover .card-btn {
-            background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 100%);
-            border-color: transparent;
-            color: #000;
-            box-shadow: 0 8px 20px rgba(212, 168, 67, 0.25);
-        }
-
-        /* CONTACT SECTION */
-        .contact {
-            background: linear-gradient(to bottom, var(--bg) 0%, var(--s1) 100%);
-            border-top: 1px solid var(--bd);
-            padding: 8rem 2rem;
-            text-align: center;
-        }
-
-        .contact-card {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(20, 20, 20, 0.5);
-            border: 1px solid var(--bd);
-            padding: 4rem 3rem;
-            border-radius: 32px;
-            backdrop-filter: blur(10px);
-        }
-
-        .contact h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
-
-        .contact p {
-            color: var(--t2);
-            margin-bottom: 2.5rem;
-            font-size: 1.1rem;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .contact-item {
-            font-size: 1.25rem;
-            color: var(--t1);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .contact-item:hover {
-            color: var(--g1);
-        }
-
-        /* FOOTER */
-        footer {
-            background: #000;
-            padding: 3rem 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        footer p {
-            color: var(--t2);
-            font-size: 0.9rem;
-        }
-
-        /* ANIMATIONS */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* RESPONSIVE DESIGN */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .hero h1 {
-                font-size: 2.75rem;
-            }
-            .hero p {
-                font-size: 1.1rem;
-            }
-            .hero-btns {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .section-header h2 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>X Marks the Spot — Rare Balloon Mollies</title>
+<meta name="description" content="World-class balloon mollies. Selectively bred. Personally evaluated. Shipped worldwide from Talisay City, Philippines."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+:root{
+  --g:#D4A843;--g2:#F5C842;--g3:#FFE082;
+  --bg:#060606;--s1:#0e0e0e;--s2:#141414;--s3:#1a1a1a;
+  --t:#f0f0f0;--t2:#999;--t3:#555;
+  --bd:rgba(255,255,255,0.06);
+  --r:18px;--rs:10px;
+  --sh:0 8px 40px rgba(0,0,0,0.8)
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-height:100vh;overflow-x:hidden;cursor:none}
+
+/* ═══════════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════════ */
+#cursor{position:fixed;width:12px;height:12px;background:var(--g2);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s,width .3s,height .3s,opacity .3s;mix-blend-mode:difference}
+#cursor-ring{position:fixed;width:40px;height:40px;border:1px solid rgba(245,200,66,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .12s ease,top .12s ease,width .3s,height .3s}
+body:hover #cursor{opacity:1}
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:20px 2.5rem;display:flex;align-items:center;justify-content:space-between;
+  transition:all .5s cubic-bezier(.23,1,.32,1)
+}
+#nav.scrolled{
+  padding:12px 2.5rem;
+  background:rgba(6,6,6,0.9);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(212,168,67,0.1)}
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+.nav-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: url('https://i.imgur.com/J6wIZx9.jpg') center/cover;
+    border: 1.5px solid rgba(212,168,67,0.5);
+    box-shadow: 0 0 16px rgba(212,168,67,0.2);
+    transition: box-shadow .3s;
+    mix-blend-mode: screen;
+}
+.nav-brand:hover .nav-logo{box-shadow:0 0 28px rgba(212,168,67,0.5)}
+.nav-wordmark{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;color:#fff;letter-spacing:-.01em}
+.nav-wordmark em{color:var(--g2);font-style:normal}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-link{font-size:13px;color:var(--t2);text-decoration:none;padding:7px 14px;border-radius:99px;transition:all .2s;font-weight:500}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.07)}
+.nav-cta{
+  font-size:13px;font-weight:700;color:#0a0a0a;
+  background:var(--g2);border:none;padding:9px 22px;border-radius:99px;
+  cursor:none;transition:all .25s;letter-spacing:.01em;
+  box-shadow:0 4px 20px rgba(245,200,66,.25)
+}
+.nav-cta:hover{background:var(--g3);box-shadow:0 8px 32px rgba(245,200,66,.4);transform:translateY(-1px)}
+
+/* ═══════════════════════════════════════
+   FLOATING ACTIONS
+═══════════════════════════════════════ */
+.fab-container {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+.fab-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.fab-menu.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+.fab-main-trigger, .fab-item {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none;
+    cursor: none;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    transition: all 0.2s ease;
+}
+.fab-main-trigger {
+    background: var(--g2);
+    color: #0a0a0a;
+}
+.fab-main-trigger .trigger-icon {
+    font-size: 24px;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    line-height: 1;
+}
+.fab-container.open-active .trigger-icon {
+    transform: rotate(135deg);
+}
+.fab-item.wa { background: #25d366; color: #fff; }
+.fab-item.em { background: #fff; color: #0a0a0a; }
+.fab-item:hover, .fab-main-trigger:hover {
+    transform: scale(1.08);
+}
+/* ═══════════════════════════════════════
+   HERO — FULL VIEWPORT
+═══════════════════════════════════════ */
+.hero{
+  height:100vh;min-height:700px;
+  display:grid;place-items:center;
+  position:relative;overflow:hidden;
+  background:var(--bg)
+}
+/* Multi-layer animated background */
+.hero-media{
+  position:absolute;inset:0;z-index:0;
+  background:url('https://i.imgur.com/J6wIZx9.jpg') center center/cover no-repeat;
+  transform:scale(1.08);
+  animation:heroZoom 20s ease-in-out infinite alternate
+}
+@keyframes heroZoom{0%{transform:scale(1.08) translateX(0)}100%{transform:scale(1.12) translateX(-2%)}}
+.hero-veil{
+  position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse 80% 80% at 50% 40%,rgba(0,0,0,.1) 0%,rgba(0,0,0,.7) 70%),
+    linear-gradient(to bottom,rgba(0,0,0,.6) 0%,rgba(6,6,6,.0) 40%,rgba(6,6,6,.95) 100%)
+}
+.hero-glow{
+  position:absolute;inset:0;z-index:2;
+  background:radial-gradient(ellipse 60% 50% at 50% 55%,rgba(212,168,67,.07) 0%,transparent 70%);
+  animation:glowPulse 5s ease-in-out infinite
+}
+@keyframes glowPulse{0%,100%{opacity:.6}50%{opacity:1}}
+/* Animated noise texture */
+.hero-noise{
+  position:absolute;inset:0;z-index:3;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity:.4;pointer-events:none
+}
+/* Particles */
+.hero-particles{position:absolute;inset:0;z-index:4;overflow:hidden;pointer-events:none}
+.ptcl{position:absolute;border-radius:50%;background:rgba(212,168,67,.5);animation:ptclRise linear infinite}
+@keyframes ptclRise{
+  0%{transform:translateY(110vh) scale(0);opacity:0}
+  5%{opacity:1}95%{opacity:.3}
+  100%{transform:translateY(-10vh) scale(1);opacity:0}
+}
+.hero-content{position:relative;z-index:5;text-align:center;max-width:780px;padding:0 2rem}
+/* Staggered reveal */
+.hero-content>*{opacity:0;animation:heroReveal .9s cubic-bezier(.23,1,.32,1) forwards}
+.hero-eyebrow{animation-delay:.2s}
+.hero-title{animation-delay:.4s}
+.hero-desc{animation-delay:.6s}
+.hero-actions{animation-delay:.8s}
+@keyframes heroReveal{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:none}}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--g2);margin-bottom:20px;
+  background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.2);
+  padding:6px 16px;border-radius:99px
+}
+.hero-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(4rem,11vw,7rem);font-weight:800;
+  line-height:.9;letter-spacing:-.04em;
+  color:#fff;margin-bottom:24px;
+  text-shadow:0 4px 80px rgba(0,0,0,1)
+}
+.hero-title .xt{
+  background:linear-gradient(135deg,var(--g) 0%,var(--g2) 50%,var(--g3) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 30px rgba(212,168,67,.4));
+  animation:shimmer 4s linear infinite
+}
+@keyframes shimmer{
+  0%{background-position:0% 50%}
+  100%{background-position:200% 50%}
+}
+.hero-title .xt{background-size:200% auto}
+.hero-desc{
+  font-size:1.1rem;color:rgba(255,255,255,.65);line-height:1.7;
+  max-width:520px;margin:0 auto 36px;font-weight:300
+}
+.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:700;
+  background:var(--g2);color:#0a0a0a;
+  border:none;padding:14px 32px;border-radius:99px;cursor:none;
+  transition:all .3s cubic-bezier(.23,1,.32,1);
+  box-shadow:0 4px 24px rgba(245,200,66,.3);letter-spacing:.01em
+}
+.btn-primary:hover{background:var(--g3);transform:translateY(-3px);box-shadow:0 12px 40px rgba(245,200,66,.5)}
+.btn-ghost{
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:600;
+  background:rgba(255,255,255,.06);color:#fff;
+  border:1px solid rgba(255,255,255,.15);padding:14px 32px;border-radius:99px;cursor:none;
+  text-decoration:none;transition:all .3s;backdrop-filter:blur(8px)
+}
+.btn-ghost:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);transform:translateY(-3px)}
+.hero-scroll{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  z-index:5;display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0;animation:heroReveal .8s ease 1.2s forwards
+}
+.hero-scroll span{font-size:10px;letter-spacing:.2em;color:rgba(255,255,255,.3);text-transform:uppercase}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent);animation:scrollDrop 2s ease-in-out infinite}
+@keyframes scrollDrop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ═══════════════════════════════════════
+   SECTIONS / LAYOUT
+═══════════════════════════════════════ */
+.wrap{max-width:1100px;margin:0 auto;padding:0 2rem}
+section{padding:100px 0}
+.s-label{
+  font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--g2);margin-bottom:12px;display:block
+}
+.s-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(2rem,5vw,3rem);font-weight:700;
+  color:#fff;line-height:1.1;letter-spacing:-.02em;margin-bottom:16px
+}
+.s-sub{font-size:1rem;color:var(--t2);line-height:1.7;max-width:560px}
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--bd),transparent);margin:0}
+
+/* ═══════════════════════════════════════
+   REVEAL ANIMATIONS
+═══════════════════════════════════════ */
+.r{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
+.r.vis{opacity:1;transform:none}
+.r-l{opacity:0;transform:translateX(-40px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
+.r-l.vis{opacity:1;transform:none}
+.r-r{opacity:0;transform:translateX(40px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
+.r-r.vis{opacity:1;transform:none}
+.delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}.delay-4{transition-delay:.4s}.delay-5{transition-delay:.5s}
+
+/* ═══════════════════════════════════════
+   ABOUT / IDENTITY
+═══════════════════════════════════════ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-visual{position:relative}
+.about-img-frame{
+  width:100%;aspect-ratio:4/5;border-radius:24px;overflow:hidden;
+  background:url('https://i.imgur.com/J6wIZx9.jpg') center/cover;
+  position:relative;box-shadow:0 32px 80px rgba(0,0,0,.8)
+}
+.about-img-frame::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(212,168,67,.08) 0%,transparent 60%)
+}
+.about-badge{
+  position:absolute;bottom:-20px;right:-20px;
+  background:var(--g2);color:#0a0a0a;
+  border-radius:16px;padding:16px 20px;text-align:center;
+  box-shadow:0 16px 40px rgba(245,200,66,.3)
+}
+.ab-num{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;line-height:1}
+.ab-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-top:2px}
+.about-content{display:flex;flex-direction:column;gap:28px}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:12px;padding:6px 14px;border-radius:99px;background:rgba(255,255,255,.04);color:rgba(255,255,255,.7);border:1px solid var(--bd);font-weight:500}
+
+/* ═══════════════════════════════════════
+   FISH GRID — MAGAZINE LAYOUT
+═══════════════════════════════════════ */
+.strain-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:20px}
+.filter-row{display:flex;gap:6px;flex-wrap:wrap}
+.fpill{
+  font-size:12px;font-weight:600;padding:8px 18px;border-radius:99px;
+  border:1px solid var(--bd);background:transparent;color:var(--t2);
+  cursor:none;transition:all .25s;font-family:'Inter',sans-serif
+}
+.fpill:hover{border-color:rgba(255,255,255,.3);color:#fff}
+.fpill.on{background:var(--g2);color:#0a0a0a;border-color:var(--g2)}
+.fish-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  border-radius:20px;overflow:hidden;
+  background:var(--bd)
+}
+.fish-card{
+  background:var(--s1);position:relative;overflow:hidden;
+  aspect-ratio:3/4;cursor:none;
+  transition:z-index 0s
+}
+/* Make first card big */
+.fish-card:first-child{grid-row:span 2;aspect-ratio:auto}
+.fish-card:nth-child(2){aspect-ratio:4/3}
+.fish-card:nth-child(3){aspect-ratio:4/3}
+.fc-img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .7s cubic-bezier(.23,1,.32,1),filter .5s
+}
+.fish-card:hover .fc-img{transform:scale(1.06);filter:brightness(1.06) saturate(1.1)}
+  /* Target the images inside your strain cards to limit their height */
+/* Unified Grid & Clean Card Fix */
+.fish-grid, .fish-extra-grid {
+    background: transparent !important;
+    display: grid !important;
+    /* This forces exactly 3 columns on desktop, and drops to 1 on mobile */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 20px !important;
+    padding: 10px 0;
+}
+
+.fish-card img, .fc-img {
+    height: 240px !important; /* This shrinks the image height from 280px to 240px */
+    width: 100% !important;
+    object-fit: cover !important;
+}
+/* Dark overlay */
+.fc-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,.3) 50%,transparent 100%);
+  transition:background .4s
+}
+.fish-card:hover .fc-overlay{background:linear-gradient(to top,rgba(0,0,0,.95) 0%,rgba(0,0,0,.4) 60%,rgba(0,0,0,.1) 100%)}
+/* Shimmer sweep */
+.fc-shimmer{
+  position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.06) 50%,transparent 65%);
+  transform:translateX(-100%);transition:transform .6s ease
+}
+.fish-card:hover .fc-shimmer{transform:translateX(100%)}
+/* Info */
+.fc-info{position:absolute;bottom:0;left:0;right:0;padding:24px;transform:translateY(0);transition:transform .4s cubic-bezier(.23,1,.32,1)}
+.fish-card:hover .fc-info{transform:translateY(-8px)}
+.fc-type{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--g2);margin-bottom:6px}
+.fc-name{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px}
+.fish-card:first-child .fc-name{font-size:1.5rem}
+.fc-bottom{display:flex;align-items:center;justify-content:space-between}
+.fc-price{font-size:1.1rem;font-weight:700;color:var(--g2)}
+.fc-cta{
+  font-size:12px;font-weight:700;color:#0a0a0a;
+  background:var(--g2);border:none;padding:8px 16px;border-radius:99px;
+  cursor:none;transition:all .25s;
+  opacity:0;transform:translateY(8px);
+  transition:all .3s cubic-bezier(.23,1,.32,1)
+}
+.fish-card:hover .fc-cta{opacity:1;transform:translateY(0)}
+.fc-cta:hover{background:var(--g3);transform:translateY(-2px) !important}
+/* Extra cards — standard grid */
+.fish-extra-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+  margin-top:2px;border-radius:0 0 20px 20px;overflow:hidden;
+  background:var(--bd)
+}
+.fish-extra-grid .fish-card{aspect-ratio:4/5}
+
+/* ═══════════════════════════════════════
+   DISCLAIMER
+═══════════════════════════════════════ */
+.disc{
+  margin-top:24px;padding:14px 20px;
+  border-radius:var(--rs);background:rgba(255,255,255,.02);
+  border:1px solid var(--bd);font-size:11.5px;color:var(--t3);line-height:1.6
+}
+.disc strong{color:var(--t2)}
+
+/* ═══════════════════════════════════════
+   GRADES — EDITORIAL CARDS
+═══════════════════════════════════════ */
+.grades-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grade-card{
+  border-radius:20px;overflow:hidden;position:relative;
+  background:var(--s1);border:1px solid var(--bd);
+  transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s,border-color .4s
+}
+.grade-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.7)}
+.grade-card.gold-card:hover{border-color:rgba(212,168,67,.3);box-shadow:0 24px 60px rgba(212,168,67,.1)}
+.gc-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .5s}
+.grade-card:hover .gc-img{transform:scale(1.04)}
+.gc-body{padding:20px}
+.gc-label{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
+.gc-name{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:6px}
+.gc-price{font-size:1.5rem;font-weight:800;color:var(--g2);font-family:'Space Grotesk',sans-serif;margin-bottom:10px}
+.gc-desc{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:14px}
+.gc-pill{font-size:11px;font-weight:600;padding:4px 12px;border-radius:99px;display:inline-block}
+.mat-pill{background:rgba(255,255,255,.06);color:var(--t2)}
+.pot-pill{background:rgba(100,200,120,.1);color:#6dc87a}
+.shw-pill{background:rgba(212,168,67,.12);color:var(--g2)}
+
+/* ═══════════════════════════════════════
+   REQUEST — SPLIT LAYOUT
+═══════════════════════════════════════ */
+.req-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.req-sidebar{position:sticky;top:120px}
+.req-steps{display:flex;flex-direction:column;gap:0;margin-top:32px}
+.rs{display:flex;gap:16px;padding-bottom:28px;position:relative}
+.rs::before{content:'';position:absolute;left:15px;top:36px;bottom:4px;width:1px;background:linear-gradient(to bottom,var(--g2),transparent)}
+.rs:last-child::before{display:none}
+.rs-dot{width:30px;height:30px;border-radius:50%;background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:var(--g2);font-family:'Space Grotesk',sans-serif}
+.rs-title{font-size:13px;font-weight:600;color:#fff;margin-bottom:3px}
+.rs-desc{font-size:12px;color:var(--t2);line-height:1.6}
+/* Form */
+.req-form{background:var(--s1);border-radius:20px;border:1px solid var(--bd);padding:32px;position:relative;overflow:hidden}
+.req-form::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--g2),transparent)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.frow.full{grid-template-columns:1fr}
+.fg{display:flex;flex-direction:column;gap:7px}
+.fg label{font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.05em}
+.fc2{
+  background:var(--s2);border:1px solid var(--bd);border-radius:var(--rs);
+  padding:12px 16px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;
+  outline:none;transition:border-color .2s,box-shadow .2s;
+  appearance:none;-webkit-appearance:none;width:100%
+}
+.fc2:focus{border-color:var(--g2);box-shadow:0 0 0 3px rgba(212,168,67,.12)}
+.fc2 option{background:var(--s2)}
+.req-err{font-size:11px;color:#f87171;margin-top:4px;font-weight:500}
+.req-send{
+  width:100%;margin-top:20px;padding:15px;
+  background:var(--g2);color:#0a0a0a;border:none;border-radius:99px;
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:none;
+  transition:all .3s cubic-bezier(.23,1,.32,1);
+  box-shadow:0 4px 24px rgba(245,200,66,.25)
+}
+.req-send:hover{background:var(--g3);transform:translateY(-2px);box-shadow:0 12px 36px rgba(245,200,66,.4)}
+.req-note{font-size:11px;color:var(--t3);text-align:center;margin-top:12px;line-height:1.6}
+.req-note strong{color:#25d366}
+.confirm{display:none;text-align:center;padding:40px 20px}
+.confirm.on{display:block}
+.conf-icon{font-size:56px;margin-bottom:16px;animation:confPop .6s cubic-bezier(.23,1,.32,1)}
+@keyframes confPop{from{transform:scale(0) rotate(-10deg)}to{transform:scale(1) rotate(0)}}
+.conf-title{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:var(--g2);margin-bottom:8px}
+.conf-sub{font-size:13px;color:var(--t2);line-height:1.7;margin-bottom:24px}
+
+/* ═══════════════════════════════════════
+   TIMELINE
+═══════════════════════════════════════ */
+.timeline{display:flex;flex-direction:column;gap:0;position:relative;padding-left:48px}
+.timeline::before{content:'';position:absolute;left:16px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--g2),rgba(212,168,67,0.1))}
+.tl-item{position:relative;padding-bottom:36px}
+.tl-item:last-child{padding-bottom:0}
+.tl-bullet{
+  position:absolute;left:-48px;top:0;
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:13px;
+  border:1px solid;transition:all .3s
+}
+.tl-bullet.gd{background:rgba(212,168,67,.14);border-color:var(--g2);box-shadow:0 0 12px rgba(212,168,67,.2)}
+.tl-bullet.wh{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12)}
+.tl-bullet.dn{background:rgba(37,211,102,.12);border-color:#25d366}
+.tl-day{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-bottom:4px}
+.tl-name{font-size:14px;font-weight:600;color:#fff;margin-bottom:4px}
+.tl-info{font-size:12.5px;color:var(--t2);line-height:1.6}
+
+/* ═══════════════════════════════════════
+   SOCIAL PROOF — TRANSACTIONS
+═══════════════════════════════════════ */
+.tx-ticker{
+  display:flex;flex-direction:column;gap:12px;
+  max-height:320px;overflow:hidden;position:relative
+}
+.tx-ticker::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,var(--bg),transparent);pointer-events:none}
+.tx-card{
+  display:flex;align-items:center;gap:16px;
+  padding:16px;background:var(--s1);border-radius:14px;
+  border:1px solid var(--bd);transition:border-color .3s
+}
+.tx-card:hover{border-color:rgba(212,168,67,.12)}
+.tx-flag{font-size:24px;flex-shrink:0}
+.tx-body{flex:1;min-width:0}
+.tx-who{font-size:13px;font-weight:600;color:#fff}
+.tx-what{font-size:12px;color:var(--t2);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tx-val{text-align:right;flex-shrink:0}
+.tx-amt{font-size:15px;font-weight:700;color:var(--g2);font-family:'Space Grotesk',sans-serif}
+.tx-when{font-size:11px;color:var(--t3);margin-top:2px}
+
+/* ═══════════════════════════════════════
+   REVIEWS
+═══════════════════════════════════════ */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rev-card{
+  background:var(--s1);border-radius:16px;border:1px solid var(--bd);
+  padding:24px;transition:transform .3s,border-color .3s
+}
+.rev-card:hover{transform:translateY(-4px);border-color:rgba(212,168,67,.12)}
+.rev-stars{margin-bottom:12px;letter-spacing:1px}
+.rev-text{font-size:13.5px;color:rgba(255,255,255,.8);line-height:1.7;font-style:italic;margin-bottom:16px}
+.rev-who{font-size:12px;color:var(--t2);font-weight:500;display:flex;align-items:center;gap:6px}
+.rev-who::before{content:'—'}
+
+/* ═══════════════════════════════════════
+   FAQ — ACCORDION
+═══════════════════════════════════════ */
+.faq-wrap{max-width:720px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--bd)}
+.faq-q{
+  width:100%;padding:20px 0;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  background:none;border:none;text-align:left;cursor:none;
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#fff;
+  transition:color .2s
+}
+.faq-q:hover{color:var(--g2)}
+.faq-ico{
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(255,255,255,.05);border:1px solid var(--bd);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:14px;color:var(--g2);
+  transition:transform .3s,background .3s;line-height:1
+}
+.faq-item.open .faq-ico{transform:rotate(45deg);background:rgba(212,168,67,.1)}
+.faq-a{
+  font-size:13.5px;color:var(--t2);line-height:1.75;
+  max-height:0;overflow:hidden;
+  transition:max-height .4s cubic-bezier(.23,1,.32,1),padding .4s
+}
+.faq-item.open .faq-a{max-height:400px;padding-bottom:20px}
+
+/* ═══════════════════════════════════════
+   EMAIL / NOTIFY
+═══════════════════════════════════════ */
+.notify-section{
+  background:linear-gradient(135deg,rgba(212,168,67,.08) 0%,rgba(212,168,67,.02) 100%);
+  border:1px solid rgba(212,168,67,.15);border-radius:24px;
+  padding:60px;text-align:center;position:relative;overflow:hidden
+}
+.notify-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 70% at 50% 0%,rgba(212,168,67,.06),transparent);
+  pointer-events:none
+}
+.notify-inner{position:relative;z-index:1}
+.notify-row{display:flex;gap:12px;max-width:480px;margin:28px auto 0}
+.ni{
+  flex:1;background:rgba(255,255,255,.06);border:1px solid var(--bd);
+  border-radius:99px;padding:13px 20px;color:var(--t);
+  font-family:'Inter',sans-serif;font-size:13px;outline:none;
+  transition:border-color .2s,background .2s
+}
+.ni:focus{border-color:var(--g2);background:rgba(255,255,255,.09)}
+.ni::placeholder{color:var(--t3)}
+.nb{
+  background:var(--g2);color:#0a0a0a;border:none;border-radius:99px;
+  padding:13px 28px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;
+  cursor:none;white-space:nowrap;transition:all .25s
+}
+.nb:hover{background:var(--g3);box-shadow:0 8px 24px rgba(245,200,66,.35)}
+.notify-ok{display:none;font-size:13px;color:var(--g2);margin-top:12px}
+.notify-ok.on{display:block}
+
+/* ═══════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════ */
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:40px}
+.cc{
+  background:var(--s1);border-radius:16px;border:1px solid var(--bd);
+  padding:20px;display:flex;align-items:center;gap:14px;
+  text-decoration:none;transition:all .3s;position:relative;overflow:hidden
+}
+.cc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,168,67,.04),transparent);opacity:0;transition:opacity .3s}
+.cc:hover{border-color:rgba(212,168,67,.2);transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.5)}
+.cc:hover::before{opacity:1}
+.cc-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cc-label{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.cc-val{font-size:13px;font-weight:600;color:#fff;margin-top:2px}
+.cc-hint{font-size:11px;color:var(--t3);margin-top:2px}
+/* Contact form */
+.cform{background:var(--s1);border-radius:20px;border:1px solid var(--bd);padding:32px;position:relative;overflow:hidden}
+.cform::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--g2),transparent)}
+.cinp{display:flex;flex-direction:column;gap:12px}
+.cinp input,.cinp textarea{
+  background:var(--s2);border:1px solid var(--bd);border-radius:var(--rs);
+  padding:12px 16px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;
+  outline:none;transition:border-color .2s,box-shadow .2s;width:100%
+}
+.cinp input:focus,.cinp textarea:focus{border-color:var(--g2);box-shadow:0 0 0 3px rgba(212,168,67,.1)}
+.cinp textarea{resize:vertical;min-height:100px}
+.cinp input::placeholder,.cinp textarea::placeholder{color:var(--t3)}
+.csend{
+  margin-top:14px;padding:12px 28px;
+  background:var(--g2);color:#0a0a0a;border:none;border-radius:99px;
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:none;transition:all .25s
+}
+.csend:hover{background:var(--g3);box-shadow:0 8px 24px rgba(245,200,66,.3);transform:translateY(-2px)}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{
+  background:var(--s1);border-top:1px solid var(--bd);
+  padding:48px 0;text-align:center
+}
+.foot-logo{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:8px}
+.foot-logo em{color:var(--g2);font-style:normal}
+.foot-sub{font-size:12.5px;color:var(--t3);line-height:1.8}
+.foot-links{display:flex;gap:24px;justify-content:center;margin:20px 0}
+.foot-link{font-size:12px;color:var(--t2);text-decoration:none;transition:color .2s}
+.foot-link:hover{color:var(--g2)}
+
+/* ═══════════════════════════════════════
+   REVIEW FORM / MISC
+═══════════════════════════════════════ */
+.rev-form-wrap{margin-top:48px;background:var(--s1);border-radius:20px;border:1px solid var(--bd);padding:32px}
+.rinp{display:flex;flex-direction:column;gap:12px}
+.rinp input,.rinp textarea,.rinp select{
+  background:var(--s2);border:1px solid var(--bd);border-radius:var(--rs);
+  padding:12px 16px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;
+  outline:none;transition:border-color .2s,box-shadow .2s;width:100%
+}
+.rinp input:focus,.rinp textarea:focus,.rinp select:focus{border-color:var(--g2);box-shadow:0 0 0 3px rgba(212,168,67,.1)}
+.rinp textarea{resize:vertical;min-height:90px}
+.rinp select option,.fc2 option{background:var(--s2)}
+.sub-btn{
+  margin-top:14px;padding:12px 28px;
+  background:var(--g2);color:#0a0a0a;border:none;border-radius:99px;
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:none;transition:all .25s
+}
+.sub-btn:hover{background:var(--g3);box-shadow:0 8px 24px rgba(245,200,66,.3)}
+.ok-msg{display:none;font-size:12px;color:var(--g2);margin-top:10px;font-weight:500}
+.ok-msg.on{display:block}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:1024px){
+  .about-grid{grid-template-columns:1fr;gap:48px}
+  .about-visual{max-width:480px;margin:0 auto}
+  .fish-grid{grid-template-columns:repeat(2,1fr)}
+  .fish-card:first-child{grid-row:span 1;aspect-ratio:4/5}
+  .fish-card:nth-child(2),.fish-card:nth-child(3){aspect-ratio:4/5}
+  .fish-extra-grid{grid-template-columns:repeat(3,1fr)}
+  .req-grid{grid-template-columns:1fr;gap:40px}
+  .req-sidebar{position:static}
+  .grades-grid{grid-template-columns:1fr}
+  .rev-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  section{padding:60px 0}
+  .hero-title{font-size:clamp(3rem,13vw,5rem)}
+  .fish-grid{grid-template-columns:1fr 1fr}
+  .fish-extra-grid{grid-template-columns:repeat(2,1fr)}
+  .frow{grid-template-columns:1fr}
+  .notify-row{flex-direction:column}
+  .contact-grid{grid-template-columns:1fr}
+  body{cursor:auto}#cursor,#cursor-ring{display:none}
+  .fab-btn{padding:12px;border-radius:50%;width:50px;height:50px;justify-content:center}
+  .fab-btn span{display:none}
+  #nav{padding:14px 1.25rem}
+  #nav.scrolled{padding:10px 1.25rem}
+  .wrap{padding:0 1.25rem}
+}
+@media(max-width:480px){
+  .fish-grid{grid-template-columns:1fr}
+  .fish-card:first-child{aspect-ratio:4/5}
+  .fish-extra-grid{grid-template-columns:1fr 1fr}
+  .hero-title{font-size:3rem}
+  .hero-actions{flex-direction:column;align-items:center}
+  .btn-primary,.btn-ghost{width:100%;max-width:300px;text-align:center}
+  .notify-section{padding:36px 24px}
+  .req-form{padding:24px}
+  .rev-form-wrap{padding:24px}
+}
+</style>
 </head>
 <body>
 
-    <!-- NAVIGATION -->
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="brand">
-                <img src="https://i.imgur.com/J6wIZx9.png" alt="X Marks the Spot Logo">
-                <div class="brand-text">
-                    <span class="brand-name">X Marks the Spot</span>
-                    <span class="brand-sub">Rare Balloon Mollies</span>
-                </div>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#strains">Our Strains</a></li>
-                <li><a href="#about">Our Standards</a></li>
-                <li><a href="#contact" class="cta-btn">Inquire Now</a></li>
-            </ul>
-        </div>
-    </nav>
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
 
-    <!-- HERO SECTION (Uses Black King Balloon Molly as background) -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <span class="hero-badge">Sourced Worldwide</span>
-            <h1>Exclusive Elite Balloon Mollies</h1>
-            <p>We source the finest, healthiest, and most visually stunning show-grade balloon mollies on the market today.</p>
-            <div class="hero-btns">
-                <a href="#strains" class="btn-primary">View Collection</a>
-                <a href="#contact" class="btn-secondary">Get in Touch</a>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-brand">
+    <div class="nav-logo"></div>
+    <span class="nav-wordmark"><em>✕</em> Marks the Spot</span>
+  </a>
+  <div class="nav-links">
+    <a href="#strains" class="nav-link">Strains</a>
+    <a href="#grades" class="nav-link">Grades</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <button class="nav-cta" id="navCta">Request a Fish</button>
+  </div>
+</nav>
+
+<!-- Interactive Floating Action Button Menu -->
+<div class="fab-container">
+    <div class="fab-menu" id="fabMenu">
+        <a href="https://wa.me/639173397877" target="_blank" class="fab-item wa" title="WhatsApp">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 00 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="mailto:Francisco.Desaca@gmail.com" class="fab-item em" title="Email Us">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+    </div>
+    <button class="fab-main-trigger" id="fabTrigger" onclick="toggleFabMenu()">
+        <span class="trigger-icon">+</span>
+    </button>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-media"></div>
+  <div class="hero-veil"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">🐠 Talisay City, Philippines</div>
+    <h1 class="hero-title">
+      <span class="xt">✕ Marks</span><br>the Spot
+    </h1>
+    <p class="hero-desc">World-class balloon mollies. Selectively bred, personally evaluated against competition standard, shipped worldwide.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" id="heroOrder">Browse Strains</button>
+      <a href="#grades" class="btn-ghost">View Grade Guide</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="r r-l">
+        <div class="about-visual">
+          <div class="about-img-frame"></div>
+          <div class="about-badge">
+            <div class="ab-num">500+</div>
+            <div class="ab-lbl">Fish Shipped</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-content r r-r">
+        <div>
+          <span class="s-label">Who We Are</span>
+          <h2 class="s-title">Every fish chosen with purpose</h2>
+          <p class="s-sub">We are a passionate balloon molly operation based in Talisay City, Philippines. Every fish is personally evaluated against the balloon molly competition standard before it ships — whether you're building a breeding program or preparing for a show.</p>
+        </div>
+        <div class="about-tags">
+          <span class="tag">🏆 Show Grade Specialist</span>
+          <span class="tag">🐠 Balloon Molly Standard</span>
+          <span class="tag">🌏 Ships Worldwide</span>
+          <span class="tag">✅ Personally Selected</span>
+          <span class="tag">📦 9 Premium Strains</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+          <div style="text-align:center;padding:20px;background:var(--s1);border-radius:14px;border:1px solid var(--bd)">
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;color:var(--g2)">9</div>
+            <div style="font-size:10px;color:var(--t2);margin-top:4px;text-transform:uppercase;letter-spacing:.07em;font-weight:600">Strains</div>
+          </div>
+          <div style="text-align:center;padding:20px;background:var(--s1);border-radius:14px;border:1px solid var(--bd)">
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;color:var(--g2)">3</div>
+            <div style="font-size:10px;color:var(--t2);margin-top:4px;text-transform:uppercase;letter-spacing:.07em;font-weight:600">Grades</div>
+          </div>
+          <div style="text-align:center;padding:20px;background:var(--s1);border-radius:14px;border:1px solid var(--bd)">
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;color:var(--g2)">🌏</div>
+            <div style="font-size:10px;color:var(--t2);margin-top:4px;text-transform:uppercase;letter-spacing:.07em;font-weight:600">Worldwide</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STRAINS -->
+<section id="strains">
+  <div class="wrap">
+    <div class="strain-header">
+      <div class="r">
+        <span class="s-label">Our Collection</span>
+        <h2 class="s-title">Available Strains</h2>
+      </div>
+      <div class="filter-row r delay-2" id="filterBar"></div>
+    </div>
+    <div class="fish-grid r" id="fishGridTop"></div>
+    <div class="fish-extra-grid r" id="fishGridExtra"></div>
+    <div class="disc r">
+      📸 <strong>Photo Reference:</strong> All photos represent the strain's typical characteristics. Actual fish may vary naturally in exact pattern, coloration and markings — this is the beauty of selectively bred live animals.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GRADES -->
+<section id="grades">
+  <div class="wrap">
+    <div class="r" style="text-align:center;margin-bottom:56px">
+      <span class="s-label">Grading System</span>
+      <h2 class="s-title">Grade Guide &amp; Pricing</h2>
+      <p class="s-sub" style="margin:0 auto">Three tiers designed around the official balloon molly competition standard.</p>
+    </div>
+    <div class="grades-grid">
+      <div class="grade-card r delay-1">
+        <img src="https://i.imgur.com/scWp5od.jpg" alt="Material Grade" class="gc-img" onerror="this.style.display='none'"/>
+        <div class="gc-body">
+          <div class="gc-label">Entry Tier</div>
+          <div class="gc-name">Material Grade</div>
+          <div class="gc-price">from $80</div>
+          <div class="gc-desc">Healthy fish with strong coloration and solid body structure. Ideal for building and developing your breeding program.</div>
+          <span class="gc-pill mat-pill">Any size</span>
+        </div>
+      </div>
+      <div class="grade-card r delay-2">
+        <img src="https://i.imgur.com/6zjsYGz.jpg" alt="Show Potential" class="gc-img" onerror="this.style.display='none'"/>
+        <div class="gc-body">
+          <div class="gc-label">Mid Tier</div>
+          <div class="gc-name">Show Potential</div>
+          <div class="gc-price">from $120</div>
+          <div class="gc-desc">Young fish displaying strong competition geometry and coloration. Eligible for junior category events.</div>
+          <span class="gc-pill pot-pill">2.5cm – 3cm</span>
+        </div>
+      </div>
+      <div class="grade-card gold-card r delay-3">
+        <img src="https://i.imgur.com/PYOUgcb.jpg" alt="Show Grade" class="gc-img" onerror="this.style.display='none'"/>
+        <div class="gc-body">
+          <div class="gc-label">Top Tier</div>
+          <div class="gc-name">Show Grade</div>
+          <div class="gc-price">from $180</div>
+          <div class="gc-desc">Fully meets the international balloon molly competition standard. Outstanding body, scales, and coloration.</div>
+          <span class="gc-pill shw-pill">3cm and above</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REQUEST -->
+<section id="request">
+  <div class="wrap">
+    <div class="req-grid">
+      <div class="req-sidebar r r-l">
+        <span class="s-label">Place an Order</span>
+        <h2 class="s-title">Request a Fish</h2>
+        <p class="s-sub">Tell us what you need and we'll personally hand-select the best match from our stock.</p>
+        <div class="req-steps">
+          <div class="rs"><div class="rs-dot">1</div><div><div class="rs-title">Fill the form</div><div class="rs-desc">Select strain, grade, quantity and contact details</div></div></div>
+          <div class="rs"><div class="rs-dot">2</div><div><div class="rs-title">We confirm</div><div class="rs-desc">We review and confirm availability within 24 hours</div></div></div>
+          <div class="rs"><div class="rs-dot">3</div><div><div class="rs-title">Fish selected &amp; shown</div><div class="rs-desc">You receive photos of your fish before we ship</div></div></div>
+          <div class="rs"><div class="rs-dot">4</div><div><div class="rs-title">Pay &amp; ship</div><div class="rs-desc">GCash, PayPal, bank transfer or Western Union</div></div></div>
+        </div>
+      </div>
+      <div class="r r-r">
+        <div class="req-form" id="reqWrap">
+          <div id="reqForm">
+            <div style="font-size:11px;color:#f87171;font-weight:600;margin-bottom:16px">* All fields required unless marked optional</div>
+            <div class="frow">
+              <div class="fg"><label>Strain *</label>
+                <select id="s_strain" class="fc2"><option value="">Select strain...</option>
+                  <option>Golden Zebra Lyretail</option><option>Pikachu Veiltail</option>
+                  <option>Pikachu Roundtail</option><option>Platinum Marble Zebra Pattern Roundtail</option>
+                  <option>Golden Zebra Veiltail</option><option>Black King Balloon Molly</option>
+                  <option>Chocolate Lyretail</option><option>Golden Blue Tail Lyretail</option>
+                  <option>Tanchu Lyretail</option><option>Other / Not sure</option>
+                </select></div>
+              <div class="fg"><label>Grade *</label>
+                <select id="s_grade" class="fc2"><option value="">Select grade...</option>
+                  <option>Material Grade (from $80)</option><option>Show Potential (from $120)</option>
+                  <option>Show Grade (from $180)</option><option>Not sure — advise me</option>
+                </select></div>
             </div>
-        </div>
-    </section>
-
-    <!-- STRAINS SECTION -->
-    <section id="strains">
-        <div class="section-header">
-            <span class="section-tag">Elite Genetics</span>
-            <h2>Our Signature Strains</h2>
-            <p>Every specimen is hand-selected, quarantined, and conditioned to thrive in your showcase tank.</p>
-        </div>
-
-        <div class="gallery-container">
-            <div class="grid">
-
-                <!-- Fish Card 1: Golden Zebra Lyretail -->
-                <div class="card">
-                    <span class="badge-premium">Show Quality</span>
-                    <div class="image-container">
-                        <img src="https://i.imgur.com/PYOUgcb.jpeg" alt="Golden Zebra Lyretail Balloon Molly">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Golden Zebra Lyretail</h3>
-                            <div class="card-meta">
-                                <span class="rarity-tag">Ultra Rare</span>
-                                <span class="origin-tag">Import</span>
-                            </div>
-                        </div>
-                        <p class="description">Features a dramatic high-fin and long-flowing lyretail pattern. The striking golden-orange stripes against black markings offer incredible contrast.</p>
-                        <div class="fish-stats">
-                            <div class="stat-box">
-                                <span class="stat-label">Size</span>
-                                <span class="stat-val">2.5" - 3"</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">Temp</span>
-                                <span class="stat-val">76-82°F</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">pH</span>
-                                <span class="stat-val">7.5 - 8.2</span>
-                            </div>
-                        </div>
-                        <div class="action-container">
-                            <div class="price-wrap">
-                                <span class="price-label">Price / Pair</span>
-                                <div class="price"><span>$</span>125</div>
-                            </div>
-                            <a href="#contact" class="card-btn">Inquire</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fish Card 2: Pikachu Veiltail -->
-                <div class="card">
-                    <span class="badge-premium">High Fin</span>
-                    <div class="image-container">
-                        <img src="https://i.imgur.com/x6toumv.jpeg" alt="Pikachu Veiltail Balloon Molly">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Pikachu Veiltail</h3>
-                            <div class="card-meta">
-                                <span class="rarity-tag">Extremely Rare</span>
-                                <span class="origin-tag">Import</span>
-                            </div>
-                        </div>
-                        <p class="description">Vibrant, true-yellow bodies that resemble the iconic electric aesthetic. Finished with delicate, feathery veil tail fins that glide gracefully.</p>
-                        <div class="fish-stats">
-                            <div class="stat-box">
-                                <span class="stat-label">Size</span>
-                                <span class="stat-val">2.2" - 2.8"</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">Temp</span>
-                                <span class="stat-val">76-82°F</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">pH</span>
-                                <span class="stat-val">7.5 - 8.2</span>
-                            </div>
-                        </div>
-                        <div class="action-container">
-                            <div class="price-wrap">
-                                <span class="price-label">Price / Pair</span>
-                                <div class="price"><span>$</span>110</div>
-                            </div>
-                            <a href="#contact" class="card-btn">Inquire</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fish Card 3: Pikachu Roundtail -->
-                <div class="card">
-                    <span class="badge-premium">Show Quality</span>
-                    <div class="image-container">
-                        <img src="https://i.imgur.com/scWp5od.jpeg" alt="Pikachu Roundtail Balloon Molly">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Pikachu Roundtail</h3>
-                            <div class="card-meta">
-                                <span class="rarity-tag">Limited Stock</span>
-                                <span class="origin-tag">Import</span>
-                            </div>
-                        </div>
-                        <p class="description">A variant of the Pikachu line showing off a tight, rounded, coin-like tail. Perfect body proportions make this balloon shape especially cute and active.</p>
-                        <div class="fish-stats">
-                            <div class="stat-box">
-                                <span class="stat-label">Size</span>
-                                <span class="stat-val">2.0" - 2.6"</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">Temp</span>
-                                <span class="stat-val">76-82°F</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">pH</span>
-                                <span class="stat-val">7.5 - 8.2</span>
-                            </div>
-                        </div>
-                        <div class="action-container">
-                            <div class="price-wrap">
-                                <span class="price-label">Price / Pair</span>
-                                <div class="price"><span>$</span>95</div>
-                            </div>
-                            <a href="#contact" class="card-btn">Inquire</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fish Card 4: Platinum Marble Zebra Pattern -->
-                <div class="card">
-                    <span class="badge-premium">Ultra Grade</span>
-                    <div class="image-container">
-                        <img src="https://i.imgur.com/6zjsYGz.jpeg" alt="Platinum Marble Zebra Pattern Balloon Molly">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Platinum Marble Zebra Pattern</h3>
-                            <div class="card-meta">
-                                <span class="rarity-tag">Exclusive</span>
-                                <span class="origin-tag">Import</span>
-                            </div>
-                        </div>
-                        <p class="description">Stunning icy-white platinum body featuring beautiful black "zebra-marbling" throughout the flank. Highly reflective under LED lighting.</p>
-                        <div class="fish-stats">
-                            <div class="stat-box">
-                                <span class="stat-label">Size</span>
-                                <span class="stat-val">2.5" - 3.2"</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">Temp</span>
-                                <span class="stat-val">76-82°F</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">pH</span>
-                                <span class="stat-val">7.5 - 8.2</span>
-                            </div>
-                        </div>
-                        <div class="action-container">
-                            <div class="price-wrap">
-                                <span class="price-label">Price / Pair</span>
-                                <div class="price"><span>$</span>140</div>
-                            </div>
-                            <a href="#contact" class="card-btn">Inquire</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fish Card 5: Golden Zebra Veiltail -->
-                <div class="card">
-                    <span class="badge-premium">Select Grade</span>
-                    <div class="image-container">
-                        <img src="https://i.imgur.com/eHacp64.jpeg" alt="Golden Zebra Veiltail Balloon Molly">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Golden Zebra Veiltail</h3>
-                            <div class="card-meta">
-                                <span class="rarity-tag">Highly Coveted</span>
-                                <span class="origin-tag">Import</span>
-                            </div>
-                        </div>
-                        <p class="description">An exquisite combination of golden zebra patterns paired with a wide, flowing veil tail. Moves like silk through the water column.</p>
-                        <div class="fish-stats">
-                            <div class="stat-box">
-                                <span class="stat-label">Size</span>
-                                <span class="stat-val">2.4" - 3.0"</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">Temp</span>
-                                <span class="stat-val">76-82°F</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">pH</span>
-                                <span class="stat-val">7.5 - 8.2</span>
-                            </div>
-                        </div>
-                        <div class="action-container">
-                            <div class="price-wrap">
-                                <span class="price-label">Price / Pair</span>
-                                <div class="price"><span>$</span>120</div>
-                            </div>
-                            <a href="#contact" class="card-btn">Inquire</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fish Card 6: Black King Balloon Molly -->
-                <div class="card">
-                    <span class="badge-premium">Show Quality</span>
-                    <div class="image-container">
-                        <img src="https://i.imgur.com/TSZartg.jpeg" alt="Black King Balloon Molly">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Black King Balloon Molly</h3>
-                            <div class="card-meta">
-                                <span class="rarity-tag">Classic Elite</span>
-                                <span class="origin-tag">Import</span>
-                            </div>
-                        </div>
-                        <p class="description">Dense, velvet-black coloration with zero light penetration. True king-sized round bodies with a commanding presence in planted aquariums.</p>
-                        <div class="fish-stats">
-                            <div class="stat-box">
-                                <span class="stat-label">Size</span>
-                                <span class="stat-val">2.8" - 3.5"</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">Temp</span>
-                                <span class="stat-val">76-82°F</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">pH</span>
-                                <span class="stat-val">7.5 - 8.2</span>
-                            </div>
-                        </div>
-                        <div class="action-container">
-                            <div class="price-wrap">
-                                <span class="price-label">Price / Pair</span>
-                                <div class="price"><span>$</span>85</div>
-                            </div>
-                            <a href="#contact" class="card-btn">Inquire</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fish Card 7: Chocolate Lyretail -->
-                <div class="card">
-                    <span class="badge-premium">Rare Pattern</span>
-                    <div class="image-container">
-                        <img src="https://i.imgur.com/CH8a14o.jpeg" alt="Chocolate Lyretail Balloon Molly">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Chocolate Lyretail</h3>
-                            <div class="card-meta">
-                                <span class="rarity-tag">Rare Import</span>
-                                <span class="origin-tag">Import</span>
-                            </div>
-                        </div>
-                        <p class="description">Rich, deep cocoa-toned scales fade into amber edges. Highlighted by an exceptionally sharp lyretail setup and elegant fin posture.</p>
-                        <div class="fish-stats">
-                            <div class="stat-box">
-                                <span class="stat-label">Size</span>
-                                <span class="stat-val">2.3" - 2.9"</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">Temp</span>
-                                <span class="stat-val">76-82°F</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">pH</span>
-                                <span class="stat-val">7.5 - 8.2</span>
-                            </div>
-                        </div>
-                        <div class="action-container">
-                            <div class="price-wrap">
-                                <span class="price-label">Price / Pair</span>
-                                <div class="price"><span>$</span>115</div>
-                            </div>
-                            <a href="#contact" class="card-btn">Inquire</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fish Card 8: Golden Blue Tail Lyretail -->
-                <div class="card">
-                    <span class="badge-premium">Vibrant Color</span>
-                    <div class="image-container">
-                        <img src="https://i.imgur.com/jyWVOfJ.jpeg" alt="Golden Blue Tail Lyretail Balloon Molly">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Golden Blue Tail Lyretail</h3>
-                            <div class="card-meta">
-                                <span class="rarity-tag">Limited</span>
-                                <span class="origin-tag">Import</span>
-                            </div>
-                        </div>
-                        <p class="description">A majestic mutation showing off a shimmering golden face and front half, transitioning into a reflective pearlescent blue hue in the tail.</p>
-                        <div class="fish-stats">
-                            <div class="stat-box">
-                                <span class="stat-label">Size</span>
-                                <span class="stat-val">2.5" - 3.1"</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">Temp</span>
-                                <span class="stat-val">76-82°F</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">pH</span>
-                                <span class="stat-val">7.5 - 8.2</span>
-                            </div>
-                        </div>
-                        <div class="action-container">
-                            <div class="price-wrap">
-                                <span class="price-label">Price / Pair</span>
-                                <div class="price"><span>$</span>130</div>
-                            </div>
-                            <a href="#contact" class="card-btn">Inquire</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fish Card 9: Tanchu Lyretail -->
-                <div class="card">
-                    <span class="badge-premium">High Contrast</span>
-                    <div class="image-container">
-                        <img src="https://i.imgur.com/bhA6Wlf.jpeg" alt="Tanchu Lyretail Balloon Molly">
-                        <div class="overlay"></div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Tanchu Lyretail</h3>
-                            <div class="card-meta">
-                                <span class="rarity-tag">Very Rare</span>
-                                <span class="origin-tag">Import</span>
-                            </div>
-                        </div>
-                        <p class="description">Bred to resemble the traditional Japanese 'Tancho' Koi, showing a solid snow-white body topped with a striking crimson red cap on the head.</p>
-                        <div class="fish-stats">
-                            <div class="stat-box">
-                                <span class="stat-label">Size</span>
-                                <span class="stat-val">2.2" - 2.8"</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">Temp</span>
-                                <span class="stat-val">76-82°F</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">pH</span>
-                                <span class="stat-val">7.5 - 8.2</span>
-                            </div>
-                        </div>
-                        <div class="action-container">
-                            <div class="price-wrap">
-                                <span class="price-label">Price / Pair</span>
-                                <div class="price"><span>$</span>150</div>
-                            </div>
-                            <a href="#contact" class="card-btn">Inquire</a>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="frow">
+              <div class="fg"><label>Quantity *</label><input type="number" id="s_qty" class="fc2" placeholder="How many?" min="1"/></div>
+              <div class="fg"><label>Your Country *</label>
+                <input type="text" id="s_country" class="fc2" list="clist" placeholder="Select or type..." autocomplete="off"/>
+                <datalist id="clist">
+                  <option value="United States"><option value="Canada"><option value="United Kingdom">
+                  <option value="Australia"><option value="New Zealand"><option value="Singapore">
+                  <option value="Japan"><option value="South Korea"><option value="Germany">
+                  <option value="France"><option value="Netherlands"><option value="Belgium">
+                  <option value="Sweden"><option value="Norway"><option value="Denmark">
+                  <option value="Switzerland"><option value="Austria"><option value="Italy">
+                  <option value="Spain"><option value="Portugal"><option value="Poland">
+                  <option value="Czech Republic"><option value="Russia"><option value="China">
+                  <option value="Hong Kong"><option value="Taiwan"><option value="Thailand">
+                  <option value="Malaysia"><option value="Indonesia"><option value="Vietnam">
+                  <option value="Philippines"><option value="India"><option value="UAE">
+                  <option value="Saudi Arabia"><option value="South Africa"><option value="Brazil">
+                  <option value="Mexico"><option value="Argentina"><option value="Other">
+                </datalist></div>
             </div>
-        </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section class="contact" id="contact">
-        <div class="contact-card">
-            <h2>Add to Your Aquarium</h2>
-            <p>Ready to acquire show-grade genetics? Drop us an inquiry directly and we will match you with curated stock.</p>
-            <div class="contact-info">
-                <a href="mailto:info@xmarksthespotaquatics.com" class="contact-item">info@xmarksthespotaquatics.com</a>
-                <a href="tel:+1234567890" class="contact-item">+1 (234) 567-890</a>
+            <div class="frow">
+              <div class="fg"><label>Contact via *</label>
+                <select id="s_contact" class="fc2"><option value="whatsapp">WhatsApp</option><option value="email">Email</option></select></div>
+              <div class="fg"><label>Your Number / Email *</label><input type="text" id="s_handle" class="fc2" placeholder="WhatsApp or email"/></div>
             </div>
+            <div class="frow full">
+              <div class="fg"><label>Notes <span style="color:var(--t3);font-weight:400">(optional)</span></label>
+                <input type="text" id="s_notes" class="fc2" placeholder="Pairs, preferences, questions..."/></div>
+            </div>
+            <button class="req-send" id="sendBtn">📩 Send Request →</button>
+            <div class="req-note">💬 <strong>WhatsApp:</strong> Your full order details will be pre-filled — just press Send.</div>
+          </div>
+          <div class="confirm" id="confirmBox">
+            <div class="conf-icon">✅</div>
+            <div class="conf-title">Request Sent!</div>
+            <div class="conf-sub">We've received your request and will confirm within 24 hours via your chosen contact method. Thank you for choosing X Marks the Spot.</div>
+            <button class="req-send" id="resetBtn">Send Another Request</button>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2026 X Marks the Spot Aquatics. All Rights Reserved. Specialty Live Imports.</p>
-    </footer>
+<div class="divider"></div>
 
+<!-- TIMELINE -->
+<section>
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
+      <div class="r r-l">
+        <span class="s-label">Process</span>
+        <h2 class="s-title">What happens after you order</h2>
+        <p class="s-sub">We keep you informed at every step — from selection to your door.</p>
+      </div>
+      <div class="timeline r r-r">
+        <div class="tl-item"><div class="tl-bullet gd">📩</div><div class="tl-day">Day 1</div><div class="tl-name">Request received</div><div class="tl-info">We review strain, grade, and quantity and confirm availability within 24 hours.</div></div>
+        <div class="tl-item"><div class="tl-bullet wh">🐠</div><div class="tl-day">Day 2 – 3</div><div class="tl-name">Fish personally selected</div><div class="tl-info">Each fish is hand-picked and evaluated against competition standard. Only the best make it through.</div></div>
+        <div class="tl-item"><div class="tl-bullet wh">📸</div><div class="tl-day">Day 3 – 4</div><div class="tl-name">You approve &amp; pay</div><div class="tl-info">We send photos of your fish before shipping. Payment confirmed after your approval.</div></div>
+        <div class="tl-item"><div class="tl-bullet wh">📦</div><div class="tl-day">Day 4 – 5</div><div class="tl-name">Packed &amp; shipped</div><div class="tl-info">Professionally bagged with oxygen. You receive a tracking number and care guide.</div></div>
+        <div class="tl-item"><div class="tl-bullet dn">✅</div><div class="tl-day">Day 5 – 10</div><div class="tl-name">Fish arrive</div><div class="tl-info">Delivery varies by location. We're available throughout transit and after arrival.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOCIAL PROOF -->
+<section>
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
+      <div class="r">
+        <span class="s-label">Track Record</span>
+        <h2 class="s-title">Verified Orders</h2>
+        <p class="s-sub" style="margin-bottom:32px">Real orders from hobbyists and breeders worldwide.</p>
+        <div class="tx-ticker" id="txList"></div>
+      </div>
+      <div class="r delay-2">
+        <span class="s-label">What Buyers Say</span>
+        <h2 class="s-title">Reviews</h2>
+        <div class="rev-grid" id="revGrid" style="grid-template-columns:1fr;margin-top:24px"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- NOTIFY -->
+<section>
+  <div class="wrap">
+    <div class="notify-section r">
+      <div class="notify-inner">
+        <span class="s-label">Stay Updated</span>
+        <h2 class="s-title">New Strains. First Access.</h2>
+        <p class="s-sub" style="margin:0 auto;max-width:440px">Get notified when rare new strains arrive before they sell out.</p>
+        <div class="notify-row">
+          <input type="email" id="notifyEmail" class="ni" placeholder="Your email address"/>
+          <button id="notifyBtn" class="nb">Notify Me</button>
+        </div>
+        <div class="notify-ok" id="notifyOk">✅ You're on the list — we'll reach out first.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:56px" class="r">
+      <span class="s-label">Answers</span>
+      <h2 class="s-title">Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-wrap r">
+      <div class="faq-list" id="faqList"></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REVIEWS FORM + CONTACT -->
+<section>
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px">
+      <div class="r r-l">
+        <span class="s-label">Share Your Experience</span>
+        <h2 class="s-title" style="font-size:1.8rem;margin-bottom:24px">Leave a Review</h2>
+        <div class="rev-form-wrap">
+          <div class="rinp">
+            <input type="text" id="rName" placeholder="Your name (e.g. John from USA)"/>
+            <select id="rRating"><option value="5">⭐⭐⭐⭐⭐ Excellent</option><option value="4">⭐⭐⭐⭐ Very Good</option><option value="3">⭐⭐⭐ Good</option><option value="2">⭐⭐ Fair</option><option value="1">⭐ Poor</option></select>
+            <textarea id="rText" placeholder="Share your experience..."></textarea>
+          </div>
+          <button class="sub-btn" id="submitRevBtn">Submit Review</button>
+          <div class="ok-msg" id="revOk">✅ Thank you for your review!</div>
+        </div>
+      </div>
+      <div class="r r-r" id="contact">
+        <span class="s-label">Get in Touch</span>
+        <h2 class="s-title" style="font-size:1.8rem;margin-bottom:24px">Contact Us</h2>
+        <div class="contact-grid" style="grid-template-columns:1fr;gap:10px;margin-bottom:24px">
+          <a href="https://www.facebook.com/eXedmarksthespot" target="_blank" class="cc">
+            <div class="cc-ico" style="background:rgba(24,119,242,.14)"><svg width="22" height="22" viewBox="0 0 24 24" fill="#4d90fe"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.514c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></div>
+            <div><div class="cc-label">Facebook</div><div class="cc-val">Xmarksthespot</div><div class="cc-hint">Follow & browse</div></div>
+          </a>
+          <a href="https://wa.me/639173397877" target="_blank" class="cc">
+            <div class="cc-ico" style="background:rgba(37,211,102,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+            <div><div class="cc-label">WhatsApp</div><div class="cc-val">+63 917 339 7877</div><div class="cc-hint">For orders</div></div>
+          </a>
+          <a href="mailto:Francisco.Desaca@gmail.com" class="cc">
+            <div class="cc-ico" style="background:rgba(212,168,67,.1)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></div>
+            <div><div class="cc-label">Email</div><div class="cc-val">Francisco.Desaca@gmail.com</div><div class="cc-hint">International inquiries</div></div>
+          </a>
+        </div>
+        <div class="cform">
+          <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:14px">Send a Message</div>
+          <div class="cinp">
+            <input type="text" id="cName" placeholder="Your name"/>
+            <input type="email" id="cEmail" placeholder="Your email"/>
+            <input type="text" id="cSubject" placeholder="Subject"/>
+            <textarea id="cMsg" placeholder="Your message..."></textarea>
+          </div>
+          <button class="csend" id="sendContactBtn">Send Message →</button>
+          <div class="ok-msg" id="conOk">✅ Message sent — we'll reply within 24 hours.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-logo"><em>✕</em> Marks the Spot</div>
+    <div class="foot-sub">Premium Balloon Mollies · Talisay City, Philippines<br>Prices in USD ($) · Ships Worldwide · © 2026</div>
+    <div class="foot-links">
+      <a href="#strains" class="foot-link">Strains</a>
+      <a href="#grades" class="foot-link">Grades</a>
+      <a href="#request" class="foot-link">Order</a>
+      <a href="#faq" class="foot-link">FAQ</a>
+      <a href="#contact" class="foot-link">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* DATA */
+const FISH=[
+  {n:"Balloon Molly",v:"Golden Zebra Lyretail",               cat:"lyretail", bg:"#1a1500",img:"https://i.imgur.com/PYOUgcb.jpg"},
+  {n:"Balloon Molly",v:"Pikachu Veiltail",                    cat:"veiltail", bg:"#1a1500",img:"https://i.imgur.com/x6toumv.jpg"},
+  {n:"Balloon Molly",v:"Pikachu Roundtail",                   cat:"roundtail",bg:"#1a1500",img:"https://i.imgur.com/scWp5od.jpg"},
+  {n:"Balloon Molly",v:"Platinum Marble Zebra Roundtail",     cat:"roundtail",bg:"#111820",img:"https://i.imgur.com/6zjsYGz.jpg"},
+  {n:"Balloon Molly",v:"Golden Zebra Veiltail",               cat:"veiltail", bg:"#1a1500",img:"https://i.imgur.com/eHacp64.jpg"},
+  {n:"Balloon Molly",v:"Black King Balloon Molly",            cat:"special",  bg:"#0d0d0d",img:"https://i.imgur.com/TSZartg.jpg"},
+  {n:"Balloon Molly",v:"Chocolate Lyretail",                  cat:"lyretail", bg:"#150e05",img:"https://i.imgur.com/CH8a14o.jpg"},
+  {n:"Balloon Molly",v:"Golden Blue Tail Lyretail",           cat:"lyretail", bg:"#001520",img:"https://i.imgur.com/jyWVOfJ.jpg"},
+  {n:"Balloon Molly",v:"Tanchu Lyretail",                     cat:"lyretail", bg:"#150010",img:"https://i.imgur.com/bhA6Wlf.jpg"},
+];
+const TX=[
+  {flag:"🇺🇸",name:"Michael T.",loc:"California, USA",      fish:"Golden Zebra Lyretail ×5 · Show Grade",   amt:900, time:"2 days ago"},
+  {flag:"🇸🇬",name:"Wei L.",    loc:"Singapore",             fish:"Pikachu Veiltail ×3 · Material Grade",    amt:240, time:"3 days ago"},
+  {flag:"🇩🇪",name:"Klaus M.", loc:"Berlin, Germany",        fish:"Chocolate Lyretail ×4 · Show Potential",  amt:480, time:"44 days ago"},
+  {flag:"🇦🇺",name:"James R.", loc:"Sydney, Australia",      fish:"Black King Molly ×6 · Material",          amt:480, time:"5 days ago"},
+  {flag:"🇯🇵",name:"Hiroshi K.",loc:"Tokyo, Japan",          fish:"Golden Blue Tail ×3 · Show Grade",        amt:540, time:"Last week"},
+];
+const REVIEWS=[
+  {name:"Michael T. — USA",   stars:5,text:"Incredible quality. The Golden Zebra Lyretail exceeded my expectations — perfect body shape, vibrant coloration. Will definitely order again.",date:"June 2026"},
+  {name:"Wei L. — Singapore", stars:5,text:"Fast response, honest communication, fish arrived healthy and active. Packaging was excellent. Highly recommend for serious hobbyists.",    date:"June 2026"},
+  {name:"Klaus M. — Germany", stars:5,text:"Show-quality fish exactly as described. Photos and video before shipping gave full confidence. Professional throughout.",                    date:"May 2026"},
+];
+const FAQS=[
+  {q:"How are fish shipped internationally?",         a:"Fish are packed in pure oxygen-filled bags with water conditioner inside insulated cargo boxes. We ship via trusted air cargo services experienced in live fish transport. Typical transit: 1–3 days internationally."},
+  {q:"What is your DOA (Dead on Arrival) policy?",   a:"<strong>Local:</strong> Full live arrival guarantee — report with clear photo within 2 hours of delivery.<br><br><strong>International:</strong> An uncut video of the sealed bag must be sent within 2 hours of customs release. Claims without video cannot be processed. Verified DOA claims handled via replacement or store credit."},
+  {q:"Can I see the fish before I pay?",             a:"Yes — once selected, we send you photos and a short video of your specific fish before you confirm payment. You see exactly what you're getting."},
+  {q:"What payment methods do you accept?",          a:"GCash, PayPal, bank transfer, and Western Union. For international orders PayPal or bank transfer is recommended. Payment is processed after you approve the fish photos."},
+  {q:"What water parameters are your fish raised in?",a:"Temperature 26–28°C, pH 7.5–8.2, hardness 10–20 dGH, light salt (0.5–1 tsp/gallon). When acclimating, take 30–45 minutes to avoid stress from parameter changes."},
+  {q:"Do you ship to my country?",                   a:"We ship to most countries worldwide. Some require live fish import permits or health certificates — message us with your country for specific requirements and shipping estimates."},
+  {q:"How do I acclimate balloon mollies on arrival?",a:"Float the sealed bag in your tank for 15–20 minutes to equalize temperature. Gradually add tank water before releasing. Maintain 24–28°C, pH 7.0–8.0 in a well-filtered, established tank. A care guide is included with every shipment."},
+];
+
+/* CURSOR */
+function initCursor(){
+  var c=document.getElementById("cursor"),r=document.getElementById("cursor-ring");
+  if(!c)return;
+  var mx=0,my=0,rx=0,ry=0;
+  document.addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY;c.style.left=mx+"px";c.style.top=my+"px"});
+  function lerp(a,b,t){return a+(b-a)*t}
+  function tick(){rx=lerp(rx,mx,.1);ry=lerp(ry,my,.1);r.style.left=rx+"px";r.style.top=ry+"px";requestAnimationFrame(tick)}
+  tick();
+  document.querySelectorAll("a,button,[class*='card'],[class*='btn'],[class*='pill']").forEach(function(el){
+    el.addEventListener("mouseenter",function(){c.style.transform="translate(-50%,-50%) scale(2)";c.style.opacity=".5"});
+    el.addEventListener("mouseleave",function(){c.style.transform="translate(-50%,-50%) scale(1)";c.style.opacity="1"});
+  });
+}
+
+/* PARTICLES */
+function makeParticles(){
+  var c=document.getElementById("particles");
+  if(!c)return;
+  for(var i=0;i<20;i++){
+    var p=document.createElement("div");p.className="ptcl";
+    var s=Math.random()*4+1.5;
+    p.style.cssText="width:"+s+"px;height:"+s+"px;left:"+Math.random()*100+"%;animation-duration:"+(Math.random()*18+10)+"s;animation-delay:-"+Math.random()*18+"s";
+    c.appendChild(p);
+  }
+}
+
+/* NAV */
+function initNav(){
+  var nav=document.getElementById("nav");
+  window.addEventListener("scroll",function(){nav.classList.toggle("scrolled",window.scrollY>60)},{ passive:true });
+  document.getElementById("navCta").addEventListener("click",function(){document.getElementById("request").scrollIntoView({behavior:"smooth"})});
+  document.getElementById("heroOrder").addEventListener("click",function(){document.getElementById("strains").scrollIntoView({behavior:"smooth"})});
+}
+
+/* REVEAL */
+function initReveal(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add("vis")})},{threshold:.1});
+  document.querySelectorAll(".r,.r-l,.r-r").forEach(function(el){io.observe(el)});
+}
+
+/* FILTERS + FISH */
+var currentCat="all";
+function initFilters(){
+  var bar=document.getElementById("filterBar");
+  var cats=[{id:"all",l:"All"},{id:"lyretail",l:"Lyretails"},{id:"veiltail",l:"Veiltails"},{id:"roundtail",l:"Roundtails"}];
+  bar.innerHTML=cats.map(function(c,i){return'<button class="fpill'+(i===0?" on":"")+'" data-cat="'+c.id+'">'+c.l+'</button>'}).join("");
+  bar.querySelectorAll(".fpill").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      bar.querySelectorAll(".fpill").forEach(function(b){b.classList.remove("on")});
+      btn.classList.add("on");currentCat=btn.dataset.cat;renderFish();
+    });
+  });
+  renderFish();
+}
+
+function fishCard(f,big){
+  return'<div class="fish-card">'+
+    '<img class="fc-img" src="'+f.img+'" alt="'+f.v+'" loading="lazy" onerror="this.style.background=\''+f.bg+'\'"/>'+
+    '<div class="fc-overlay"></div>'+
+    '<div class="fc-shimmer"></div>'+
+    '<div class="fc-info">'+
+      '<div class="fc-type">'+f.n+'</div>'+
+      '<div class="fc-name">'+f.v+'</div>'+
+      '<div class="fc-bottom">'+
+        '<span class="fc-price">from $80</span>'+
+        '<button class="fc-cta" data-v="'+f.v.replace(/"/g,"&quot;")+'">Request →</button>'+
+      '</div>'+
+    '</div>'+
+  '</div>';
+}
+
+function renderFish(){
+  var list=currentCat==="all"?FISH:FISH.filter(function(f){return f.cat===currentCat});
+  var top=list.slice(0,3),extra=list.slice(3);
+  var tg=document.getElementById("fishGridTop"),eg=document.getElementById("fishGridExtra");
+  tg.innerHTML=top.map(function(f,i){return fishCard(f,i===0)}).join("");
+  eg.innerHTML=extra.map(function(f){return fishCard(f,false)}).join("");
+  document.querySelectorAll(".fc-cta").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      pickStrain(btn.dataset.v);
+    });
+  });
+}
+
+function pickStrain(v){
+  var sel=document.getElementById("s_strain");
+  for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===v){sel.selectedIndex=i;break}}
+  document.getElementById("request").scrollIntoView({behavior:"smooth",block:"start"});
+  setTimeout(function(){
+    document.getElementById("s_grade").focus();
+  },800);
+}
+
+/* TX + REVIEWS + FAQ */
+function renderTx(){
+  document.getElementById("txList").innerHTML=TX.map(function(t){
+    return'<div class="tx-card">'+
+      '<div class="tx-flag">'+t.flag+'</div>'+
+      '<div class="tx-body"><div class="tx-who">'+t.name+' · '+t.loc+'</div><div class="tx-what">'+t.fish+'</div></div>'+
+      '<div class="tx-val"><div class="tx-amt">$'+t.amt+'</div><div class="tx-when">'+t.time+'</div></div>'+
+    '</div>';
+  }).join("");
+}
+function renderRevs(){
+  document.getElementById("revGrid").innerHTML=REVIEWS.map(function(r){
+    return'<div class="rev-card"><div class="rev-stars">'+"⭐".repeat(r.stars)+'</div><div class="rev-text">"'+r.text+'"</div><div class="rev-who">'+r.name+' · '+r.date+'</div></div>';
+  }).join("");
+}
+function renderFAQs(){
+  document.getElementById("faqList").innerHTML=FAQS.map(function(f){
+    return'<div class="faq-item"><button class="faq-q">'+f.q+'<span class="faq-ico">+</span></button><div class="faq-a">'+f.a+'</div></div>';
+  }).join("");
+  document.querySelectorAll(".faq-q").forEach(function(q){
+    q.addEventListener("click",function(){
+      var it=q.parentElement,open=it.classList.contains("open");
+      document.querySelectorAll(".faq-item").forEach(function(i){i.classList.remove("open")});
+      if(!open)it.classList.add("open");
+    });
+  });
+}
+
+/* FORM */
+function initForm(){
+  document.getElementById("sendBtn").addEventListener("click",function(){
+    var strain=document.getElementById("s_strain").value;
+    var grade=document.getElementById("s_grade").value;
+    var qty=document.getElementById("s_qty").value;
+    var country=document.getElementById("s_country").value.trim();
+    var contact=document.getElementById("s_contact").value||"whatsapp";
+    var handle=document.getElementById("s_handle").value.trim();
+    var notes=document.getElementById("s_notes").value.trim()||"None";
+    document.querySelectorAll(".req-err").forEach(function(e){e.remove()});
+    document.querySelectorAll(".fc2").forEach(function(el){el.style.borderColor="var(--bd)"});
+    var ok=true;
+    function err(id,m){var el=document.getElementById(id);el.style.borderColor="#f87171";var d=document.createElement("div");d.className="req-err";d.textContent=m;el.parentNode.appendChild(d);ok=false}
+    if(!strain)err("s_strain","Please select a strain");
+    if(!grade)err("s_grade","Please select a grade");
+    if(!qty||qty<1)err("s_qty","Please enter quantity");
+    if(!country)err("s_country","Please enter your country");
+    if(!handle)err("s_handle","Please enter your contact details");
+    if(!ok)return;
+    var msg="Hi! I'd like to order from X Marks the Spot:\n\n🐠 Strain: "+strain+"\n⭐ Grade: "+grade+"\n📦 Quantity: "+qty+"\n🌏 Country: "+country+"\n📞 Contact via: "+contact+" — "+handle+"\n📝 Notes: "+notes+"\n\nPlease confirm availability and shipping cost. Thank you!";
+    if(contact==="whatsapp"){window.open("https://wa.me/639173397877?text="+encodeURIComponent(msg),"_blank")}
+    else{window.open("mailto:Francisco.Desaca@gmail.com?subject=Fish Request — "+encodeURIComponent(strain)+"&body="+encodeURIComponent(msg),"_blank")}
+    document.getElementById("reqForm").style.display="none";
+    document.getElementById("confirmBox").classList.add("on");
+  });
+  document.getElementById("resetBtn").addEventListener("click",function(){
+    document.getElementById("reqForm").style.display="block";
+    document.getElementById("confirmBox").classList.remove("on");
+    ["s_strain","s_grade","s_qty","s_country","s_handle","s_notes"].forEach(function(id){document.getElementById(id).value=""});
+    document.getElementById("s_contact").value="whatsapp";
+  });
+  document.getElementById("notifyBtn").addEventListener("click",function(){
+    var e=document.getElementById("notifyEmail").value.trim();
+    if(!e||!e.includes("@")){alert("Please enter a valid email address.");return}
+    window.open("mailto:Francisco.Desaca@gmail.com?subject=Newsletter&body="+encodeURIComponent("Add: "+e),"_blank");
+    document.getElementById("notifyOk").classList.add("on");
+    document.getElementById("notifyEmail").value="";
+  });
+  document.getElementById("submitRevBtn").addEventListener("click",function(){
+    var n=document.getElementById("rName").value.trim(),r=document.getElementById("rRating").value,t=document.getElementById("rText").value.trim();
+    if(!n||!t){alert("Please fill in your name and review.");return}
+    window.open("mailto:Francisco.Desaca@gmail.com?subject=Review&body="+encodeURIComponent("Name: "+n+"\nRating: "+r+"/5\nReview: "+t),"_blank");
+    document.getElementById("revOk").classList.add("on");
+    document.getElementById("rName").value="";document.getElementById("rText").value="";
+  });
+  document.getElementById("sendContactBtn").addEventListener("click",function(){
+    var n=document.getElementById("cName").value.trim(),e=document.getElementById("cEmail").value.trim(),s=document.getElementById("cSubject").value.trim()||"General Inquiry",m=document.getElementById("cMsg").value.trim();
+    if(!n||!m){alert("Please fill in your name and message.");return}
+    window.open("mailto:Francisco.Desaca@gmail.com?subject="+encodeURIComponent(s)+"&body="+encodeURIComponent("Name: "+n+"\nEmail: "+e+"\n\n"+m),"_blank");
+    document.getElementById("conOk").classList.add("on");
+    document.getElementById("cName").value="";document.getElementById("cEmail").value="";document.getElementById("cSubject").value="";document.getElementById("cMsg").value="";
+  });
+}
+
+/* INIT */
+document.addEventListener("DOMContentLoaded",function(){
+  makeParticles();
+  initCursor();
+  initNav();
+  initReveal();
+  initFilters();
+  renderTx();
+  renderRevs();
+  renderFAQs();
+  initForm();
+});
+
+function toggleFabMenu() {
+    const menu = document.getElementById('fabMenu');
+    const container = document.querySelector('.fab-container');
+    menu.classList.toggle('open');
+    container.classList.toggle('open-active');
+}
+</script>
 </body>
 </html>
