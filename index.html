@@ -147,18 +147,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
     radial-gradient(ellipse 120% 80% at 70% 40%, rgba(0,40,60,0.9) 0%, rgba(0,0,0,1) 60%),
     linear-gradient(135deg, #000810 0%, #001520 40%, #000d08 70%, #060606 100%);
 }
-/* Animated fish silhouette using Golden Zebra Lyretail as hero accent */
-.hero-fish{
-  position:absolute;right:-2%;top:50%;transform:translateY(-50%);
-  z-index:1;width:52%;max-width:680px;
-  opacity:.22;
-  animation:fishDrift 12s ease-in-out infinite alternate;
-  filter:brightness(1.3) saturate(1.2)
-}
-@keyframes fishDrift{
-  0%{transform:translateY(-50%) translateX(0) scale(1)}
-  100%{transform:translateY(-53%) translateX(-2%) scale(1.03)}
-}
+
 /* Scan lines for cinematic depth */
 .hero-media::after{
   content:'';position:absolute;inset:0;
@@ -167,9 +156,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 }
 .hero-veil{
   position:absolute;inset:0;z-index:2;
-  background:
-    linear-gradient(to right,rgba(0,0,0,.85) 0%,rgba(0,0,0,.6) 50%,rgba(0,0,0,.1) 100%),
-    linear-gradient(to bottom,rgba(0,0,0,.5) 0%,rgba(6,6,6,0) 40%,rgba(6,6,6,.98) 100%)
+  background:linear-gradient(to bottom,rgba(6,6,6,.3) 0%,rgba(6,6,6,0) 50%,rgba(6,6,6,1) 100%)
 }
 .hero-glow{
   position:absolute;inset:0;z-index:4;
@@ -193,10 +180,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 }
 .hero-content{
   position:relative;z-index:5;
-  text-align:left;max-width:560px;
-  padding:0 0 0 2.5rem;
-  align-self:center;justify-self:start;
-  margin-left:max(2rem,calc((100vw - 1100px)/2))
+  text-align:center;
+  max-width:700px;
+  padding:0 2rem;
 }
 /* Staggered reveal */
 .hero-content>*{opacity:0;animation:heroReveal .9s cubic-bezier(.23,1,.32,1) forwards}
@@ -214,10 +200,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 }
 .hero-title{
   font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(4rem,11vw,7rem);font-weight:800;
-  line-height:.9;letter-spacing:-.04em;
-  color:#fff;margin-bottom:24px;
-  text-shadow:0 4px 80px rgba(0,0,0,1)
+  font-size:clamp(3.2rem,8vw,5.5rem);font-weight:800;
+  line-height:1;letter-spacing:-.03em;
+  color:#fff;margin-bottom:20px;
+  text-shadow:0 4px 60px rgba(0,0,0,.8)
 }
 .hero-title .xt{
   background:linear-gradient(135deg,var(--g) 0%,var(--g2) 50%,var(--g3) 100%);
@@ -231,8 +217,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 }
 .hero-title .xt{background-size:200% auto}
 .hero-desc{
-  font-size:1rem;color:rgba(255,255,255,.68);line-height:1.75;
-  max-width:480px;margin:0 0 36px;font-weight:300
+  font-size:1.05rem;color:rgba(255,255,255,.6);line-height:1.75;
+  max-width:520px;margin:0 auto 36px;font-weight:300
 }
 .hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .btn-primary{
@@ -338,7 +324,7 @@ section{padding:100px 0}
 }
 .fish-card{
   background:var(--s1);position:relative;overflow:hidden;
-  aspect-ratio:3/4;cursor:none;
+  aspect-ratio:4/5;cursor:none;
 }
 .fc-img{
   position:absolute;inset:0;width:100%;height:100%;
@@ -348,11 +334,9 @@ section{padding:100px 0}
 .fish-card:hover .fc-img{transform:scale(1.07);filter:brightness(1.07) saturate(1.12)}
 /* Dark overlay */
 .fc-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,.3) 50%,transparent 100%);
-  transition:background .4s
+  position:absolute;inset:0;z-index:2;
+  background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.4) 45%,rgba(0,0,0,.05) 75%,transparent 100%);
 }
-.fish-card:hover .fc-overlay{background:linear-gradient(to top,rgba(0,0,0,.95) 0%,rgba(0,0,0,.4) 60%,rgba(0,0,0,.1) 100%)}
 /* Shimmer sweep */
 .fc-shimmer{
   position:absolute;inset:0;
@@ -361,7 +345,7 @@ section{padding:100px 0}
 }
 .fish-card:hover .fc-shimmer{transform:translateX(100%)}
 /* Info */
-.fc-info{position:absolute;bottom:0;left:0;right:0;padding:24px;transform:translateY(0);transition:transform .4s cubic-bezier(.23,1,.32,1)}
+.fc-info{position:absolute;bottom:0;left:0;right:0;padding:20px 22px 22px;z-index:4}
 .fish-card:hover .fc-info{transform:translateY(-8px)}
 .fc-type{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--g2);margin-bottom:6px}
 .fc-name{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px}
@@ -662,10 +646,7 @@ footer{
 }
 @media(max-width:768px){
   section{padding:60px 0}
-  .hero-title{font-size:clamp(3rem,12vw,5rem)}
-  .hero-content{text-align:center;padding:0 1.5rem;margin-left:0;max-width:100%}
-  .hero-badges{justify-content:center}
-  .hero-desc{margin:0 auto 36px}
+  .hero-title{font-size:clamp(2.8rem,11vw,5rem)}
   .fish-grid{grid-template-columns:1fr 1fr}
 .frow{grid-template-columns:1fr}
   .notify-row{flex-direction:column}
@@ -767,16 +748,16 @@ footer{
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="hero-media"></div>
-  <img class="hero-fish" src="https://i.imgur.com/PYOUgcb.jpg" alt="" aria-hidden="true" onerror="this.style.display='none'"/>
+  <div class="hero-x-mark" aria-hidden="true">✕</div>
+  <div class="hero-orb" aria-hidden="true"></div>
+
   <div class="hero-veil"></div>
   <div class="hero-glow"></div>
   <div class="hero-noise"></div>
   <div class="hero-particles" id="particles"></div>
   <div class="hero-content" style="z-index:5">
     <div class="hero-eyebrow">Talisay City, Philippines · Est. 2024</div>
-    <h1 class="hero-title">
-      <span class="xt">✕ Marks</span><br>the Spot
-    </h1>
+    <h1 class="hero-title"><span class="xt">✕</span> Marks the Spot</h1>
     <p class="hero-desc">World-class balloon mollies. Selectively bred, personally evaluated against competition standard, shipped worldwide.</p>
     <div class="hero-actions">
       <button class="btn-primary" id="heroOrder">Browse Strains</button>
