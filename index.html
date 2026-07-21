@@ -40,7 +40,29 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 .nav-cta:hover{background:var(--g3);box-shadow:0 8px 32px rgba(245,200,66,.4);transform:translateY(-1px)}
 
 /* FISH POPUP FAB */
-.fab{position:fixed;bottom:32px;right:32px;z-index:99;width:54px;height:54px;border-radius:50%;background:var(--g2);border:none;cursor:none;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(245,200,66,.4);transition:all .3s cubic-bezier(.23,1,.32,1)}
+.fab{
+  position:fixed;bottom:32px;right:32px;z-index:99;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--g2);border:none;cursor:none;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 28px rgba(245,200,66,.4);
+  transition:all .3s cubic-bezier(.23,1,.32,1)
+}
+.fab-label{
+  position:absolute;right:64px;
+  background:rgba(0,0,0,.85);color:#fff;
+  font-size:11px;font-weight:600;padding:6px 12px;
+  border-radius:8px;white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+  font-family:'Inter',sans-serif
+}
+.fab-label::after{
+  content:'';position:absolute;right:-5px;top:50%;transform:translateY(-50%);
+  width:0;height:0;
+  border-top:5px solid transparent;border-bottom:5px solid transparent;
+  border-left:5px solid rgba(0,0,0,.85)
+}
+.fab:hover .fab-label{opacity:1}
 .fab svg{transition:transform .4s cubic-bezier(.23,1,.32,1)}
 .fab:hover,.fab.open{transform:scale(1.1);box-shadow:0 12px 40px rgba(245,200,66,.55)}
 .fab.open svg{transform:rotate(45deg)}
@@ -63,7 +85,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 .popup-tip{font-size:11px;color:var(--t3);text-align:center;padding:4px 14px 14px;line-height:1.6}
 
 /* ═══ HERO CAROUSEL ═══ */
-.hero{height:100vh;min-height:640px;max-height:960px;position:relative;overflow:hidden}
+.hero{height:100svh;min-height:600px;max-height:980px;position:relative;overflow:hidden}
 
 /* Slides */
 .slide{
@@ -85,9 +107,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 
 /* Fish image — right side, large, transparent bg removed */
 .slide-fish{
-  position:absolute;right:0;bottom:0;
-  height:95%;width:55%;
-  object-fit:contain;object-position:right bottom;
+  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  height:88%;width:52%;
+  object-fit:contain;object-position:center center;
   z-index:2;
   filter:drop-shadow(-40px 0 60px rgba(0,0,0,.9));
   animation:none;
@@ -95,8 +117,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 }
 .slide.active .slide-fish{animation:fishEnter 1.6s cubic-bezier(.23,1,.32,1) forwards}
 @keyframes fishEnter{
-  from{transform:translateX(60px) scale(.96);opacity:0;filter:drop-shadow(-40px 0 60px rgba(0,0,0,.9)) blur(8px)}
-  to{transform:translateX(0) scale(1);opacity:1;filter:drop-shadow(-40px 0 60px rgba(0,0,0,.9)) blur(0)}
+  from{transform:translateY(-50%) translateX(60px) scale(.96);opacity:0;filter:drop-shadow(-40px 0 60px rgba(0,0,0,.9)) blur(8px)}
+  to{transform:translateY(-50%) translateX(0) scale(1);opacity:1;filter:drop-shadow(-40px 0 60px rgba(0,0,0,.9)) blur(0)}
 }
 
 /* Left gradient fade so fish blends into dark */
@@ -130,7 +152,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
   position:relative;z-index:5;
   max-width:1100px;margin:0 auto;
   padding:0 2.5rem;
-  width:100%
+  width:100%;
+  display:flex;flex-direction:column;justify-content:center;
+  padding-top:80px
 }
 .slide-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
@@ -146,7 +170,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
   font-size:clamp(3rem,7vw,5.5rem);font-weight:800;
   color:#fff;letter-spacing:-.03em;line-height:.95;
   margin-bottom:18px;
-  opacity:0;text-shadow:0 4px 40px rgba(0,0,0,1)
+  opacity:0;
+  text-shadow:0 2px 4px rgba(0,0,0,.8),0 8px 40px rgba(0,0,0,1)
 }
 .slide.active .slide-title{animation:fadeUp .9s .5s ease forwards}
 .slide-title .xt{
@@ -242,9 +267,12 @@ section{padding:100px 0}
   border:1px solid var(--bd);
   overflow:hidden;position:relative;
   transition:transform .35s cubic-bezier(.23,1,.32,1),border-color .3s,box-shadow .3s;
-  cursor:none
+  cursor:none;
+  opacity:0;
+  animation:cardIn .6s cubic-bezier(.23,1,.32,1) both
 }
-.fc:hover{transform:translateY(-6px);border-color:rgba(212,168,67,.3);box-shadow:0 20px 50px rgba(0,0,0,.7),0 0 40px rgba(212,168,67,.06)}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fc:hover{transform:translateY(-8px) scale(1.01);border-color:rgba(212,168,67,.3);box-shadow:0 24px 56px rgba(0,0,0,.7),0 0 40px rgba(212,168,67,.07)}
 
 /* Fish image area — taller, fish centered */
 .fc-img-wrap{
@@ -256,11 +284,20 @@ section{padding:100px 0}
 .fc-img{
   width:100%;height:100%;
   object-fit:contain;object-position:center center;
-  transition:transform .6s cubic-bezier(.23,1,.32,1),filter .4s;
-  padding:8px;
-  filter:drop-shadow(0 8px 24px rgba(0,0,0,.6))
+  transition:transform .7s cubic-bezier(.23,1,.32,1),filter .4s;
+  padding:10px;
+  filter:drop-shadow(0 12px 28px rgba(0,0,0,.65));
+  animation:fishFloat 4s ease-in-out infinite
 }
-.fc:hover .fc-img{transform:scale(1.06) translateY(-4px);filter:drop-shadow(0 16px 36px rgba(0,0,0,.7)) brightness(1.06)}
+.fc:hover .fc-img{
+  transform:scale(1.08) translateY(-6px);
+  filter:drop-shadow(0 20px 40px rgba(0,0,0,.75)) brightness(1.07);
+  animation:none
+}
+@keyframes fishFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
 
 /* Shimmer sweep */
 .fc-shine{
@@ -291,8 +328,8 @@ section{padding:100px 0}
 .gc:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.6)}
 .gc.gold:hover{border-color:rgba(212,168,67,.25);box-shadow:0 20px 50px rgba(212,168,67,.08)}
 .gc-img-wrap{width:100%;height:180px;display:flex;align-items:center;justify-content:center;background:linear-gradient(to bottom,var(--s1),var(--s2));overflow:hidden}
-.gc-fish{width:100%;height:100%;object-fit:contain;padding:16px;transition:transform .5s cubic-bezier(.23,1,.32,1);filter:drop-shadow(0 8px 20px rgba(0,0,0,.5))}
-.gc:hover .gc-fish{transform:scale(1.08) translateY(-4px)}
+.gc-fish{width:100%;height:100%;object-fit:contain;padding:16px;transition:transform .5s cubic-bezier(.23,1,.32,1);filter:drop-shadow(0 8px 20px rgba(0,0,0,.5));animation:fishFloat 5s ease-in-out infinite}
+.gc:hover .gc-fish{transform:scale(1.1) translateY(-6px)}
 .gc-body{padding:18px 20px 22px;border-top:1px solid var(--bd)}
 .gc-tier{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:6px}
 .gc-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;margin-bottom:4px}
@@ -455,7 +492,7 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
   .wrap{padding:0 1.25rem}
   .hero{height:100svh}
   .slide-content{padding:0 1.5rem}
-  .slide-fish{width:65%;opacity:.7}
+  .slide-fish{width:60%;opacity:.75;height:80%}
   body{cursor:auto}
   #cur{display:none}
 }
@@ -489,6 +526,7 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 
 <!-- FAB + POPUP -->
 <button class="fab" id="fab">
+  <span class="fab-label">Contact Us</span>
   <svg viewBox="0 0 28 28" fill="none" width="20" height="20"><line x1="4" y1="4" x2="24" y2="24" stroke="#111" stroke-width="3" stroke-linecap="round"/><line x1="24" y1="4" x2="4" y2="24" stroke="#111" stroke-width="3" stroke-linecap="round"/></svg>
 </button>
 <div class="popup" id="popup">
@@ -1029,170 +1067,4 @@ makeParticles();
 })();
 
 /* ─── NAV ─── */
-window.addEventListener("scroll",function(){document.getElementById("nav").classList.toggle("solid",window.scrollY>60)},{passive:true});
-document.getElementById("navCta").addEventListener("click",function(){document.getElementById("request").scrollIntoView({behavior:"smooth"})});
-document.getElementById("heroBtn").addEventListener("click",function(){document.getElementById("strains").scrollIntoView({behavior:"smooth"})});
-
-/* ─── FAB POPUP ─── */
-var fab=document.getElementById("fab"),popup=document.getElementById("popup"),pclose=document.getElementById("popClose");
-fab.addEventListener("click",function(){fab.classList.toggle("open");popup.classList.toggle("open")});
-pclose.addEventListener("click",function(e){e.stopPropagation();fab.classList.remove("open");popup.classList.remove("open")});
-document.addEventListener("click",function(e){if(!popup.contains(e.target)&&e.target!==fab){fab.classList.remove("open");popup.classList.remove("open")}});
-
-/* ─── REVEAL ─── */
-(function(){
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add("vis")})},{threshold:.1});
-  document.querySelectorAll(".r").forEach(function(el){io.observe(el)});
-})();
-
-/* ─── FILTERS + FISH ─── */
-var curCat="all";
-function buildFilters(){
-  var bar=document.getElementById("fpills");
-  var cats=[{id:"all",l:"All"},{id:"lyretail",l:"Lyretails"},{id:"veiltail",l:"Veiltails"},{id:"roundtail",l:"Roundtails"}];
-  bar.innerHTML=cats.map(function(c,i){return'<button class="fp'+(i===0?" on":"")+'" data-cat="'+c.id+'">'+c.l+'</button>'}).join("");
-  bar.querySelectorAll(".fp").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      bar.querySelectorAll(".fp").forEach(function(b){b.classList.remove("on")});
-      btn.classList.add("on");curCat=btn.dataset.cat;renderFish();
-    });
-  });
-}
-function renderFish(){
-  var list=curCat==="all"?FISH:FISH.filter(function(f){return f.cat===curCat});
-  var g=document.getElementById("fishGrid");
-  if(!list.length){g.innerHTML='<div class="empty">No strains in this category.</div>';return}
-  g.innerHTML=list.map(function(f){
-    return'<div class="fc">'+
-      '<div class="fc-img-wrap">'+
-        '<img class="fc-img" src="'+f.img+'" alt="'+f.v+'" loading="lazy" onerror="this.style.display=\'none\'"/>'+
-        '<div class="fc-shine"></div>'+
-      '</div>'+
-      '<div class="fc-body">'+
-        '<div class="fc-strain-type">Balloon Molly</div>'+
-        '<div class="fc-name">'+f.v+'</div>'+
-        '<div class="fc-foot">'+
-          '<span class="fc-price">from $80</span>'+
-          '<button class="fc-btn" data-v="'+f.v.replace(/"/g,"&quot;")+'">Request →</button>'+
-        '</div>'+
-      '</div>'+
-    '</div>';
-  }).join("");
-  g.querySelectorAll(".fc-btn").forEach(function(btn){
-    btn.addEventListener("click",function(){pickStrain(btn.dataset.v)});
-  });
-}
-function pickStrain(v){
-  var sel=document.getElementById("s_strain");
-  for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===v){sel.selectedIndex=i;break}}
-  document.getElementById("request").scrollIntoView({behavior:"smooth",block:"start"});
-  setTimeout(function(){var g=document.getElementById("s_grade");g.focus();g.style.borderColor="var(--g2)";setTimeout(function(){g.style.borderColor=""},2000)},800);
-}
-buildFilters();
-renderFish();
-
-/* ─── TX + REVIEWS + FAQ ─── */
-function renderTx(){
-  document.getElementById("txList").innerHTML=TX.map(function(t){
-    return'<div class="tx"><div class="tx-flag">'+t.flag+'</div><div class="tx-body"><div class="tx-who">'+t.name+' · '+t.loc+'</div><div class="tx-what">'+t.fish+'</div></div><div class="tx-r"><div class="tx-amt">$'+t.amt+'</div><div class="tx-when">'+t.time+'</div></div></div>';
-  }).join("");
-}
-function renderRevs(){
-  document.getElementById("revList").innerHTML=REVIEWS.map(function(r){
-    return'<div class="rev"><div class="rev-stars">'+"⭐".repeat(r.stars)+'</div><div class="rev-txt">"'+r.text+'"</div><div class="rev-who">'+r.name+' · '+r.date+'</div></div>';
-  }).join("");
-}
-function renderFAQs(){
-  document.getElementById("faqList").innerHTML=FAQS.map(function(f){
-    return'<div class="faq-item"><button class="faq-q">'+f.q+'<span class="faq-ico">+</span></button><div class="faq-a">'+f.a+'</div></div>';
-  }).join("");
-  document.querySelectorAll(".faq-q").forEach(function(q){
-    q.addEventListener("click",function(){var it=q.parentElement,open=it.classList.contains("open");document.querySelectorAll(".faq-item").forEach(function(i){i.classList.remove("open")});if(!open)it.classList.add("open")});
-  });
-}
-renderTx();renderRevs();renderFAQs();
-
-/* ─── FORM ─── */
-document.getElementById("sendBtn").addEventListener("click",function(){
-  var strain=document.getElementById("s_strain").value,
-      grade=document.getElementById("s_grade").value,
-      qty=document.getElementById("s_qty").value,
-      country=document.getElementById("s_country").value.trim(),
-      contact=document.getElementById("s_contact").value||"whatsapp",
-      handle=document.getElementById("s_handle").value.trim(),
-      notes=document.getElementById("s_notes").value.trim()||"None";
-
-  document.querySelectorAll(".ferr").forEach(function(e){e.remove()});
-  document.querySelectorAll(".fc2").forEach(function(el){el.style.borderColor=""});
-
-  var ok=true;
-  function err(id,m){
-    var el=document.getElementById(id);
-    el.style.borderColor="#f87171";
-    var d=document.createElement("div");
-    d.className="ferr";
-    d.textContent=m;
-    el.parentNode.appendChild(d);
-    ok=false;
-  }
-
-  if(!strain) err("s_strain","Select a strain");
-  if(!grade) err("s_grade","Select a grade");
-  if(!qty||parseInt(qty)<=0) err("s_qty","Enter quantity");
-  if(!country) err("s_country","Enter country");
-  if(!handle) err("s_handle","Enter contact handle");
-
-  if(!ok) return;
-
-  if(contact==="whatsapp"){
-    var msg="Hello! Requesting fish from XMTS Aquatics:\n\n"
-           +"• Strain: "+strain+"\n"
-           +"• Grade: "+grade+"\n"
-           +"• Quantity: "+qty+"\n"
-           +"• Country: "+country+"\n"
-           +"• Notes: "+notes;
-    window.open("https://wa.me/639173397877?text="+encodeURIComponent(msg),"_blank");
-  }
-
-  document.getElementById("reqForm").style.display="none";
-  document.getElementById("confBox").classList.add("on");
-});
-
-document.getElementById("resetBtn").addEventListener("click",function(){
-  document.getElementById("reqForm").style.display="block";
-  document.getElementById("confBox").classList.remove("on");
-});
-
-/* ─── OTHER ACTIONS ─── */
-document.getElementById("nBtn").addEventListener("click",function(){
-  var e=document.getElementById("nEmail").value.trim();
-  if(e){
-    document.getElementById("nOk").classList.add("on");
-    document.getElementById("nEmail").value="";
-  }
-});
-
-document.getElementById("cSend").addEventListener("click",function(){
-  var n=document.getElementById("cName").value.trim(),
-      m=document.getElementById("cMsg").value.trim();
-  if(n&&m){
-    document.getElementById("cOk").classList.add("on");
-    document.getElementById("cName").value="";
-    document.getElementById("cEmail").value="";
-    document.getElementById("cSubject").value="";
-    document.getElementById("cMsg").value="";
-  }
-});
-
-document.getElementById("rSubmit").addEventListener("click",function(){
-  var n=document.getElementById("rName").value.trim(),
-      t=document.getElementById("rText").value.trim();
-  if(n&&t){
-    document.getElementById("rOk").classList.add("on");
-    document.getElementById("rName").value="";
-    document.getElementById("rText").value="";
-  }
-});
-</script>
-</body>
-</html>
+window.addEventListener("scroll",function(){document.getElementById("nav").classList.toggle("solid",window.scrollY>60)},{passiv
