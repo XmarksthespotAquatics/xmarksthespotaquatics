@@ -36,33 +36,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 .nav-r{display:flex;gap:6px;align-items:center}
 .nav-a{font-size:13px;color:var(--t2);text-decoration:none;padding:7px 14px;border-radius:99px;transition:all .2s;font-weight:500}
 .nav-a:hover{color:#fff;background:rgba(255,255,255,.07)}
-.nav-cta{font-size:13px;font-weight:700;color:#0a0a0a;background:var(--g2);border:none;padding:99px;padding:9px 22px;border-radius:99px;cursor:none;transition:all .25s;box-shadow:0 4px 20px rgba(245,200,66,.25)}
+.nav-cta{font-size:13px;font-weight:700;color:#0a0a0a;background:var(--g2);border:none;padding:9px 22px;border-radius:99px;cursor:none;transition:all .25s;box-shadow:0 4px 20px rgba(245,200,66,.25)}
 .nav-cta:hover{background:var(--g3);box-shadow:0 8px 32px rgba(245,200,66,.4);transform:translateY(-1px)}
 
-/* FAB & POPUP */
-.fab{
-  position:fixed;bottom:32px;right:32px;z-index:99;
-  width:52px;height:52px;border-radius:50%;
-  background:var(--g2);border:none;cursor:none;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 28px rgba(245,200,66,.4);
-  transition:all .3s cubic-bezier(.23,1,.32,1)
-}
-.fab-label{
-  position:absolute;right:64px;
-  background:rgba(0,0,0,.85);color:#fff;
-  font-size:11px;font-weight:600;padding:6px 12px;
-  border-radius:8px;white-space:nowrap;
-  opacity:0;pointer-events:none;transition:opacity .2s;
-  font-family:'Inter',sans-serif
-}
-.fab-label::after{
-  content:'';position:absolute;right:-5px;top:50%;transform:translateY(-50%);
-  width:0;height:0;
-  border-top:5px solid transparent;border-bottom:5px solid transparent;
-  border-left:5px solid rgba(0,0,0,.85)
-}
-.fab:hover .fab-label{opacity:1}
+/* FISH POPUP FAB */
+.fab{position:fixed;bottom:32px;right:32px;z-index:99;width:54px;height:54px;border-radius:50%;background:var(--g2);border:none;cursor:none;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(245,200,66,.4);transition:all .3s cubic-bezier(.23,1,.32,1)}
 .fab svg{transition:transform .4s cubic-bezier(.23,1,.32,1)}
 .fab:hover,.fab.open{transform:scale(1.1);box-shadow:0 12px 40px rgba(245,200,66,.55)}
 .fab.open svg{transform:rotate(45deg)}
@@ -85,14 +63,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 .popup-tip{font-size:11px;color:var(--t3);text-align:center;padding:4px 14px 14px;line-height:1.6}
 
 /* ═══ HERO CAROUSEL ═══ */
-.hero{
-  height:100vh;
-  min-height:600px;
-  max-height:980px;
-  position:relative;
-  overflow:hidden;
-  background:var(--bg); /* Prevents blank white/transparent gaps */
-}
+.hero{height:100vh;min-height:640px;max-height:960px;position:relative;overflow:hidden}
 
 /* Slides */
 .slide{
@@ -104,7 +75,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 .slide.active{opacity:1;z-index:1}
 .slide.prev{opacity:0;z-index:0}
 
-/* Slide background */
+/* Slide background — dark gradient per slide */
 .slide-bg{position:absolute;inset:0;z-index:0}
 .slide-bg-1{background:linear-gradient(135deg,#0a0500 0%,#1a0e00 40%,#060606 100%)}
 .slide-bg-2{background:linear-gradient(135deg,#00080a 0%,#001520 40%,#060606 100%)}
@@ -112,36 +83,35 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 .slide-bg-4{background:linear-gradient(135deg,#030a00 0%,#0a1500 40%,#060606 100%)}
 .slide-bg-5{background:linear-gradient(135deg,#08050a 0%,#140a1a 40%,#060606 100%)}
 
+/* Fish image — right side, large, transparent bg removed */
 .slide-fish{
-  position:absolute;
-  right:2%;
-  top:50%;
-  transform:translateY(-50%);
-  height:80%;
-  width:45%;
-  max-width:550px;
-  object-fit:contain;
-  object-position:center center;
+  position:absolute;right:0;bottom:0;
+  height:95%;width:55%;
+  object-fit:contain;object-position:right bottom;
   z-index:2;
   filter:drop-shadow(-40px 0 60px rgba(0,0,0,.9));
-  pointer-events:none;
+  animation:none;
+  transition:none
 }
 .slide.active .slide-fish{animation:fishEnter 1.6s cubic-bezier(.23,1,.32,1) forwards}
 @keyframes fishEnter{
-  from{transform:translateY(-50%) translateX(60px) scale(.96);opacity:0;filter:drop-shadow(-40px 0 60px rgba(0,0,0,.9)) blur(8px)}
-  to{transform:translateY(-50%) translateX(0) scale(1);opacity:1;filter:drop-shadow(-40px 0 60px rgba(0,0,0,.9)) blur(0)}
+  from{transform:translateX(60px) scale(.96);opacity:0;filter:drop-shadow(-40px 0 60px rgba(0,0,0,.9)) blur(8px)}
+  to{transform:translateX(0) scale(1);opacity:1;filter:drop-shadow(-40px 0 60px rgba(0,0,0,.9)) blur(0)}
 }
 
+/* Left gradient fade so fish blends into dark */
 .slide-fade{
   position:absolute;inset:0;z-index:3;
-  background:linear-gradient(to right,rgba(6,6,6,1) 0%,rgba(6,6,6,.85) 35%,rgba(6,6,6,.3) 65%,rgba(6,6,6,0) 85%)
+  background:linear-gradient(to right,rgba(6,6,6,1) 0%,rgba(6,6,6,.9) 25%,rgba(6,6,6,.4) 55%,rgba(6,6,6,0) 80%)
 }
 
+/* Bottom fade */
 .slide-bottom{
-  position:absolute;bottom:0;left:0;right:0;height:25%;z-index:3;
+  position:absolute;bottom:0;left:0;right:0;height:30%;z-index:3;
   background:linear-gradient(to top,rgba(6,6,6,1),transparent)
 }
 
+/* Gold ambient glow per slide */
 .slide-glow{
   position:absolute;left:-10%;top:50%;transform:translateY(-50%);
   width:65%;height:130%;z-index:1;
@@ -150,23 +120,18 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 }
 @keyframes glowPulse{0%,100%{opacity:.6}50%{opacity:1}}
 
+/* Particles */
 .particles{position:absolute;inset:0;z-index:4;overflow:hidden;pointer-events:none}
 .pt{position:absolute;border-radius:50%;background:rgba(212,168,67,.45);animation:ptRise linear infinite}
 @keyframes ptRise{0%{transform:translateY(110vh);opacity:0}5%{opacity:1}90%{opacity:.3}100%{transform:translateY(-10vh);opacity:0}}
 
-/* FIX 1: Restrict text container width to prevent image overlap */
+/* Slide content */
 .slide-content{
   position:relative;z-index:5;
   max-width:1100px;margin:0 auto;
   padding:0 2.5rem;
-  width:100%;
-  display:flex;flex-direction:column;justify-content:center;
-  padding-top:40px;
+  width:100%
 }
-.slide-content-inner{
-  max-width:560px; /* Text bounding box prevents overlapping with fish image */
-}
-
 .slide-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
@@ -178,11 +143,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 .slide.active .slide-eyebrow{animation:fadeUp .8s .3s ease forwards}
 .slide-title{
   font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(2.5rem,5.5vw,4.8rem);font-weight:800;
+  font-size:clamp(3rem,7vw,5.5rem);font-weight:800;
   color:#fff;letter-spacing:-.03em;line-height:.95;
   margin-bottom:18px;
-  opacity:0;
-  text-shadow:0 2px 4px rgba(0,0,0,.8),0 8px 40px rgba(0,0,0,1)
+  opacity:0;text-shadow:0 4px 40px rgba(0,0,0,1)
 }
 .slide.active .slide-title{animation:fadeUp .9s .5s ease forwards}
 .slide-title .xt{
@@ -211,20 +175,20 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-heig
 .btn-g:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
 
 /* Carousel controls */
-.hero-nav{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:6;display:flex;align-items:center;gap:20px}
+.hero-nav{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);z-index:6;display:flex;align-items:center;gap:20px}
 .hero-dots{display:flex;gap:8px;align-items:center}
 .dot{width:6px;height:6px;border-radius:99px;background:rgba(255,255,255,.25);cursor:none;transition:all .4s cubic-bezier(.23,1,.32,1)}
 .dot.on{width:28px;background:var(--g2)}
 .hero-arr{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;cursor:none;transition:all .2s;color:rgba(255,255,255,.7)}
 .hero-arr:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)}
-.scroll-hint{position:absolute;bottom:36px;right:60px;z-index:6;display:flex;flex-direction:column;align-items:center;gap:8px}
+.scroll-hint{position:absolute;bottom:48px;right:60px;z-index:6;display:flex;flex-direction:column;align-items:center;gap:8px}
 .scroll-hint span{font-size:10px;letter-spacing:.2em;color:rgba(255,255,255,.3);text-transform:uppercase}
 .scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent);animation:lineDown 2s ease-in-out infinite}
 @keyframes lineDown{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* ═══ SECTIONS ═══ */
 .wrap{max-width:1100px;margin:0 auto;padding:0 2rem}
-section{padding:80px 0}
+section{padding:100px 0}
 .s-label{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g2);display:block;margin-bottom:10px}
 .s-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:14px;line-height:1.1}
 .s-sub{font-size:1rem;color:var(--t2);line-height:1.7;max-width:520px}
@@ -264,7 +228,7 @@ section{padding:80px 0}
 .sn{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;color:var(--g2)}
 .sl{font-size:10px;color:var(--t2);margin-top:4px;text-transform:uppercase;letter-spacing:.07em;font-weight:600}
 
-/* FISH GRID */
+/* FISH GRID — clean uniform cards with transparent-bg fish */
 .strain-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:20px}
 .fpills{display:flex;gap:6px;flex-wrap:wrap}
 .fp{font-size:12px;font-weight:600;padding:8px 18px;border-radius:99px;border:1px solid var(--bd);background:transparent;color:var(--t2);cursor:none;transition:all .25s;font-family:'Inter',sans-serif}
@@ -272,18 +236,17 @@ section{padding:80px 0}
 .fp.on{background:var(--g2);color:#0a0a0a;border-color:var(--g2)}
 .fish-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 
+/* Fish card — transparent bg, fish floats on dark */
 .fc{
   background:var(--s1);border-radius:20px;
   border:1px solid var(--bd);
   overflow:hidden;position:relative;
   transition:transform .35s cubic-bezier(.23,1,.32,1),border-color .3s,box-shadow .3s;
-  cursor:none;
-  opacity:0;
-  animation:cardIn .6s cubic-bezier(.23,1,.32,1) both
+  cursor:none
 }
-@keyframes cardIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.fc:hover{transform:translateY(-8px) scale(1.01);border-color:rgba(212,168,67,.3);box-shadow:0 24px 56px rgba(0,0,0,.7),0 0 40px rgba(212,168,67,.07)}
+.fc:hover{transform:translateY(-6px);border-color:rgba(212,168,67,.3);box-shadow:0 20px 50px rgba(0,0,0,.7),0 0 40px rgba(212,168,67,.06)}
 
+/* Fish image area — taller, fish centered */
 .fc-img-wrap{
   width:100%;height:260px;
   display:flex;align-items:center;justify-content:center;
@@ -293,21 +256,13 @@ section{padding:80px 0}
 .fc-img{
   width:100%;height:100%;
   object-fit:contain;object-position:center center;
-  transition:transform .7s cubic-bezier(.23,1,.32,1),filter .4s;
-  padding:10px;
-  filter:drop-shadow(0 12px 28px rgba(0,0,0,.65));
-  animation:fishFloat 4s ease-in-out infinite
+  transition:transform .6s cubic-bezier(.23,1,.32,1),filter .4s;
+  padding:8px;
+  filter:drop-shadow(0 8px 24px rgba(0,0,0,.6))
 }
-.fc:hover .fc-img{
-  transform:scale(1.08) translateY(-6px);
-  filter:drop-shadow(0 20px 40px rgba(0,0,0,.75)) brightness(1.07);
-  animation:none
-}
-@keyframes fishFloat{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-}
+.fc:hover .fc-img{transform:scale(1.06) translateY(-4px);filter:drop-shadow(0 16px 36px rgba(0,0,0,.7)) brightness(1.06)}
 
+/* Shimmer sweep */
 .fc-shine{
   position:absolute;inset:0;
   background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.05) 50%,transparent 65%);
@@ -315,6 +270,7 @@ section{padding:80px 0}
 }
 .fc:hover .fc-shine{transform:translateX(100%)}
 
+/* Card info */
 .fc-body{padding:16px 18px 20px;border-top:1px solid var(--bd)}
 .fc-strain-type{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g2);margin-bottom:5px}
 .fc-name{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:#fff;line-height:1.25;margin-bottom:14px}
@@ -335,8 +291,8 @@ section{padding:80px 0}
 .gc:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.6)}
 .gc.gold:hover{border-color:rgba(212,168,67,.25);box-shadow:0 20px 50px rgba(212,168,67,.08)}
 .gc-img-wrap{width:100%;height:180px;display:flex;align-items:center;justify-content:center;background:linear-gradient(to bottom,var(--s1),var(--s2));overflow:hidden}
-.gc-fish{width:100%;height:100%;object-fit:contain;padding:16px;transition:transform .5s cubic-bezier(.23,1,.32,1);filter:drop-shadow(0 8px 20px rgba(0,0,0,.5));animation:fishFloat 5s ease-in-out infinite}
-.gc:hover .gc-fish{transform:scale(1.1) translateY(-6px)}
+.gc-fish{width:100%;height:100%;object-fit:contain;padding:16px;transition:transform .5s cubic-bezier(.23,1,.32,1);filter:drop-shadow(0 8px 20px rgba(0,0,0,.5))}
+.gc:hover .gc-fish{transform:scale(1.08) translateY(-4px)}
 .gc-body{padding:18px 20px 22px;border-top:1px solid var(--bd)}
 .gc-tier{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:6px}
 .gc-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;margin-bottom:4px}
@@ -475,6 +431,7 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 .foot-links{display:flex;gap:24px;justify-content:center;margin:20px 0}
 .foot-link{font-size:12px;color:var(--t2);text-decoration:none;transition:color .2s}
 .foot-link:hover{color:var(--g2)}
+.empty{text-align:center;padding:3rem;color:var(--t2)}
 
 /* RESPONSIVE */
 @media(min-width:1100px){.fish-grid{grid-template-columns:repeat(4,1fr)}}
@@ -484,8 +441,6 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
   .req-side{position:static}
   .grades-grid{grid-template-columns:1fr 1fr}
   .about-img-col{max-width:400px;margin:0 auto}
-  .slide-content-inner{max-width:480px}
-  .slide-fish{width:40%;height:70%}
 }
 @media(max-width:768px){
   section{padding:64px 0}
@@ -498,10 +453,9 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
   #nav{padding:14px 1.25rem}
   .nav-wm{display:none}
   .wrap{padding:0 1.25rem}
-  .hero{height:100vh}
+  .hero{height:100svh}
   .slide-content{padding:0 1.5rem}
-  .slide-content-inner{max-width:100%}
-  .slide-fish{width:55%;opacity:.4;height:65%;right:-10px}
+  .slide-fish{width:65%;opacity:.7}
   body{cursor:auto}
   #cur{display:none}
 }
@@ -535,7 +489,6 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 
 <!-- FAB + POPUP -->
 <button class="fab" id="fab">
-  <span class="fab-label">Contact Us</span>
   <svg viewBox="0 0 28 28" fill="none" width="20" height="20"><line x1="4" y1="4" x2="24" y2="24" stroke="#111" stroke-width="3" stroke-linecap="round"/><line x1="24" y1="4" x2="4" y2="24" stroke="#111" stroke-width="3" stroke-linecap="round"/></svg>
 </button>
 <div class="popup" id="popup">
@@ -572,7 +525,7 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 <div class="hero" id="hero">
   <div class="particles" id="particles"></div>
 
-  <!-- Slide 1 -->
+  <!-- Slide 1 — Golden Zebra Lyretail -->
   <div class="slide active" id="slide0">
     <div class="slide-bg slide-bg-1"></div>
     <div class="slide-glow"></div>
@@ -580,20 +533,18 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
     <div class="slide-bottom"></div>
     <img class="slide-fish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Golden_Zebra_Veiltail-removebg-preview.png" alt="Golden Zebra Veiltail" onerror="this.style.display='none'"/>
     <div class="slide-content">
-      <div class="slide-content-inner">
-        <div class="slide-eyebrow">Premium Collection</div>
-        <div class="slide-strain">Balloon Molly</div>
-        <h1 class="slide-title"><span class="xt">✕</span> Marks<br>the Spot</h1>
-        <p class="slide-desc">World-class balloon mollies. Selectively bred, personally evaluated against competition standard, shipped worldwide.</p>
-        <div class="slide-actions">
-          <button class="btn-p" id="heroBtn">Browse Strains</button>
-          <a href="#grades" class="btn-g">Grade Guide</a>
-        </div>
+      <div class="slide-eyebrow">Premium Collection</div>
+      <div class="slide-strain">Balloon Molly</div>
+      <h1 class="slide-title"><span class="xt">✕</span> Marks<br>the Spot</h1>
+      <p class="slide-desc">World-class balloon mollies. Selectively bred, personally evaluated against competition standard, shipped worldwide.</p>
+      <div class="slide-actions">
+        <button class="btn-p" id="heroBtn">Browse Strains</button>
+        <a href="#grades" class="btn-g">Grade Guide</a>
       </div>
     </div>
   </div>
 
-  <!-- Slide 2 -->
+  <!-- Slide 2 — Pikachu Lyretail -->
   <div class="slide" id="slide1">
     <div class="slide-bg slide-bg-2"></div>
     <div class="slide-glow"></div>
@@ -601,20 +552,18 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
     <div class="slide-bottom"></div>
     <img class="slide-fish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Pikachu_Lyretail-removebg-preview.png" alt="Pikachu Lyretail" onerror="this.style.display='none'"/>
     <div class="slide-content">
-      <div class="slide-content-inner">
-        <div class="slide-eyebrow">Featured Strain</div>
-        <div class="slide-strain">Balloon Molly</div>
-        <h1 class="slide-title">Pikachu<br><span class="xt">Lyretail</span></h1>
-        <p class="slide-desc">Striking yellow and black pattern with elegant lyretail fins. A show-stopper in any collection.</p>
-        <div class="slide-actions">
-          <button class="btn-p" onclick="pickStrain('Pikachu Lyretail')">Request This Strain</button>
-          <a href="#strains" class="btn-g">View All Strains</a>
-        </div>
+      <div class="slide-eyebrow">Featured Strain</div>
+      <div class="slide-strain">Balloon Molly</div>
+      <h1 class="slide-title">Pikachu<br><span class="xt">Lyretail</span></h1>
+      <p class="slide-desc">Striking yellow and black pattern with elegant lyretail fins. A show-stopper in any collection.</p>
+      <div class="slide-actions">
+        <button class="btn-p" onclick="pickStrain('Pikachu Lyretail')">Request This Strain</button>
+        <a href="#strains" class="btn-g">View All Strains</a>
       </div>
     </div>
   </div>
 
-  <!-- Slide 3 -->
+  <!-- Slide 3 — Black King -->
   <div class="slide" id="slide2">
     <div class="slide-bg slide-bg-3"></div>
     <div class="slide-glow"></div>
@@ -622,20 +571,18 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
     <div class="slide-bottom"></div>
     <img class="slide-fish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Black_King_Balloon_Molly_Lyretail-removebg-preview.png" alt="Black King" onerror="this.style.display='none'"/>
     <div class="slide-content">
-      <div class="slide-content-inner">
-        <div class="slide-eyebrow">Show Grade</div>
-        <div class="slide-strain">Balloon Molly</div>
-        <h1 class="slide-title">Black King<br><span class="xt">Lyretail</span></h1>
-        <p class="slide-desc">Deep obsidian body with dramatic lyretail fins. Competition-standard excellence from Talisay City.</p>
-        <div class="slide-actions">
-          <button class="btn-p" onclick="pickStrain('Black King Lyretail')">Request This Strain</button>
-          <a href="#grades" class="btn-g">Grade Guide</a>
-        </div>
+      <div class="slide-eyebrow">Show Grade</div>
+      <div class="slide-strain">Balloon Molly</div>
+      <h1 class="slide-title">Black King<br><span class="xt">Lyretail</span></h1>
+      <p class="slide-desc">Deep obsidian body with dramatic lyretail fins. Competition-standard excellence from Talisay City.</p>
+      <div class="slide-actions">
+        <button class="btn-p" onclick="pickStrain('Black King Balloon Molly Lyretail')">Request This Strain</button>
+        <a href="#grades" class="btn-g">Grade Guide</a>
       </div>
     </div>
   </div>
 
-  <!-- Slide 4 -->
+  <!-- Slide 4 — Platinum Marble -->
   <div class="slide" id="slide3">
     <div class="slide-bg slide-bg-4"></div>
     <div class="slide-glow"></div>
@@ -643,20 +590,18 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
     <div class="slide-bottom"></div>
     <img class="slide-fish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Platinum__Marble_Zebra_Pattern-removebg-preview.png" alt="Platinum Marble" onerror="this.style.display='none'"/>
     <div class="slide-content">
-      <div class="slide-content-inner">
-        <div class="slide-eyebrow">Rare Pattern</div>
-        <div class="slide-strain">Balloon Molly</div>
-        <h1 class="slide-title">Platinum<br><span class="xt">Marble</span></h1>
-        <p class="slide-desc">Intricate marble zebra pattern on a platinum base. One of the most sought-after strains in our collection.</p>
-        <div class="slide-actions">
-          <button class="btn-p" onclick="pickStrain('Platinum Marble Roundtail')">Request This Strain</button>
-          <a href="#strains" class="btn-g">View All Strains</a>
-        </div>
+      <div class="slide-eyebrow">Rare Pattern</div>
+      <div class="slide-strain">Balloon Molly</div>
+      <h1 class="slide-title">Platinum<br><span class="xt">Marble</span></h1>
+      <p class="slide-desc">Intricate marble zebra pattern on a platinum base. One of the most sought-after strains in our collection.</p>
+      <div class="slide-actions">
+        <button class="btn-p" onclick="pickStrain('Platinum Marble Roundtail')">Request This Strain</button>
+        <a href="#strains" class="btn-g">View All Strains</a>
       </div>
     </div>
   </div>
 
-  <!-- Slide 5 -->
+  <!-- Slide 5 — Tancho Lyretail -->
   <div class="slide" id="slide4">
     <div class="slide-bg slide-bg-5"></div>
     <div class="slide-glow"></div>
@@ -664,19 +609,18 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
     <div class="slide-bottom"></div>
     <img class="slide-fish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Tancho_Lyretail-removebg-preview.png" alt="Tancho Lyretail" onerror="this.style.display='none'"/>
     <div class="slide-content">
-      <div class="slide-content-inner">
-        <div class="slide-eyebrow">Ships Worldwide</div>
-        <div class="slide-strain">Balloon Molly</div>
-        <h1 class="slide-title">Tancho<br><span class="xt">Lyretail</span></h1>
-        <p class="slide-desc">Elegant white body with distinctive markings and flowing lyretail. Every fish personally selected against competition standard.</p>
-        <div class="slide-actions">
-          <button class="btn-p" onclick="pickStrain('Tancho Lyretail')">Request This Strain</button>
-          <a href="#strains" class="btn-g">View All Strains</a>
-        </div>
+      <div class="slide-eyebrow">Ships Worldwide</div>
+      <div class="slide-strain">Balloon Molly</div>
+      <h1 class="slide-title">Tancho<br><span class="xt">Lyretail</span></h1>
+      <p class="slide-desc">Elegant white body with distinctive markings and flowing lyretail. Every fish personally selected against competition standard.</p>
+      <div class="slide-actions">
+        <button class="btn-p" onclick="pickStrain('Tancho Lyretail')">Request This Strain</button>
+        <a href="#strains" class="btn-g">View All Strains</a>
       </div>
     </div>
   </div>
 
+  <!-- Carousel nav -->
   <div class="hero-nav">
     <button class="hero-arr" id="prevBtn">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -773,7 +717,7 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
                   <option>Golden Zebra Veiltail</option>
                   <option>Pikachu Lyretail</option>
                   <option>Pikachu Roundtail</option>
-                  <option>Black King Lyretail</option>
+                  <option>Black King Balloon Molly Lyretail</option>
                   <option>Platinum Marble Roundtail</option>
                   <option>Chocolate Lyretail</option>
                   <option>Golden Blue Tail Lyretail</option>
@@ -806,7 +750,7 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
                 <input type="text" id="s_notes" class="fc2" placeholder="Pairs, preferences, questions..."/></div>
             </div>
             <button class="sbtn" id="sendBtn">📩 Send Request →</button>
-            <div class="wa-note">💬 <strong>Web3Forms / WhatsApp:</strong> Instant order notification enabled.</div>
+            <div class="wa-note">💬 <strong>WhatsApp:</strong> Order details pre-filled — just press Send.</div>
           </div>
           <div class="conf" id="confBox">
             <div class="conf-ic">✅</div>
@@ -990,7 +934,6 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 </footer>
 
 <script>
-const WEB3FORMS_KEY = "c927ffe6-6c54-4c33-afc6-6ccbaf94b509";
 const BASE="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/";
 const FISH=[
   {v:"Golden Zebra Veiltail",    cat:"veiltail", img:BASE+"Golden_Zebra_Veiltail-removebg-preview.png"},
@@ -1003,16 +946,16 @@ const FISH=[
   {v:"Tancho Lyretail",          cat:"lyretail", img:BASE+"Tancho_Lyretail-removebg-preview.png"},
 ];
 const TX=[
-  {flag:"🇺🇸",name:"Michael T.",loc:"California, USA",fish:"Golden Zebra Veiltail ×5 · Show Grade",amt:"$900",time:"2 days ago"},
-  {flag:"🇸🇬",name:"Wei L.",    loc:"Singapore",     fish:"Pikachu Lyretail ×3 · Material Grade",  amt:"$240",time:"3 days ago"},
-  {flag:"🇩🇪",name:"Klaus M.",  loc:"Berlin, Germany",fish:"Chocolate Lyretail ×4 · Show Potential",amt:"$480",time:"4 days ago"},
-  {flag:"🇦🇺",name:"James R.",  loc:"Sydney, Australia",fish:"Black King ×6 · Material Grade",     amt:"$480",time:"5 days ago"},
-  {flag:"🇯🇵",name:"Hiroshi K.",loc:"Tokyo, Japan",   fish:"Golden Blue Tail ×3 · Show Grade",     amt:"$540",time:"Last week"},
+  {flag:"🇺🇸",name:"Michael T.",loc:"California, USA",fish:"Golden Zebra Veiltail ×5 · Show Grade",amt:900,time:"2 days ago"},
+  {flag:"🇸🇬",name:"Wei L.",    loc:"Singapore",     fish:"Pikachu Lyretail ×3 · Material Grade",  amt:240,time:"3 days ago"},
+  {flag:"🇩🇪",name:"Klaus M.",  loc:"Berlin, Germany",fish:"Chocolate Lyretail ×4 · Show Potential",amt:480,time:"4 days ago"},
+  {flag:"🇦🇺",name:"James R.",  loc:"Sydney, Australia",fish:"Black King ×6 · Material Grade",     amt:480,time:"5 days ago"},
+  {flag:"🇯🇵",name:"Hiroshi K.",loc:"Tokyo, Japan",   fish:"Golden Blue Tail ×3 · Show Grade",     amt:540,time:"Last week"},
 ];
 const REVIEWS=[
-  {name:"Michael T. — USA",   stars:"⭐⭐⭐⭐⭐",text:"Incredible quality. The Golden Zebra Veiltail exceeded expectations — perfect body shape and vibrant coloration. Will order again.",date:"June 2026"},
-  {name:"Wei L. — Singapore", stars:"⭐⭐⭐⭐⭐",text:"Fast response, honest communication, fish arrived healthy and active. Packaging was excellent.",date:"June 2026"},
-  {name:"Klaus M. — Germany", stars:"⭐⭐⭐⭐⭐",text:"Show-quality fish exactly as described. Photos before shipping gave full confidence. Professional throughout.",date:"May 2026"},
+  {name:"Michael T. — USA",   stars:5,text:"Incredible quality. The Golden Zebra Veiltail exceeded expectations — perfect body shape and vibrant coloration. Will order again.",date:"June 2026"},
+  {name:"Wei L. — Singapore", stars:5,text:"Fast response, honest communication, fish arrived healthy and active. Packaging was excellent.",date:"June 2026"},
+  {name:"Klaus M. — Germany", stars:5,text:"Show-quality fish exactly as described. Photos before shipping gave full confidence. Professional throughout.",date:"May 2026"},
 ];
 const FAQS=[
   {q:"How are fish shipped internationally?",a:"Fish are packed in pure oxygen-filled bags with water conditioner inside insulated cargo boxes. We ship via trusted air cargo services experienced in live fish transport. Typical transit: 1–3 days internationally."},
@@ -1024,7 +967,7 @@ const FAQS=[
   {q:"Do you ship to my country?",a:"We ship to most countries worldwide. Some require live fish permits — message us with your country for specific requirements."},
 ];
 
-/* CAROUSEL */
+/* ─── CAROUSEL ─── */
 var slides=document.querySelectorAll(".slide");
 var cur=0,total=slides.length,timer;
 function goTo(n){
@@ -1062,7 +1005,7 @@ document.getElementById("hero").addEventListener("touchend",function(e){
   hx=null;
 },{passive:true});
 
-/* PARTICLES */
+/* ─── PARTICLES ─── */
 function makeParticles(){
   var c=document.getElementById("particles");
   for(var i=0;i<18;i++){
@@ -1074,7 +1017,7 @@ function makeParticles(){
 }
 makeParticles();
 
-/* CURSOR */
+/* ─── CURSOR ─── */
 (function(){
   var el=document.getElementById("cur");
   if(!el)return;
@@ -1085,122 +1028,171 @@ makeParticles();
   });
 })();
 
-/* NAV SCROLL */
-window.addEventListener("scroll",function(){
-  document.getElementById("nav").classList.toggle("solid",window.scrollY>60);
-},{passive:true});
+/* ─── NAV ─── */
+window.addEventListener("scroll",function(){document.getElementById("nav").classList.toggle("solid",window.scrollY>60)},{passive:true});
+document.getElementById("navCta").addEventListener("click",function(){document.getElementById("request").scrollIntoView({behavior:"smooth"})});
+document.getElementById("heroBtn").addEventListener("click",function(){document.getElementById("strains").scrollIntoView({behavior:"smooth"})});
 
-/* FAB & POPUP */
-const fab = document.getElementById("fab");
-const popup = document.getElementById("popup");
-const popClose = document.getElementById("popClose");
-fab.addEventListener("click",()=>{
-  fab.classList.toggle("open");
-  popup.classList.toggle("open");
-});
-popClose.addEventListener("click",()=>{
-  fab.classList.remove("open");
-  popup.classList.remove("open");
-});
+/* ─── FAB POPUP ─── */
+var fab=document.getElementById("fab"),popup=document.getElementById("popup"),pclose=document.getElementById("popClose");
+fab.addEventListener("click",function(){fab.classList.toggle("open");popup.classList.toggle("open")});
+pclose.addEventListener("click",function(e){e.stopPropagation();fab.classList.remove("open");popup.classList.remove("open")});
+document.addEventListener("click",function(e){if(!popup.contains(e.target)&&e.target!==fab){fab.classList.remove("open");popup.classList.remove("open")}});
 
-/* FISH GRID RENDER */
-let activeCat = "all";
+/* ─── REVEAL ─── */
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add("vis")})},{threshold:.1});
+  document.querySelectorAll(".r").forEach(function(el){io.observe(el)});
+})();
+
+/* ─── FILTERS + FISH ─── */
+var curCat="all";
+function buildFilters(){
+  var bar=document.getElementById("fpills");
+  var cats=[{id:"all",l:"All"},{id:"lyretail",l:"Lyretails"},{id:"veiltail",l:"Veiltails"},{id:"roundtail",l:"Roundtails"}];
+  bar.innerHTML=cats.map(function(c,i){return'<button class="fp'+(i===0?" on":"")+'" data-cat="'+c.id+'">'+c.l+'</button>'}).join("");
+  bar.querySelectorAll(".fp").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      bar.querySelectorAll(".fp").forEach(function(b){b.classList.remove("on")});
+      btn.classList.add("on");curCat=btn.dataset.cat;renderFish();
+    });
+  });
+}
 function renderFish(){
-  const grid = document.getElementById("fishGrid");
-  grid.innerHTML = "";
-  const list = activeCat === "all" ? FISH : FISH.filter(f=>f.cat===activeCat);
-  list.forEach((f, idx)=>{
-    const card = document.createElement("div");
-    card.className = "fc";
-    card.style.animationDelay = (idx * 0.08) + "s";
-    card.innerHTML = `
-      <div class="fc-img-wrap">
-        <img class="fc-img" src="${f.img}" alt="${f.v}" onerror="this.style.display='none'"/>
-        <div class="fc-shine"></div>
-      </div>
-      <div class="fc-body">
-        <div class="fc-strain-type">${f.cat}</div>
-        <div class="fc-name">${f.v}</div>
-        <div class="fc-foot">
-          <div class="fc-price">From $80</div>
-          <button class="fc-btn" onclick="pickStrain('${f.v}')">Request</button>
-        </div>
-      </div>
-    `;
-    grid.appendChild(card);
+  var list=curCat==="all"?FISH:FISH.filter(function(f){return f.cat===curCat});
+  var g=document.getElementById("fishGrid");
+  if(!list.length){g.innerHTML='<div class="empty">No strains in this category.</div>';return}
+  g.innerHTML=list.map(function(f){
+    return'<div class="fc">'+
+      '<div class="fc-img-wrap">'+
+        '<img class="fc-img" src="'+f.img+'" alt="'+f.v+'" loading="lazy" onerror="this.style.display=\'none\'"/>'+
+        '<div class="fc-shine"></div>'+
+      '</div>'+
+      '<div class="fc-body">'+
+        '<div class="fc-strain-type">Balloon Molly</div>'+
+        '<div class="fc-name">'+f.v+'</div>'+
+        '<div class="fc-foot">'+
+          '<span class="fc-price">from $80</span>'+
+          '<button class="fc-btn" data-v="'+f.v.replace(/"/g,"&quot;")+'">Request →</button>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }).join("");
+  g.querySelectorAll(".fc-btn").forEach(function(btn){
+    btn.addEventListener("click",function(){pickStrain(btn.dataset.v)});
   });
 }
-
-function renderPills(){
-  const p = document.getElementById("fpills");
-  const cats = [{id:"all",l:"All Strains"},{id:"lyretail",l:"Lyretail"},{id:"veiltail",l:"Veiltail"},{id:"roundtail",l:"Roundtail"}];
-  p.innerHTML = "";
-  cats.forEach(c=>{
-    const b = document.createElement("button");
-    b.className = "fp" + (activeCat === c.id ? " on" : "");
-    b.textContent = c.l;
-    b.onclick = ()=>{
-      activeCat = c.id;
-      renderPills();
-      renderFish();
-    };
-    p.appendChild(b);
-  });
+function pickStrain(v){
+  var sel=document.getElementById("s_strain");
+  for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===v){sel.selectedIndex=i;break}}
+  document.getElementById("request").scrollIntoView({behavior:"smooth",block:"start"});
+  setTimeout(function(){var g=document.getElementById("s_grade");g.focus();g.style.borderColor="var(--g2)";setTimeout(function(){g.style.borderColor=""},2000)},800);
 }
-renderPills();
+buildFilters();
 renderFish();
 
-function pickStrain(s){
-  document.getElementById("s_strain").value = s;
-  document.getElementById("request").scrollIntoView({behavior:"smooth"});
+/* ─── TX + REVIEWS + FAQ ─── */
+function renderTx(){
+  document.getElementById("txList").innerHTML=TX.map(function(t){
+    return'<div class="tx"><div class="tx-flag">'+t.flag+'</div><div class="tx-body"><div class="tx-who">'+t.name+' · '+t.loc+'</div><div class="tx-what">'+t.fish+'</div></div><div class="tx-r"><div class="tx-amt">$'+t.amt+'</div><div class="tx-when">'+t.time+'</div></div></div>';
+  }).join("");
 }
+function renderRevs(){
+  document.getElementById("revList").innerHTML=REVIEWS.map(function(r){
+    return'<div class="rev"><div class="rev-stars">'+"⭐".repeat(r.stars)+'</div><div class="rev-txt">"'+r.text+'"</div><div class="rev-who">'+r.name+' · '+r.date+'</div></div>';
+  }).join("");
+}
+function renderFAQs(){
+  document.getElementById("faqList").innerHTML=FAQS.map(function(f){
+    return'<div class="faq-item"><button class="faq-q">'+f.q+'<span class="faq-ico">+</span></button><div class="faq-a">'+f.a+'</div></div>';
+  }).join("");
+  document.querySelectorAll(".faq-q").forEach(function(q){
+    q.addEventListener("click",function(){var it=q.parentElement,open=it.classList.contains("open");document.querySelectorAll(".faq-item").forEach(function(i){i.classList.remove("open")});if(!open)it.classList.add("open")});
+  });
+}
+renderTx();renderRevs();renderFAQs();
 
-/* RENDER PROOF & REVIEWS */
-function renderProof(){
-  const txBox = document.getElementById("txList");
-  txBox.innerHTML = TX.map(t=>`
-    <div class="tx">
-      <div class="tx-flag">${t.flag}</div>
-      <div class="tx-body">
-        <div class="tx-who">${t.name} (${t.loc})</div>
-        <div class="tx-what">${t.fish}</div>
-      </div>
-      <div class="tx-r">
-        <div class="tx-amt">${t.amt}</div>
-        <div class="tx-when">${t.time}</div>
-      </div>
-    </div>
-  `).join("");
+/* ─── FORM ─── */
+document.getElementById("sendBtn").addEventListener("click",function(){
+  var strain=document.getElementById("s_strain").value,
+      grade=document.getElementById("s_grade").value,
+      qty=document.getElementById("s_qty").value,
+      country=document.getElementById("s_country").value.trim(),
+      contact=document.getElementById("s_contact").value||"whatsapp",
+      handle=document.getElementById("s_handle").value.trim(),
+      notes=document.getElementById("s_notes").value.trim()||"None";
 
-  const revBox = document.getElementById("revList");
-  revBox.innerHTML = REVIEWS.map(r=>`
-    <div class="rev">
-      <div class="rev-stars">${r.stars}</div>
-      <div class="rev-txt">"${r.text}"</div>
-      <div class="rev-who">${r.name} · ${r.date}</div>
-    </div>
-  `).join("");
-}
-renderProof();
+  document.querySelectorAll(".ferr").forEach(function(e){e.remove()});
+  document.querySelectorAll(".fc2").forEach(function(el){el.style.borderColor=""});
 
-/* RENDER FAQ */
-function renderFaq(){
-  const fBox = document.getElementById("faqList");
-  fBox.innerHTML = FAQS.map((f,i)=>`
-    <div class="faq-item" id="faq-${i}">
-      <button class="faq-q" onclick="toggleFaq(${i})">
-        <span>${f.q}</span>
-        <div class="faq-ico">+</div>
-      </button>
-      <div class="faq-a">${f.a}</div>
-    </div>
-  `).join("");
-}
-function toggleFaq(i){
-  const el = document.getElementById(`faq-${i}`);
-  el.classList.toggle("open");
-}
-renderFaq();
+  var ok=true;
+  function err(id,m){
+    var el=document.getElementById(id);
+    el.style.borderColor="#f87171";
+    var d=document.createElement("div");
+    d.className="ferr";
+    d.textContent=m;
+    el.parentNode.appendChild(d);
+    ok=false;
+  }
+
+  if(!strain) err("s_strain","Select a strain");
+  if(!grade) err("s_grade","Select a grade");
+  if(!qty||parseInt(qty)<=0) err("s_qty","Enter quantity");
+  if(!country) err("s_country","Enter country");
+  if(!handle) err("s_handle","Enter contact handle");
+
+  if(!ok) return;
+
+  if(contact==="whatsapp"){
+    var msg="Hello! Requesting fish from XMTS Aquatics:\n\n"
+           +"• Strain: "+strain+"\n"
+           +"• Grade: "+grade+"\n"
+           +"• Quantity: "+qty+"\n"
+           +"• Country: "+country+"\n"
+           +"• Notes: "+notes;
+    window.open("https://wa.me/639173397877?text="+encodeURIComponent(msg),"_blank");
+  }
+
+  document.getElementById("reqForm").style.display="none";
+  document.getElementById("confBox").classList.add("on");
+});
+
+document.getElementById("resetBtn").addEventListener("click",function(){
+  document.getElementById("reqForm").style.display="block";
+  document.getElementById("confBox").classList.remove("on");
+});
+
+/* ─── OTHER ACTIONS ─── */
+document.getElementById("nBtn").addEventListener("click",function(){
+  var e=document.getElementById("nEmail").value.trim();
+  if(e){
+    document.getElementById("nOk").classList.add("on");
+    document.getElementById("nEmail").value="";
+  }
+});
+
+document.getElementById("cSend").addEventListener("click",function(){
+  var n=document.getElementById("cName").value.trim(),
+      m=document.getElementById("cMsg").value.trim();
+  if(n&&m){
+    document.getElementById("cOk").classList.add("on");
+    document.getElementById("cName").value="";
+    document.getElementById("cEmail").value="";
+    document.getElementById("cSubject").value="";
+    document.getElementById("cMsg").value="";
+  }
+});
+
+document.getElementById("rSubmit").addEventListener("click",function(){
+  var n=document.getElementById("rName").value.trim(),
+      t=document.getElementById("rText").value.trim();
+  if(n&&t){
+    document.getElementById("rOk").classList.add("on");
+    document.getElementById("rName").value="";
+    document.getElementById("rText").value="";
+  }
+});
 </script>
 </body>
 </html>
