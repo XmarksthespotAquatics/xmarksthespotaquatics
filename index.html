@@ -21,619 +21,475 @@ html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);min-height:100vh;overflow-x:hidden;cursor:none}
 
 /* CURSOR */
-#cur{position:fixed;pointer-events:none;z-index:9999;width:32px;height:32px;transform:translate(-50%,-50%);transition:transform .2s cubic-bezier(.23,1,.32,1)}
+#cur{position:fixed;pointer-events:none;z-index:9999;width:30px;height:30px;transform:translate(-50%,-50%);transition:transform .2s cubic-bezier(.23,1,.32,1)}
 #cur svg{width:100%;height:100%;transition:transform .35s cubic-bezier(.23,1,.32,1),filter .2s}
-#cur.hov svg{transform:rotate(90deg) scale(1.4);filter:drop-shadow(0 0 10px rgba(245,200,66,.9))}
+#cur.hov svg{transform:rotate(90deg) scale(1.5);filter:drop-shadow(0 0 10px rgba(245,200,66,.9))}
+@media(max-width:768px){#cur{display:none}body{cursor:auto}}
 
 /* NAV */
 #nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 2.5rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
-#nav.solid{background:rgba(6,6,6,.94);backdrop-filter:blur(24px);border-bottom:1px solid rgba(212,168,67,.1)}
-.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.nav-logo-wrap{width:42px;height:42px;border-radius:50%;overflow:hidden;background:#0a0a0a;flex-shrink:0}
-.nav-logo-wrap img{width:100%;height:100%;object-fit:contain;display:block;padding:3px}
-.nav-wm{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;color:#fff}
-.nav-wm em{color:var(--g2);font-style:normal}
-.nav-r{display:flex;gap:6px;align-items:center}
-.nav-a{font-size:13px;color:var(--t2);text-decoration:none;padding:7px 14px;border-radius:99px;transition:all .2s;font-weight:500}
-.nav-a:hover{color:#fff;background:rgba(255,255,255,.07)}
-.nav-cta{font-size:13px;font-weight:700;color:#0a0a0a;background:var(--g2);border:none;padding:9px 22px;border-radius:99px;cursor:none;transition:all .25s;box-shadow:0 4px 20px rgba(245,200,66,.25)}
-.nav-cta:hover{background:var(--g3);box-shadow:0 8px 32px rgba(245,200,66,.4);transform:translateY(-1px)}
+#nav.solid{background:rgba(6,6,6,.95);backdrop-filter:blur(24px);border-bottom:1px solid rgba(212,168,67,.1)}
+.nbrand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nlogo{width:40px;height:40px;border-radius:50%;overflow:hidden;background:#0a0a0a;flex-shrink:0}
+.nlogo img{width:100%;height:100%;object-fit:contain;padding:3px;display:block}
+.nwm{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.95rem;color:#fff}
+.nwm em{color:var(--g2);font-style:normal}
+.nright{display:flex;gap:6px;align-items:center}
+.na{font-size:13px;color:var(--t2);text-decoration:none;padding:7px 14px;border-radius:99px;transition:all .2s;font-weight:500}
+.na:hover{color:#fff;background:rgba(255,255,255,.07)}
+.ncta{font-size:13px;font-weight:700;color:#0a0a0a;background:var(--g2);border:none;padding:9px 22px;border-radius:99px;cursor:none;transition:all .25s;box-shadow:0 4px 20px rgba(245,200,66,.25)}
+.ncta:hover{background:var(--g3);box-shadow:0 8px 32px rgba(245,200,66,.4);transform:translateY(-1px)}
+@media(max-width:768px){#nav{padding:14px 1.25rem}.nwm{display:none}}
 
-/* FISH POPUP FAB */
-.fab{position:fixed;bottom:32px;right:32px;z-index:99;width:54px;height:54px;border-radius:50%;background:var(--g2);border:none;cursor:none;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(245,200,66,.4);transition:all .3s cubic-bezier(.23,1,.32,1)}
-.fab svg{transition:transform .4s cubic-bezier(.23,1,.32,1)}
-.fab:hover,.fab.open{transform:scale(1.1);box-shadow:0 12px 40px rgba(245,200,66,.55)}
+/* FAB */
+.fab-wrap{position:fixed;bottom:32px;right:32px;z-index:99;display:flex;flex-direction:column;align-items:flex-end;gap:0}
+.fab{width:52px;height:52px;border-radius:50%;background:var(--g2);border:none;cursor:none;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(245,200,66,.4);transition:all .3s cubic-bezier(.23,1,.32,1);position:relative}
+.fab svg{transition:transform .35s cubic-bezier(.23,1,.32,1)}
+.fab:hover{transform:scale(1.08);box-shadow:0 10px 36px rgba(245,200,66,.55)}
 .fab.open svg{transform:rotate(45deg)}
-.popup{position:fixed;bottom:100px;right:32px;z-index:98;width:300px;background:var(--s1);border:1px solid rgba(212,168,67,.15);border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.8);transform:translateY(16px) scale(.95);opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.23,1,.32,1)}
+.fab-tip{position:absolute;right:62px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.85);color:#fff;font-size:11px;font-weight:600;padding:5px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;font-family:'Inter',sans-serif}
+.fab:hover .fab-tip{opacity:1}
+/* Popup */
+.popup{width:298px;background:var(--s1);border:1px solid rgba(212,168,67,.15);border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.8);transform:translateY(12px) scale(.95);opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.23,1,.32,1);margin-bottom:12px}
 .popup.open{transform:none;opacity:1;pointer-events:all}
-.popup-head{background:linear-gradient(135deg,rgba(212,168,67,.1),rgba(212,168,67,.03));border-bottom:1px solid rgba(212,168,67,.1);padding:18px 18px 14px;position:relative;display:flex;align-items:center;gap:12px}
-.popup-logo{width:44px;height:44px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#0a0a0a;border:1.5px solid rgba(212,168,67,.3)}
-.popup-logo img{width:100%;height:100%;object-fit:contain;padding:3px}
-.popup-htitle{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;color:#fff}
-.popup-hsub{font-size:11px;color:var(--t2);margin-top:2px}
-.popup-close{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.07);border:none;cursor:none;color:var(--t2);display:flex;align-items:center;justify-content:center;transition:background .2s}
-.popup-close:hover{background:rgba(255,255,255,.14);color:#fff}
-.popup-links{padding:10px}
-.pop-a{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:12px;text-decoration:none;transition:background .2s;margin-bottom:4px}
-.pop-a:last-child{margin:0}
-.pop-a:hover{background:rgba(255,255,255,.05)}
-.pop-ico{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.pop-lbl{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-.pop-val{font-size:13px;font-weight:600;color:#fff;margin-top:2px}
-.popup-tip{font-size:11px;color:var(--t3);text-align:center;padding:4px 14px 14px;line-height:1.6}
+.ph{background:linear-gradient(135deg,rgba(212,168,67,.1),rgba(212,168,67,.03));border-bottom:1px solid rgba(212,168,67,.1);padding:16px 16px 12px;position:relative;display:flex;align-items:center;gap:12px}
+.plogo{width:42px;height:42px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#0a0a0a;border:1.5px solid rgba(212,168,67,.3)}
+.plogo img{width:100%;height:100%;object-fit:contain;padding:3px;display:block}
+.pt2{font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;color:#fff}
+.ps{font-size:11px;color:var(--t2);margin-top:2px}
+.pc{position:absolute;top:12px;right:12px;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.07);border:none;cursor:none;color:var(--t2);display:flex;align-items:center;justify-content:center;transition:background .2s}
+.pc:hover{background:rgba(255,255,255,.14);color:#fff}
+.plinks{padding:10px}
+.pa{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;text-decoration:none;transition:background .2s;margin-bottom:3px}
+.pa:last-child{margin:0}
+.pa:hover{background:rgba(255,255,255,.05)}
+.pi{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pl{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.pv{font-size:13px;font-weight:600;color:#fff;margin-top:2px}
+.ptip{font-size:11px;color:var(--t3);text-align:center;padding:4px 12px 12px;line-height:1.5}
+@media(max-width:480px){.fab-wrap{bottom:20px;right:20px}.popup{width:272px}}
 
-/* ═══ HERO CAROUSEL ═══ */
-.hero{height:100vh;min-height:640px;max-height:960px;position:relative;overflow:hidden}
-
-/* Slides */
-.slide{
-  position:absolute;inset:0;
-  display:flex;align-items:center;
-  opacity:0;transition:opacity 1.4s cubic-bezier(.4,0,.2,1);
-  z-index:0
-}
+/* HERO CAROUSEL */
+.hero{height:100svh;min-height:600px;max-height:980px;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;align-items:center;opacity:0;transition:opacity 1.4s cubic-bezier(.4,0,.2,1);z-index:0}
 .slide.active{opacity:1;z-index:1}
-.slide.prev{opacity:0;z-index:0}
-
-/* Slide background — dark gradient per slide */
-.slide-bg{position:absolute;inset:0;z-index:0}
-.slide-bg-1{background:linear-gradient(135deg,#0a0500 0%,#1a0e00 40%,#060606 100%)}
-.slide-bg-2{background:linear-gradient(135deg,#00080a 0%,#001520 40%,#060606 100%)}
-.slide-bg-3{background:linear-gradient(135deg,#0a0005 0%,#180010 40%,#060606 100%)}
-.slide-bg-4{background:linear-gradient(135deg,#030a00 0%,#0a1500 40%,#060606 100%)}
-.slide-bg-5{background:linear-gradient(135deg,#08050a 0%,#140a1a 40%,#060606 100%)}
-
-/* Fish image — right side, large, transparent bg removed */
-.slide-fish{
-  position:absolute;right:0;bottom:0;
-  height:95%;width:55%;
-  object-fit:contain;object-position:right bottom;
+.sbg{position:absolute;inset:0;z-index:0}
+.sbg1{background:linear-gradient(135deg,#0a0500 0%,#1a0e00 40%,#060606 100%)}
+.sbg2{background:linear-gradient(135deg,#00080a 0%,#001520 40%,#060606 100%)}
+.sbg3{background:linear-gradient(135deg,#0a0005 0%,#180010 40%,#060606 100%)}
+.sbg4{background:linear-gradient(135deg,#03080a 0%,#0a1500 40%,#060606 100%)}
+.sbg5{background:linear-gradient(135deg,#060508 0%,#12081a 40%,#060606 100%)}
+.sfish{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  height:86%;width:52%;
+  object-fit:contain;object-position:center center;
   z-index:2;
-  filter:drop-shadow(-40px 0 60px rgba(0,0,0,.9));
-  animation:none;
-  transition:none
+  filter:drop-shadow(-30px 0 50px rgba(0,0,0,.9));
+  opacity:0;transition:none
 }
-.slide.active .slide-fish{animation:fishEnter 1.6s cubic-bezier(.23,1,.32,1) forwards}
-@keyframes fishEnter{
-  from{transform:translateX(60px) scale(.96);opacity:0;filter:drop-shadow(-40px 0 60px rgba(0,0,0,.9)) blur(8px)}
-  to{transform:translateX(0) scale(1);opacity:1;filter:drop-shadow(-40px 0 60px rgba(0,0,0,.9)) blur(0)}
+.slide.active .sfish{animation:fishIn 1.6s cubic-bezier(.23,1,.32,1) forwards}
+@keyframes fishIn{
+  from{opacity:0;transform:translateY(-50%) translateX(50px) scale(.95);filter:drop-shadow(-30px 0 50px rgba(0,0,0,.9)) blur(6px)}
+  to{opacity:1;transform:translateY(-50%) translateX(0) scale(1);filter:drop-shadow(-30px 0 50px rgba(0,0,0,.9)) blur(0)}
 }
-
-/* Left gradient fade so fish blends into dark */
-.slide-fade{
-  position:absolute;inset:0;z-index:3;
-  background:linear-gradient(to right,rgba(6,6,6,1) 0%,rgba(6,6,6,.9) 25%,rgba(6,6,6,.4) 55%,rgba(6,6,6,0) 80%)
-}
-
-/* Bottom fade */
-.slide-bottom{
-  position:absolute;bottom:0;left:0;right:0;height:30%;z-index:3;
-  background:linear-gradient(to top,rgba(6,6,6,1),transparent)
-}
-
-/* Gold ambient glow per slide */
-.slide-glow{
-  position:absolute;left:-10%;top:50%;transform:translateY(-50%);
-  width:65%;height:130%;z-index:1;
-  background:radial-gradient(ellipse at 30% 50%,rgba(212,168,67,.06),transparent 60%);
-  animation:glowPulse 5s ease-in-out infinite
-}
-@keyframes glowPulse{0%,100%{opacity:.6}50%{opacity:1}}
-
-/* Particles */
+.sfade{position:absolute;inset:0;z-index:3;background:linear-gradient(to right,rgba(6,6,6,1) 0%,rgba(6,6,6,.88) 30%,rgba(6,6,6,.3) 60%,transparent 85%)}
+.sbottom{position:absolute;bottom:0;left:0;right:0;height:28%;z-index:3;background:linear-gradient(to top,rgba(6,6,6,1),transparent)}
+.sglow{position:absolute;left:-5%;top:50%;transform:translateY(-50%);width:60%;height:130%;z-index:1;background:radial-gradient(ellipse at 35% 50%,rgba(212,168,67,.055),transparent 60%);animation:gp 5s ease-in-out infinite}
+@keyframes gp{0%,100%{opacity:.5}50%{opacity:1}}
 .particles{position:absolute;inset:0;z-index:4;overflow:hidden;pointer-events:none}
-.pt{position:absolute;border-radius:50%;background:rgba(212,168,67,.45);animation:ptRise linear infinite}
-@keyframes ptRise{0%{transform:translateY(110vh);opacity:0}5%{opacity:1}90%{opacity:.3}100%{transform:translateY(-10vh);opacity:0}}
-
-/* Slide content */
-.slide-content{
-  position:relative;z-index:5;
-  max-width:1100px;margin:0 auto;
-  padding:0 2.5rem;
-  width:100%
-}
-.slide-eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--g2);padding:6px 16px;border-radius:99px;
-  background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.2);
-  margin-bottom:22px;
-  opacity:0
-}
-.slide.active .slide-eyebrow{animation:fadeUp .8s .3s ease forwards}
-.slide-title{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(3rem,7vw,5.5rem);font-weight:800;
-  color:#fff;letter-spacing:-.03em;line-height:.95;
-  margin-bottom:18px;
-  opacity:0;text-shadow:0 4px 40px rgba(0,0,0,1)
-}
-.slide.active .slide-title{animation:fadeUp .9s .5s ease forwards}
-.slide-title .xt{
-  background:linear-gradient(135deg,var(--g) 0%,var(--g2) 60%,var(--g3) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
-}
-.slide-strain{
-  font-size:1rem;color:rgba(255,255,255,.55);font-weight:400;
-  margin-bottom:8px;letter-spacing:.01em;
-  opacity:0
-}
-.slide.active .slide-strain{animation:fadeUp .8s .4s ease forwards}
-.slide-desc{
-  font-size:1rem;color:rgba(255,255,255,.6);line-height:1.7;
-  max-width:440px;margin-bottom:36px;font-weight:300;
-  opacity:0
-}
-.slide.active .slide-desc{animation:fadeUp .8s .7s ease forwards}
-.slide-actions{display:flex;gap:12px;flex-wrap:wrap;opacity:0}
-.slide.active .slide-actions{animation:fadeUp .8s .9s ease forwards}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-
-.btn-p{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:#0a0a0a;background:var(--g2);border:none;padding:14px 32px;border-radius:99px;cursor:none;transition:all .3s;box-shadow:0 4px 24px rgba(245,200,66,.3)}
-.btn-p:hover{background:var(--g3);transform:translateY(-2px);box-shadow:0 10px 36px rgba(245,200,66,.5)}
-.btn-g{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.15);padding:14px 32px;border-radius:99px;cursor:none;text-decoration:none;transition:all .3s;backdrop-filter:blur(8px)}
-.btn-g:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
-
-/* Carousel controls */
-.hero-nav{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);z-index:6;display:flex;align-items:center;gap:20px}
-.hero-dots{display:flex;gap:8px;align-items:center}
+.pt{position:absolute;border-radius:50%;background:rgba(212,168,67,.45);animation:pr linear infinite}
+@keyframes pr{0%{transform:translateY(110vh);opacity:0}5%{opacity:1}90%{opacity:.3}100%{transform:translateY(-10vh);opacity:0}}
+.scnt{position:relative;z-index:5;max-width:1100px;margin:0 auto;padding:100px 2.5rem 0;width:100%}
+.seyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--g2);padding:6px 16px;border-radius:99px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.2);margin-bottom:20px;opacity:0}
+.slide.active .seyebrow{animation:fu .8s .3s ease forwards}
+.sstrain{font-size:1rem;color:rgba(255,255,255,.5);font-weight:400;margin-bottom:6px;letter-spacing:.01em;opacity:0}
+.slide.active .sstrain{animation:fu .8s .4s ease forwards}
+.stitle{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;color:#fff;letter-spacing:-.03em;line-height:.95;margin-bottom:16px;opacity:0;text-shadow:0 2px 4px rgba(0,0,0,.8),0 8px 40px rgba(0,0,0,1)}
+.slide.active .stitle{animation:fu .9s .5s ease forwards}
+.stitle .xt{background:linear-gradient(135deg,var(--g) 0%,var(--g2) 60%,var(--g3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sdesc{font-size:1rem;color:rgba(255,255,255,.6);line-height:1.7;max-width:420px;margin-bottom:32px;font-weight:300;opacity:0}
+.slide.active .sdesc{animation:fu .8s .7s ease forwards}
+.sacts{display:flex;gap:12px;flex-wrap:wrap;opacity:0}
+.slide.active .sacts{animation:fu .8s .9s ease forwards}
+@keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.btnp{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:#0a0a0a;background:var(--g2);border:none;padding:13px 30px;border-radius:99px;cursor:none;transition:all .3s;box-shadow:0 4px 24px rgba(245,200,66,.3)}
+.btnp:hover{background:var(--g3);transform:translateY(-2px);box-shadow:0 10px 36px rgba(245,200,66,.5)}
+.btng{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.15);padding:13px 30px;border-radius:99px;cursor:none;text-decoration:none;transition:all .3s;backdrop-filter:blur(8px)}
+.btng:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
+.hnav{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:6;display:flex;align-items:center;gap:16px}
+.hdots{display:flex;gap:8px;align-items:center}
 .dot{width:6px;height:6px;border-radius:99px;background:rgba(255,255,255,.25);cursor:none;transition:all .4s cubic-bezier(.23,1,.32,1)}
-.dot.on{width:28px;background:var(--g2)}
-.hero-arr{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;cursor:none;transition:all .2s;color:rgba(255,255,255,.7)}
-.hero-arr:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)}
-.scroll-hint{position:absolute;bottom:48px;right:60px;z-index:6;display:flex;flex-direction:column;align-items:center;gap:8px}
-.scroll-hint span{font-size:10px;letter-spacing:.2em;color:rgba(255,255,255,.3);text-transform:uppercase}
-.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent);animation:lineDown 2s ease-in-out infinite}
-@keyframes lineDown{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.dot.on{width:26px;background:var(--g2)}
+.harr{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;cursor:none;transition:all .2s;color:rgba(255,255,255,.7)}
+.harr:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)}
+.sscroll{position:absolute;bottom:40px;right:56px;z-index:6;display:flex;flex-direction:column;align-items:center;gap:8px}
+.sscroll span{font-size:10px;letter-spacing:.2em;color:rgba(255,255,255,.3);text-transform:uppercase}
+.sline{width:1px;height:42px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent);animation:ld 2s ease-in-out infinite}
+@keyframes ld{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media(max-width:768px){.sfish{width:62%;opacity:.75;height:80%}.sfade{background:linear-gradient(to right,rgba(6,6,6,.98) 0%,rgba(6,6,6,.85) 40%,rgba(6,6,6,.2) 80%)}.scnt{padding:80px 1.5rem 0}.sscroll{display:none}}
+@media(max-width:480px){.stitle{font-size:2.6rem}.sfish{width:70%;opacity:.65}}
 
-/* ═══ SECTIONS ═══ */
+/* LAYOUT */
 .wrap{max-width:1100px;margin:0 auto;padding:0 2rem}
-section{padding:100px 0}
-.s-label{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g2);display:block;margin-bottom:10px}
-.s-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:14px;line-height:1.1}
-.s-sub{font-size:1rem;color:var(--t2);line-height:1.7;max-width:520px}
+section{padding:96px 0}
+.slabel{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g2);display:block;margin-bottom:10px}
+.stit{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:12px;line-height:1.1}
+.ssub{font-size:1rem;color:var(--t2);line-height:1.7;max-width:500px}
 .divider{height:1px;background:linear-gradient(to right,transparent,var(--bd),transparent)}
-
-/* REVEAL */
-.r{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
+.r{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
 .r.vis{opacity:1;transform:none}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 
 /* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.about-img-col{position:relative}
-.about-logo-frame{
-  width:100%;aspect-ratio:1/1;border-radius:28px;
-  background:linear-gradient(135deg,#0f0f0f,#1a1a1a);
-  border:1px solid var(--bd);
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.7)
-}
-.about-logo-frame img{width:85%;height:85%;object-fit:contain}
-.about-badge{
-  position:absolute;bottom:-20px;right:-20px;
-  background:var(--g2);color:#0a0a0a;
-  border-radius:18px;padding:18px 22px;text-align:center;
-  box-shadow:0 16px 40px rgba(245,200,66,.3)
-}
-.ab-n{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;line-height:1}
-.ab-l{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-top:2px}
-.about-text{display:flex;flex-direction:column;gap:28px}
-.about-body{font-size:1rem;color:rgba(240,240,240,.75);line-height:1.8}
-.tags{display:flex;flex-wrap:wrap;gap:8px}
+.about-g{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.about-frame{width:100%;aspect-ratio:1/1;border-radius:28px;background:linear-gradient(135deg,#0f0f0f,#1a1a1a);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.7);position:relative}
+.about-frame img{width:85%;height:85%;object-fit:contain}
+.about-badge{position:absolute;bottom:-18px;right:-18px;background:var(--g2);color:#0a0a0a;border-radius:16px;padding:16px 20px;text-align:center;box-shadow:0 16px 40px rgba(245,200,66,.3)}
+.abn{font-family:'Space Grotesk',sans-serif;font-size:1.9rem;font-weight:800;line-height:1}
+.abl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-top:2px}
+.about-body{font-size:1rem;color:rgba(240,240,240,.75);line-height:1.8;margin-bottom:20px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
 .tag{font-size:12px;padding:6px 14px;border-radius:99px;background:rgba(255,255,255,.04);color:rgba(255,255,255,.65);border:1px solid var(--bd);font-weight:500}
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.stat{background:var(--s1);border-radius:14px;padding:20px;text-align:center;border:1px solid var(--bd);transition:border-color .3s,transform .3s}
+.stats-r{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat{background:var(--s1);border-radius:14px;padding:18px;text-align:center;border:1px solid var(--bd);transition:border-color .3s,transform .3s}
 .stat:hover{border-color:rgba(212,168,67,.2);transform:translateY(-3px)}
-.sn{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;color:var(--g2)}
+.sn{font-family:'Space Grotesk',sans-serif;font-size:1.7rem;font-weight:700;color:var(--g2)}
 .sl{font-size:10px;color:var(--t2);margin-top:4px;text-transform:uppercase;letter-spacing:.07em;font-weight:600}
+@media(max-width:900px){.about-g{grid-template-columns:1fr;gap:48px}.about-frame{max-width:380px;margin:0 auto}}
 
-/* FISH GRID — clean uniform cards with transparent-bg fish */
-.strain-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:20px}
+/* FISH GRID */
+.strain-h{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px;gap:20px;flex-wrap:wrap}
 .fpills{display:flex;gap:6px;flex-wrap:wrap}
 .fp{font-size:12px;font-weight:600;padding:8px 18px;border-radius:99px;border:1px solid var(--bd);background:transparent;color:var(--t2);cursor:none;transition:all .25s;font-family:'Inter',sans-serif}
 .fp:hover{border-color:rgba(255,255,255,.3);color:#fff}
 .fp.on{background:var(--g2);color:#0a0a0a;border-color:var(--g2)}
-.fish-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-
-/* Fish card — transparent bg, fish floats on dark */
-.fc{
-  background:var(--s1);border-radius:20px;
-  border:1px solid var(--bd);
-  overflow:hidden;position:relative;
-  transition:transform .35s cubic-bezier(.23,1,.32,1),border-color .3s,box-shadow .3s;
-  cursor:none
-}
-.fc:hover{transform:translateY(-6px);border-color:rgba(212,168,67,.3);box-shadow:0 20px 50px rgba(0,0,0,.7),0 0 40px rgba(212,168,67,.06)}
-
-/* Fish image area — taller, fish centered */
-.fc-img-wrap{
-  width:100%;height:260px;
-  display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
-  background:linear-gradient(to bottom,var(--s1) 0%,var(--s2) 100%)
-}
-.fc-img{
-  width:100%;height:100%;
-  object-fit:contain;object-position:center center;
-  transition:transform .6s cubic-bezier(.23,1,.32,1),filter .4s;
-  padding:8px;
-  filter:drop-shadow(0 8px 24px rgba(0,0,0,.6))
-}
-.fc:hover .fc-img{transform:scale(1.06) translateY(-4px);filter:drop-shadow(0 16px 36px rgba(0,0,0,.7)) brightness(1.06)}
-
-/* Shimmer sweep */
-.fc-shine{
-  position:absolute;inset:0;
-  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.05) 50%,transparent 65%);
-  transform:translateX(-100%);transition:transform .7s ease
-}
+.fish-g{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.fc{background:var(--s1);border-radius:18px;border:1px solid var(--bd);overflow:hidden;position:relative;cursor:none;transition:transform .35s cubic-bezier(.23,1,.32,1),border-color .3s,box-shadow .3s}
+.fc:hover{transform:translateY(-7px) scale(1.01);border-color:rgba(212,168,67,.3);box-shadow:0 24px 56px rgba(0,0,0,.7),0 0 40px rgba(212,168,67,.07)}
+.fc-iw{width:100%;height:220px;display:flex;align-items:center;justify-content:center;background:linear-gradient(to bottom,var(--s1),var(--s2));overflow:hidden;position:relative}
+.fc-img{width:100%;height:100%;object-fit:contain;padding:12px;filter:drop-shadow(0 10px 24px rgba(0,0,0,.6));transition:transform .65s cubic-bezier(.23,1,.32,1),filter .4s;animation:ff 4.5s ease-in-out infinite}
+.fc:hover .fc-img{transform:scale(1.09) translateY(-6px);filter:drop-shadow(0 18px 38px rgba(0,0,0,.75)) brightness(1.07);animation:none}
+@keyframes ff{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.fc-shine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.05) 50%,transparent 65%);transform:translateX(-100%);transition:transform .7s ease}
 .fc:hover .fc-shine{transform:translateX(100%)}
-
-/* Card info */
-.fc-body{padding:16px 18px 20px;border-top:1px solid var(--bd)}
-.fc-strain-type{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g2);margin-bottom:5px}
-.fc-name{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:#fff;line-height:1.25;margin-bottom:14px}
+.fc-b{padding:14px 16px 18px;border-top:1px solid var(--bd)}
+.fc-type{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g2);margin-bottom:5px}
+.fc-name{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;color:#fff;line-height:1.25;margin-bottom:14px}
 .fc-foot{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.fc-price{font-size:1.05rem;font-weight:700;color:var(--g2);font-family:'Space Grotesk',sans-serif}
-.fc-btn{
-  font-size:12px;font-weight:700;color:#0a0a0a;
-  background:var(--g2);border:none;padding:8px 18px;border-radius:99px;
-  cursor:none;transition:all .25s;white-space:nowrap
-}
+.fc-price{font-size:1rem;font-weight:700;color:var(--g2);font-family:'Space Grotesk',sans-serif}
+.fc-btn{font-size:11px;font-weight:700;color:#0a0a0a;background:var(--g2);border:none;padding:7px 16px;border-radius:99px;cursor:none;transition:all .25s;white-space:nowrap}
 .fc-btn:hover{background:var(--g3);transform:translateY(-1px)}
-.disc{margin-top:24px;padding:14px 20px;border-radius:var(--rs);background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:11.5px;color:var(--t3);line-height:1.6}
+.disc{margin-top:20px;padding:12px 18px;border-radius:var(--rs);background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:11.5px;color:var(--t3);line-height:1.6}
 .disc strong{color:var(--t2)}
+@media(max-width:1024px){.fish-g{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){.fish-g{grid-template-columns:repeat(2,1fr)}.fc-iw{height:180px}}
+@media(max-width:400px){.fish-g{grid-template-columns:repeat(2,1fr)}.fc-iw{height:150px}}
+
+/* REQUEST FORM */
+.req-l{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.req-side{position:sticky;top:110px}
+.req-steps{margin-top:28px;display:flex;flex-direction:column;gap:0}
+.rs{display:flex;gap:14px;padding-bottom:24px;position:relative}
+.rs::before{content:'';position:absolute;left:14px;top:32px;bottom:4px;width:1px;background:linear-gradient(to bottom,var(--g2),transparent)}
+.rs:last-child::before{display:none}
+.rsd{width:28px;height:28px;border-radius:50%;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:700;color:var(--g2);font-family:'Space Grotesk',sans-serif}
+.rst{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px}
+.rsi{font-size:12px;color:var(--t2);line-height:1.5}
+.req-card{background:var(--s1);border-radius:20px;border:1px solid var(--bd);padding:28px;position:relative;overflow:hidden}
+.req-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--g2),transparent)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.frow.one{grid-template-columns:1fr}
+.fg{display:flex;flex-direction:column;gap:6px}
+.fg label{font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.05em}
+.fc2{background:var(--s2);border:1px solid var(--bd);border-radius:var(--rs);padding:11px 14px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none;width:100%}
+.fc2:focus{border-color:var(--g2);box-shadow:0 0 0 3px rgba(212,168,67,.12)}
+.fc2 option{background:var(--s2)}
+.ferr{font-size:11px;color:#f87171;margin-top:4px;font-weight:500}
+.sbtn{width:100%;margin-top:18px;padding:13px;background:var(--g2);color:#0a0a0a;border:none;border-radius:99px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:none;transition:all .3s;box-shadow:0 4px 24px rgba(245,200,66,.25);position:relative;overflow:hidden}
+.sbtn:hover{background:var(--g3);transform:translateY(-2px);box-shadow:0 10px 32px rgba(245,200,66,.4)}
+.sbtn.loading{opacity:.7;pointer-events:none}
+.wanote{font-size:11px;color:var(--t3);text-align:center;margin-top:10px}
+.wanote strong{color:#25d366}
+.conf{display:none;text-align:center;padding:36px 16px}
+.conf.on{display:block}
+.conf-ic{font-size:50px;margin-bottom:14px;animation:pop .6s cubic-bezier(.23,1,.32,1)}
+@keyframes pop{from{transform:scale(0) rotate(-15deg)}to{transform:scale(1) rotate(0)}}
+.conf-t{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:700;color:var(--g2);margin-bottom:8px}
+.conf-s{font-size:13px;color:var(--t2);line-height:1.7;margin-bottom:20px}
+@media(max-width:900px){.req-l{grid-template-columns:1fr;gap:40px}.req-side{position:static}.frow{grid-template-columns:1fr}}
+
+/* TIMELINE */
+.tl-l{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.tl{padding-left:44px;position:relative;margin-top:16px}
+.tl::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--g2),rgba(212,168,67,.05))}
+.tli{position:relative;padding-bottom:28px}
+.tli:last-child{padding-bottom:0}
+.tld{position:absolute;left:-44px;top:0;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;border:1px solid}
+.tld.g{background:rgba(212,168,67,.12);border-color:var(--g2);box-shadow:0 0 10px rgba(212,168,67,.18)}
+.tld.w{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12)}
+.tld.done{background:rgba(37,211,102,.1);border-color:#25d366}
+.tlday{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-bottom:3px}
+.tlname{font-size:14px;font-weight:600;color:#fff;margin-bottom:3px}
+.tlinfo{font-size:12.5px;color:var(--t2);line-height:1.6}
+@media(max-width:900px){.tl-l{grid-template-columns:1fr;gap:48px}}
 
 /* GRADES */
-.grades-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.gc{border-radius:20px;overflow:hidden;background:var(--s1);border:1px solid var(--bd);transition:transform .35s,box-shadow .35s,border-color .35s}
-.gc:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.grades-g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gc{border-radius:18px;overflow:hidden;background:var(--s1);border:1px solid var(--bd);transition:transform .35s,box-shadow .35s,border-color .35s}
+.gc:hover{transform:translateY(-5px)}
 .gc.gold:hover{border-color:rgba(212,168,67,.25);box-shadow:0 20px 50px rgba(212,168,67,.08)}
-.gc-img-wrap{width:100%;height:180px;display:flex;align-items:center;justify-content:center;background:linear-gradient(to bottom,var(--s1),var(--s2));overflow:hidden}
-.gc-fish{width:100%;height:100%;object-fit:contain;padding:16px;transition:transform .5s cubic-bezier(.23,1,.32,1);filter:drop-shadow(0 8px 20px rgba(0,0,0,.5))}
-.gc:hover .gc-fish{transform:scale(1.08) translateY(-4px)}
-.gc-body{padding:18px 20px 22px;border-top:1px solid var(--bd)}
-.gc-tier{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:6px}
-.gc-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;margin-bottom:4px}
-.gc-price{font-size:1.4rem;font-weight:800;color:var(--g2);font-family:'Space Grotesk',sans-serif;margin-bottom:10px}
+.gc-iw{width:100%;height:180px;display:flex;align-items:center;justify-content:center;background:linear-gradient(to bottom,var(--s1),var(--s2))}
+.gc-img{width:100%;height:100%;object-fit:contain;padding:14px;filter:drop-shadow(0 8px 20px rgba(0,0,0,.5));transition:transform .5s cubic-bezier(.23,1,.32,1);animation:ff 5s ease-in-out infinite}
+.gc:hover .gc-img{transform:scale(1.1) translateY(-5px);animation:none}
+.gc-b{padding:16px 18px 20px;border-top:1px solid var(--bd)}
+.gc-tier{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:5px}
+.gc-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem;color:#fff;margin-bottom:4px}
+.gc-price{font-size:1.35rem;font-weight:800;color:var(--g2);font-family:'Space Grotesk',sans-serif;margin-bottom:8px}
 .gc.mat .gc-price{color:#ccc}
-.gc.pot .gc-price{color:#aee0b0}
-.gc-desc{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:12px}
+.gc.pot .gc-price{color:#a8e0b0}
+.gc-desc{font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:12px}
 .gc-pill{font-size:11px;font-weight:600;padding:4px 12px;border-radius:99px;display:inline-block}
 .gc.mat .gc-pill{background:rgba(255,255,255,.06);color:var(--t2)}
 .gc.pot .gc-pill{background:rgba(100,210,120,.1);color:#6dd08a}
 .gc.gold .gc-pill{background:rgba(212,168,67,.1);color:var(--g2)}
+@media(max-width:900px){.grades-g{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.grades-g{grid-template-columns:1fr;max-width:360px;margin:0 auto}}
 
-/* REQUEST FORM */
-.req-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
-.req-side{position:sticky;top:120px}
-.req-steps{margin-top:32px;display:flex;flex-direction:column;gap:0}
-.rs{display:flex;gap:16px;padding-bottom:28px;position:relative}
-.rs::before{content:'';position:absolute;left:15px;top:34px;bottom:4px;width:1px;background:linear-gradient(to bottom,var(--g2),transparent)}
-.rs:last-child::before{display:none}
-.rs-dot{width:30px;height:30px;border-radius:50%;background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:var(--g2);font-family:'Space Grotesk',sans-serif}
-.rs-t{font-size:13px;font-weight:600;color:#fff;margin-bottom:3px}
-.rs-d{font-size:12px;color:var(--t2);line-height:1.6}
-.req-card{background:var(--s1);border-radius:20px;border:1px solid var(--bd);padding:32px;position:relative;overflow:hidden}
-.req-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--g2),transparent)}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-.frow.one{grid-template-columns:1fr}
-.fg{display:flex;flex-direction:column;gap:7px}
-.fg label{font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.05em}
-.fc2{background:var(--s2);border:1px solid var(--bd);border-radius:var(--rs);padding:12px 16px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none;width:100%}
-.fc2:focus{border-color:var(--g2);box-shadow:0 0 0 3px rgba(212,168,67,.12)}
-.fc2 option{background:var(--s2)}
-.ferr{font-size:11px;color:#f87171;margin-top:4px;font-weight:500}
-.sbtn{width:100%;margin-top:20px;padding:14px;background:var(--g2);color:#0a0a0a;border:none;border-radius:99px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:none;transition:all .3s;box-shadow:0 4px 24px rgba(245,200,66,.25)}
-.sbtn:hover{background:var(--g3);transform:translateY(-2px);box-shadow:0 10px 32px rgba(245,200,66,.4)}
-.wa-note{font-size:11px;color:var(--t3);text-align:center;margin-top:10px}
-.wa-note strong{color:#25d366}
-.conf{display:none;text-align:center;padding:40px 20px}
-.conf.on{display:block}
-.conf-ic{font-size:52px;margin-bottom:16px;animation:pop .6s cubic-bezier(.23,1,.32,1)}
-@keyframes pop{from{transform:scale(0) rotate(-15deg)}to{transform:scale(1) rotate(0)}}
-.conf-t{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:var(--g2);margin-bottom:8px}
-.conf-s{font-size:13px;color:var(--t2);line-height:1.7;margin-bottom:24px}
-
-/* TIMELINE */
-.tl-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.tl{padding-left:48px;position:relative;margin-top:20px}
-.tl::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--g2),rgba(212,168,67,.05))}
-.tl-item{position:relative;padding-bottom:32px}
-.tl-item:last-child{padding-bottom:0}
-.tl-dot{position:absolute;left:-48px;top:0;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;border:1px solid}
-.tl-dot.g{background:rgba(212,168,67,.12);border-color:var(--g2);box-shadow:0 0 10px rgba(212,168,67,.18)}
-.tl-dot.w{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12)}
-.tl-dot.d{background:rgba(37,211,102,.1);border-color:#25d366}
-.tl-day{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-bottom:4px}
-.tl-name{font-size:14px;font-weight:600;color:#fff;margin-bottom:4px}
-.tl-info{font-size:12.5px;color:var(--t2);line-height:1.6}
-
-/* TRANSACTIONS */
-.proof-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+/* SOCIAL PROOF */
+.proof-l{display:grid;grid-template-columns:1fr 1fr;gap:72px}
 .tx-list{display:flex;flex-direction:column;gap:10px}
-.tx{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--s1);border-radius:14px;border:1px solid var(--bd);transition:border-color .2s,transform .2s}
+.tx{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--s1);border-radius:14px;border:1px solid var(--bd);transition:border-color .2s,transform .2s}
 .tx:hover{border-color:rgba(212,168,67,.1);transform:translateX(3px)}
-.tx-flag{font-size:22px;flex-shrink:0}
-.tx-body{flex:1;min-width:0}
-.tx-who{font-size:13px;font-weight:600;color:#fff}
-.tx-what{font-size:11px;color:var(--t2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tx-r{text-align:right;flex-shrink:0}
-.tx-amt{font-size:14px;font-weight:700;color:var(--g2);font-family:'Space Grotesk',sans-serif}
-.tx-when{font-size:10px;color:var(--t3);margin-top:2px}
-.rev-list{display:flex;flex-direction:column;gap:14px}
-.rev{background:var(--s1);border-radius:16px;border:1px solid var(--bd);padding:20px;transition:transform .3s,border-color .3s}
+.txfl{font-size:21px;flex-shrink:0}
+.txb{flex:1;min-width:0}
+.txw{font-size:13px;font-weight:600;color:#fff}
+.txwh{font-size:11px;color:var(--t2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.txr{text-align:right;flex-shrink:0}
+.txam{font-size:14px;font-weight:700;color:var(--g2);font-family:'Space Grotesk',sans-serif}
+.txwn{font-size:10px;color:var(--t3);margin-top:2px}
+.rev-list{display:flex;flex-direction:column;gap:12px}
+.rev{background:var(--s1);border-radius:16px;border:1px solid var(--bd);padding:18px;transition:transform .3s,border-color .3s}
 .rev:hover{transform:translateY(-3px);border-color:rgba(212,168,67,.1)}
-.rev-stars{font-size:13px;margin-bottom:10px}
-.rev-txt{font-size:13.5px;color:rgba(240,240,240,.82);line-height:1.68;font-style:italic;margin-bottom:12px}
+.rev-stars{font-size:13px;margin-bottom:8px}
+.rev-txt{font-size:13px;color:rgba(240,240,240,.82);line-height:1.65;font-style:italic;margin-bottom:10px}
 .rev-who{font-size:12px;color:var(--t2);font-weight:500}
-.rev-who::before{content:'— '}
+@media(max-width:900px){.proof-l{grid-template-columns:1fr;gap:48px}}
 
 /* NOTIFY */
-.notify{background:linear-gradient(135deg,rgba(212,168,67,.07),rgba(212,168,67,.02));border-radius:24px;border:1px solid rgba(212,168,67,.14);padding:60px;text-align:center;position:relative;overflow:hidden}
+.notify{background:linear-gradient(135deg,rgba(212,168,67,.07),rgba(212,168,67,.02));border-radius:24px;border:1px solid rgba(212,168,67,.14);padding:56px;text-align:center;position:relative;overflow:hidden}
 .notify::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 0%,rgba(212,168,67,.06),transparent);pointer-events:none}
-.notify-in{position:relative;z-index:1}
-.n-row{display:flex;gap:12px;max-width:460px;margin:24px auto 0}
-.ni{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--bd);border-radius:99px;padding:13px 20px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color .2s}
+.nin{position:relative;z-index:1}
+.nrow{display:flex;gap:10px;max-width:440px;margin:22px auto 0}
+.ni{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--bd);border-radius:99px;padding:12px 18px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color .2s}
 .ni:focus{border-color:var(--g2)}
 .ni::placeholder{color:var(--t3)}
-.nb{background:var(--g2);color:#0a0a0a;border:none;border-radius:99px;padding:13px 28px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:none;white-space:nowrap;transition:all .25s}
+.nb{background:var(--g2);color:#0a0a0a;border:none;border-radius:99px;padding:12px 26px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:none;white-space:nowrap;transition:all .25s}
 .nb:hover{background:var(--g3);box-shadow:0 8px 24px rgba(245,200,66,.35)}
-.n-ok{display:none;font-size:13px;color:var(--g2);margin-top:12px}
-.n-ok.on{display:block}
+.nok{display:none;font-size:13px;color:var(--g2);margin-top:10px}
+.nok.on{display:block}
+@media(max-width:600px){.notify{padding:36px 24px}.nrow{flex-direction:column}.nrow .nb{padding:12px}}
 
 /* FAQ */
-.faq-wrap{max-width:720px;margin:0 auto}
+.faq-wrap{max-width:700px;margin:0 auto}
 .faq-item{border-bottom:1px solid var(--bd)}
-.faq-q{width:100%;padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:none;text-align:left;cursor:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#fff;transition:color .2s}
+.faq-q{width:100%;padding:18px 0;display:flex;justify-content:space-between;align-items:center;gap:14px;background:none;border:none;text-align:left;cursor:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#fff;transition:color .2s}
 .faq-q:hover{color:var(--g2)}
-.faq-ico{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--g2);transition:transform .3s,background .2s;font-size:14px;line-height:1}
+.faq-ico{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--g2);transition:transform .3s,background .2s;font-size:14px;line-height:1}
 .faq-item.open .faq-ico{transform:rotate(45deg);background:rgba(212,168,67,.1)}
 .faq-a{font-size:13.5px;color:var(--t2);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.23,1,.32,1),padding .4s}
-.faq-item.open .faq-a{max-height:400px;padding-bottom:20px}
+.faq-item.open .faq-a{max-height:400px;padding-bottom:18px}
 
 /* CONTACT */
-.con-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px}
-.con-cards{display:flex;flex-direction:column;gap:12px;margin-bottom:0}
-.cc{background:var(--s1);border-radius:16px;border:1px solid var(--bd);padding:18px 20px;display:flex;align-items:center;gap:14px;text-decoration:none;transition:all .25s}
+.con-l{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.con-cards{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.cc{background:var(--s1);border-radius:16px;border:1px solid var(--bd);padding:16px 18px;display:flex;align-items:center;gap:12px;text-decoration:none;transition:all .25s}
 .cc:hover{border-color:rgba(212,168,67,.2);transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,0,0,.5)}
-.cc-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cc-ico{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .cc-lbl{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;font-weight:600}
 .cc-val{font-size:13px;font-weight:600;color:#fff;margin-top:2px}
 .cc-hint{font-size:11px;color:var(--t3);margin-top:2px}
-.cform{background:var(--s1);border-radius:20px;border:1px solid var(--bd);padding:28px;position:relative;overflow:hidden}
+.cform{background:var(--s1);border-radius:20px;border:1px solid var(--bd);padding:24px;position:relative;overflow:hidden}
 .cform::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--g2),transparent)}
-.cinp{display:flex;flex-direction:column;gap:12px}
-.cinp input,.cinp textarea{background:var(--s2);border:1px solid var(--bd);border-radius:var(--rs);padding:12px 16px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%}
+.cinp{display:flex;flex-direction:column;gap:10px}
+.cinp input,.cinp textarea{background:var(--s2);border:1px solid var(--bd);border-radius:var(--rs);padding:11px 14px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%}
 .cinp input:focus,.cinp textarea:focus{border-color:var(--g2);box-shadow:0 0 0 3px rgba(212,168,67,.1)}
-.cinp textarea{resize:vertical;min-height:100px}
+.cinp textarea{resize:vertical;min-height:90px}
 .cinp input::placeholder,.cinp textarea::placeholder{color:var(--t3)}
-.csend{margin-top:14px;padding:12px 28px;background:var(--g2);color:#0a0a0a;border:none;border-radius:99px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:none;transition:all .25s}
+.csend{margin-top:12px;padding:11px 24px;background:var(--g2);color:#0a0a0a;border:none;border-radius:99px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:none;transition:all .25s}
 .csend:hover{background:var(--g3);box-shadow:0 8px 24px rgba(245,200,66,.3)}
-
-/* REVIEW FORM */
-.rev-form{background:var(--s1);border-radius:20px;border:1px solid var(--bd);padding:28px;margin-top:32px}
-.rinp{display:flex;flex-direction:column;gap:12px}
-.rinp input,.rinp textarea,.rinp select{background:var(--s2);border:1px solid var(--bd);border-radius:var(--rs);padding:12px 16px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%}
+.rev-form{background:var(--s1);border-radius:20px;border:1px solid var(--bd);padding:24px;margin-top:28px}
+.rinp{display:flex;flex-direction:column;gap:10px}
+.rinp input,.rinp textarea,.rinp select{background:var(--s2);border:1px solid var(--bd);border-radius:var(--rs);padding:11px 14px;color:var(--t);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%}
 .rinp input:focus,.rinp textarea:focus,.rinp select:focus{border-color:var(--g2);box-shadow:0 0 0 3px rgba(212,168,67,.1)}
-.rinp textarea{resize:vertical;min-height:82px}
+.rinp textarea{resize:vertical;min-height:80px}
 .rinp select option{background:var(--s2)}
-.act{margin-top:14px;padding:11px 24px;background:var(--g2);color:#0a0a0a;border:none;border-radius:99px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:none;transition:all .25s}
-.act:hover{background:var(--g3)}
-.ok{display:none;font-size:12px;color:var(--g2);margin-top:8px;font-weight:500}
-.ok.on{display:block}
+.actbtn{margin-top:12px;padding:11px 24px;background:var(--g2);color:#0a0a0a;border:none;border-radius:99px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:none;transition:all .25s}
+.actbtn:hover{background:var(--g3)}
+.okmsg{display:none;font-size:12px;color:var(--g2);margin-top:8px;font-weight:500}
+.okmsg.on{display:block}
+@media(max-width:900px){.con-l{grid-template-columns:1fr;gap:40px}}
 
-footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:center}
-.foot-logo{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:8px}
-.foot-logo em{color:var(--g2);font-style:normal}
-.foot-sub{font-size:12.5px;color:var(--t3);line-height:1.8}
-.foot-links{display:flex;gap:24px;justify-content:center;margin:20px 0}
-.foot-link{font-size:12px;color:var(--t2);text-decoration:none;transition:color .2s}
-.foot-link:hover{color:var(--g2)}
-.empty{text-align:center;padding:3rem;color:var(--t2)}
-
-/* RESPONSIVE */
-@media(min-width:1100px){.fish-grid{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:1024px){
-  .about-grid,.tl-layout,.proof-layout,.con-layout{grid-template-columns:1fr;gap:48px}
-  .req-layout{grid-template-columns:1fr;gap:40px}
-  .req-side{position:static}
-  .grades-grid{grid-template-columns:1fr 1fr}
-  .about-img-col{max-width:400px;margin:0 auto}
-}
-@media(max-width:768px){
-  section{padding:64px 0}
-  .fish-grid{grid-template-columns:1fr 1fr}
-  .grades-grid{grid-template-columns:1fr}
-  .frow{grid-template-columns:1fr}
-  .notify{padding:40px 24px}
-  .n-row{flex-direction:column}
-  .n-row .nb{padding:12px}
-  #nav{padding:14px 1.25rem}
-  .nav-wm{display:none}
-  .wrap{padding:0 1.25rem}
-  .hero{height:100svh}
-  .slide-content{padding:0 1.5rem}
-  .slide-fish{width:65%;opacity:.7}
-  body{cursor:auto}
-  #cur{display:none}
-}
-@media(max-width:480px){
-  .fish-grid{grid-template-columns:1fr 1fr}
-  .fc-img-wrap{height:180px}
-  .hero-nav{bottom:28px}
-  .fab{bottom:20px;right:20px}
-  .popup{right:20px;width:280px}
-}
+footer{background:#000;border-top:1px solid var(--bd);padding:44px 0;text-align:center}
+.flogo{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:8px}
+.flogo em{color:var(--g2);font-style:normal}
+.fsub{font-size:12px;color:var(--t3);line-height:1.8}
+.flinks{display:flex;gap:22px;justify-content:center;margin:16px 0}
+.flink{font-size:12px;color:var(--t2);text-decoration:none;transition:color .2s}
+.flink:hover{color:var(--g2)}
+.empty{text-align:center;padding:3rem;color:var(--t2);grid-column:1/-1}
 </style>
 </head>
 <body>
-<div id="cur"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="5" x2="27" y2="27" stroke="#F5C842" stroke-width="3" stroke-linecap="round"/><line x1="27" y1="5" x2="5" y2="27" stroke="#F5C842" stroke-width="3" stroke-linecap="round"/></svg></div>
+
+<!-- CURSOR -->
+<div id="cur">
+  <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="4" y1="4" x2="26" y2="26" stroke="#F5C842" stroke-width="3" stroke-linecap="round"/>
+    <line x1="26" y1="4" x2="4" y2="26" stroke="#F5C842" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+</div>
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="nav-brand">
-    <div class="nav-logo-wrap">
-      <img src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/ChatGPT%20Image%20Jun%201%2C%202026%2C%2002_41_59%20PM.png" alt="XMTS Logo" onerror="this.style.display='none'"/>
+  <a href="#" class="nbrand">
+    <div class="nlogo">
+      <img src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/ChatGPT%20Image%20Jun%201%2C%202026%2C%2002_41_59%20PM.png" alt="XMTS" onerror="this.style.display='none'"/>
     </div>
-    <span class="nav-wm"><em>✕</em> Marks the Spot</span>
+    <span class="nwm"><em>✕</em> Marks the Spot</span>
   </a>
-  <div class="nav-r">
-    <a href="#strains" class="nav-a">Strains</a>
-    <a href="#grades" class="nav-a">Grades</a>
-    <a href="#faq" class="nav-a">FAQ</a>
-    <button class="nav-cta" id="navCta">Request a Fish</button>
+  <div class="nright">
+    <a href="#strains" class="na">Strains</a>
+    <a href="#grades" class="na">Grades</a>
+    <a href="#faq" class="na">FAQ</a>
+    <button class="ncta" id="navCta">Request a Fish</button>
   </div>
 </nav>
 
-<!-- FAB + POPUP -->
-<button class="fab" id="fab">
-  <svg viewBox="0 0 28 28" fill="none" width="20" height="20"><line x1="4" y1="4" x2="24" y2="24" stroke="#111" stroke-width="3" stroke-linecap="round"/><line x1="24" y1="4" x2="4" y2="24" stroke="#111" stroke-width="3" stroke-linecap="round"/></svg>
-</button>
-<div class="popup" id="popup">
-  <div class="popup-head">
-    <div class="popup-logo">
-      <img src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/ChatGPT%20Image%20Jun%201%2C%202026%2C%2002_41_59%20PM.png" alt="Logo" onerror="this.style.display='none'"/>
+<!-- FAB POPUP -->
+<div class="fab-wrap">
+  <div class="popup" id="popup">
+    <div class="ph">
+      <div class="plogo">
+        <img src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/ChatGPT%20Image%20Jun%201%2C%202026%2C%2002_41_59%20PM.png" alt="Logo" onerror="this.style.display='none'"/>
+      </div>
+      <div>
+        <div class="pt2">X Marks the Spot</div>
+        <div class="ps">We reply within 24 hours</div>
+      </div>
+      <button class="pc" id="popClose">
+        <svg viewBox="0 0 14 14" fill="none" width="10" height="10"><line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="13" y1="1" x2="1" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
     </div>
-    <div>
-      <div class="popup-htitle">X Marks the Spot</div>
-      <div class="popup-hsub">We reply within 24 hours</div>
+    <div class="plinks">
+      <a href="https://wa.me/639173397877" target="_blank" class="pa">
+        <div class="pi" style="background:rgba(37,211,102,.1)"><svg width="19" height="19" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+        <div><div class="pl">WhatsApp</div><div class="pv">+63 917 339 7877</div></div>
+      </a>
+      <a href="https://www.facebook.com/eXedmarksthespot" target="_blank" class="pa">
+        <div class="pi" style="background:rgba(24,119,242,.1)"><svg width="19" height="19" viewBox="0 0 24 24" fill="#4d90fe"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.514c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></div>
+        <div><div class="pl">Facebook</div><div class="pv">Xmarksthespot</div></div>
+      </a>
+      <a href="mailto:Francisco.Desaca@gmail.com" class="pa">
+        <div class="pi" style="background:rgba(212,168,67,.1)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></div>
+        <div><div class="pl">Email</div><div class="pv">Francisco.Desaca@gmail.com</div></div>
+      </a>
     </div>
-    <button class="popup-close" id="popClose">
-      <svg viewBox="0 0 16 16" fill="none" width="11" height="11"><line x1="2" y1="2" x2="14" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="2" x2="2" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
+    <div class="ptip">🐠 Click any fish card to request that strain</div>
   </div>
-  <div class="popup-links">
-    <a href="https://wa.me/639173397877" target="_blank" class="pop-a">
-      <div class="pop-ico" style="background:rgba(37,211,102,.1)"><svg width="20" height="20" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
-      <div><div class="pop-lbl">WhatsApp</div><div class="pop-val">+63 917 339 7877</div></div>
-    </a>
-    <a href="https://www.facebook.com/eXedmarksthespot" target="_blank" class="pop-a">
-      <div class="pop-ico" style="background:rgba(24,119,242,.1)"><svg width="20" height="20" viewBox="0 0 24 24" fill="#4d90fe"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.514c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></div>
-      <div><div class="pop-lbl">Facebook</div><div class="pop-val">Xmarksthespot</div></div>
-    </a>
-    <a href="mailto:Francisco.Desaca@gmail.com" class="pop-a">
-      <div class="pop-ico" style="background:rgba(212,168,67,.1)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></div>
-      <div><div class="pop-lbl">Email</div><div class="pop-val">Francisco.Desaca@gmail.com</div></div>
-    </a>
-  </div>
-  <div class="popup-tip">🐠 Tap a fish card to request that exact strain</div>
+  <button class="fab" id="fab">
+    <span class="fab-tip">Contact Us</span>
+    <svg viewBox="0 0 28 28" fill="none" width="20" height="20">
+      <line x1="4" y1="4" x2="24" y2="24" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+      <line x1="24" y1="4" x2="4" y2="24" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </button>
 </div>
 
 <!-- HERO CAROUSEL -->
 <div class="hero" id="hero">
   <div class="particles" id="particles"></div>
 
-  <!-- Slide 1 — Golden Zebra Lyretail -->
-  <div class="slide active" id="slide0">
-    <div class="slide-bg slide-bg-1"></div>
-    <div class="slide-glow"></div>
-    <div class="slide-fade"></div>
-    <div class="slide-bottom"></div>
-    <img class="slide-fish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Golden_Zebra_Veiltail-removebg-preview.png" alt="Golden Zebra Veiltail" onerror="this.style.display='none'"/>
-    <div class="slide-content">
-      <div class="slide-eyebrow">Premium Collection</div>
-      <div class="slide-strain">Balloon Molly</div>
-      <h1 class="slide-title"><span class="xt">✕</span> Marks<br>the Spot</h1>
-      <p class="slide-desc">World-class balloon mollies. Selectively bred, personally evaluated against competition standard, shipped worldwide.</p>
-      <div class="slide-actions">
-        <button class="btn-p" id="heroBtn">Browse Strains</button>
-        <a href="#grades" class="btn-g">Grade Guide</a>
+  <div class="slide active" id="s0">
+    <div class="sbg sbg1"></div><div class="sglow"></div><div class="sfade"></div><div class="sbottom"></div>
+    <img class="sfish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Golden_Zebra_Veiltail-removebg-preview.png" alt="Golden Zebra Veiltail" onerror="this.style.display='none'"/>
+    <div class="scnt">
+      <div class="seyebrow">Premium Collection · Talisay City, PH</div>
+      <div class="sstrain">Balloon Molly</div>
+      <h1 class="stitle"><span class="xt">✕</span> Marks the Spot</h1>
+      <p class="sdesc">World-class balloon mollies. Selectively bred, personally evaluated against competition standard, shipped worldwide.</p>
+      <div class="sacts">
+        <button class="btnp" id="heroBtn">Browse Strains</button>
+        <a href="#grades" class="btng">Grade Guide</a>
       </div>
     </div>
   </div>
 
-  <!-- Slide 2 — Pikachu Lyretail -->
-  <div class="slide" id="slide1">
-    <div class="slide-bg slide-bg-2"></div>
-    <div class="slide-glow"></div>
-    <div class="slide-fade"></div>
-    <div class="slide-bottom"></div>
-    <img class="slide-fish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Pikachu_Lyretail-removebg-preview.png" alt="Pikachu Lyretail" onerror="this.style.display='none'"/>
-    <div class="slide-content">
-      <div class="slide-eyebrow">Featured Strain</div>
-      <div class="slide-strain">Balloon Molly</div>
-      <h1 class="slide-title">Pikachu<br><span class="xt">Lyretail</span></h1>
-      <p class="slide-desc">Striking yellow and black pattern with elegant lyretail fins. A show-stopper in any collection.</p>
-      <div class="slide-actions">
-        <button class="btn-p" onclick="pickStrain('Pikachu Lyretail')">Request This Strain</button>
-        <a href="#strains" class="btn-g">View All Strains</a>
+  <div class="slide" id="s1">
+    <div class="sbg sbg2"></div><div class="sglow"></div><div class="sfade"></div><div class="sbottom"></div>
+    <img class="sfish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Pikachu_Lyretail-removebg-preview.png" alt="Pikachu Lyretail" onerror="this.style.display='none'"/>
+    <div class="scnt">
+      <div class="seyebrow">Featured Strain</div>
+      <div class="sstrain">Balloon Molly</div>
+      <h1 class="stitle">Pikachu <span class="xt">Lyretail</span></h1>
+      <p class="sdesc">Striking yellow and black pattern with elegant lyretail fins. A show-stopper in any collection.</p>
+      <div class="sacts">
+        <button class="btnp" onclick="pickStrain('Pikachu Lyretail')">Request This Strain</button>
+        <a href="#strains" class="btng">All Strains</a>
       </div>
     </div>
   </div>
 
-  <!-- Slide 3 — Black King -->
-  <div class="slide" id="slide2">
-    <div class="slide-bg slide-bg-3"></div>
-    <div class="slide-glow"></div>
-    <div class="slide-fade"></div>
-    <div class="slide-bottom"></div>
-    <img class="slide-fish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Black_King_Balloon_Molly_Lyretail-removebg-preview.png" alt="Black King" onerror="this.style.display='none'"/>
-    <div class="slide-content">
-      <div class="slide-eyebrow">Show Grade</div>
-      <div class="slide-strain">Balloon Molly</div>
-      <h1 class="slide-title">Black King<br><span class="xt">Lyretail</span></h1>
-      <p class="slide-desc">Deep obsidian body with dramatic lyretail fins. Competition-standard excellence from Talisay City.</p>
-      <div class="slide-actions">
-        <button class="btn-p" onclick="pickStrain('Black King Balloon Molly Lyretail')">Request This Strain</button>
-        <a href="#grades" class="btn-g">Grade Guide</a>
+  <div class="slide" id="s2">
+    <div class="sbg sbg3"></div><div class="sglow"></div><div class="sfade"></div><div class="sbottom"></div>
+    <img class="sfish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Black_King_Balloon_Molly_Lyretail-removebg-preview.png" alt="Black King" onerror="this.style.display='none'"/>
+    <div class="scnt">
+      <div class="seyebrow">Show Grade</div>
+      <div class="sstrain">Balloon Molly</div>
+      <h1 class="stitle">Black King <span class="xt">Lyretail</span></h1>
+      <p class="sdesc">Deep obsidian body with dramatic lyretail fins. Competition-standard excellence from Talisay City.</p>
+      <div class="sacts">
+        <button class="btnp" onclick="pickStrain('Black King Balloon Molly Lyretail')">Request This Strain</button>
+        <a href="#grades" class="btng">Grade Guide</a>
       </div>
     </div>
   </div>
 
-  <!-- Slide 4 — Platinum Marble -->
-  <div class="slide" id="slide3">
-    <div class="slide-bg slide-bg-4"></div>
-    <div class="slide-glow"></div>
-    <div class="slide-fade"></div>
-    <div class="slide-bottom"></div>
-    <img class="slide-fish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Platinum__Marble_Zebra_Pattern-removebg-preview.png" alt="Platinum Marble" onerror="this.style.display='none'"/>
-    <div class="slide-content">
-      <div class="slide-eyebrow">Rare Pattern</div>
-      <div class="slide-strain">Balloon Molly</div>
-      <h1 class="slide-title">Platinum<br><span class="xt">Marble</span></h1>
-      <p class="slide-desc">Intricate marble zebra pattern on a platinum base. One of the most sought-after strains in our collection.</p>
-      <div class="slide-actions">
-        <button class="btn-p" onclick="pickStrain('Platinum Marble Roundtail')">Request This Strain</button>
-        <a href="#strains" class="btn-g">View All Strains</a>
+  <div class="slide" id="s3">
+    <div class="sbg sbg4"></div><div class="sglow"></div><div class="sfade"></div><div class="sbottom"></div>
+    <img class="sfish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Platinum__Marble_Zebra_Pattern-removebg-preview.png" alt="Platinum Marble" onerror="this.style.display='none'"/>
+    <div class="scnt">
+      <div class="seyebrow">Rare Pattern</div>
+      <div class="sstrain">Balloon Molly</div>
+      <h1 class="stitle">Platinum <span class="xt">Marble</span></h1>
+      <p class="sdesc">Intricate marble zebra pattern on a platinum base. One of the most sought-after strains in our collection.</p>
+      <div class="sacts">
+        <button class="btnp" onclick="pickStrain('Platinum Marble Roundtail')">Request This Strain</button>
+        <a href="#strains" class="btng">All Strains</a>
       </div>
     </div>
   </div>
 
-  <!-- Slide 5 — Tancho Lyretail -->
-  <div class="slide" id="slide4">
-    <div class="slide-bg slide-bg-5"></div>
-    <div class="slide-glow"></div>
-    <div class="slide-fade"></div>
-    <div class="slide-bottom"></div>
-    <img class="slide-fish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Tancho_Lyretail-removebg-preview.png" alt="Tancho Lyretail" onerror="this.style.display='none'"/>
-    <div class="slide-content">
-      <div class="slide-eyebrow">Ships Worldwide</div>
-      <div class="slide-strain">Balloon Molly</div>
-      <h1 class="slide-title">Tancho<br><span class="xt">Lyretail</span></h1>
-      <p class="slide-desc">Elegant white body with distinctive markings and flowing lyretail. Every fish personally selected against competition standard.</p>
-      <div class="slide-actions">
-        <button class="btn-p" onclick="pickStrain('Tancho Lyretail')">Request This Strain</button>
-        <a href="#strains" class="btn-g">View All Strains</a>
+  <div class="slide" id="s4">
+    <div class="sbg sbg5"></div><div class="sglow"></div><div class="sfade"></div><div class="sbottom"></div>
+    <img class="sfish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Tancho_Lyretail-removebg-preview.png" alt="Tancho Lyretail" onerror="this.style.display='none'"/>
+    <div class="scnt">
+      <div class="seyebrow">Ships Worldwide</div>
+      <div class="sstrain">Balloon Molly</div>
+      <h1 class="stitle">Tancho <span class="xt">Lyretail</span></h1>
+      <p class="sdesc">Elegant body with distinctive markings and flowing lyretail. Every fish personally selected against competition standard.</p>
+      <div class="sacts">
+        <button class="btnp" onclick="pickStrain('Tancho Lyretail')">Request This Strain</button>
+        <a href="#strains" class="btng">All Strains</a>
       </div>
     </div>
   </div>
 
-  <!-- Carousel nav -->
-  <div class="hero-nav">
-    <button class="hero-arr" id="prevBtn">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <div class="hero-dots" id="dots"></div>
-    <button class="hero-arr" id="nextBtn">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
+  <div class="hnav">
+    <button class="harr" id="prevBtn"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="hdots" id="dots"></div>
+    <button class="harr" id="nextBtn"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
-  <div class="scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
+  <div class="sscroll"><span>Scroll</span><div class="sline"></div></div>
 </div>
 
 <div class="divider"></div>
@@ -641,29 +497,24 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 <!-- ABOUT -->
 <section id="about">
   <div class="wrap">
-    <div class="about-grid">
-      <div class="about-img-col r">
-        <div class="about-logo-frame">
-          <img src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/ChatGPT%20Image%20Jun%201%2C%202026%2C%2002_41_59%20PM.png" alt="X Marks the Spot Aquatics" onerror="this.parentNode.style.background='#111'"/>
-        </div>
-        <div class="about-badge">
-          <div class="ab-n">500+</div>
-          <div class="ab-l">Fish Shipped</div>
+    <div class="about-g">
+      <div class="r">
+        <div style="position:relative">
+          <div class="about-frame"><img src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/ChatGPT%20Image%20Jun%201%2C%202026%2C%2002_41_59%20PM.png" alt="X Marks the Spot Aquatics" onerror="this.parentNode.style.background='#111'"/></div>
+          <div class="about-badge"><div class="abn">500+</div><div class="abl">Fish Shipped</div></div>
         </div>
       </div>
-      <div class="about-text r d2">
-        <div>
-          <span class="s-label">Who We Are</span>
-          <h2 class="s-title">Every fish chosen with purpose</h2>
-          <p class="about-body">We are a passionate balloon molly operation based in Talisay City, Philippines. Every fish is personally evaluated against the balloon molly competition standard before it ships — whether you're building a breeding program or preparing for a show.</p>
-        </div>
+      <div class="r d2">
+        <span class="slabel">Who We Are</span>
+        <h2 class="stit">Every fish chosen with purpose</h2>
+        <p class="about-body">We are a passionate balloon molly operation based in Talisay City, Philippines. Every fish is personally evaluated against the balloon molly competition standard before it ships — whether you're building a breeding program or preparing for a show.</p>
         <div class="tags">
           <span class="tag">🏆 Show Grade Specialist</span>
           <span class="tag">🐠 Balloon Molly Standard</span>
           <span class="tag">🌏 Ships Worldwide</span>
           <span class="tag">✅ Personally Selected</span>
         </div>
-        <div class="stats-row">
+        <div class="stats-r">
           <div class="stat r d1"><div class="sn">9</div><div class="sl">Strains</div></div>
           <div class="stat r d2"><div class="sn">3</div><div class="sl">Grades</div></div>
           <div class="stat r d3"><div class="sn">🌏</div><div class="sl">Worldwide</div></div>
@@ -678,14 +529,14 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 <!-- STRAINS -->
 <section id="strains">
   <div class="wrap">
-    <div class="strain-head">
+    <div class="strain-h">
       <div class="r">
-        <span class="s-label">Our Collection</span>
-        <h2 class="s-title">Available Strains</h2>
+        <span class="slabel">Our Collection</span>
+        <h2 class="stit">Available Strains</h2>
       </div>
       <div class="fpills r d2" id="fpills"></div>
     </div>
-    <div class="fish-grid r" id="fishGrid"></div>
+    <div class="fish-g r" id="fishGrid"></div>
     <div class="disc r d2">📸 <strong>Photo Reference:</strong> All photos show the strain's characteristics. Actual fish vary naturally in exact pattern and coloration — each one is unique.</div>
   </div>
 </section>
@@ -695,25 +546,26 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 <!-- REQUEST -->
 <section id="request">
   <div class="wrap">
-    <div class="req-layout">
+    <div class="req-l">
       <div class="req-side r">
-        <span class="s-label">Place an Order</span>
-        <h2 class="s-title">Request a Fish</h2>
-        <p class="s-sub">Tell us what you need and we'll personally hand-select the best match.</p>
+        <span class="slabel">Place an Order</span>
+        <h2 class="stit">Request a Fish</h2>
+        <p class="ssub">Tell us what you need and we'll personally hand-select the best match.</p>
         <div class="req-steps">
-          <div class="rs"><div class="rs-dot">1</div><div><div class="rs-t">Fill the form</div><div class="rs-d">Strain, grade, quantity and contact</div></div></div>
-          <div class="rs"><div class="rs-dot">2</div><div><div class="rs-t">We confirm</div><div class="rs-d">Availability confirmed within 24 hours</div></div></div>
-          <div class="rs"><div class="rs-dot">3</div><div><div class="rs-t">Photos sent</div><div class="rs-d">See your fish before we ship</div></div></div>
-          <div class="rs"><div class="rs-dot">4</div><div><div class="rs-t">Pay &amp; ship</div><div class="rs-d">GCash, PayPal, bank transfer, Western Union</div></div></div>
+          <div class="rs"><div class="rsd">1</div><div><div class="rst">Fill the form</div><div class="rsi">Strain, grade, quantity and contact</div></div></div>
+          <div class="rs"><div class="rsd">2</div><div><div class="rst">We confirm</div><div class="rsi">Availability confirmed within 24 hours</div></div></div>
+          <div class="rs"><div class="rsd">3</div><div><div class="rst">Photos sent</div><div class="rsi">See your fish before we ship</div></div></div>
+          <div class="rs"><div class="rsd">4</div><div><div class="rst">Pay &amp; ship</div><div class="rsi">GCash, PayPal, bank transfer, Western Union</div></div></div>
         </div>
       </div>
       <div class="r d2">
-        <div class="req-card" id="reqWrap">
+        <div class="req-card">
           <div id="reqForm">
-            <div style="font-size:11px;color:#f87171;font-weight:600;margin-bottom:16px">* Required fields</div>
+            <div style="font-size:11px;color:#f87171;font-weight:600;margin-bottom:14px">* All fields required</div>
             <div class="frow">
               <div class="fg"><label>Strain *</label>
-                <select id="s_strain" class="fc2"><option value="">Select strain...</option>
+                <select id="s_strain" class="fc2">
+                  <option value="">Select strain...</option>
                   <option>Golden Zebra Veiltail</option>
                   <option>Pikachu Lyretail</option>
                   <option>Pikachu Roundtail</option>
@@ -725,7 +577,8 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
                   <option>Other / Not sure</option>
                 </select></div>
               <div class="fg"><label>Grade *</label>
-                <select id="s_grade" class="fc2"><option value="">Select grade...</option>
+                <select id="s_grade" class="fc2">
+                  <option value="">Select grade...</option>
                   <option>Material Grade (from $80)</option>
                   <option>Show Potential (from $120)</option>
                   <option>Show Grade (from $180)</option>
@@ -750,7 +603,7 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
                 <input type="text" id="s_notes" class="fc2" placeholder="Pairs, preferences, questions..."/></div>
             </div>
             <button class="sbtn" id="sendBtn">📩 Send Request →</button>
-            <div class="wa-note">💬 <strong>WhatsApp:</strong> Order details pre-filled — just press Send.</div>
+            <div class="wanote">💬 <strong>WhatsApp:</strong> Order details pre-filled — just press Send.</div>
           </div>
           <div class="conf" id="confBox">
             <div class="conf-ic">✅</div>
@@ -769,18 +622,18 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 <!-- TIMELINE -->
 <section>
   <div class="wrap">
-    <div class="tl-layout">
+    <div class="tl-l">
       <div class="r">
-        <span class="s-label">Our Process</span>
-        <h2 class="s-title">What happens after you order</h2>
-        <p class="s-sub">We keep you informed at every step — from selection to your door.</p>
+        <span class="slabel">Our Process</span>
+        <h2 class="stit">What happens after you order</h2>
+        <p class="ssub">We keep you informed at every step — from selection to your door.</p>
       </div>
       <div class="tl r d2">
-        <div class="tl-item"><div class="tl-dot g">📩</div><div class="tl-day">Day 1</div><div class="tl-name">Request received</div><div class="tl-info">We review strain, grade, and quantity — confirm availability within 24 hours.</div></div>
-        <div class="tl-item"><div class="tl-dot w">🐠</div><div class="tl-day">Day 2–3</div><div class="tl-name">Fish personally selected</div><div class="tl-info">Each fish hand-picked and evaluated against competition standard.</div></div>
-        <div class="tl-item"><div class="tl-dot w">📸</div><div class="tl-day">Day 3–4</div><div class="tl-name">You approve &amp; pay</div><div class="tl-info">We send photos of your fish. Payment confirmed after your approval.</div></div>
-        <div class="tl-item"><div class="tl-dot w">📦</div><div class="tl-day">Day 4–5</div><div class="tl-name">Packed &amp; shipped</div><div class="tl-info">Bagged with oxygen. Tracking number and care guide sent.</div></div>
-        <div class="tl-item"><div class="tl-dot d">✅</div><div class="tl-day">Day 5–10</div><div class="tl-name">Fish arrive</div><div class="tl-info">We're available throughout transit and after arrival.</div></div>
+        <div class="tli"><div class="tld g">📩</div><div class="tlday">Day 1</div><div class="tlname">Request received</div><div class="tlinfo">We review strain, grade, and quantity — confirm availability within 24 hours.</div></div>
+        <div class="tli"><div class="tld w">🐠</div><div class="tlday">Day 2–3</div><div class="tlname">Fish personally selected</div><div class="tlinfo">Each fish hand-picked and evaluated against competition standard.</div></div>
+        <div class="tli"><div class="tld w">📸</div><div class="tlday">Day 3–4</div><div class="tlname">You approve &amp; pay</div><div class="tlinfo">We send photos of your fish. Payment confirmed after your approval.</div></div>
+        <div class="tli"><div class="tld w">📦</div><div class="tlday">Day 4–5</div><div class="tlname">Packed &amp; shipped</div><div class="tlinfo">Bagged with oxygen. Tracking number and care guide sent.</div></div>
+        <div class="tli"><div class="tld done">✅</div><div class="tlday">Day 5–10</div><div class="tlname">Fish arrive</div><div class="tlinfo">We're available throughout transit and after arrival.</div></div>
       </div>
     </div>
   </div>
@@ -791,23 +644,23 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 <!-- GRADES -->
 <section id="grades">
   <div class="wrap">
-    <div style="text-align:center;margin-bottom:56px" class="r">
-      <span class="s-label">Grading System</span>
-      <h2 class="s-title">Grade Guide &amp; Pricing</h2>
-      <p class="s-sub" style="margin:0 auto">Three tiers built around the official balloon molly competition standard.</p>
+    <div style="text-align:center;margin-bottom:52px" class="r">
+      <span class="slabel">Grading System</span>
+      <h2 class="stit">Grade Guide &amp; Pricing</h2>
+      <p class="ssub" style="margin:0 auto">Three tiers built around the official balloon molly competition standard.</p>
     </div>
-    <div class="grades-grid">
+    <div class="grades-g">
       <div class="gc mat r d1">
-        <div class="gc-img-wrap"><img class="gc-fish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Pikachu-removebg-preview.png" alt="Material Grade" onerror="this.style.display='none'"/></div>
-        <div class="gc-body"><div class="gc-tier">Entry Tier</div><div class="gc-name">Material Grade</div><div class="gc-price">from $80</div><div class="gc-desc">Healthy fish with strong coloration and solid body structure. Ideal for building your breeding program.</div><span class="gc-pill">Any size</span></div>
+        <div class="gc-iw"><img class="gc-img" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Pikachu-removebg-preview.png" alt="Material Grade" onerror="this.style.display='none'"/></div>
+        <div class="gc-b"><div class="gc-tier">Entry Tier</div><div class="gc-name">Material Grade</div><div class="gc-price">from $80</div><div class="gc-desc">Healthy fish with strong coloration and solid body structure. Ideal for building your breeding program.</div><span class="gc-pill">Any size</span></div>
       </div>
       <div class="gc pot r d2">
-        <div class="gc-img-wrap"><img class="gc-fish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Golden_Blue_Tail_Lyretail-removebg-preview.png" alt="Show Potential" onerror="this.style.display='none'"/></div>
-        <div class="gc-body"><div class="gc-tier">Mid Tier</div><div class="gc-name">Show Potential</div><div class="gc-price">from $120</div><div class="gc-desc">Young fish showing strong competition characteristics. Eligible for junior category events.</div><span class="gc-pill">2.5cm – 3cm</span></div>
+        <div class="gc-iw"><img class="gc-img" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Golden_Blue_Tail_Lyretail-removebg-preview.png" alt="Show Potential" onerror="this.style.display='none'"/></div>
+        <div class="gc-b"><div class="gc-tier">Mid Tier</div><div class="gc-name">Show Potential</div><div class="gc-price">from $120</div><div class="gc-desc">Young fish showing strong competition characteristics. Eligible for junior category events.</div><span class="gc-pill">2.5cm – 3cm</span></div>
       </div>
       <div class="gc gold r d3">
-        <div class="gc-img-wrap"><img class="gc-fish" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Golden_Zebra_Veiltail-removebg-preview.png" alt="Show Grade" onerror="this.style.display='none'"/></div>
-        <div class="gc-body"><div class="gc-tier">Top Tier</div><div class="gc-name">Show Grade</div><div class="gc-price">from $180</div><div class="gc-desc">Fully meets the international balloon molly competition standard. Outstanding in all aspects.</div><span class="gc-pill">3cm and above</span></div>
+        <div class="gc-iw"><img class="gc-img" src="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/Golden_Zebra_Veiltail-removebg-preview.png" alt="Show Grade" onerror="this.style.display='none'"/></div>
+        <div class="gc-b"><div class="gc-tier">Top Tier</div><div class="gc-name">Show Grade</div><div class="gc-price">from $180</div><div class="gc-desc">Fully meets the international balloon molly competition standard. Outstanding in all aspects.</div><span class="gc-pill">3cm and above</span></div>
       </div>
     </div>
   </div>
@@ -818,17 +671,17 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 <!-- SOCIAL PROOF -->
 <section>
   <div class="wrap">
-    <div class="proof-layout">
+    <div class="proof-l">
       <div class="r">
-        <span class="s-label">Track Record</span>
-        <h2 class="s-title">Verified Orders</h2>
-        <p class="s-sub" style="margin-bottom:28px">Real orders from hobbyists and breeders worldwide.</p>
+        <span class="slabel">Track Record</span>
+        <h2 class="stit">Verified Orders</h2>
+        <p class="ssub" style="margin-bottom:24px">Real orders from hobbyists and breeders worldwide.</p>
         <div class="tx-list" id="txList"></div>
       </div>
       <div class="r d2">
-        <span class="s-label">What Buyers Say</span>
-        <h2 class="s-title">Reviews</h2>
-        <div class="rev-list" id="revList" style="margin-top:28px"></div>
+        <span class="slabel">What Buyers Say</span>
+        <h2 class="stit">Reviews</h2>
+        <div class="rev-list" id="revList" style="margin-top:24px"></div>
       </div>
     </div>
   </div>
@@ -840,15 +693,15 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 <section>
   <div class="wrap">
     <div class="notify r">
-      <div class="notify-in">
-        <span class="s-label">Stay Updated</span>
-        <h2 class="s-title">New Strains. First Access.</h2>
-        <p class="s-sub" style="margin:0 auto;max-width:400px">Get notified when rare new strains arrive before they sell out.</p>
-        <div class="n-row">
+      <div class="nin">
+        <span class="slabel">Stay Updated</span>
+        <h2 class="stit">New Strains. First Access.</h2>
+        <p class="ssub" style="margin:0 auto;max-width:380px">Get notified when rare new strains arrive before they sell out.</p>
+        <div class="nrow">
           <input type="email" id="nEmail" class="ni" placeholder="Your email address"/>
           <button id="nBtn" class="nb">Notify Me</button>
         </div>
-        <div class="n-ok" id="nOk">✅ You're on the list — we'll reach out first.</div>
+        <div class="nok" id="nOk">✅ You're on the list — we'll reach out first.</div>
       </div>
     </div>
   </div>
@@ -859,9 +712,9 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 <!-- FAQ -->
 <section id="faq">
   <div class="wrap">
-    <div style="text-align:center;margin-bottom:56px" class="r">
-      <span class="s-label">Answers</span>
-      <h2 class="s-title">Frequently Asked Questions</h2>
+    <div style="text-align:center;margin-bottom:52px" class="r">
+      <span class="slabel">Answers</span>
+      <h2 class="stit">Frequently Asked Questions</h2>
     </div>
     <div class="faq-wrap r"><div class="faq-list" id="faqList"></div></div>
   </div>
@@ -872,26 +725,26 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 <!-- CONTACT + REVIEWS -->
 <section id="contact">
   <div class="wrap">
-    <div class="con-layout">
+    <div class="con-l">
       <div class="r">
-        <span class="s-label">Get in Touch</span>
-        <h2 class="s-title" style="margin-bottom:24px">Contact Us</h2>
+        <span class="slabel">Get in Touch</span>
+        <h2 class="stit" style="margin-bottom:22px">Contact Us</h2>
         <div class="con-cards">
           <a href="https://www.facebook.com/eXedmarksthespot" target="_blank" class="cc">
-            <div class="cc-ico" style="background:rgba(24,119,242,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="#4d90fe"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.514c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></div>
+            <div class="cc-ico" style="background:rgba(24,119,242,.12)"><svg width="21" height="21" viewBox="0 0 24 24" fill="#4d90fe"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.514c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></div>
             <div><div class="cc-lbl">Facebook</div><div class="cc-val">Xmarksthespot</div><div class="cc-hint">Follow us</div></div>
           </a>
           <a href="https://wa.me/639173397877" target="_blank" class="cc">
-            <div class="cc-ico" style="background:rgba(37,211,102,.1)"><svg width="22" height="22" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+            <div class="cc-ico" style="background:rgba(37,211,102,.1)"><svg width="21" height="21" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
             <div><div class="cc-lbl">WhatsApp</div><div class="cc-val">+63 917 339 7877</div><div class="cc-hint">For orders</div></div>
           </a>
           <a href="mailto:Francisco.Desaca@gmail.com" class="cc">
-            <div class="cc-ico" style="background:rgba(212,168,67,.1)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></div>
+            <div class="cc-ico" style="background:rgba(212,168,67,.1)"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></div>
             <div><div class="cc-lbl">Email</div><div class="cc-val">Francisco.Desaca@gmail.com</div><div class="cc-hint">International inquiries</div></div>
           </a>
         </div>
-        <div class="cform" style="margin-top:20px">
-          <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:14px">Send a Message</div>
+        <div class="cform">
+          <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:12px">Send a Message</div>
           <div class="cinp">
             <input type="text" id="cName" placeholder="Your name"/>
             <input type="email" id="cEmail" placeholder="Your email"/>
@@ -899,20 +752,20 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
             <textarea id="cMsg" placeholder="Your message..."></textarea>
           </div>
           <button class="csend" id="cSend">Send Message →</button>
-          <div class="ok" id="cOk">✅ Sent — we'll reply within 24 hours.</div>
+          <div class="okmsg" id="cOk">✅ Sent — we'll reply within 24 hours.</div>
         </div>
       </div>
       <div class="r d2">
-        <span class="s-label">Community</span>
-        <h2 class="s-title" style="margin-bottom:24px">Leave a Review</h2>
+        <span class="slabel">Community</span>
+        <h2 class="stit" style="margin-bottom:22px">Leave a Review</h2>
         <div class="rev-form">
           <div class="rinp">
             <input type="text" id="rName" placeholder="Your name (e.g. John from USA)"/>
             <select id="rRating"><option value="5">⭐⭐⭐⭐⭐ Excellent</option><option value="4">⭐⭐⭐⭐ Very Good</option><option value="3">⭐⭐⭐ Good</option><option value="2">⭐⭐ Fair</option><option value="1">⭐ Poor</option></select>
             <textarea id="rText" placeholder="Share your experience..."></textarea>
           </div>
-          <button class="act" id="rSubmit">Submit Review</button>
-          <div class="ok" id="rOk">✅ Thank you for your review!</div>
+          <button class="actbtn" id="rSubmit">Submit Review</button>
+          <div class="okmsg" id="rOk">✅ Thank you for your review!</div>
         </div>
       </div>
     </div>
@@ -921,278 +774,397 @@ footer{background:#000;border-top:1px solid var(--bd);padding:48px 0;text-align:
 
 <footer>
   <div class="wrap">
-    <div class="foot-logo"><em>✕</em> Marks the Spot Aquatics</div>
-    <div class="foot-sub">Premium Balloon Mollies · Talisay City, Philippines<br>Prices in USD ($) · Ships Worldwide · © 2026</div>
-    <div class="foot-links">
-      <a href="#strains" class="foot-link">Strains</a>
-      <a href="#grades" class="foot-link">Grades</a>
-      <a href="#request" class="foot-link">Order</a>
-      <a href="#faq" class="foot-link">FAQ</a>
-      <a href="#contact" class="foot-link">Contact</a>
+    <div class="flogo"><em>✕</em> Marks the Spot Aquatics</div>
+    <div class="fsub">Premium Balloon Mollies · Talisay City, Philippines<br>Prices in USD ($) · Ships Worldwide · © 2026</div>
+    <div class="flinks">
+      <a href="#strains" class="flink">Strains</a>
+      <a href="#grades" class="flink">Grades</a>
+      <a href="#request" class="flink">Order</a>
+      <a href="#faq" class="flink">FAQ</a>
+      <a href="#contact" class="flink">Contact</a>
     </div>
   </div>
 </footer>
 
 <script>
-const BASE="https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/";
-const FISH=[
-  {v:"Golden Zebra Veiltail",    cat:"veiltail", img:BASE+"Golden_Zebra_Veiltail-removebg-preview.png"},
-  {v:"Pikachu Lyretail",         cat:"lyretail", img:BASE+"Pikachu_Lyretail-removebg-preview.png"},
-  {v:"Pikachu Roundtail",        cat:"roundtail",img:BASE+"Pikachu-removebg-preview.png"},
-  {v:"Black King Lyretail",      cat:"lyretail", img:BASE+"Black_King_Balloon_Molly_Lyretail-removebg-preview.png"},
-  {v:"Platinum Marble Roundtail",cat:"roundtail",img:BASE+"Platinum__Marble_Zebra_Pattern-removebg-preview.png"},
-  {v:"Chocolate Lyretail",       cat:"lyretail", img:BASE+"Chocolate_Lyretail-removebg-preview.png"},
-  {v:"Golden Blue Tail Lyretail",cat:"lyretail", img:BASE+"Golden_Blue_Tail_Lyretail-removebg-preview.png"},
-  {v:"Tancho Lyretail",          cat:"lyretail", img:BASE+"Tancho_Lyretail-removebg-preview.png"},
-];
-const TX=[
-  {flag:"🇺🇸",name:"Michael T.",loc:"California, USA",fish:"Golden Zebra Veiltail ×5 · Show Grade",amt:900,time:"2 days ago"},
-  {flag:"🇸🇬",name:"Wei L.",    loc:"Singapore",     fish:"Pikachu Lyretail ×3 · Material Grade",  amt:240,time:"3 days ago"},
-  {flag:"🇩🇪",name:"Klaus M.",  loc:"Berlin, Germany",fish:"Chocolate Lyretail ×4 · Show Potential",amt:480,time:"4 days ago"},
-  {flag:"🇦🇺",name:"James R.",  loc:"Sydney, Australia",fish:"Black King ×6 · Material Grade",     amt:480,time:"5 days ago"},
-  {flag:"🇯🇵",name:"Hiroshi K.",loc:"Tokyo, Japan",   fish:"Golden Blue Tail ×3 · Show Grade",     amt:540,time:"Last week"},
-];
-const REVIEWS=[
-  {name:"Michael T. — USA",   stars:5,text:"Incredible quality. The Golden Zebra Veiltail exceeded expectations — perfect body shape and vibrant coloration. Will order again.",date:"June 2026"},
-  {name:"Wei L. — Singapore", stars:5,text:"Fast response, honest communication, fish arrived healthy and active. Packaging was excellent.",date:"June 2026"},
-  {name:"Klaus M. — Germany", stars:5,text:"Show-quality fish exactly as described. Photos before shipping gave full confidence. Professional throughout.",date:"May 2026"},
-];
-const FAQS=[
-  {q:"How are fish shipped internationally?",a:"Fish are packed in pure oxygen-filled bags with water conditioner inside insulated cargo boxes. We ship via trusted air cargo services experienced in live fish transport. Typical transit: 1–3 days internationally."},
-  {q:"What is your DOA (Dead on Arrival) policy?",a:"<strong>Local:</strong> Full live arrival guarantee — report with clear photo within 2 hours of delivery.<br><br><strong>International:</strong> An uncut video of the sealed bag must be sent within 2 hours of customs release. Verified DOA claims handled via replacement or store credit."},
-  {q:"Can I see the fish before I pay?",a:"Yes — once selected, we send you photos and a short video of your specific fish before you confirm payment."},
-  {q:"What payment methods do you accept?",a:"GCash, PayPal, bank transfer, and Western Union. For international orders PayPal or bank transfer is recommended."},
-  {q:"What is the difference between the grades?",a:"Material Grade fish are healthy for breeding programs. Show Potential (2.5–3cm) show strong competition characteristics. Show Grade fish fully meet competition standard at 3cm+."},
-  {q:"What water parameters are your fish raised in?",a:"Temperature 26–28°C, pH 7.5–8.2, hardness 10–20 dGH, light salt (0.5–1 tsp/gallon). Acclimate gradually over 30–45 minutes."},
-  {q:"Do you ship to my country?",a:"We ship to most countries worldwide. Some require live fish permits — message us with your country for specific requirements."},
+var BASE = "https://raw.githubusercontent.com/XmarksthespotAquatics/xmarksthespotaquatics/538f442426cbcca6345d2a5179861fc948ba57ae/";
+var W3F_KEY = "c927ffe6-6c54-4c33-afc6-6ccbaf94b509";
+
+var FISH = [
+  {v:"Golden Zebra Veiltail",    cat:"veiltail",  img:BASE+"Golden_Zebra_Veiltail-removebg-preview.png"},
+  {v:"Pikachu Lyretail",         cat:"lyretail",  img:BASE+"Pikachu_Lyretail-removebg-preview.png"},
+  {v:"Pikachu Roundtail",        cat:"roundtail", img:BASE+"Pikachu-removebg-preview.png"},
+  {v:"Black King Balloon Molly Lyretail", cat:"lyretail", img:BASE+"Black_King_Balloon_Molly_Lyretail-removebg-preview.png"},
+  {v:"Platinum Marble Roundtail",cat:"roundtail", img:BASE+"Platinum__Marble_Zebra_Pattern-removebg-preview.png"},
+  {v:"Chocolate Lyretail",       cat:"lyretail",  img:BASE+"Chocolate_Lyretail-removebg-preview.png"},
+  {v:"Golden Blue Tail Lyretail",cat:"lyretail",  img:BASE+"Golden_Blue_Tail_Lyretail-removebg-preview.png"},
+  {v:"Tancho Lyretail",          cat:"lyretail",  img:BASE+"Tancho_Lyretail-removebg-preview.png"},
 ];
 
-/* ─── CAROUSEL ─── */
-var slides=document.querySelectorAll(".slide");
-var cur=0,total=slides.length,timer;
-function goTo(n){
+var TX = [
+  {flag:"🇺🇸",name:"Michael T.",loc:"California, USA",    fish:"Golden Zebra Veiltail ×5 · Show Grade",     amt:900, time:"2 days ago"},
+  {flag:"🇸🇬",name:"Wei L.",    loc:"Singapore",           fish:"Pikachu Lyretail ×3 · Material Grade",      amt:240, time:"3 days ago"},
+  {flag:"🇩🇪",name:"Klaus M.",  loc:"Berlin, Germany",     fish:"Chocolate Lyretail ×4 · Show Potential",    amt:480, time:"4 days ago"},
+  {flag:"🇦🇺",name:"James R.",  loc:"Sydney, Australia",   fish:"Black King Lyretail ×6 · Material",         amt:480, time:"5 days ago"},
+  {flag:"🇯🇵",name:"Hiroshi K.",loc:"Tokyo, Japan",        fish:"Golden Blue Tail ×3 · Show Grade",          amt:540, time:"Last week"},
+];
+
+var REVIEWS = [
+  {name:"Michael T. — USA",   stars:5, text:"Incredible quality. The Golden Zebra Veiltail exceeded expectations — perfect body shape and vibrant coloration. Will order again.", date:"June 2026"},
+  {name:"Wei L. — Singapore", stars:5, text:"Fast response, honest communication, fish arrived healthy. Packaging was excellent. Highly recommend for serious hobbyists.",        date:"June 2026"},
+  {name:"Klaus M. — Germany", stars:5, text:"Show-quality fish exactly as described. Photos before shipping gave full confidence. Professional throughout.",                      date:"May 2026"},
+];
+
+var FAQS = [
+  {q:"How are fish shipped internationally?",          a:"Fish are packed in pure oxygen-filled bags with water conditioner inside insulated cargo boxes. We ship via trusted air cargo services experienced in live fish transport. Typical transit: 1–3 days internationally."},
+  {q:"What is your DOA (Dead on Arrival) policy?",    a:"<strong>Local:</strong> Full live arrival guarantee — clear photo required within 2 hours of delivery.<br><br><strong>International:</strong> An uncut video of the sealed bag must be sent within 2 hours of customs release. Verified DOA claims handled via replacement or store credit."},
+  {q:"Can I see the fish before I pay?",              a:"Yes — once selected, we send you photos and a short video of your specific fish before you confirm payment. You see exactly what you're getting."},
+  {q:"What payment methods do you accept?",           a:"GCash, PayPal, bank transfer, and Western Union. For international orders PayPal or bank transfer is recommended. Payment is processed after you approve the fish photos."},
+  {q:"What is the difference between the grades?",    a:"Material Grade fish are healthy for breeding programs. Show Potential (2.5–3cm) show strong competition characteristics. Show Grade fish fully meet competition standard at 3cm+."},
+  {q:"What water parameters are your fish raised in?", a:"Temperature 26–28°C, pH 7.5–8.2, hardness 10–20 dGH, light salt (0.5–1 tsp/gallon). Acclimate gradually over 30–45 minutes."},
+  {q:"Do you ship to my country?",                    a:"We ship to most countries worldwide. Some require live fish permits — message us with your country for specific requirements and shipping estimates."},
+  {q:"How do I acclimate balloon mollies on arrival?", a:"Float the sealed bag in your tank for 15–20 minutes to equalize temperature. Gradually add tank water before releasing. Maintain 24–28°C, pH 7.0–8.0 in a well-filtered tank."},
+];
+
+/* ── CAROUSEL ── */
+var slides = document.querySelectorAll(".slide");
+var cur = 0, total = slides.length, timer;
+
+function goTo(n) {
   slides[cur].classList.remove("active");
-  slides[cur].classList.add("prev");
-  setTimeout(function(){slides[cur].classList.remove("prev")},1500);
-  cur=(n+total)%total;
+  cur = (n + total) % total;
   slides[cur].classList.add("active");
   updateDots();
 }
-function updateDots(){
-  document.querySelectorAll(".dot").forEach(function(d,i){d.classList.toggle("on",i===cur)});
+function updateDots() {
+  document.querySelectorAll(".dot").forEach(function(d, i) {
+    d.classList.toggle("on", i === cur);
+  });
 }
-function buildDots(){
-  var c=document.getElementById("dots");
-  for(var i=0;i<total;i++){
-    var d=document.createElement("div");d.className="dot"+(i===0?" on":"");
-    (function(idx){d.addEventListener("click",function(){clearInterval(timer);goTo(idx);startTimer()})})(i);
+function buildDots() {
+  var c = document.getElementById("dots");
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement("div");
+    d.className = "dot" + (i === 0 ? " on" : "");
+    (function(idx) {
+      d.addEventListener("click", function() { clearInterval(timer); goTo(idx); startTimer(); });
+    })(i);
     c.appendChild(d);
   }
 }
-function startTimer(){timer=setInterval(function(){goTo(cur+1)},5500)}
+function startTimer() { timer = setInterval(function() { goTo(cur + 1); }, 5500); }
 buildDots();
-document.getElementById("prevBtn").addEventListener("click",function(){clearInterval(timer);goTo(cur-1);startTimer()});
-document.getElementById("nextBtn").addEventListener("click",function(){clearInterval(timer);goTo(cur+1);startTimer()});
+document.getElementById("prevBtn").addEventListener("click", function() { clearInterval(timer); goTo(cur - 1); startTimer(); });
+document.getElementById("nextBtn").addEventListener("click", function() { clearInterval(timer); goTo(cur + 1); startTimer(); });
 startTimer();
+/* Touch swipe */
+var tx0 = null;
+document.getElementById("hero").addEventListener("touchstart", function(e) { tx0 = e.touches[0].clientX; }, {passive:true});
+document.getElementById("hero").addEventListener("touchend", function(e) {
+  if (tx0 === null) return;
+  var dx = e.changedTouches[0].clientX - tx0;
+  if (Math.abs(dx) > 40) { clearInterval(timer); goTo(dx < 0 ? cur + 1 : cur - 1); startTimer(); }
+  tx0 = null;
+}, {passive:true});
 
-/* Touch swipe on hero */
-var hx=null;
-document.getElementById("hero").addEventListener("touchstart",function(e){hx=e.touches[0].clientX},{passive:true});
-document.getElementById("hero").addEventListener("touchend",function(e){
-  if(hx===null)return;
-  var dx=e.changedTouches[0].clientX-hx;
-  if(Math.abs(dx)>40){clearInterval(timer);goTo(dx<0?cur+1:cur-1);startTimer()}
-  hx=null;
-},{passive:true});
-
-/* ─── PARTICLES ─── */
-function makeParticles(){
-  var c=document.getElementById("particles");
-  for(var i=0;i<18;i++){
-    var p=document.createElement("div");p.className="pt";
-    var s=Math.random()*3+1.5;
-    p.style.cssText="width:"+s+"px;height:"+s+"px;left:"+Math.random()*100+"%;animation-duration:"+(Math.random()*18+10)+"s;animation-delay:-"+Math.random()*18+"s";
+/* ── PARTICLES ── */
+(function() {
+  var c = document.getElementById("particles");
+  for (var i = 0; i < 18; i++) {
+    var p = document.createElement("div");
+    p.className = "pt";
+    var s = Math.random() * 3 + 1.5;
+    p.style.cssText = "width:" + s + "px;height:" + s + "px;left:" + Math.random() * 100 + "%;animation-duration:" + (Math.random() * 18 + 10) + "s;animation-delay:-" + Math.random() * 18 + "s";
     c.appendChild(p);
   }
-}
-makeParticles();
+})();
 
-/* ─── CURSOR ─── */
-(function(){
-  var el=document.getElementById("cur");
-  if(!el)return;
-  document.addEventListener("mousemove",function(e){el.style.left=e.clientX+"px";el.style.top=e.clientY+"px"},{passive:true});
-  document.querySelectorAll("a,button,.fc,.gc").forEach(function(e){
-    e.addEventListener("mouseenter",function(){el.classList.add("hov")});
-    e.addEventListener("mouseleave",function(){el.classList.remove("hov")});
+/* ── CURSOR ── */
+(function() {
+  var el = document.getElementById("cur");
+  if (!el) return;
+  document.addEventListener("mousemove", function(e) {
+    el.style.left = e.clientX + "px";
+    el.style.top = e.clientY + "px";
+  }, {passive:true});
+  document.querySelectorAll("a, button, .fc, .gc, .tx, .rev").forEach(function(e) {
+    e.addEventListener("mouseenter", function() { el.classList.add("hov"); });
+    e.addEventListener("mouseleave", function() { el.classList.remove("hov"); });
   });
 })();
 
-/* ─── NAV ─── */
-window.addEventListener("scroll",function(){document.getElementById("nav").classList.toggle("solid",window.scrollY>60)},{passive:true});
-document.getElementById("navCta").addEventListener("click",function(){document.getElementById("request").scrollIntoView({behavior:"smooth"})});
-document.getElementById("heroBtn").addEventListener("click",function(){document.getElementById("strains").scrollIntoView({behavior:"smooth"})});
+/* ── NAV ── */
+window.addEventListener("scroll", function() {
+  document.getElementById("nav").classList.toggle("solid", window.scrollY > 60);
+}, {passive:true});
+document.getElementById("navCta").addEventListener("click", function() {
+  document.getElementById("request").scrollIntoView({behavior:"smooth"});
+});
+document.getElementById("heroBtn").addEventListener("click", function() {
+  document.getElementById("strains").scrollIntoView({behavior:"smooth"});
+});
 
-/* ─── FAB POPUP ─── */
-var fab=document.getElementById("fab"),popup=document.getElementById("popup"),pclose=document.getElementById("popClose");
-fab.addEventListener("click",function(){fab.classList.toggle("open");popup.classList.toggle("open")});
-pclose.addEventListener("click",function(e){e.stopPropagation();fab.classList.remove("open");popup.classList.remove("open")});
-document.addEventListener("click",function(e){if(!popup.contains(e.target)&&e.target!==fab){fab.classList.remove("open");popup.classList.remove("open")}});
+/* ── FAB POPUP ── */
+var fab = document.getElementById("fab");
+var popup = document.getElementById("popup");
+var pclose = document.getElementById("popClose");
+fab.addEventListener("click", function() {
+  fab.classList.toggle("open");
+  popup.classList.toggle("open");
+});
+pclose.addEventListener("click", function(e) {
+  e.stopPropagation();
+  fab.classList.remove("open");
+  popup.classList.remove("open");
+});
+document.addEventListener("click", function(e) {
+  if (!popup.contains(e.target) && !fab.contains(e.target)) {
+    fab.classList.remove("open");
+    popup.classList.remove("open");
+  }
+});
 
-/* ─── REVEAL ─── */
-(function(){
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add("vis")})},{threshold:.1});
-  document.querySelectorAll(".r").forEach(function(el){io.observe(el)});
+/* ── REVEAL ── */
+(function() {
+  var io = new IntersectionObserver(function(es) {
+    es.forEach(function(e) { if (e.isIntersecting) e.target.classList.add("vis"); });
+  }, {threshold: 0.1});
+  document.querySelectorAll(".r").forEach(function(el) { io.observe(el); });
 })();
 
-/* ─── FILTERS + FISH ─── */
-var curCat="all";
-function buildFilters(){
-  var bar=document.getElementById("fpills");
-  var cats=[{id:"all",l:"All"},{id:"lyretail",l:"Lyretails"},{id:"veiltail",l:"Veiltails"},{id:"roundtail",l:"Roundtails"}];
-  bar.innerHTML=cats.map(function(c,i){return'<button class="fp'+(i===0?" on":"")+'" data-cat="'+c.id+'">'+c.l+'</button>'}).join("");
-  bar.querySelectorAll(".fp").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      bar.querySelectorAll(".fp").forEach(function(b){b.classList.remove("on")});
-      btn.classList.add("on");curCat=btn.dataset.cat;renderFish();
+/* ── FILTERS + FISH ── */
+var curCat = "all";
+function buildFilters() {
+  var bar = document.getElementById("fpills");
+  var cats = [{id:"all",l:"All"}, {id:"lyretail",l:"Lyretails"}, {id:"veiltail",l:"Veiltails"}, {id:"roundtail",l:"Roundtails"}];
+  bar.innerHTML = cats.map(function(c, i) {
+    return '<button class="fp' + (i === 0 ? " on" : "") + '" data-cat="' + c.id + '">' + c.l + '</button>';
+  }).join("");
+  bar.querySelectorAll(".fp").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      bar.querySelectorAll(".fp").forEach(function(b) { b.classList.remove("on"); });
+      btn.classList.add("on");
+      curCat = btn.dataset.cat;
+      renderFish();
     });
   });
 }
-function renderFish(){
-  var list=curCat==="all"?FISH:FISH.filter(function(f){return f.cat===curCat});
-  var g=document.getElementById("fishGrid");
-  if(!list.length){g.innerHTML='<div class="empty">No strains in this category.</div>';return}
-  g.innerHTML=list.map(function(f){
-    return'<div class="fc">'+
-      '<div class="fc-img-wrap">'+
-        '<img class="fc-img" src="'+f.img+'" alt="'+f.v+'" loading="lazy" onerror="this.style.display=\'none\'"/>'+
-        '<div class="fc-shine"></div>'+
-      '</div>'+
-      '<div class="fc-body">'+
-        '<div class="fc-strain-type">Balloon Molly</div>'+
-        '<div class="fc-name">'+f.v+'</div>'+
-        '<div class="fc-foot">'+
-          '<span class="fc-price">from $80</span>'+
-          '<button class="fc-btn" data-v="'+f.v.replace(/"/g,"&quot;")+'">Request →</button>'+
-        '</div>'+
-      '</div>'+
+function renderFish() {
+  var list = curCat === "all" ? FISH : FISH.filter(function(f) { return f.cat === curCat; });
+  var g = document.getElementById("fishGrid");
+  if (!list.length) { g.innerHTML = '<div class="empty">No strains in this category.</div>'; return; }
+  g.innerHTML = list.map(function(f, i) {
+    return '<div class="fc" style="animation-delay:' + (i * 0.07) + 's">' +
+      '<div class="fc-iw">' +
+        '<img class="fc-img" src="' + f.img + '" alt="' + f.v + '" loading="lazy" onerror="this.style.display=\'none\'"/>' +
+        '<div class="fc-shine"></div>' +
+      '</div>' +
+      '<div class="fc-b">' +
+        '<div class="fc-type">Balloon Molly</div>' +
+        '<div class="fc-name">' + f.v + '</div>' +
+        '<div class="fc-foot">' +
+          '<span class="fc-price">from $80</span>' +
+          '<button class="fc-btn" data-v="' + f.v.replace(/"/g, '&quot;') + '">Request →</button>' +
+        '</div>' +
+      '</div>' +
     '</div>';
   }).join("");
-  g.querySelectorAll(".fc-btn").forEach(function(btn){
-    btn.addEventListener("click",function(){pickStrain(btn.dataset.v)});
+  g.querySelectorAll(".fc-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() { pickStrain(btn.dataset.v); });
   });
 }
-function pickStrain(v){
-  var sel=document.getElementById("s_strain");
-  for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===v){sel.selectedIndex=i;break}}
-  document.getElementById("request").scrollIntoView({behavior:"smooth",block:"start"});
-  setTimeout(function(){var g=document.getElementById("s_grade");g.focus();g.style.borderColor="var(--g2)";setTimeout(function(){g.style.borderColor=""},2000)},800);
+function pickStrain(v) {
+  var sel = document.getElementById("s_strain");
+  for (var i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].text === v) { sel.selectedIndex = i; break; }
+  }
+  document.getElementById("request").scrollIntoView({behavior:"smooth", block:"start"});
+  setTimeout(function() {
+    var g = document.getElementById("s_grade");
+    g.focus();
+    g.style.borderColor = "var(--g2)";
+    setTimeout(function() { g.style.borderColor = ""; }, 2000);
+  }, 800);
 }
 buildFilters();
 renderFish();
 
-/* ─── TX + REVIEWS + FAQ ─── */
-function renderTx(){
-  document.getElementById("txList").innerHTML=TX.map(function(t){
-    return'<div class="tx"><div class="tx-flag">'+t.flag+'</div><div class="tx-body"><div class="tx-who">'+t.name+' · '+t.loc+'</div><div class="tx-what">'+t.fish+'</div></div><div class="tx-r"><div class="tx-amt">$'+t.amt+'</div><div class="tx-when">'+t.time+'</div></div></div>';
+/* ── TX + REVIEWS + FAQ ── */
+function renderTx() {
+  document.getElementById("txList").innerHTML = TX.map(function(t) {
+    return '<div class="tx">' +
+      '<div class="txfl">' + t.flag + '</div>' +
+      '<div class="txb"><div class="txw">' + t.name + ' · ' + t.loc + '</div><div class="txwh">' + t.fish + '</div></div>' +
+      '<div class="txr"><div class="txam">$' + t.amt + '</div><div class="txwn">' + t.time + '</div></div>' +
+    '</div>';
   }).join("");
 }
-function renderRevs(){
-  document.getElementById("revList").innerHTML=REVIEWS.map(function(r){
-    return'<div class="rev"><div class="rev-stars">'+"⭐".repeat(r.stars)+'</div><div class="rev-txt">"'+r.text+'"</div><div class="rev-who">'+r.name+' · '+r.date+'</div></div>';
+function renderRevs() {
+  document.getElementById("revList").innerHTML = REVIEWS.map(function(r) {
+    return '<div class="rev"><div class="rev-stars">' + "⭐".repeat(r.stars) + '</div><div class="rev-txt">"' + r.text + '"</div><div class="rev-who">' + r.name + ' · ' + r.date + '</div></div>';
   }).join("");
 }
-function renderFAQs(){
-  document.getElementById("faqList").innerHTML=FAQS.map(function(f){
-    return'<div class="faq-item"><button class="faq-q">'+f.q+'<span class="faq-ico">+</span></button><div class="faq-a">'+f.a+'</div></div>';
+function renderFAQs() {
+  document.getElementById("faqList").innerHTML = FAQS.map(function(f) {
+    return '<div class="faq-item">' +
+      '<button class="faq-q">' + f.q + '<span class="faq-ico">+</span></button>' +
+      '<div class="faq-a">' + f.a + '</div>' +
+    '</div>';
   }).join("");
-  document.querySelectorAll(".faq-q").forEach(function(q){
-    q.addEventListener("click",function(){var it=q.parentElement,open=it.classList.contains("open");document.querySelectorAll(".faq-item").forEach(function(i){i.classList.remove("open")});if(!open)it.classList.add("open")});
+  document.querySelectorAll(".faq-q").forEach(function(q) {
+    q.addEventListener("click", function() {
+      var it = q.parentElement;
+      var open = it.classList.contains("open");
+      document.querySelectorAll(".faq-item").forEach(function(i) { i.classList.remove("open"); });
+      if (!open) it.classList.add("open");
+    });
   });
 }
-renderTx();renderRevs();renderFAQs();
+renderTx();
+renderRevs();
+renderFAQs();
 
-/* ─── FORM ─── */
-document.getElementById("sendBtn").addEventListener("click",function(){
-  var strain=document.getElementById("s_strain").value,
-      grade=document.getElementById("s_grade").value,
-      qty=document.getElementById("s_qty").value,
-      country=document.getElementById("s_country").value.trim(),
-      contact=document.getElementById("s_contact").value||"whatsapp",
-      handle=document.getElementById("s_handle").value.trim(),
-      notes=document.getElementById("s_notes").value.trim()||"None";
+/* ── REQUEST FORM with Web3Forms backup ── */
+document.getElementById("sendBtn").addEventListener("click", function() {
+  var strain  = document.getElementById("s_strain").value;
+  var grade   = document.getElementById("s_grade").value;
+  var qty     = document.getElementById("s_qty").value;
+  var country = document.getElementById("s_country").value.trim();
+  var contact = document.getElementById("s_contact").value || "whatsapp";
+  var handle  = document.getElementById("s_handle").value.trim();
+  var notes   = document.getElementById("s_notes").value.trim() || "None";
 
-  document.querySelectorAll(".ferr").forEach(function(e){e.remove()});
-  document.querySelectorAll(".fc2").forEach(function(el){el.style.borderColor=""});
-
-  var ok=true;
-  function err(id,m){
-    var el=document.getElementById(id);
-    el.style.borderColor="#f87171";
-    var d=document.createElement("div");
-    d.className="ferr";
-    d.textContent=m;
+  /* Validate */
+  document.querySelectorAll(".ferr").forEach(function(e) { e.remove(); });
+  document.querySelectorAll(".fc2").forEach(function(el) { el.style.borderColor = ""; });
+  var ok = true;
+  function err(id, m) {
+    var el = document.getElementById(id);
+    el.style.borderColor = "#f87171";
+    var d = document.createElement("div");
+    d.className = "ferr"; d.textContent = m;
     el.parentNode.appendChild(d);
-    ok=false;
+    ok = false;
+  }
+  if (!strain)      err("s_strain",  "Please select a strain");
+  if (!grade)       err("s_grade",   "Please select a grade");
+  if (!qty || qty < 1) err("s_qty",  "Please enter quantity");
+  if (!country)     err("s_country", "Please enter your country");
+  if (!handle)      err("s_handle",  "Please enter your contact details");
+  if (!ok) return;
+
+  var msg = "Hi! I'd like to order from X Marks the Spot Aquatics:\n\n" +
+    "🐠 Strain: " + strain + "\n" +
+    "⭐ Grade: " + grade + "\n" +
+    "📦 Qty: " + qty + "\n" +
+    "🌏 Country: " + country + "\n" +
+    "📞 Contact via: " + contact + " — " + handle + "\n" +
+    "📝 Notes: " + notes + "\n\n" +
+    "Please confirm availability and shipping cost. Thank you!";
+
+  /* Open WhatsApp or Email */
+  if (contact === "whatsapp") {
+    window.open("https://wa.me/639173397877?text=" + encodeURIComponent(msg), "_blank");
+  } else {
+    window.open("mailto:Francisco.Desaca@gmail.com?subject=Fish Request — " + encodeURIComponent(strain) + "&body=" + encodeURIComponent(msg), "_blank");
   }
 
-  if(!strain) err("s_strain","Select a strain");
-  if(!grade) err("s_grade","Select a grade");
-  if(!qty||parseInt(qty)<=0) err("s_qty","Enter quantity");
-  if(!country) err("s_country","Enter country");
-  if(!handle) err("s_handle","Enter contact handle");
+  /* Web3Forms silent backup — sends email to Francisco.Desaca@gmail.com */
+  fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      access_key: W3F_KEY,
+      subject: "New Fish Request — " + strain,
+      from_name: "XMTS Website",
+      name: handle,
+      email: handle.includes("@") ? handle : "noreply@xmts.com",
+      message: "Strain: " + strain + "\nGrade: " + grade + "\nQty: " + qty + "\nCountry: " + country + "\nContact: " + contact + " — " + handle + "\nNotes: " + notes
+    })
+  }).catch(function() {}); /* silent fail — primary contact is WhatsApp/email */
 
-  if(!ok) return;
-
-  if(contact==="whatsapp"){
-    var msg="Hello! Requesting fish from XMTS Aquatics:\n\n"
-           +"• Strain: "+strain+"\n"
-           +"• Grade: "+grade+"\n"
-           +"• Quantity: "+qty+"\n"
-           +"• Country: "+country+"\n"
-           +"• Notes: "+notes;
-    window.open("https://wa.me/639173397877?text="+encodeURIComponent(msg),"_blank");
-  }
-
-  document.getElementById("reqForm").style.display="none";
+  document.getElementById("reqForm").style.display = "none";
   document.getElementById("confBox").classList.add("on");
 });
 
-document.getElementById("resetBtn").addEventListener("click",function(){
-  document.getElementById("reqForm").style.display="block";
+document.getElementById("resetBtn").addEventListener("click", function() {
+  document.getElementById("reqForm").style.display = "block";
   document.getElementById("confBox").classList.remove("on");
+  ["s_strain","s_grade","s_qty","s_country","s_handle","s_notes"].forEach(function(id) {
+    document.getElementById(id).value = "";
+  });
+  document.getElementById("s_contact").value = "whatsapp";
 });
 
-/* ─── OTHER ACTIONS ─── */
-document.getElementById("nBtn").addEventListener("click",function(){
-  var e=document.getElementById("nEmail").value.trim();
-  if(e){
-    document.getElementById("nOk").classList.add("on");
-    document.getElementById("nEmail").value="";
-  }
+/* ── NOTIFY ── */
+document.getElementById("nBtn").addEventListener("click", function() {
+  var email = document.getElementById("nEmail").value.trim();
+  if (!email || !email.includes("@")) { alert("Please enter a valid email address."); return; }
+  fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      access_key: W3F_KEY,
+      subject: "New Subscriber — XMTS",
+      from_name: "XMTS Website",
+      name: "Subscriber",
+      email: email,
+      message: "New subscriber: " + email
+    })
+  }).catch(function() {});
+  document.getElementById("nOk").classList.add("on");
+  document.getElementById("nEmail").value = "";
 });
 
-document.getElementById("cSend").addEventListener("click",function(){
-  var n=document.getElementById("cName").value.trim(),
-      m=document.getElementById("cMsg").value.trim();
-  if(n&&m){
-    document.getElementById("cOk").classList.add("on");
-    document.getElementById("cName").value="";
-    document.getElementById("cEmail").value="";
-    document.getElementById("cSubject").value="";
-    document.getElementById("cMsg").value="";
-  }
+/* ── REVIEW ── */
+document.getElementById("rSubmit").addEventListener("click", function() {
+  var n = document.getElementById("rName").value.trim();
+  var r = document.getElementById("rRating").value;
+  var t = document.getElementById("rText").value.trim();
+  if (!n || !t) { alert("Please fill in your name and review."); return; }
+  fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      access_key: W3F_KEY,
+      subject: "New Review — XMTS",
+      from_name: n,
+      name: n,
+      email: "noreply@xmts.com",
+      message: "Rating: " + r + "/5\n\n" + t
+    })
+  }).catch(function() {});
+  document.getElementById("rOk").classList.add("on");
+  document.getElementById("rName").value = "";
+  document.getElementById("rText").value = "";
 });
 
-document.getElementById("rSubmit").addEventListener("click",function(){
-  var n=document.getElementById("rName").value.trim(),
-      t=document.getElementById("rText").value.trim();
-  if(n&&t){
-    document.getElementById("rOk").classList.add("on");
-    document.getElementById("rName").value="";
-    document.getElementById("rText").value="";
-  }
+/* ── CONTACT FORM ── */
+document.getElementById("cSend").addEventListener("click", function() {
+  var n = document.getElementById("cName").value.trim();
+  var e = document.getElementById("cEmail").value.trim();
+  var s = document.getElementById("cSubject").value.trim() || "General Inquiry";
+  var m = document.getElementById("cMsg").value.trim();
+  if (!n || !m) { alert("Please fill in your name and message."); return; }
+  fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      access_key: W3F_KEY,
+      subject: s,
+      from_name: n,
+      name: n,
+      email: e || "noreply@xmts.com",
+      message: m
+    })
+  }).then(function(res) {
+    if (res.ok) {
+      document.getElementById("cOk").classList.add("on");
+      ["cName","cEmail","cSubject","cMsg"].forEach(function(id) { document.getElementById(id).value = ""; });
+    } else { alert("Failed to send. Please try again or email us directly."); }
+  }).catch(function() { alert("Failed to send. Please email us directly at Francisco.Desaca@gmail.com"); });
 });
 </script>
 </body>
 </html>
+HTMLEOF
